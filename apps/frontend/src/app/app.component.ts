@@ -27,7 +27,10 @@ export class AppComponent implements OnInit {
 
     public crearMenu() {
         this.menuList = [];
+        this.menuList.push({ label: 'Bienvenido', icon: 'home', route: '/home' });
         this.menuList.push({ label: 'Página Principal', icon: 'home', route: '/home' });
+        this.menuList.push({ label: 'Itemasggg', icon: 'home 1', route: '/edItems' });
+        this.menuList.push({ label: 'Categorias', icon: 'home 1', route: '/edCategoriass' });
         this.plex.updateMenu(this.menuList);
     }
 }

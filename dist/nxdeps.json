@@ -40,52 +40,47 @@
             {
               "file": "apps/frontend-e2e/cypress.json",
               "ext": ".json",
-              "mtime": 1585050184428.6357
+              "mtime": 1715870079688.0234
             },
             {
               "file": "apps/frontend-e2e/src/fixtures/example.json",
               "ext": ".json",
-              "mtime": 1585050184429.488
+              "mtime": 1715870079688.0234
             },
             {
               "file": "apps/frontend-e2e/src/integration/app.spec.ts",
               "ext": ".ts",
-              "mtime": 1585050184429.7966
-            },
-            {
-              "file": "apps/frontend-e2e/src/plugins/index.js",
-              "ext": ".js",
-              "mtime": 1585050184430.098
+              "mtime": 1715870079688.0234
             },
             {
               "file": "apps/frontend-e2e/src/support/app.po.ts",
               "ext": ".ts",
-              "mtime": 1585050184430.842
+              "mtime": 1715870079688.0234
             },
             {
               "file": "apps/frontend-e2e/src/support/commands.ts",
               "ext": ".ts",
-              "mtime": 1586030361938.9785
+              "mtime": 1715870079688.0234
             },
             {
               "file": "apps/frontend-e2e/src/support/index.ts",
               "ext": ".ts",
-              "mtime": 1585050184432.4226
+              "mtime": 1715870079688.0234
             },
             {
               "file": "apps/frontend-e2e/tsconfig.e2e.json",
               "ext": ".json",
-              "mtime": 1585050184432.8948
+              "mtime": 1715870079688.0234
             },
             {
               "file": "apps/frontend-e2e/tsconfig.json",
               "ext": ".json",
-              "mtime": 1585050184433.716
+              "mtime": 1715870079688.0234
             },
             {
               "file": "apps/frontend-e2e/tslint.json",
               "ext": ".json",
-              "mtime": 1585050184434.357
+              "mtime": 1715870079688.0234
             }
           ]
         }
@@ -201,162 +196,227 @@
             {
               "file": "apps/frontend/.DS_Store",
               "ext": "",
-              "mtime": 1715002567809.9
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/browserslist",
               "ext": "",
-              "mtime": 1585050184435.5122
-            },
-            {
-              "file": "apps/frontend/jest.config.js",
-              "ext": ".js",
-              "mtime": 1585050184436.3516
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/.DS_Store",
               "ext": "",
-              "mtime": 1715006937491.6199
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/app/.DS_Store",
               "ext": "",
-              "mtime": 1715006942556.8984
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/app/app-routing.module.ts",
               "ext": ".ts",
-              "mtime": 1715709737364.9568
+              "mtime": 1723122092060.5732
             },
             {
               "file": "apps/frontend/src/app/app.component.html",
               "ext": ".html",
-              "mtime": 1715709966049.7913
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/app/app.component.scss",
               "ext": ".scss",
-              "mtime": 1587227941568.352
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/app/app.component.spec.ts",
               "ext": ".ts",
-              "mtime": 1585050184437.3088
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/app/app.component.ts",
               "ext": ".ts",
-              "mtime": 1715709879991.0369
+              "mtime": 1723123018671.576
             },
             {
               "file": "apps/frontend/src/app/app.module.ts",
               "ext": ".ts",
-              "mtime": 1715709340853.1426
+              "mtime": 1723114054837.0776
+            },
+            {
+              "file": "apps/frontend/src/app/edcategorias/edcategoria.component.css",
+              "ext": ".css",
+              "mtime": 1723042437255.7556
+            },
+            {
+              "file": "apps/frontend/src/app/edcategorias/edcategoria.component.html",
+              "ext": ".html",
+              "mtime": 1723042065018.173
+            },
+            {
+              "file": "apps/frontend/src/app/edcategorias/edcategoria.component.ts",
+              "ext": ".ts",
+              "mtime": 1723113889522.493
+            },
+            {
+              "file": "apps/frontend/src/app/editems/edItems.component.css",
+              "ext": ".css",
+              "mtime": 1719584260000
+            },
+            {
+              "file": "apps/frontend/src/app/editems/edItems.component.html",
+              "ext": ".html",
+              "mtime": 1722350375000
+            },
+            {
+              "file": "apps/frontend/src/app/editems/edItems.component.ts",
+              "ext": ".ts",
+              "mtime": 1723114054837.0776
             },
             {
               "file": "apps/frontend/src/app/home/ayuda.component.ts",
               "ext": ".ts",
-              "mtime": 1587746958513.057
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/app/home/ayuda.html",
               "ext": ".html",
-              "mtime": 1715709029614.5437
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/home/eDesmp.component.html",
+              "ext": ".html",
+              "mtime": 1720180410000
+            },
+            {
+              "file": "apps/frontend/src/app/home/eDesmp.component.ts",
+              "ext": ".ts",
+              "mtime": 1718808118000
             },
             {
               "file": "apps/frontend/src/app/home/home.component.html",
               "ext": ".html",
-              "mtime": 1715709444768.7507
+              "mtime": 1720787957000
             },
             {
               "file": "apps/frontend/src/app/home/home.component.ts",
               "ext": ".ts",
-              "mtime": 1592320451311.055
+              "mtime": 1720794099000
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.html",
+              "ext": ".html",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/institution.module.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/institution.provider.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/institution.routing.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/service/institution.service.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/app/shared/directives/select-search.directive.ts",
               "ext": ".ts",
-              "mtime": 1641239343930.4302
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/app/shared/location.services.ts",
               "ext": ".ts",
-              "mtime": 1592326570388.9548
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/app/shared/select-search.service.ts",
               "ext": ".ts",
-              "mtime": 1641239343930.7356
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/app/shared/utils.ts",
               "ext": ".ts",
-              "mtime": 1587247252545.8945
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/assets/.gitkeep",
               "ext": "",
-              "mtime": 1585050184439.183
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/environments/environment.prod.ts",
               "ext": ".ts",
-              "mtime": 1587227941586.6663
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/environments/environment.ts",
               "ext": ".ts",
-              "mtime": 1641239343931.7327
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/favicon.ico",
               "ext": ".ico",
-              "mtime": 1585050184441.64
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/index.html",
               "ext": ".html",
-              "mtime": 1715709666635.0652
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/main.ts",
               "ext": ".ts",
-              "mtime": 1585050184442.5374
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/polyfills.ts",
               "ext": ".ts",
-              "mtime": 1585050184443.0254
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/styles.scss",
               "ext": ".scss",
-              "mtime": 1587746958673.3289
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/src/test-setup.ts",
               "ext": ".ts",
-              "mtime": 1585050184443.535
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/tsconfig.app.json",
               "ext": ".json",
-              "mtime": 1587401548655.741
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/tsconfig.json",
               "ext": ".json",
-              "mtime": 1585050184443.8281
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/tsconfig.spec.json",
               "ext": ".json",
-              "mtime": 1585050184443.9722
+              "mtime": 1715870079000
             },
             {
               "file": "apps/frontend/tslint.json",
               "ext": ".json",
-              "mtime": 1585050184444.631
+              "mtime": 1715870079000
             }
           ]
         }
@@ -430,112 +490,142 @@
             {
               "file": "apps/backend/.eslintrc",
               "ext": "",
-              "mtime": 1585050184419.456
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/app/.gitkeep",
               "ext": "",
-              "mtime": 1585050184420.0083
+              "mtime": 1715870079684.0234
+            },
+            {
+              "file": "apps/backend/src/app/EDItems/routes/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1722247986661.575
+            },
+            {
+              "file": "apps/backend/src/app/EDItems/schemas/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1722248444248.885
             },
             {
               "file": "apps/backend/src/app/application.ts",
               "ext": ".ts",
-              "mtime": 1715710073583.5544
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/app/auth/auth.routes.spec.ts",
               "ext": ".ts",
-              "mtime": 1586030361924.5732
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/app/auth/auth.routes.ts",
               "ext": ".ts",
-              "mtime": 1715710986297.1155
+              "mtime": 1715950839542.3364
+            },
+            {
+              "file": "apps/backend/src/app/categoriaitems/routes/categoriaItems.ts",
+              "ext": ".ts",
+              "mtime": 1721917078386.2717
+            },
+            {
+              "file": "apps/backend/src/app/categoriaitems/schemas/categoriaItems.ts",
+              "ext": ".ts",
+              "mtime": 1721917839246.408
             },
             {
               "file": "apps/backend/src/app/connection.ts",
               "ext": ".ts",
-              "mtime": 1595461113831.218
+              "mtime": 1715870079684.0234
+            },
+            {
+              "file": "apps/backend/src/app/eDesempeno/routes/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1721918930279.711
+            },
+            {
+              "file": "apps/backend/src/app/eDesempeno/schemas/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1722247986645.5747
             },
             {
               "file": "apps/backend/src/app/services/mail/mail.shema.ts",
               "ext": ".ts",
-              "mtime": 1586030361930.9346
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/app/services/mail/mail.ts",
               "ext": ".ts",
-              "mtime": 1715710326548.28
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/app/templates/email/account-activation.html",
               "ext": ".html",
-              "mtime": 1592320451279.499
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/app/templates/email/layout.html",
               "ext": ".html",
-              "mtime": 1592320451279.8457
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/app/templates/email/password-reset.html",
               "ext": ".html",
-              "mtime": 1592320451280.0703
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/app/templates/email/user-suggestions.html",
               "ext": ".html",
-              "mtime": 1592320451280.6277
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/app/users/user.controller.ts",
               "ext": ".ts",
-              "mtime": 1715710814176.603
+              "mtime": 1715950019734.0342
             },
             {
               "file": "apps/backend/src/app/users/user.interface.ts",
               "ext": ".ts",
-              "mtime": 1587227941565.3052
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/app/users/user.schema.ts",
               "ext": ".ts",
-              "mtime": 1592320451292.2117
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/assets/.gitkeep",
               "ext": "",
-              "mtime": 1585050184421.8748
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/environments/environment.prod.ts",
               "ext": ".ts",
-              "mtime": 1715708518447.4143
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/environments/environment.ts",
               "ext": ".ts",
-              "mtime": 1715708559754.1519
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/src/main.ts",
               "ext": ".ts",
-              "mtime": 1715710221965.6392
+              "mtime": 1721919565681.9531
             },
             {
               "file": "apps/backend/tsconfig.app.json",
               "ext": ".json",
-              "mtime": 1585050184426.6992
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/tsconfig.json",
               "ext": ".json",
-              "mtime": 1585050184427.384
+              "mtime": 1715870079684.0234
             },
             {
               "file": "apps/backend/tsconfig.spec.json",
               "ext": ".json",
-              "mtime": 1585050184427.843
+              "mtime": 1715870079688.0234
             }
           ]
         }
@@ -920,7 +1010,7 @@
         "type": "npm",
         "name": "@types/express",
         "data": {
-          "version": "^4.17.3",
+          "version": "^4.0.35",
           "files": []
         }
       },
@@ -1009,6 +1099,14 @@
         "name": "eslint-config-prettier",
         "data": {
           "version": "^6.10.1",
+          "files": []
+        }
+      },
+      "express": {
+        "type": "npm",
+        "name": "express",
+        "data": {
+          "version": "^4.16.3",
           "files": []
         }
       },
@@ -1159,12 +1257,17 @@
         {
           "type": "static",
           "source": "backend",
-          "target": "@andes/api-tool"
+          "target": "express"
         },
         {
           "type": "static",
           "source": "backend",
           "target": "mongoose"
+        },
+        {
+          "type": "static",
+          "source": "backend",
+          "target": "@andes/api-tool"
         },
         {
           "type": "static",
@@ -1241,6 +1344,7 @@
       "dotenv": [],
       "eslint": [],
       "eslint-config-prettier": [],
+      "express": [],
       "jest": [],
       "jest-preset-angular": [],
       "mongodb-memory-server-global": [],
@@ -1257,316 +1361,416 @@
       {
         "file": "apps/frontend-e2e/cypress.json",
         "ext": ".json",
-        "mtime": 1585050184428.6357
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend-e2e/src/fixtures/example.json",
         "ext": ".json",
-        "mtime": 1585050184429.488
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend-e2e/src/integration/app.spec.ts",
         "ext": ".ts",
-        "mtime": 1585050184429.7966
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend-e2e/src/support/app.po.ts",
         "ext": ".ts",
-        "mtime": 1585050184430.842
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend-e2e/src/support/commands.ts",
         "ext": ".ts",
-        "mtime": 1586030361938.9785
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend-e2e/src/support/index.ts",
         "ext": ".ts",
-        "mtime": 1585050184432.4226
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend-e2e/tsconfig.e2e.json",
         "ext": ".json",
-        "mtime": 1585050184432.8948
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend-e2e/tsconfig.json",
         "ext": ".json",
-        "mtime": 1585050184433.716
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend-e2e/tslint.json",
         "ext": ".json",
-        "mtime": 1585050184434.357
+        "mtime": 1715870079000
       }
     ],
     "frontend": [
       {
         "file": "apps/frontend/.DS_Store",
         "ext": "",
-        "mtime": 1715002567809.9
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/browserslist",
         "ext": "",
-        "mtime": 1585050184435.5122
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/.DS_Store",
         "ext": "",
-        "mtime": 1715006937491.6199
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/app/.DS_Store",
         "ext": "",
-        "mtime": 1715006942556.8984
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/app/app-routing.module.ts",
         "ext": ".ts",
-        "mtime": 1715709737364.9568
+        "mtime": 1723122092060.5732
       },
       {
         "file": "apps/frontend/src/app/app.component.html",
         "ext": ".html",
-        "mtime": 1715709966049.791
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/app/app.component.scss",
         "ext": ".scss",
-        "mtime": 1587227941568.352
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/app/app.component.spec.ts",
         "ext": ".ts",
-        "mtime": 1585050184437.3088
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/app/app.component.ts",
         "ext": ".ts",
-        "mtime": 1715709879991.0369
+        "mtime": 1723123018671.576
       },
       {
         "file": "apps/frontend/src/app/app.module.ts",
         "ext": ".ts",
-        "mtime": 1715709340853.1426
+        "mtime": 1723114054837.0776
+      },
+      {
+        "file": "apps/frontend/src/app/edcategorias/edcategoria.component.css",
+        "ext": ".css",
+        "mtime": 1723042437255.7556
+      },
+      {
+        "file": "apps/frontend/src/app/edcategorias/edcategoria.component.html",
+        "ext": ".html",
+        "mtime": 1723042065018.173
+      },
+      {
+        "file": "apps/frontend/src/app/edcategorias/edcategoria.component.ts",
+        "ext": ".ts",
+        "mtime": 1723113889522.493
+      },
+      {
+        "file": "apps/frontend/src/app/editems/edItems.component.css",
+        "ext": ".css",
+        "mtime": 1719584260000
+      },
+      {
+        "file": "apps/frontend/src/app/editems/edItems.component.html",
+        "ext": ".html",
+        "mtime": 1722350375000
+      },
+      {
+        "file": "apps/frontend/src/app/editems/edItems.component.ts",
+        "ext": ".ts",
+        "mtime": 1723114054837.0776
       },
       {
         "file": "apps/frontend/src/app/home/ayuda.component.ts",
         "ext": ".ts",
-        "mtime": 1587746958513.057
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/app/home/ayuda.html",
         "ext": ".html",
-        "mtime": 1715709029614.5437
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/home/eDesmp.component.html",
+        "ext": ".html",
+        "mtime": 1720180410000
+      },
+      {
+        "file": "apps/frontend/src/app/home/eDesmp.component.ts",
+        "ext": ".ts",
+        "mtime": 1718808118000
       },
       {
         "file": "apps/frontend/src/app/home/home.component.html",
         "ext": ".html",
-        "mtime": 1715709444768.7507
+        "mtime": 1720787957000
       },
       {
         "file": "apps/frontend/src/app/home/home.component.ts",
         "ext": ".ts",
-        "mtime": 1592320451311.055
+        "mtime": 1720794099000
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.html",
+        "ext": ".html",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/institution.module.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/institution.provider.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/institution.routing.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/service/institution.service.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/app/shared/directives/select-search.directive.ts",
         "ext": ".ts",
-        "mtime": 1641239343930.4302
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/app/shared/location.services.ts",
         "ext": ".ts",
-        "mtime": 1592326570388.9548
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/app/shared/select-search.service.ts",
         "ext": ".ts",
-        "mtime": 1641239343930.7356
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/app/shared/utils.ts",
         "ext": ".ts",
-        "mtime": 1587247252545.8945
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/assets/.gitkeep",
         "ext": "",
-        "mtime": 1585050184439.183
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/environments/environment.prod.ts",
         "ext": ".ts",
-        "mtime": 1587227941586.6663
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/environments/environment.ts",
         "ext": ".ts",
-        "mtime": 1641239343931.7327
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/favicon.ico",
         "ext": ".ico",
-        "mtime": 1585050184441.64
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/index.html",
         "ext": ".html",
-        "mtime": 1715709666635.0652
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/main.ts",
         "ext": ".ts",
-        "mtime": 1585050184442.5374
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/polyfills.ts",
         "ext": ".ts",
-        "mtime": 1585050184443.0254
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/styles.scss",
         "ext": ".scss",
-        "mtime": 1587746958673.3289
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/src/test-setup.ts",
         "ext": ".ts",
-        "mtime": 1585050184443.535
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/tsconfig.app.json",
         "ext": ".json",
-        "mtime": 1587401548655.741
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/tsconfig.json",
         "ext": ".json",
-        "mtime": 1585050184443.8281
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/tsconfig.spec.json",
         "ext": ".json",
-        "mtime": 1585050184443.9722
+        "mtime": 1715870079000
       },
       {
         "file": "apps/frontend/tslint.json",
         "ext": ".json",
-        "mtime": 1585050184444.631
+        "mtime": 1715870079000
       }
     ],
     "backend": [
       {
         "file": "apps/backend/.eslintrc",
         "ext": "",
-        "mtime": 1585050184419.456
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/app/.gitkeep",
         "ext": "",
-        "mtime": 1585050184420.0083
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/EDItems/routes/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1722247986000
+      },
+      {
+        "file": "apps/backend/src/app/EDItems/schemas/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1722248444000
       },
       {
         "file": "apps/backend/src/app/application.ts",
         "ext": ".ts",
-        "mtime": 1715710073583.5544
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/app/auth/auth.routes.spec.ts",
         "ext": ".ts",
-        "mtime": 1586030361924.5732
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/app/auth/auth.routes.ts",
         "ext": ".ts",
-        "mtime": 1715710986297.1155
+        "mtime": 1715950839000
+      },
+      {
+        "file": "apps/backend/src/app/categoriaitems/routes/categoriaItems.ts",
+        "ext": ".ts",
+        "mtime": 1721917078000
+      },
+      {
+        "file": "apps/backend/src/app/categoriaitems/schemas/categoriaItems.ts",
+        "ext": ".ts",
+        "mtime": 1721917839000
       },
       {
         "file": "apps/backend/src/app/connection.ts",
         "ext": ".ts",
-        "mtime": 1595461113831.218
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/eDesempeno/routes/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1721918930000
+      },
+      {
+        "file": "apps/backend/src/app/eDesempeno/schemas/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1722247986000
       },
       {
         "file": "apps/backend/src/app/services/mail/mail.shema.ts",
         "ext": ".ts",
-        "mtime": 1586030361930.9346
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/app/services/mail/mail.ts",
         "ext": ".ts",
-        "mtime": 1715710326548.28
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/app/templates/email/account-activation.html",
         "ext": ".html",
-        "mtime": 1592320451279.499
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/app/templates/email/layout.html",
         "ext": ".html",
-        "mtime": 1592320451279.8457
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/app/templates/email/password-reset.html",
         "ext": ".html",
-        "mtime": 1592320451280.0703
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/app/templates/email/user-suggestions.html",
         "ext": ".html",
-        "mtime": 1592320451280.6277
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/app/users/user.controller.ts",
         "ext": ".ts",
-        "mtime": 1715710814176.603
+        "mtime": 1715950019000
       },
       {
         "file": "apps/backend/src/app/users/user.interface.ts",
         "ext": ".ts",
-        "mtime": 1587227941565.3052
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/app/users/user.schema.ts",
         "ext": ".ts",
-        "mtime": 1592320451292.2117
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/assets/.gitkeep",
         "ext": "",
-        "mtime": 1585050184421.8748
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/environments/environment.prod.ts",
         "ext": ".ts",
-        "mtime": 1715708518447.4143
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/environments/environment.ts",
         "ext": ".ts",
-        "mtime": 1715708559754.1519
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/src/main.ts",
         "ext": ".ts",
-        "mtime": 1715710221965.6392
+        "mtime": 1721919565000
       },
       {
         "file": "apps/backend/tsconfig.app.json",
         "ext": ".json",
-        "mtime": 1585050184426.6992
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/tsconfig.json",
         "ext": ".json",
-        "mtime": 1585050184427.384
+        "mtime": 1715870079000
       },
       {
         "file": "apps/backend/tsconfig.spec.json",
         "ext": ".json",
-        "mtime": 1585050184427.843
+        "mtime": 1715870079000
       }
     ]
   }

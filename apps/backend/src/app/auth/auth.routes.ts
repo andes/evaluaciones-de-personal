@@ -40,41 +40,42 @@ AuthRouter.post('/auth/login', async (req: Request, res, next) => {
 });
 
 AuthRouter.post('/auth/create', async (req: Request, res, next) => {
-    try {
+    //   try {
 
-        const createdUser = await UsersCtr.create(req.body, req);
-        const data = {
-            user: createdUser,
-            url: `${environment.app_host}/auth/activacion-cuenta/${createdUser.validationToken}`,
-            subject: 'Activación de cuenta'
-        }
+    //       const createdUser = await UsersCtr.create(req.body, req);
+    //       const data = {
+    //           user: createdUser,
+    //           url: `${environment.app_host}/auth/activacion-cuenta/${createdUser.validationToken}`,
+    //           subject: 'Activación de cuenta'
+    //        }
 
-        await sendUserEmail(data, 'account-activation');
+    //       await sendUserEmail(data, 'account-activation');
 
-        return res.json({ status: 'ok' });
-    } catch (err) {
-        return next(403);
-    }
+    //       return res.json({ status: 'ok' });
+    //   } catch (err) {
+    //       return next(403);
+    //   }
+
 });
 
-AuthRouter.post('/auth/regenerate/:email', async (req: Request, res, next) => {
-    try {
-        const email = req.params.email;
-        const updatedUser = await UsersCtr.setNewToken(email, req);
+//AuthRouter.post('/auth/regenerate/:email', async (req: Request, res, next) => {
+//      try {
+//    const email = req.params.email;
+//    const updatedUser = await UsersCtr.setNewToken(email, req);
 
-        const data = {
-            user: updatedUser,
-            url: `${environment.app_host}/auth/regenerate-password/${updatedUser.validationToken}`,
-            subject: 'Regenerar contraseña'
-        }
+//    const data = {
+//        user: updatedUser,
+//        url: `${environment.app_host}/auth/regenerate-password/${updatedUser.validationToken}`,
+//        subject: 'Regenerar contraseña'
+//    }
 
-        await sendUserEmail(data, 'password-reset');
+//    await sendUserEmail(data, 'password-reset');
 
-        return res.json({ status: 'ok' });
-    } catch (err) {
-        return next(403);
-    }
-});
+//    return res.json({ status: 'ok' });
+//} catch (err) {
+//   return next(403);
+//}
+//});
 
 AuthRouter.post('/auth/suggestions', application.authenticate(), async (req: Request, res, next) => {
     try {
@@ -85,15 +86,15 @@ AuthRouter.post('/auth/suggestions', application.authenticate(), async (req: Req
     }
 });
 
-AuthRouter.post('/auth/validate/:token', async (req: Request, res, next) => {
-    try {
-        const token = req.params.token;
-        await UsersCtr.validateUser(token, req);
-        return res.json({ status: 'ok' });
-    } catch (err) {
-        return next(403);
-    }
-});
+//AuthRouter.post('/auth/validate/:token', async (req: Request, res, next) => {
+//    try {
+//        const token = req.params.token;
+//        await UsersCtr.validateUser(token, req);
+//        return res.json({ status: 'ok' });
+//    } catch (err) {
+//        return next(403);
+//    }
+//});
 
 AuthRouter.post('/auth/resetPassword', async (req: Request, res, next) => {
     try {
