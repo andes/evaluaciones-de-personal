@@ -1,0 +1,51 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Alinear el título LISTADO DE ITEMS -->
+                    <div class="header-container mb-3 d-flex justify-content-between align-items-center">
+                        <span class="titulo text-center mx-auto" style="font-weight: bold; font-size: 1.5rem;">
+                            LISTADO DE ITEMS
+                        </span>
+                        <button class="btn btn-success" (click)="crearNuevoItemsM()">NUEVO</button>
+                    </div>
+
+                    <!-- Input para buscar items -->
+                    <div class="mb-3">
+                        <input type="text" [(ngModel)]="searchTerm" (input)="filtrarItems()"
+                               placeholder="Buscar por nombre" class="form-control" />
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center">Descripción</th>
+                                    <th class="text-center">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let items of filteredItems">
+                                    <!-- Ocultar el ID -->
+                                    <td class="text-left" style="display: none;">{{items._id}}</td>
+                                    <td class="text-left">{{items.descripcion}}</td>
+                                    <td class="text-center">{{items.valor}}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" (click)="editarItems(items)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5 style="text-align: start; margin-top: 10px;" *ngIf="filteredItems.length == 0">
+                        No hay items para mostrar
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

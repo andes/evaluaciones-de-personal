@@ -1,0 +1,56 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Encabezado de la tabla -->
+                    <div class="header-container mb-3 d-flex justify-content-between align-items-center">
+                        <span class="titulo text-center mx-auto" style="font-weight: bold; font-size: 1.5rem;">
+                            LISTADO DE PLANILLAS
+                        </span>
+                        <button class="btn btn-success" (click)="crearNuevoPlanillaEDM()">NUEVO</button>
+                    </div>
+
+                    <!-- Input para buscar planillas -->
+                    <div class="mb-3">
+                        <input type="text" [(ngModel)]="searchTerm" (input)="filtrarPlanillaED()"
+                               placeholder="Buscar por descripción" class="form-control" />
+                    </div>
+
+                    <!-- Tabla -->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center">Fecha</th>
+                                    <th class="text-center">Descripción</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let planilla of filterPlanillaED">
+                                    <td class="text-center">{{ planilla.fechaCreacion | date: 'dd/MM/yyyy' }}</td>
+                                    <td class="text-center">{{ planilla.descripcion }}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-primary btn-sm" (click)="editarPlanillaED(planilla)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm"
+                                                (click)="eliminarPlanillaED(planilla._id)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Mensaje si no hay planillas -->
+                    <h5 style="text-align: start; margin-top: 10px;" *ngIf="filterPlanillaED.length == 0">
+                        No hay planillas para mostrar
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

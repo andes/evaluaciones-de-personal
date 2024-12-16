@@ -1,0 +1,19 @@
+<plex-layout>
+    <plex-layout-main>
+        <plex-title titulo="¡Bienvenido!">
+            <!-- Mensaje de bienvenida y ayuda -->
+            <plex-help icon="help" type="help" titulo="Ayuda para el usuario" subtitulo="Evaluaciones de Personal">
+                <ayuda></ayuda>
+            </plex-help>
+        </plex-title>
+
+        <!-- Menú de botones -->
+        <div class="menu-buttons">
+            <button plexButton (click)="onEfectoresClick()">Efectores</button>
+            <button plexButton (click)="onServiciosClick()">Servicios</button>
+            <button plexButton (click)="onAgentesClick()">Agentes</button>
+            <button plexButton (click)="onCategoriasClick()">Categorías</button>
+            <button plexButton (click)="onItemsClick()">Items</button>
+        </div>
+    </plex-layout-main>
+</plex-layout>

@@ -1,0 +1,35 @@
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Ensures button is aligned to the right */
+}
+
+.titulo {
+    font-size: 2rem;
+    /* Adjust size as needed */
+    font-weight: bold;
+    /* Makes text bold */
+    color: #343a40;
+    /* Dark color for the text (adjust as needed) */
+    text-align: center;
+    flex-grow: 1;
+}
+
+.header-container {
+    position: sticky;
+    /* Mantiene el elemento fijo al desplazarse */
+    top: 0;
+    /* Fija el encabezado al inicio de la vista */
+    background-color: white;
+    /* Fondo blanco para el encabezado */
+    z-index: 10;
+    /* Asegúrate de que el encabezado esté encima de otros elementos */
+}
+
+.table-responsive {
+    max-height: 400px;
+    /* Altura máxima para el área de la tabla */
+    overflow-y: auto;
+    /* Habilita el desplazamiento vertical */
+}

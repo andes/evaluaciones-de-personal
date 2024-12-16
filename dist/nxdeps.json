@@ -1,0 +1,2372 @@
+{
+  "projectGraph": {
+    "nodes": {
+      "frontend-e2e": {
+        "name": "frontend-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "apps/frontend-e2e",
+          "sourceRoot": "apps/frontend-e2e/src",
+          "projectType": "application",
+          "architect": {
+            "e2e": {
+              "builder": "@nrwl/cypress:cypress",
+              "options": {
+                "cypressConfig": "apps/frontend-e2e/cypress.json",
+                "tsConfig": "apps/frontend-e2e/tsconfig.e2e.json",
+                "devServerTarget": "frontend:serve"
+              },
+              "configurations": {
+                "production": {
+                  "devServerTarget": "frontend:serve:production"
+                }
+              }
+            },
+            "lint": {
+              "builder": "@angular-devkit/build-angular:tslint",
+              "options": {
+                "tsConfig": [
+                  "apps/frontend-e2e/tsconfig.e2e.json"
+                ],
+                "exclude": [
+                  "**/node_modules/**",
+                  "!apps/frontend-e2e/**"
+                ]
+              }
+            }
+          },
+          "tags": [],
+          "files": [
+            {
+              "file": "apps/frontend-e2e/cypress.json",
+              "ext": ".json",
+              "mtime": 1715870079688.0234
+            },
+            {
+              "file": "apps/frontend-e2e/src/fixtures/example.json",
+              "ext": ".json",
+              "mtime": 1715870079688.0234
+            },
+            {
+              "file": "apps/frontend-e2e/src/integration/app.spec.ts",
+              "ext": ".ts",
+              "mtime": 1715870079688.0234
+            },
+            {
+              "file": "apps/frontend-e2e/src/support/app.po.ts",
+              "ext": ".ts",
+              "mtime": 1715870079688.0234
+            },
+            {
+              "file": "apps/frontend-e2e/src/support/commands.ts",
+              "ext": ".ts",
+              "mtime": 1715870079688.0234
+            },
+            {
+              "file": "apps/frontend-e2e/src/support/index.ts",
+              "ext": ".ts",
+              "mtime": 1715870079688.0234
+            },
+            {
+              "file": "apps/frontend-e2e/tsconfig.e2e.json",
+              "ext": ".json",
+              "mtime": 1715870079688.0234
+            },
+            {
+              "file": "apps/frontend-e2e/tsconfig.json",
+              "ext": ".json",
+              "mtime": 1715870079688.0234
+            },
+            {
+              "file": "apps/frontend-e2e/tslint.json",
+              "ext": ".json",
+              "mtime": 1715870079688.0234
+            }
+          ]
+        }
+      },
+      "frontend": {
+        "name": "frontend",
+        "type": "app",
+        "data": {
+          "projectType": "application",
+          "schematics": {
+            "@nrwl/angular:component": {
+              "style": "scss"
+            }
+          },
+          "root": "apps/frontend",
+          "sourceRoot": "apps/frontend/src",
+          "prefix": "sala-de-situacion",
+          "architect": {
+            "build": {
+              "builder": "@angular-devkit/build-angular:browser",
+              "options": {
+                "outputPath": "dist/apps/frontend",
+                "index": "apps/frontend/src/index.html",
+                "main": "apps/frontend/src/main.ts",
+                "polyfills": "apps/frontend/src/polyfills.ts",
+                "tsConfig": "apps/frontend/tsconfig.app.json",
+                "aot": false,
+                "assets": [
+                  "apps/frontend/src/favicon.ico",
+                  "apps/frontend/src/assets"
+                ],
+                "styles": [
+                  "apps/frontend/src/styles.scss"
+                ],
+                "scripts": [
+                  "node_modules/intro.js/intro.js"
+                ]
+              },
+              "configurations": {
+                "production": {
+                  "fileReplacements": [
+                    {
+                      "replace": "apps/frontend/src/environments/environment.ts",
+                      "with": "apps/frontend/src/environments/environment.prod.ts"
+                    }
+                  ],
+                  "optimization": true,
+                  "outputHashing": "all",
+                  "sourceMap": false,
+                  "extractCss": true,
+                  "namedChunks": false,
+                  "aot": true,
+                  "extractLicenses": true,
+                  "vendorChunk": false,
+                  "buildOptimizer": true,
+                  "budgets": [
+                    {
+                      "type": "initial",
+                      "maximumWarning": "2mb",
+                      "maximumError": "5mb"
+                    },
+                    {
+                      "type": "anyComponentStyle",
+                      "maximumWarning": "6kb",
+                      "maximumError": "10kb"
+                    }
+                  ]
+                }
+              }
+            },
+            "serve": {
+              "builder": "@angular-devkit/build-angular:dev-server",
+              "options": {
+                "browserTarget": "frontend:build"
+              },
+              "configurations": {
+                "production": {
+                  "browserTarget": "frontend:build:production"
+                }
+              }
+            },
+            "extract-i18n": {
+              "builder": "@angular-devkit/build-angular:extract-i18n",
+              "options": {
+                "browserTarget": "frontend:build"
+              }
+            },
+            "lint": {
+              "builder": "@angular-devkit/build-angular:tslint",
+              "options": {
+                "tsConfig": [
+                  "apps/frontend/tsconfig.app.json",
+                  "apps/frontend/tsconfig.spec.json"
+                ],
+                "exclude": [
+                  "**/node_modules/**",
+                  "!apps/frontend/**"
+                ]
+              }
+            },
+            "test": {
+              "builder": "@nrwl/jest:jest",
+              "options": {
+                "jestConfig": "apps/frontend/jest.config.js",
+                "tsConfig": "apps/frontend/tsconfig.spec.json",
+                "passWithNoTests": true,
+                "setupFile": "apps/frontend/src/test-setup.ts"
+              }
+            }
+          },
+          "tags": [],
+          "files": [
+            {
+              "file": "apps/frontend/.DS_Store",
+              "ext": "",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/browserslist",
+              "ext": "",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/.DS_Store",
+              "ext": "",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/.DS_Store",
+              "ext": "",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.css",
+              "ext": ".css",
+              "mtime": 1726663291733.771
+            },
+            {
+              "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.html",
+              "ext": ".html",
+              "mtime": 1729504598910.633
+            },
+            {
+              "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.spec.ts",
+              "ext": ".ts",
+              "mtime": 1729263306019.024
+            },
+            {
+              "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.ts",
+              "ext": ".ts",
+              "mtime": 1732906197476.73
+            },
+            {
+              "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.css",
+              "ext": ".css",
+              "mtime": 1726740073200.633
+            },
+            {
+              "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.html",
+              "ext": ".html",
+              "mtime": 1729607450964.686
+            },
+            {
+              "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.ts",
+              "ext": ".ts",
+              "mtime": 1729607450964.686
+            },
+            {
+              "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.css",
+              "ext": ".css",
+              "mtime": 1729609756856.403
+            },
+            {
+              "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.html",
+              "ext": ".html",
+              "mtime": 1729609756852.403
+            },
+            {
+              "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.ts",
+              "ext": ".ts",
+              "mtime": 1732540985916.236
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.css",
+              "ext": ".css",
+              "mtime": 1733051481552.338
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.html",
+              "ext": ".html",
+              "mtime": 1733830456628.4949
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.ts",
+              "ext": ".ts",
+              "mtime": 1734100275838.5693
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component..ts",
+              "ext": ".ts",
+              "mtime": 1734100614051.3193
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.css",
+              "ext": ".css",
+              "mtime": 1733308694899.125
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.html",
+              "ext": ".html",
+              "mtime": 1734100600495.1292
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.css",
+              "ext": ".css",
+              "mtime": 1731335335678.193
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.html",
+              "ext": ".html",
+              "mtime": 1732184343848.931
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.ts",
+              "ext": ".ts",
+              "mtime": 1733133648788.332
+            },
+            {
+              "file": "apps/frontend/src/app/app-routing.module.ts",
+              "ext": ".ts",
+              "mtime": 1733496899438.8274
+            },
+            {
+              "file": "apps/frontend/src/app/app.component.html",
+              "ext": ".html",
+              "mtime": 1729693845176.351
+            },
+            {
+              "file": "apps/frontend/src/app/app.component.scss",
+              "ext": ".scss",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/app.component.spec.ts",
+              "ext": ".ts",
+              "mtime": 1728485370405.018
+            },
+            {
+              "file": "apps/frontend/src/app/app.component.ts",
+              "ext": ".ts",
+              "mtime": 1732099394410.46
+            },
+            {
+              "file": "apps/frontend/src/app/app.module.ts",
+              "ext": ".ts",
+              "mtime": 1733497038740.8772
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.css",
+              "ext": ".css",
+              "mtime": 1726663291733.771
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.html",
+              "ext": ".html",
+              "mtime": 1729509165054.568
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.spec.ts",
+              "ext": ".ts",
+              "mtime": 1725880666877.97
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.ts",
+              "ext": ".ts",
+              "mtime": 1729264800812.332
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.css",
+              "ext": ".css",
+              "mtime": 1726740073200.633
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.html",
+              "ext": ".html",
+              "mtime": 1727174094537.231
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.ts",
+              "ext": ".ts",
+              "mtime": 1728050720250.203
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.css",
+              "ext": ".css",
+              "mtime": 1726570236474.366
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.html",
+              "ext": ".html",
+              "mtime": 1727173970207.168
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.spec.ts",
+              "ext": ".ts",
+              "mtime": 1727088323067.446
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.ts",
+              "ext": ".ts",
+              "mtime": 1727088323047.445
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.css",
+              "ext": ".css",
+              "mtime": 1726663291733.771
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.html",
+              "ext": ".html",
+              "mtime": 1726663295881.805
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.spec.ts",
+              "ext": ".ts",
+              "mtime": 1725880666877.97
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.ts",
+              "ext": ".ts",
+              "mtime": 1727087163618.699
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.css",
+              "ext": ".css",
+              "mtime": 1726740073200.633
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.html",
+              "ext": ".html",
+              "mtime": 1727874772584.155
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.ts",
+              "ext": ".ts",
+              "mtime": 1727875460431.082
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.css",
+              "ext": ".css",
+              "mtime": 1726570236474.366
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.html",
+              "ext": ".html",
+              "mtime": 1727173970207.168
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.spec.ts",
+              "ext": ".ts",
+              "mtime": 1727088323067.446
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.ts",
+              "ext": ".ts",
+              "mtime": 1727088323047.445
+            },
+            {
+              "file": "apps/frontend/src/app/editems/edItems.component.css",
+              "ext": ".css",
+              "mtime": 1719584260000
+            },
+            {
+              "file": "apps/frontend/src/app/editems/edItems.component.html",
+              "ext": ".html",
+              "mtime": 1723201094571.525
+            },
+            {
+              "file": "apps/frontend/src/app/editems/edItems.component.ts",
+              "ext": ".ts",
+              "mtime": 1723114054837.077
+            },
+            {
+              "file": "apps/frontend/src/app/editems/edcategoria.component.html",
+              "ext": ".html",
+              "mtime": 1724247980837.768
+            },
+            {
+              "file": "apps/frontend/src/app/home/MenuPlanillaED.component.css",
+              "ext": ".css",
+              "mtime": 1732028003703.655
+            },
+            {
+              "file": "apps/frontend/src/app/home/MenuPlanillaED.component.html",
+              "ext": ".html",
+              "mtime": 1732111073304.931
+            },
+            {
+              "file": "apps/frontend/src/app/home/MenuPlanillaED.component.ts",
+              "ext": ".ts",
+              "mtime": 1732111080069.041
+            },
+            {
+              "file": "apps/frontend/src/app/home/ayuda.component.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/home/ayuda.html",
+              "ext": ".html",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/home/eDesmp.component.html",
+              "ext": ".html",
+              "mtime": 1720180410000
+            },
+            {
+              "file": "apps/frontend/src/app/home/eDesmp.component.ts",
+              "ext": ".ts",
+              "mtime": 1718808118000
+            },
+            {
+              "file": "apps/frontend/src/app/home/home.component.html",
+              "ext": ".html",
+              "mtime": 1729695035995.01
+            },
+            {
+              "file": "apps/frontend/src/app/home/home.component.ts",
+              "ext": ".ts",
+              "mtime": 1729694480537.467
+            },
+            {
+              "file": "apps/frontend/src/app/home/menucomunes.component.css",
+              "ext": ".css",
+              "mtime": 1730114432224.955
+            },
+            {
+              "file": "apps/frontend/src/app/home/menucomunes.component.html",
+              "ext": ".html",
+              "mtime": 1732101611520.446
+            },
+            {
+              "file": "apps/frontend/src/app/home/menucomunes.component.ts",
+              "ext": ".ts",
+              "mtime": 1729866527270.338
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.html",
+              "ext": ".html",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/institution.module.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/institution.provider.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/institution.routing.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/service/institution.service.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/modelos/PlanillaED.Model.ts",
+              "ext": ".ts",
+              "mtime": 1733831317721.0571
+            },
+            {
+              "file": "apps/frontend/src/app/modelos/categoria.model.ts",
+              "ext": ".ts",
+              "mtime": 1726839834444.354
+            },
+            {
+              "file": "apps/frontend/src/app/modelos/items.model.ts",
+              "ext": ".ts",
+              "mtime": 1728468724012.674
+            },
+            {
+              "file": "apps/frontend/src/app/services/PlanillaED.Service.ts",
+              "ext": ".ts",
+              "mtime": 1734179909313.4104
+            },
+            {
+              "file": "apps/frontend/src/app/services/categoria.service.ts",
+              "ext": ".ts",
+              "mtime": 1734100753285.2744
+            },
+            {
+              "file": "apps/frontend/src/app/services/items.service.ts",
+              "ext": ".ts",
+              "mtime": 1731683905650.618
+            },
+            {
+              "file": "apps/frontend/src/app/shared/directives/select-search.directive.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/shared/location.services.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/shared/select-search.service.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/app/shared/utils.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/assets/.gitkeep",
+              "ext": "",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/environments/environment.prod.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/environments/environment.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/favicon.ico",
+              "ext": ".ico",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/index.html",
+              "ext": ".html",
+              "mtime": 1732101611520.446
+            },
+            {
+              "file": "apps/frontend/src/main.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/polyfills.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/styles.scss",
+              "ext": ".scss",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/src/test-setup.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/tsconfig.app.json",
+              "ext": ".json",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/tsconfig.json",
+              "ext": ".json",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/tsconfig.spec.json",
+              "ext": ".json",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/frontend/tslint.json",
+              "ext": ".json",
+              "mtime": 1715870079000
+            }
+          ]
+        }
+      },
+      "backend": {
+        "name": "backend",
+        "type": "app",
+        "data": {
+          "root": "apps/backend",
+          "sourceRoot": "apps/backend/src",
+          "projectType": "application",
+          "prefix": "backend",
+          "schematics": {},
+          "architect": {
+            "build": {
+              "builder": "@nrwl/node:build",
+              "options": {
+                "outputPath": "dist/apps/backend",
+                "main": "apps/backend/src/main.ts",
+                "tsConfig": "apps/backend/tsconfig.app.json",
+                "assets": [
+                  "apps/backend/src/assets"
+                ]
+              },
+              "configurations": {
+                "production": {
+                  "optimization": true,
+                  "extractLicenses": true,
+                  "inspect": false,
+                  "fileReplacements": [
+                    {
+                      "replace": "apps/backend/src/environments/environment.ts",
+                      "with": "apps/backend/src/environments/environment.prod.ts"
+                    }
+                  ]
+                }
+              }
+            },
+            "serve": {
+              "builder": "@nrwl/node:execute",
+              "options": {
+                "buildTarget": "backend:build"
+              }
+            },
+            "lint": {
+              "builder": "@nrwl/linter:lint",
+              "options": {
+                "linter": "eslint",
+                "config": "apps/backend/.eslintrc",
+                "tsConfig": [
+                  "apps/backend/tsconfig.app.json",
+                  "apps/backend/tsconfig.spec.json"
+                ],
+                "exclude": [
+                  "**/node_modules/**",
+                  "!apps/backend/**"
+                ]
+              }
+            },
+            "test": {
+              "builder": "@nrwl/jest:jest",
+              "options": {
+                "jestConfig": "apps/backend/jest.config.js",
+                "tsConfig": "apps/backend/tsconfig.spec.json",
+                "passWithNoTests": true
+              }
+            }
+          },
+          "tags": [],
+          "files": [
+            {
+              "file": "apps/backend/.eslintrc",
+              "ext": "",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/.gitkeep",
+              "ext": "",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/EDItems/routes/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1722247986000
+            },
+            {
+              "file": "apps/backend/src/app/EDItems/schemas/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1722248444000
+            },
+            {
+              "file": "apps/backend/src/app/Efectores/Routes/efectores.ts",
+              "ext": ".ts",
+              "mtime": 1730818178827.892
+            },
+            {
+              "file": "apps/backend/src/app/Efectores/schemas/efectores.ts",
+              "ext": ".ts",
+              "mtime": 1732906197472.73
+            },
+            {
+              "file": "apps/backend/src/app/Items/routes/items.ts",
+              "ext": ".ts",
+              "mtime": 1730291578145.94
+            },
+            {
+              "file": "apps/backend/src/app/Items/schemas/items.ts",
+              "ext": ".ts",
+              "mtime": 1730973016950.525
+            },
+            {
+              "file": "apps/backend/src/app/PlanillaED/Router/PlanillaED.ts",
+              "ext": ".ts",
+              "mtime": 1734179905401.3518
+            },
+            {
+              "file": "apps/backend/src/app/PlanillaED/Schemas/PlanillaED.ts",
+              "ext": ".ts",
+              "mtime": 1734179909309.4104
+            },
+            {
+              "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",
+              "ext": ".ts",
+              "mtime": 1734179909317.4104
+            },
+            {
+              "file": "apps/backend/src/app/Servicios/Schemas/servicios.ts",
+              "ext": ".ts",
+              "mtime": 1730898021263.107
+            },
+            {
+              "file": "apps/backend/src/app/application.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/auth/auth.routes.spec.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/auth/auth.routes.ts",
+              "ext": ".ts",
+              "mtime": 1715950839000
+            },
+            {
+              "file": "apps/backend/src/app/categoriaitems/routes/categoriaItems.ts",
+              "ext": ".ts",
+              "mtime": 1729517880141.757
+            },
+            {
+              "file": "apps/backend/src/app/categoriaitems/schemas/categoriaItems.ts",
+              "ext": ".ts",
+              "mtime": 1730973004490.364
+            },
+            {
+              "file": "apps/backend/src/app/connection.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/eDesempeno/routes/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1721918930000
+            },
+            {
+              "file": "apps/backend/src/app/eDesempeno/schemas/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1722247986000
+            },
+            {
+              "file": "apps/backend/src/app/services/mail/mail.shema.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/services/mail/mail.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/templates/email/account-activation.html",
+              "ext": ".html",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/templates/email/layout.html",
+              "ext": ".html",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/templates/email/password-reset.html",
+              "ext": ".html",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/templates/email/user-suggestions.html",
+              "ext": ".html",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/users/user.controller.ts",
+              "ext": ".ts",
+              "mtime": 1715950019000
+            },
+            {
+              "file": "apps/backend/src/app/users/user.interface.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/app/users/user.schema.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/assets/.gitkeep",
+              "ext": "",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/environments/environment.prod.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/environments/environment.ts",
+              "ext": ".ts",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/src/main.ts",
+              "ext": ".ts",
+              "mtime": 1730978958816.626
+            },
+            {
+              "file": "apps/backend/tsconfig.app.json",
+              "ext": ".json",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/tsconfig.json",
+              "ext": ".json",
+              "mtime": 1715870079000
+            },
+            {
+              "file": "apps/backend/tsconfig.spec.json",
+              "ext": ".json",
+              "mtime": 1715870079000
+            }
+          ]
+        }
+      },
+      "@andes/api-tool": {
+        "type": "npm",
+        "name": "@andes/api-tool",
+        "data": {
+          "version": "^2.1.0",
+          "files": []
+        }
+      },
+      "@andes/core": {
+        "type": "npm",
+        "name": "@andes/core",
+        "data": {
+          "version": "^1.6.0",
+          "files": []
+        }
+      },
+      "@andes/georeference": {
+        "type": "npm",
+        "name": "@andes/georeference",
+        "data": {
+          "version": "^1.0.0",
+          "files": []
+        }
+      },
+      "@andes/log": {
+        "type": "npm",
+        "name": "@andes/log",
+        "data": {
+          "version": "^2.0.0",
+          "files": []
+        }
+      },
+      "@andes/mongoose-plugin-audit": {
+        "type": "npm",
+        "name": "@andes/mongoose-plugin-audit",
+        "data": {
+          "version": "^1.1.0",
+          "files": []
+        }
+      },
+      "@andes/plex": {
+        "type": "npm",
+        "name": "@andes/plex",
+        "data": {
+          "version": "6.1.2",
+          "files": []
+        }
+      },
+      "@andes/shared": {
+        "type": "npm",
+        "name": "@andes/shared",
+        "data": {
+          "version": "^5.2.0",
+          "files": []
+        }
+      },
+      "@angular/animations": {
+        "type": "npm",
+        "name": "@angular/animations",
+        "data": {
+          "version": "^8.2.0",
+          "files": []
+        }
+      },
+      "@angular/cdk": {
+        "type": "npm",
+        "name": "@angular/cdk",
+        "data": {
+          "version": "^8.2.3",
+          "files": []
+        }
+      },
+      "@angular/common": {
+        "type": "npm",
+        "name": "@angular/common",
+        "data": {
+          "version": "^8.2.0",
+          "files": []
+        }
+      },
+      "@angular/compiler": {
+        "type": "npm",
+        "name": "@angular/compiler",
+        "data": {
+          "version": "^8.2.0",
+          "files": []
+        }
+      },
+      "@angular/core": {
+        "type": "npm",
+        "name": "@angular/core",
+        "data": {
+          "version": "^8.2.0",
+          "files": []
+        }
+      },
+      "@angular/forms": {
+        "type": "npm",
+        "name": "@angular/forms",
+        "data": {
+          "version": "^8.2.0",
+          "files": []
+        }
+      },
+      "@angular/material": {
+        "type": "npm",
+        "name": "@angular/material",
+        "data": {
+          "version": "^8.2.3",
+          "files": []
+        }
+      },
+      "@angular/platform-browser": {
+        "type": "npm",
+        "name": "@angular/platform-browser",
+        "data": {
+          "version": "^8.2.0",
+          "files": []
+        }
+      },
+      "@angular/platform-browser-dynamic": {
+        "type": "npm",
+        "name": "@angular/platform-browser-dynamic",
+        "data": {
+          "version": "^8.2.0",
+          "files": []
+        }
+      },
+      "@angular/router": {
+        "type": "npm",
+        "name": "@angular/router",
+        "data": {
+          "version": "^8.2.0",
+          "files": []
+        }
+      },
+      "@types/mssql": {
+        "type": "npm",
+        "name": "@types/mssql",
+        "data": {
+          "version": "^6.0.2",
+          "files": []
+        }
+      },
+      "bcrypt": {
+        "type": "npm",
+        "name": "bcrypt",
+        "data": {
+          "version": "^4.0.1",
+          "files": []
+        }
+      },
+      "concurrently": {
+        "type": "npm",
+        "name": "concurrently",
+        "data": {
+          "version": "^5.1.0",
+          "files": []
+        }
+      },
+      "core-js": {
+        "type": "npm",
+        "name": "core-js",
+        "data": {
+          "version": "^2.5.4",
+          "files": []
+        }
+      },
+      "crypto": {
+        "type": "npm",
+        "name": "crypto",
+        "data": {
+          "version": "^1.0.1",
+          "files": []
+        }
+      },
+      "debug": {
+        "type": "npm",
+        "name": "debug",
+        "data": {
+          "version": "^4.1.1",
+          "files": []
+        }
+      },
+      "handlebars": {
+        "type": "npm",
+        "name": "handlebars",
+        "data": {
+          "version": "^4.1.0",
+          "files": []
+        }
+      },
+      "jquery": {
+        "type": "npm",
+        "name": "jquery",
+        "data": {
+          "version": "^3.4.1",
+          "files": []
+        }
+      },
+      "mongoose": {
+        "type": "npm",
+        "name": "mongoose",
+        "data": {
+          "version": "^5.9.5",
+          "files": []
+        }
+      },
+      "mssql": {
+        "type": "npm",
+        "name": "mssql",
+        "data": {
+          "version": "^6.2.0",
+          "files": []
+        }
+      },
+      "ng-recaptcha": {
+        "type": "npm",
+        "name": "ng-recaptcha",
+        "data": {
+          "version": "^7.0.1",
+          "files": []
+        }
+      },
+      "ngx-observe": {
+        "type": "npm",
+        "name": "ngx-observe",
+        "data": {
+          "version": "^1.1.0",
+          "files": []
+        }
+      },
+      "node-fetch": {
+        "type": "npm",
+        "name": "node-fetch",
+        "data": {
+          "version": "^2.6.0",
+          "files": []
+        }
+      },
+      "node-schedule": {
+        "type": "npm",
+        "name": "node-schedule",
+        "data": {
+          "version": "^1.3.2",
+          "files": []
+        }
+      },
+      "nodemailer": {
+        "type": "npm",
+        "name": "nodemailer",
+        "data": {
+          "version": "^6.4.6",
+          "files": []
+        }
+      },
+      "ol": {
+        "type": "npm",
+        "name": "ol",
+        "data": {
+          "version": "^5.3.3",
+          "files": []
+        }
+      },
+      "rxjs": {
+        "type": "npm",
+        "name": "rxjs",
+        "data": {
+          "version": "~6.4.0",
+          "files": []
+        }
+      },
+      "rxjs-compat": {
+        "type": "npm",
+        "name": "rxjs-compat",
+        "data": {
+          "version": "^6.5.4",
+          "files": []
+        }
+      },
+      "shiro-trie": {
+        "type": "npm",
+        "name": "shiro-trie",
+        "data": {
+          "version": "^0.4.9",
+          "files": []
+        }
+      },
+      "zone.js": {
+        "type": "npm",
+        "name": "zone.js",
+        "data": {
+          "version": "^0.9.1",
+          "files": []
+        }
+      },
+      "@angular-devkit/build-angular": {
+        "type": "npm",
+        "name": "@angular-devkit/build-angular",
+        "data": {
+          "version": "^0.803.25",
+          "files": []
+        }
+      },
+      "@angular/compiler-cli": {
+        "type": "npm",
+        "name": "@angular/compiler-cli",
+        "data": {
+          "version": "^8.2.0",
+          "files": []
+        }
+      },
+      "@angular/language-service": {
+        "type": "npm",
+        "name": "@angular/language-service",
+        "data": {
+          "version": "^8.2.0",
+          "files": []
+        }
+      },
+      "@babel/compat-data": {
+        "type": "npm",
+        "name": "@babel/compat-data",
+        "data": {
+          "version": "~7.8.6",
+          "files": []
+        }
+      },
+      "@nrwl/angular": {
+        "type": "npm",
+        "name": "@nrwl/angular",
+        "data": {
+          "version": "^8.12.10",
+          "files": []
+        }
+      },
+      "@nrwl/cypress": {
+        "type": "npm",
+        "name": "@nrwl/cypress",
+        "data": {
+          "version": "8.12.10",
+          "files": []
+        }
+      },
+      "@nrwl/eslint-plugin-nx": {
+        "type": "npm",
+        "name": "@nrwl/eslint-plugin-nx",
+        "data": {
+          "version": "^9.1.4",
+          "files": []
+        }
+      },
+      "@nrwl/jest": {
+        "type": "npm",
+        "name": "@nrwl/jest",
+        "data": {
+          "version": "9.1.2",
+          "files": []
+        }
+      },
+      "@nrwl/node": {
+        "type": "npm",
+        "name": "@nrwl/node",
+        "data": {
+          "version": "9.1.2",
+          "files": []
+        }
+      },
+      "@nrwl/workspace": {
+        "type": "npm",
+        "name": "@nrwl/workspace",
+        "data": {
+          "version": "9.1.2",
+          "files": []
+        }
+      },
+      "@types/express": {
+        "type": "npm",
+        "name": "@types/express",
+        "data": {
+          "version": "^4.0.35",
+          "files": []
+        }
+      },
+      "@types/jest": {
+        "type": "npm",
+        "name": "@types/jest",
+        "data": {
+          "version": "24.9.1",
+          "files": []
+        }
+      },
+      "@types/jquery": {
+        "type": "npm",
+        "name": "@types/jquery",
+        "data": {
+          "version": "^3.3.31",
+          "files": []
+        }
+      },
+      "@types/mongoose": {
+        "type": "npm",
+        "name": "@types/mongoose",
+        "data": {
+          "version": "^5.7.7",
+          "files": []
+        }
+      },
+      "@types/node": {
+        "type": "npm",
+        "name": "@types/node",
+        "data": {
+          "version": "^8.9.5",
+          "files": []
+        }
+      },
+      "@typescript-eslint/eslint-plugin": {
+        "type": "npm",
+        "name": "@typescript-eslint/eslint-plugin",
+        "data": {
+          "version": "^2.25.0",
+          "files": []
+        }
+      },
+      "@typescript-eslint/parser": {
+        "type": "npm",
+        "name": "@typescript-eslint/parser",
+        "data": {
+          "version": "^2.25.0",
+          "files": []
+        }
+      },
+      "codelyzer": {
+        "type": "npm",
+        "name": "codelyzer",
+        "data": {
+          "version": "~5.0.1",
+          "files": []
+        }
+      },
+      "cypress": {
+        "type": "npm",
+        "name": "cypress",
+        "data": {
+          "version": "^3.8.2",
+          "files": []
+        }
+      },
+      "dotenv": {
+        "type": "npm",
+        "name": "dotenv",
+        "data": {
+          "version": "^6.2.0",
+          "files": []
+        }
+      },
+      "eslint": {
+        "type": "npm",
+        "name": "eslint",
+        "data": {
+          "version": "6.8.0",
+          "files": []
+        }
+      },
+      "eslint-config-prettier": {
+        "type": "npm",
+        "name": "eslint-config-prettier",
+        "data": {
+          "version": "^6.10.1",
+          "files": []
+        }
+      },
+      "express": {
+        "type": "npm",
+        "name": "express",
+        "data": {
+          "version": "^4.16.3",
+          "files": []
+        }
+      },
+      "jest": {
+        "type": "npm",
+        "name": "jest",
+        "data": {
+          "version": "24.9.0",
+          "files": []
+        }
+      },
+      "jest-preset-angular": {
+        "type": "npm",
+        "name": "jest-preset-angular",
+        "data": {
+          "version": "^8.1.2",
+          "files": []
+        }
+      },
+      "mongodb-memory-server-global": {
+        "type": "npm",
+        "name": "mongodb-memory-server-global",
+        "data": {
+          "version": "^6.4.1",
+          "files": []
+        }
+      },
+      "prettier": {
+        "type": "npm",
+        "name": "prettier",
+        "data": {
+          "version": "1.19.1",
+          "files": []
+        }
+      },
+      "supertest": {
+        "type": "npm",
+        "name": "supertest",
+        "data": {
+          "version": "^4.0.2",
+          "files": []
+        }
+      },
+      "ts-jest": {
+        "type": "npm",
+        "name": "ts-jest",
+        "data": {
+          "version": "24.0.0",
+          "files": []
+        }
+      },
+      "ts-node": {
+        "type": "npm",
+        "name": "ts-node",
+        "data": {
+          "version": "~7.0.0",
+          "files": []
+        }
+      },
+      "tslint": {
+        "type": "npm",
+        "name": "tslint",
+        "data": {
+          "version": "~6.0.0",
+          "files": []
+        }
+      },
+      "typescript": {
+        "type": "npm",
+        "name": "typescript",
+        "data": {
+          "version": "~3.5.3",
+          "files": []
+        }
+      }
+    },
+    "dependencies": {
+      "frontend-e2e": [
+        {
+          "type": "implicit",
+          "source": "frontend-e2e",
+          "target": "frontend"
+        }
+      ],
+      "frontend": [
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "@angular/core"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "@angular/router"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "@angular/forms"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "@andes/shared"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "@andes/plex"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "@angular/common"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "@angular/platform-browser"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "ngx-observe"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "rxjs"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "mongoose"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "@angular/platform-browser-dynamic"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "zone.js"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "jest-preset-angular"
+        }
+      ],
+      "backend": [
+        {
+          "type": "static",
+          "source": "backend",
+          "target": "express"
+        },
+        {
+          "type": "static",
+          "source": "backend",
+          "target": "mongoose"
+        },
+        {
+          "type": "static",
+          "source": "backend",
+          "target": "@andes/api-tool"
+        },
+        {
+          "type": "static",
+          "source": "backend",
+          "target": "mongodb-memory-server-global"
+        },
+        {
+          "type": "static",
+          "source": "backend",
+          "target": "debug"
+        },
+        {
+          "type": "static",
+          "source": "backend",
+          "target": "@andes/core"
+        }
+      ],
+      "@andes/api-tool": [],
+      "@andes/core": [],
+      "@andes/georeference": [],
+      "@andes/log": [],
+      "@andes/mongoose-plugin-audit": [],
+      "@andes/plex": [],
+      "@andes/shared": [],
+      "@angular/animations": [],
+      "@angular/cdk": [],
+      "@angular/common": [],
+      "@angular/compiler": [],
+      "@angular/core": [],
+      "@angular/forms": [],
+      "@angular/material": [],
+      "@angular/platform-browser": [],
+      "@angular/platform-browser-dynamic": [],
+      "@angular/router": [],
+      "@types/mssql": [],
+      "bcrypt": [],
+      "concurrently": [],
+      "core-js": [],
+      "crypto": [],
+      "debug": [],
+      "handlebars": [],
+      "jquery": [],
+      "mongoose": [],
+      "mssql": [],
+      "ng-recaptcha": [],
+      "ngx-observe": [],
+      "node-fetch": [],
+      "node-schedule": [],
+      "nodemailer": [],
+      "ol": [],
+      "rxjs": [],
+      "rxjs-compat": [],
+      "shiro-trie": [],
+      "zone.js": [],
+      "@angular-devkit/build-angular": [],
+      "@angular/compiler-cli": [],
+      "@angular/language-service": [],
+      "@babel/compat-data": [],
+      "@nrwl/angular": [],
+      "@nrwl/cypress": [],
+      "@nrwl/eslint-plugin-nx": [],
+      "@nrwl/jest": [],
+      "@nrwl/node": [],
+      "@nrwl/workspace": [],
+      "@types/express": [],
+      "@types/jest": [],
+      "@types/jquery": [],
+      "@types/mongoose": [],
+      "@types/node": [],
+      "@typescript-eslint/eslint-plugin": [],
+      "@typescript-eslint/parser": [],
+      "codelyzer": [],
+      "cypress": [],
+      "dotenv": [],
+      "eslint": [],
+      "eslint-config-prettier": [],
+      "express": [],
+      "jest": [],
+      "jest-preset-angular": [],
+      "mongodb-memory-server-global": [],
+      "prettier": [],
+      "supertest": [],
+      "ts-jest": [],
+      "ts-node": [],
+      "tslint": [],
+      "typescript": []
+    }
+  },
+  "fileMap": {
+    "frontend-e2e": [
+      {
+        "file": "apps/frontend-e2e/cypress.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend-e2e/src/fixtures/example.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend-e2e/src/integration/app.spec.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend-e2e/src/support/app.po.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend-e2e/src/support/commands.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend-e2e/src/support/index.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend-e2e/tsconfig.e2e.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend-e2e/tsconfig.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend-e2e/tslint.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      }
+    ],
+    "frontend": [
+      {
+        "file": "apps/frontend/.DS_Store",
+        "ext": "",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/browserslist",
+        "ext": "",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/.DS_Store",
+        "ext": "",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/.DS_Store",
+        "ext": "",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.css",
+        "ext": ".css",
+        "mtime": 1726663291733.771
+      },
+      {
+        "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.html",
+        "ext": ".html",
+        "mtime": 1729504598910.633
+      },
+      {
+        "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.spec.ts",
+        "ext": ".ts",
+        "mtime": 1729263306019.024
+      },
+      {
+        "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.ts",
+        "ext": ".ts",
+        "mtime": 1732906197476.73
+      },
+      {
+        "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.css",
+        "ext": ".css",
+        "mtime": 1726740073200.633
+      },
+      {
+        "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.html",
+        "ext": ".html",
+        "mtime": 1729607450964.686
+      },
+      {
+        "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.ts",
+        "ext": ".ts",
+        "mtime": 1729607450964.686
+      },
+      {
+        "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.css",
+        "ext": ".css",
+        "mtime": 1729609756856.403
+      },
+      {
+        "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.html",
+        "ext": ".html",
+        "mtime": 1729609756852.403
+      },
+      {
+        "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.ts",
+        "ext": ".ts",
+        "mtime": 1732540985916.236
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.css",
+        "ext": ".css",
+        "mtime": 1733051481552.338
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.html",
+        "ext": ".html",
+        "mtime": 1733830456628.4949
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.ts",
+        "ext": ".ts",
+        "mtime": 1734100275838.5693
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component..ts",
+        "ext": ".ts",
+        "mtime": 1734100614051.3193
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.css",
+        "ext": ".css",
+        "mtime": 1733308694899.125
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.html",
+        "ext": ".html",
+        "mtime": 1734100600495.1292
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.css",
+        "ext": ".css",
+        "mtime": 1731335335678.193
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.html",
+        "ext": ".html",
+        "mtime": 1732184343848.931
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.ts",
+        "ext": ".ts",
+        "mtime": 1733133648788.332
+      },
+      {
+        "file": "apps/frontend/src/app/app-routing.module.ts",
+        "ext": ".ts",
+        "mtime": 1733496899438.8274
+      },
+      {
+        "file": "apps/frontend/src/app/app.component.html",
+        "ext": ".html",
+        "mtime": 1729693845176.351
+      },
+      {
+        "file": "apps/frontend/src/app/app.component.scss",
+        "ext": ".scss",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/app.component.spec.ts",
+        "ext": ".ts",
+        "mtime": 1728485370405.018
+      },
+      {
+        "file": "apps/frontend/src/app/app.component.ts",
+        "ext": ".ts",
+        "mtime": 1732099394410.46
+      },
+      {
+        "file": "apps/frontend/src/app/app.module.ts",
+        "ext": ".ts",
+        "mtime": 1733497038740.8772
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.css",
+        "ext": ".css",
+        "mtime": 1726663291733.771
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.html",
+        "ext": ".html",
+        "mtime": 1729509165054.568
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.spec.ts",
+        "ext": ".ts",
+        "mtime": 1725880666877.97
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.ts",
+        "ext": ".ts",
+        "mtime": 1729264800812.332
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.css",
+        "ext": ".css",
+        "mtime": 1726740073200.633
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.html",
+        "ext": ".html",
+        "mtime": 1727174094537.231
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.ts",
+        "ext": ".ts",
+        "mtime": 1728050720250.203
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.css",
+        "ext": ".css",
+        "mtime": 1726570236474.366
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.html",
+        "ext": ".html",
+        "mtime": 1727173970207.168
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.spec.ts",
+        "ext": ".ts",
+        "mtime": 1727088323067.446
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.ts",
+        "ext": ".ts",
+        "mtime": 1727088323047.445
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.css",
+        "ext": ".css",
+        "mtime": 1726663291733.771
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.html",
+        "ext": ".html",
+        "mtime": 1726663295881.805
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.spec.ts",
+        "ext": ".ts",
+        "mtime": 1725880666877.97
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.ts",
+        "ext": ".ts",
+        "mtime": 1727087163618.699
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.css",
+        "ext": ".css",
+        "mtime": 1726740073200.633
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.html",
+        "ext": ".html",
+        "mtime": 1727874772584.155
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.ts",
+        "ext": ".ts",
+        "mtime": 1727875460431.082
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.css",
+        "ext": ".css",
+        "mtime": 1726570236474.366
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.html",
+        "ext": ".html",
+        "mtime": 1727173970207.168
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.spec.ts",
+        "ext": ".ts",
+        "mtime": 1727088323067.446
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.ts",
+        "ext": ".ts",
+        "mtime": 1727088323047.445
+      },
+      {
+        "file": "apps/frontend/src/app/editems/edItems.component.css",
+        "ext": ".css",
+        "mtime": 1719584260000
+      },
+      {
+        "file": "apps/frontend/src/app/editems/edItems.component.html",
+        "ext": ".html",
+        "mtime": 1723201094571.525
+      },
+      {
+        "file": "apps/frontend/src/app/editems/edItems.component.ts",
+        "ext": ".ts",
+        "mtime": 1723114054837.077
+      },
+      {
+        "file": "apps/frontend/src/app/editems/edcategoria.component.html",
+        "ext": ".html",
+        "mtime": 1724247980837.768
+      },
+      {
+        "file": "apps/frontend/src/app/home/MenuPlanillaED.component.css",
+        "ext": ".css",
+        "mtime": 1732028003703.655
+      },
+      {
+        "file": "apps/frontend/src/app/home/MenuPlanillaED.component.html",
+        "ext": ".html",
+        "mtime": 1732111073304.931
+      },
+      {
+        "file": "apps/frontend/src/app/home/MenuPlanillaED.component.ts",
+        "ext": ".ts",
+        "mtime": 1732111080069.041
+      },
+      {
+        "file": "apps/frontend/src/app/home/ayuda.component.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/home/ayuda.html",
+        "ext": ".html",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/home/eDesmp.component.html",
+        "ext": ".html",
+        "mtime": 1720180410000
+      },
+      {
+        "file": "apps/frontend/src/app/home/eDesmp.component.ts",
+        "ext": ".ts",
+        "mtime": 1718808118000
+      },
+      {
+        "file": "apps/frontend/src/app/home/home.component.html",
+        "ext": ".html",
+        "mtime": 1729695035995.01
+      },
+      {
+        "file": "apps/frontend/src/app/home/home.component.ts",
+        "ext": ".ts",
+        "mtime": 1729694480537.467
+      },
+      {
+        "file": "apps/frontend/src/app/home/menucomunes.component.css",
+        "ext": ".css",
+        "mtime": 1730114432224.955
+      },
+      {
+        "file": "apps/frontend/src/app/home/menucomunes.component.html",
+        "ext": ".html",
+        "mtime": 1732101611520.446
+      },
+      {
+        "file": "apps/frontend/src/app/home/menucomunes.component.ts",
+        "ext": ".ts",
+        "mtime": 1729866527270.338
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.html",
+        "ext": ".html",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/institution.module.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/institution.provider.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/institution.routing.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/service/institution.service.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/modelos/PlanillaED.Model.ts",
+        "ext": ".ts",
+        "mtime": 1733831317721.0571
+      },
+      {
+        "file": "apps/frontend/src/app/modelos/categoria.model.ts",
+        "ext": ".ts",
+        "mtime": 1726839834444.354
+      },
+      {
+        "file": "apps/frontend/src/app/modelos/items.model.ts",
+        "ext": ".ts",
+        "mtime": 1728468724012.674
+      },
+      {
+        "file": "apps/frontend/src/app/services/PlanillaED.Service.ts",
+        "ext": ".ts",
+        "mtime": 1734179909313.4104
+      },
+      {
+        "file": "apps/frontend/src/app/services/categoria.service.ts",
+        "ext": ".ts",
+        "mtime": 1734100753285.2744
+      },
+      {
+        "file": "apps/frontend/src/app/services/items.service.ts",
+        "ext": ".ts",
+        "mtime": 1731683905650.618
+      },
+      {
+        "file": "apps/frontend/src/app/shared/directives/select-search.directive.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/shared/location.services.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/shared/select-search.service.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/app/shared/utils.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/assets/.gitkeep",
+        "ext": "",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/environments/environment.prod.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/environments/environment.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/favicon.ico",
+        "ext": ".ico",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/index.html",
+        "ext": ".html",
+        "mtime": 1732101611520.446
+      },
+      {
+        "file": "apps/frontend/src/main.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/polyfills.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/styles.scss",
+        "ext": ".scss",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/src/test-setup.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/tsconfig.app.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/tsconfig.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/tsconfig.spec.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/frontend/tslint.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      }
+    ],
+    "backend": [
+      {
+        "file": "apps/backend/.eslintrc",
+        "ext": "",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/.gitkeep",
+        "ext": "",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/EDItems/routes/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1722247986000
+      },
+      {
+        "file": "apps/backend/src/app/EDItems/schemas/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1722248444000
+      },
+      {
+        "file": "apps/backend/src/app/Efectores/Routes/efectores.ts",
+        "ext": ".ts",
+        "mtime": 1730818178827.892
+      },
+      {
+        "file": "apps/backend/src/app/Efectores/schemas/efectores.ts",
+        "ext": ".ts",
+        "mtime": 1732906197472.73
+      },
+      {
+        "file": "apps/backend/src/app/Items/routes/items.ts",
+        "ext": ".ts",
+        "mtime": 1730291578145.94
+      },
+      {
+        "file": "apps/backend/src/app/Items/schemas/items.ts",
+        "ext": ".ts",
+        "mtime": 1730973016950.525
+      },
+      {
+        "file": "apps/backend/src/app/PlanillaED/Router/PlanillaED.ts",
+        "ext": ".ts",
+        "mtime": 1734179905401.3518
+      },
+      {
+        "file": "apps/backend/src/app/PlanillaED/Schemas/PlanillaED.ts",
+        "ext": ".ts",
+        "mtime": 1734179909309.4104
+      },
+      {
+        "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",
+        "ext": ".ts",
+        "mtime": 1734179909317.4104
+      },
+      {
+        "file": "apps/backend/src/app/Servicios/Schemas/servicios.ts",
+        "ext": ".ts",
+        "mtime": 1730898021263.107
+      },
+      {
+        "file": "apps/backend/src/app/application.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/auth/auth.routes.spec.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/auth/auth.routes.ts",
+        "ext": ".ts",
+        "mtime": 1715950839000
+      },
+      {
+        "file": "apps/backend/src/app/categoriaitems/routes/categoriaItems.ts",
+        "ext": ".ts",
+        "mtime": 1729517880141.757
+      },
+      {
+        "file": "apps/backend/src/app/categoriaitems/schemas/categoriaItems.ts",
+        "ext": ".ts",
+        "mtime": 1730973004490.364
+      },
+      {
+        "file": "apps/backend/src/app/connection.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/eDesempeno/routes/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1721918930000
+      },
+      {
+        "file": "apps/backend/src/app/eDesempeno/schemas/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1722247986000
+      },
+      {
+        "file": "apps/backend/src/app/services/mail/mail.shema.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/services/mail/mail.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/templates/email/account-activation.html",
+        "ext": ".html",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/templates/email/layout.html",
+        "ext": ".html",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/templates/email/password-reset.html",
+        "ext": ".html",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/templates/email/user-suggestions.html",
+        "ext": ".html",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/users/user.controller.ts",
+        "ext": ".ts",
+        "mtime": 1715950019000
+      },
+      {
+        "file": "apps/backend/src/app/users/user.interface.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/app/users/user.schema.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/assets/.gitkeep",
+        "ext": "",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/environments/environment.prod.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/environments/environment.ts",
+        "ext": ".ts",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/src/main.ts",
+        "ext": ".ts",
+        "mtime": 1730978958816.626
+      },
+      {
+        "file": "apps/backend/tsconfig.app.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/tsconfig.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      },
+      {
+        "file": "apps/backend/tsconfig.spec.json",
+        "ext": ".json",
+        "mtime": 1715870079000
+      }
+    ]
+  }
+}

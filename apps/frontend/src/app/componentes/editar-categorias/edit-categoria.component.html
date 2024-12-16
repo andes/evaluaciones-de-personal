@@ -1,0 +1,24 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Editar Categoría</h3>
+                    <form [formGroup]="editCategoriaForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+
+                            <input type="text" id="_id" class="form-control" formControlName="_id" hidden>
+
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" id="descripcion" class="form-control" formControlName="descripcion">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3" [disabled]="!editCategoriaForm.valid">
+                            Guardar Cambios
+                        </button>
+                        <button class="btn btn-secondary mt-3" (click)="cancelar()">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{
+  "npmScope": "sala-de-situacion",
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "frontend": {
+      "tags": []
+    },
+    "frontend-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "frontend"
+      ]
+    },
+    "backend": {
+      "tags": []
+    }
+  }
+}

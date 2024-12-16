@@ -1,0 +1,21 @@
+<div>
+    <h2>Categorías</h2>
+    <form [formGroup]="categoriaForm" (ngSubmit)="onSubmit()">
+
+
+        <label for="descripcion">Descripción:</label>
+
+        <!-- Esto es un comentario <input name="descripcion"> -->
+
+        <input name="descripcion" formControlName="descripcion">
+
+        <button type="submit">Agregar Categoría</button>
+    </form>
+
+    <ul>
+        <li *ngFor="let categoria of categorias">
+            <strong>{{ categoria.nombre }}</strong> - {{ categoria.descripcion }}
+            <button (click)="eliminarCategoria(categoria._id)">Eliminar</button>
+        </li>
+    </ul>
+</div>

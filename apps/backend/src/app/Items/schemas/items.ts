@@ -1,0 +1,32 @@
+import * as mongoose from 'mongoose';
+
+const schema = new mongoose.Schema({
+
+
+
+    descripcion: { type: String },
+    valor: { type: Number },
+    //  idCategoriaItems: { type: mongoose.Schema.Types.ObjectId }
+
+
+});
+
+export const modelo = mongoose.model('items', schema, 'edItems');
+//                                   este formulario             tabla o collection
+
+
+
+const Schema = mongoose.Schema;
+
+export interface IItem extends mongoose.Document {
+    descripcion: string;
+    valor: number;
+}
+
+const ItemSchema = new Schema<IItem>({
+    descripcion: { type: String, required: true },
+    valor: { type: Number, required: true }
+});
+
+export const ItemModel = mongoose.model<IItem>('Items', ItemSchema, 'edItems');
+export { ItemSchema };

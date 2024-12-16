@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../../../node_modules/@andes/plex/src/lib/styles.scss';
+
+// Overrides
+$nav-bar-color:  #4d7998;
+
+:root {
+    // --nav-bar-color: #7a3e7b;
+    --nav-bar-color: #{$nav-bar-color};
+}
+
+
+body {
+    background-color: white !important;
+}
+
+a.hover {
+    color: $nav-bar-color !important;
+    &:hover {
+        color: darken($nav-bar-color, 20%) !important;
+    }
+}
+
+plex-icon i.mdi-menu {
+    padding-top: 5px;
+    background: $nav-bar-color !important;
+    color: white !important;
+}
+
+.bg-inverse {
+    background-color: var(--nav-bar-color) !important;
+}
+// Fin Overrides 
+
+.logo-nav {
+    --nav-bar-icon-color: #002738;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--nav-bar-icon-color);
+    width: 48px;
+    height: 50px;
+    plex-icon {
+        height: 50px;
+    }
+}
+
+// Pantalla Inicio
+// 1- texto Ayuda
+p.lead {
+    font-size: 1.25rem;
+}
+.secondary{
+    font-size: 1rem;
+}
+
+
+
+// Accordions
+plex-panel {
+    .card {
+        border: 0;
+    }
+    .card-header {
+        background-color: #dae5ec;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+        border-left: 4px solid rgba(0,0,0,0.125);
+        margin: 2px 0;
+    }
+    .card-block {
+        padding-top: 0.2rem;
+        padding-left: 0.5rem;
+        border-left: 4px solid rgba(0, 0, 0, 0.125);
+    }
+    plex-accordion {
+        plex-panel {
+            .card-header {
+                background-color: #e6e6e6;
+                padding: 0.45rem 0.75rem;
+                h5 {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+.btn-custom-red {
+    background-color: red;
+    border: none;
+    color: white;
+}
+
+.btn-custom-red:hover {
+    background-color: darkred;
+}
+
+.select-pequeno {
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    font-size: 14px;
+    /* Tamaño de letra */
+    padding: 5px;
+    /* Espaciado interno */
+    box-sizing: border-box;
+    /* Incluye el padding en el cálculo del ancho */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    /* Asegura que el label quede en su propia línea */
+}
