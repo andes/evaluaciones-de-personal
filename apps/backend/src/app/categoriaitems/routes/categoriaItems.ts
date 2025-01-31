@@ -1,45 +1,37 @@
 import { Router } from 'express';
-import { modelo } from '../schemas/categoriaItems';
+import { CategoriaItemModel as modelo } from '../schemas/categoriaItems';
+
 // import { application } from '../../application';
 
 const router = Router();
-//*
-//router.get('/rCategoriaItems', (req, res) => {
-//    // lógica para manejar la solicitud
-//    res.send('Items de categoría');
-//});
+
 
 router.get('/rmCategoriaItems', async (req, res, next) => {
     try {
+        //  console.log('pepe');
         const data = await modelo.find().sort({ descripcion: 1 }); // 1 para orden ascendente
+        //  console.log('data dpepe', data);
         res.json(data);
     } catch (error) {
         next(error);
     }
 });
-
-
+/*
 router.get('/rmCategoriaItems/:id', async (req, res) => {
-    const id = req.params.id;
-    const respuesta = await modelo.findById(id);
-    res.json(respuesta);
-});
-
-
-
-// Ver si la descripción existe
-router.get('/rCategoriaItems/verificar-descripcion/:descripcion', async (req, res) => {
-    const descripcion = req.params.descripcion;
-    const { id } = req.query;
-    // Buscar una categoría con la misma descripción pero excluir la categoría actual
-    const categoria = await modelo.findOne({ descripcion: descripcion, _id: { $ne: id } });
-
-    if (categoria) {
-        res.json(false); // La descripción ya existe (no es única)
-    } else {
-        res.json(true);  // La descripción es única (puede usarse)
+    try {
+        const id = req.params.id;
+        const respuesta = await modelo.findById(id);
+        if (!respuesta) {
+            return res.status(404).json({ error: 'Documento no encontrado' });
+        }
+        res.json(respuesta);
+    } catch (error) {
+        console.error('Error al obtener el documento:', error);
+        res.status(500).json({ error: 'Ha ocurrido un error' });
     }
 });
+*/
+
 
 
 
@@ -132,7 +124,7 @@ router.put('/rCategoriaItems/:id', async (req, res) => {
 
 
 
-
+/*
 
 // Ruta PATCH para actualizar parcialmente un documento
 router.patch('/rCategoriaItems/:id', async (req, res) => {
@@ -151,7 +143,7 @@ router.patch('/rCategoriaItems/:id', async (req, res) => {
         res.status(500).json({ error: 'Ha ocurrido un error' });
     }
 });
-
+*/
 router.delete('/rCategoriaItems/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -167,16 +159,5 @@ router.delete('/rCategoriaItems/:id', async (req, res) => {
 });
 
 // thunder   http://localhost:3000/api/rCategoriaItems/
-
-
-
-//put modificaar
-//router.post('/items', (req, res) => {
-//    const newItem = req.body; // El nuevo item se espera en el cuerpo de la solicitud
-//    items.push(newItem);
-//    res.status(201).json(newItem); // Responder con el item creado y un código de estado 201
-//});
-
-
 export default router;
 

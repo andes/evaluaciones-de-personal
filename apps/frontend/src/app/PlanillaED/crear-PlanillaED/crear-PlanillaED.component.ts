@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 export class CrearPlanillaEDComponent implements OnInit {
     nuevoPlanillaED: any = {
         fechaCreacion: new Date(),
-        efector: '',
         descripcion: '',
-        servicio: ''
+        efector: '',   // ID del efector
+        servicio: ''    // ID del servicio
     };
 
     efectores: any[] = [];
@@ -38,33 +38,40 @@ export class CrearPlanillaEDComponent implements OnInit {
     }
 
     guardarPlanilla() {
-        // Validar los datos antes de enviar
+        // Verifica si los campos están completos
         if (!this.nuevoPlanillaED.descripcion || !this.nuevoPlanillaED.efector || !this.nuevoPlanillaED.servicio) {
             alert('Debe completar todos los campos obligatorios.');
             return;
         }
 
-        // Crear el objeto a enviar
+        // Crea el objeto para enviar al servicio
         const nuevaPlanilla = {
             descripcion: this.nuevoPlanillaED.descripcion,
-            idEfector: this.nuevoPlanillaED.efector,
-            idServicio: this.nuevoPlanillaED.servicio,
-            fechaCreacion: this.nuevoPlanillaED.fechaCreacion // Opcional si el backend lo genera automáticamente
+            idEfector: this.nuevoPlanillaED.efector,  // Usar idEfector en lugar de efector
+            idServicio: this.nuevoPlanillaED.servicio, // Usar idServicio en lugar de servicio
+            fechaCreacion: this.nuevoPlanillaED.fechaCreacion
         };
 
-        // Enviar los datos al servicio
+        // Llama al servicio para guardar la planilla
         this._PlanillaEDService.guardarPlanillaED(nuevaPlanilla).subscribe({
             next: (response) => {
                 console.log('Planilla guardada exitosamente:', response);
+
+                // Encuentra el nombre del efector y servicio para pasar en la redirección
+                const efector = this.efectores.find(e => e._id === nuevaPlanilla.idEfector);
+                const servicio = this.servicios.find(s => s._id === nuevaPlanilla.idServicio);
+
+                const efectorNombre = efector ? efector.nombre : '';
+                const servicioNombre = servicio ? servicio.nombre : '';
                 alert('Planilla creada con éxito.');
 
-                // Redirigir al componente para agregar ítems
+                // Redirige a la siguiente página con los parámetros
                 this.router.navigate(['/crear-planillaEDItems'], {
                     queryParams: {
                         id: response._id,
-                        fecha: response.fechaCreacion,
-                        efector: response.idEfector,
-                        servicio: response.idServicio
+                        descripcion: nuevaPlanilla.descripcion,
+                        efector: efectorNombre, // Asignamos el nombre del efector o un string vacío
+                        servicio: servicioNombre // Asignamos el nombre del servicio o un string vacío
                     }
                 });
             },

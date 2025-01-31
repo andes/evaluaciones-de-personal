@@ -114,7 +114,7 @@ router.patch('/rItems/:id', async (req, res) => {
         res.status(500).json({ error: 'Ha ocurrido un error' });
     }
 });
-
+/** 
 router.delete('/rItems/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -128,6 +128,7 @@ router.delete('/rItems/:id', async (req, res) => {
         res.status(500).json({ error: 'Ha ocurrido un error' });
     }
 });
+*/
 
 // thunder   http://localhost:3000/api/rItems/
 

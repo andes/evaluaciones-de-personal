@@ -1,0 +1,95 @@
+<!-- Primer cuadro - Detalle de la planilla -->
+<div class="row mt-5">
+    <div class="col-lg-8 offset-lg-2 text-center">
+        <div class="card">
+
+            <div class="card-body mt-4 text-left">
+
+                <div class="form-group">
+
+                    <!-- Primer cuadro - Detalle de la planilla -->
+                    <div class="row mt-5">
+                        <div class="col-lg-8 offset-lg-2 text-center">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white text-center">
+                                    <h4 class="mb-0 font-weight-bold">Detalle de la Planilla</h4>
+                                </div>
+                                <div class="card-body mt-4 text-left">
+                                    <p><strong>Detalle de la Planilla:</strong> {{ descripcionPlanilla }}</p>
+                                    <p><strong>Efector:</strong> {{ efectorNombre }}</p>
+                                    <p><strong>Servicio:</strong> {{ servicioNombre }}</p>
+                                    <div class="form-group d-none">
+                                        <label for="planillaId">ID de la Planilla:</label>
+                                        <input type="text" id="planillaId" class="form-control" [(ngModel)]="planillaId"
+                                               readonly />
+                                    </div>
+
+                                    <div class="form-group d-none">
+                                        <label for="categoriaId">ID de la Categoría:</label>
+                                        <input type="text" id="categoriaId" class="form-control"
+                                               [(ngModel)]="categoriaId" readonly />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recuadro Categoría -->
+                    <div class="row mt-4">
+                        <div class="col-md-8 offset-md-2">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white text-center">
+                                    <label class="font-weight-bold d-block mb-0" style="font-size: 1.25rem;">Categoría
+                                        seleccionada:</label>
+                                    <h5 class="mb-0" style="font-size: 1.25rem;">{{ descripcionCategoria }}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <button class="btn btn-success mb-3" (click)="agregarItem()">
+                                        <i class="fas fa-plus"></i> Agregar otro item
+                                    </button>
+
+                                    <table class="table table-bordered mt-3">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Descripción</th>
+                                                <th>Valor</th>
+                                                <th>Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Item de ejemplo 1</td>
+                                                <td>100</td>
+                                                <td>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash-alt"></i> Eliminar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Item de ejemplo 2</td>
+                                                <td>200</td>
+                                                <td>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash-alt"></i> Eliminar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

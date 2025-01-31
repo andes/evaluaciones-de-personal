@@ -26,7 +26,7 @@ import { EditItemsComponent } from './Items/editar-items/edit-items.component';
 import { ListarPlanillaEDComponent } from './PlanillaED/listar-PlanillaED/listar-PlanillaED.component';
 import { CrearPlanillaEDComponent } from './PlanillaED/crear-PlanillaED/crear-PlanillaED.component';
 import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.';
-
+import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component';
 
 
 
@@ -45,6 +45,7 @@ import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItem
         MenuPlanillaEDComponent,
         CrearPlanillaEDComponent,
         CrearPlanillaEDItemsComponent,
+        CrearPlanillaEDItemsDetalleComponent,
 
 
 

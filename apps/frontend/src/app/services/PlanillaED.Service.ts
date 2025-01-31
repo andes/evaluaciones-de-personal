@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export interface IPlanillaED extends Document {
     fechaCreacion: Date;
@@ -9,11 +10,16 @@ export interface IPlanillaED extends Document {
     descripcion: string;
     idServicio: string;  // ID de tipo string, que corresponde a un ObjectId de Mongoose
 }
+export interface Categoria {
+    _id: string;
+    descripcion: string;
+}
 
 @Injectable({
     providedIn: 'root'
 })
 export class PlanillaEDService {
+
     private baseUrl = 'http://localhost:3000/api'; // Cambia según la URL de tu backend
 
     constructor(private http: HttpClient) { }
@@ -30,8 +36,13 @@ export class PlanillaEDService {
         return this.http.get<any[]>('http://localhost:3000/api/rmServicios');
     }
 
+    obtenerEfectorPorId(id: string): Observable<any> {
+        return this.http.get<any>(`http://localhost:3000/api/efectores/${id}`);
+    }
 
-
+    obtenerServicioPorId(id: string): Observable<any> {
+        return this.http.get<any>(`http://localhost:3000/api/servicios/${id}`);
+    }
 
     obtenerCategorias(): Observable<any[]> {
         return this.http.get<any[]>(`${this.baseUrl}/categorias`);
@@ -50,8 +61,44 @@ export class PlanillaEDService {
         );
     }
 
+    obtenerCategoriasOrdenadas(): Observable<Categoria[]> {
+        return this.http.get<Categoria[]>(`${this.baseUrl}/categorias`).pipe(  // Reemplazado para que sea más específico
+            map(categorias => categorias.sort((a, b) => a.descripcion.localeCompare(b.descripcion)))
+        );
+    }
 
+    obtenerItems(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.baseUrl}/rmItems`).pipe(
+            catchError((error) => {
+                console.error('Error al obtener los items:', error);
+                return throwError(error);
+            })
+        );
+    }
 
+    actualizarPlanilla(idPlanilla: string, categoria: any): Observable<any> {
 
+        return this.http.put(`${this.baseUrl}/planillasED/${idPlanilla}`, { categoria })
+            .pipe(
+                catchError((error) => {
+                    console.error('Error al actualizar la planilla:', error);
+                    return throwError(error);
+                })
+            );
+    }
 
+    agregarCategoriaItems(planillaId: string, categoriaConItems: any): Observable<any> {
+        console.log('utlimo error Datos enviados a la API:', categoriaConItems);
+        return this.http.put(`${this.baseUrl}/planillasED/${planillaId}/categorias`, categoriaConItems).pipe(
+            catchError((error) => {
+                console.error('Error al agregar categoría e ítems:', error);
+                return throwError(error);
+            })
+        );
+    }
+
+    obtenerCategoriasPorPlanilla(planillaId: string): Observable<any> {
+        const url = `${this.baseUrl}/planillasED/${planillaId}/categorias`;
+        return this.http.get<any>(url);
+    }
 }

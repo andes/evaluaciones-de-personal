@@ -1,7 +1,7 @@
 import { Router } from 'express';
-//import { modelo } from '../schemas/efectores';
+
 import { EfectorModel } from '../schemas/efectores';
-// import { application } from '../../application';
+
 
 const router = Router();
 
@@ -12,7 +12,7 @@ router.get('/rmEfectores', async (req, res, next) => {
 
         res.json(data);
     } catch (error) {
-        console.error('Error al obtener los items:', error);
+        console.error('Error al obtener los Efectores:', error);
         res.status(500).json({ error: 'Error al obtener los items' });
     }
 });

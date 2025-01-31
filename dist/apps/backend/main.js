@@ -102,9 +102,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _schemas_efectores__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../schemas/efectores */ "./apps/backend/src/app/Efectores/schemas/efectores.ts");
 
 
-//import { modelo } from '../schemas/efectores';
 
-// import { application } from '../../application';
 const router = Object(express__WEBPACK_IMPORTED_MODULE_1__["Router"])();
 router.get('/rmEfectores', (req, res, next) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
     try {
@@ -112,7 +110,7 @@ router.get('/rmEfectores', (req, res, next) => tslib__WEBPACK_IMPORTED_MODULE_0_
         res.json(data);
     }
     catch (error) {
-        console.error('Error al obtener los items:', error);
+        console.error('Error al obtener los Efectores:', error);
         res.status(500).json({ error: 'Error al obtener los items' });
     }
 }));
@@ -257,21 +255,21 @@ router.patch('/rItems/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__
         res.status(500).json({ error: 'Ha ocurrido un error' });
     }
 }));
-router.delete('/rItems/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
+/**
+router.delete('/rItems/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const respuesta = yield _schemas_items__WEBPACK_IMPORTED_MODULE_2__["modelo"].findByIdAndDelete(id);
+        const respuesta = await modelo.findByIdAndDelete(id);
         if (respuesta) {
             res.json({ message: 'Documento eliminado correctamente' });
-        }
-        else {
+        } else {
             res.status(404).json({ error: 'Documento no encontrado' });
         }
-    }
-    catch (error) {
+    } catch (error) {
         res.status(500).json({ error: 'Ha ocurrido un error' });
     }
-}));
+});
+*/
 // thunder   http://localhost:3000/api/rItems/
 //put modificaar
 //router.post('/items', (req, res) => {
@@ -336,16 +334,20 @@ __webpack_require__.r(__webpack_exports__);
 const router = Object(express__WEBPACK_IMPORTED_MODULE_1__["Router"])();
 router.post('/planillasED', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
     console.log('Datos recibidos en la solicitud:', req.body);
-    const { descripcion, idEfector, idServicio } = req.body;
+    const { descripcion, idEfector, idServicio, categorias } = req.body;
     if (!descripcion || !idEfector || !idServicio) {
         console.error('Error: Faltan campos obligatorios.');
         return res.status(400).json({ message: 'Faltan campos obligatorios.' });
     }
+    // Asignar fechaCreacion si no se proporciona
+    const fechaCreacion = req.body.fechaCreacion || new Date();
     try {
         const newPlanilla = new _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"]({
             descripcion,
             idEfector,
             idServicio,
+            categorias,
+            fechaCreacion // Asignar la fecha automáticamente si no se envió
         });
         const savedPlanilla = yield newPlanilla.save();
         console.log('Planilla guardada con éxito:', savedPlanilla);
@@ -356,44 +358,90 @@ router.post('/planillasED', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__
         res.status(500).json({ message: 'Error al guardar la planilla.', error });
     }
 }));
+// Obtener todas las planillas
 router.get('/planillasED', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
     try {
-        const planillas = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].find();
+        const planillas = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].find()
+            .populate('categorias.categoria')
+            .lean(); // Convertir a objetos JSON planos
+        // Ordenar las categorías dentro de cada planilla
+        planillas.forEach(planilla => {
+            if (planilla.categorias && Array.isArray(planilla.categorias)) {
+                planilla.categorias.sort((a, b) => a.descripcion.localeCompare(b.descripcion));
+            }
+        });
         res.json(planillas);
     }
     catch (error) {
         res.status(500).json({ message: 'Error al obtener las planillas.', error });
     }
 }));
-router.get('/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
+// Obtener categorías e ítems de una planilla específica
+router.get('/planillasED/:id/categorias', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
     try {
+        const { id } = req.params;
+        // Buscar la planilla por ID y popular las categorías
+        const planilla = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].findById(id)
+            .populate('categorias.categoria')
+            .lean();
+        if (!planilla) {
+            return res.status(404).json({ message: 'Planilla no encontrada.' });
+        }
+        // Agrupar categorías con el conteo de ítems
+        const categoriasResumen = planilla.categorias.map((categoria) => ({
+            id: categoria.categoria._id,
+            descripcion: categoria.categoria.descripcion,
+            totalItems: categoria.items.length // Total de ítems en la categoría
+        }));
+        res.json({
+            planillaId: id,
+            descripcion: planilla.descripcion,
+            categorias: categoriasResumen,
+        });
+    }
+    catch (error) {
+        console.error('Error al obtener categorías y total de ítems:', error);
+        res.status(500).json({ message: 'Error al obtener categorías y total de ítems.', error });
+    }
+}));
+// Agregar un console.log en la ruta del PUT
+router.put('/planillasED/:id/categorias', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
+    try {
+        const { categoria, descripcionCategoria, items } = req.body;
+        // Verificar que los datos están bien estructurados
+        if (!categoria || !descripcionCategoria || !Array.isArray(items)) {
+            return res.status(400).json({ message: 'Faltan datos: categoría, descripción o ítems.' });
+        }
+        // Buscar la planilla por ID
         const planilla = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].findById(req.params.id);
-        if (planilla) {
-            res.json(planilla);
+        if (!planilla) {
+            return res.status(404).json({ message: 'Planilla no encontrada.' });
+        }
+        // Buscar si la categoría ya existe en la planilla
+        const categoriaExistente = planilla.categorias.find((cat) => String(cat.categoria) === String(categoria));
+        if (categoriaExistente) {
+            // Actualizar la descripción
+            categoriaExistente.descripcion = descripcionCategoria;
+            // Filtrar ítems nuevos y agregarlos
+            const nuevosItems = items.filter((item) => !categoriaExistente.items.some((itemExistente) => String(itemExistente.id) === String(item.id)));
+            if (nuevosItems.length > 0) {
+                categoriaExistente.items = [...categoriaExistente.items, ...nuevosItems];
+            }
         }
         else {
-            res.status(404).json({ message: 'Planilla no encontrada.' });
+            // Si la categoría no existe, agregarla
+            planilla.categorias.push({ categoria, descripcion: descripcionCategoria, items });
         }
+        // Guardar los cambios en la base de datos
+        yield planilla.save();
+        res.status(200).json({ message: 'Planilla actualizada exitosamente', planilla });
     }
     catch (error) {
-        res.status(500).json({ message: 'Error al obtener la planilla.', error });
+        console.error('Error al actualizar la planilla:', error.message);
+        res.status(500).json({ message: 'Error interno al actualizar la planilla.', error: error.message });
     }
 }));
-// Actualizar
-router.put('/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
-    try {
-        const updatedPlanilla = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (updatedPlanilla) {
-            res.json(updatedPlanilla);
-        }
-        else {
-            res.status(404).json({ message: 'Planilla no encontrada.' });
-        }
-    }
-    catch (error) {
-        res.status(500).json({ message: 'Error al actualizar la planilla.', error });
-    }
-}));
+// Eliminar todas las planillas
 router.delete('/planillasED', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
     try {
         const result = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].deleteMany({});
@@ -425,12 +473,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
 
 const Schema = mongoose__WEBPACK_IMPORTED_MODULE_0__["Schema"];
-const PlanillaEDSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0__["Schema"]({
-    fechaCreacion: { type: Date, default: Date.now },
-    idEfector: { type: mongoose__WEBPACK_IMPORTED_MODULE_0__["Schema"].Types.ObjectId, ref: 'Efector', required: true },
-    idServicio: { type: mongoose__WEBPACK_IMPORTED_MODULE_0__["Schema"].Types.ObjectId, ref: 'Servicio', required: true },
-    descripcion: { type: String, required: true }
+// Esquema de la categoría, ahora incluye la descripción y los ítems con descripción y valor
+const CategoriaSchema = new Schema({
+    categoria: { type: Schema.Types.ObjectId, ref: 'CategoriaItem', required: true },
+    descripcion: { type: String, required: true },
+    items: [{
+            _id: { type: Schema.Types.ObjectId, ref: 'Item' },
+            descripcion: { type: String, required: true },
+            valor: { type: Number, required: true } // Valor del ítem
+        }]
 });
+// Esquema para la planilla, incluyendo las categorías y los ítems con sus descripciones y valores
+const PlanillaEDSchema = new Schema({
+    fechaCreacion: { type: Date, required: true },
+    descripcion: { type: String, required: true },
+    idEfector: { type: Schema.Types.ObjectId, ref: 'Efector', required: true },
+    idServicio: { type: Schema.Types.ObjectId, ref: 'Servicio', required: true },
+    categorias: [CategoriaSchema] // Arreglo de categorías, que contiene ítems con descripciones y valores
+});
+// Exportar el modelo de Mongoose para la planilla
 const PlanillaEDModel = mongoose__WEBPACK_IMPORTED_MODULE_0__["model"]('PlanillaED', PlanillaEDSchema, 'planillaed');
 
 
@@ -820,38 +881,32 @@ __webpack_require__.r(__webpack_exports__);
 
 // import { application } from '../../application';
 const router = Object(express__WEBPACK_IMPORTED_MODULE_1__["Router"])();
-//*
-//router.get('/rCategoriaItems', (req, res) => {
-//    // lógica para manejar la solicitud
-//    res.send('Items de categoría');
-//});
 router.get('/rmCategoriaItems', (req, res, next) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
     try {
-        const data = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["modelo"].find().sort({ descripcion: 1 }); // 1 para orden ascendente
+        //  console.log('pepe');
+        const data = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["CategoriaItemModel"].find().sort({ descripcion: 1 }); // 1 para orden ascendente
+        //  console.log('data dpepe', data);
         res.json(data);
     }
     catch (error) {
         next(error);
     }
 }));
-router.get('/rmCategoriaItems/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
-    const id = req.params.id;
-    const respuesta = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["modelo"].findById(id);
-    res.json(respuesta);
-}));
-// Ver si la descripción existe
-router.get('/rCategoriaItems/verificar-descripcion/:descripcion', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
-    const descripcion = req.params.descripcion;
-    const { id } = req.query;
-    // Buscar una categoría con la misma descripción pero excluir la categoría actual
-    const categoria = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["modelo"].findOne({ descripcion: descripcion, _id: { $ne: id } });
-    if (categoria) {
-        res.json(false); // La descripción ya existe (no es única)
+/*
+router.get('/rmCategoriaItems/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const respuesta = await modelo.findById(id);
+        if (!respuesta) {
+            return res.status(404).json({ error: 'Documento no encontrado' });
+        }
+        res.json(respuesta);
+    } catch (error) {
+        console.error('Error al obtener el documento:', error);
+        res.status(500).json({ error: 'Ha ocurrido un error' });
     }
-    else {
-        res.json(true); // La descripción es única (puede usarse)
-    }
-}));
+});
+*/
 // Ver si la descripción existe en cualquier categoría
 //router.get('/rmCategoriaItems/verificar-descripcion/:descripcion', async (req, res) => {
 //   const descripcion = req.params.descripcion;
@@ -867,7 +922,7 @@ router.get('/rCategoriaItems/verificar-descripcion/:descripcion', (req, res) => 
 //ver este
 router.post('/rCategoriaItems', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
     try {
-        const newItems = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["modelo"].create(req.body);
+        const newItems = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["CategoriaItemModel"].create(req.body);
         res.json(newItems);
     }
     catch (error) {
@@ -879,11 +934,11 @@ router.post('/rCategoriaItems', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__
     try {
         // Verificar si     req.body es un array
         if (Array.isArray(req.body)) {
-            const newItems = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["modelo"].insertMany(req.body);
+            const newItems = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["CategoriaItemModel"].insertMany(req.body);
             res.json(newItems);
         }
         else {
-            const newItem = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["modelo"].create(req.body);
+            const newItem = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["CategoriaItemModel"].create(req.body);
             res.json(newItem);
         }
     }
@@ -895,7 +950,7 @@ router.put('/rCategoriaItems/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_
     try {
         const nuevaDescripcion = req.body.descripcion; // Obtener la nueva descripción
         // Verificar si ya existe cualquier categoría con la misma descripción
-        const categoriaExistente = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["modelo"].findOne({ descripcion: nuevaDescripcion });
+        const categoriaExistente = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["CategoriaItemModel"].findOne({ descripcion: nuevaDescripcion });
         // Si se encuentra una categoría con la misma descripción, devolver un error
         if (categoriaExistente) {
             return res.status(400).json({
@@ -903,7 +958,7 @@ router.put('/rCategoriaItems/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_
             });
         }
         // Proceder a la actualización ya que no se encontró ninguna categoría con esa descripción
-        const respuesta = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["modelo"].findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const respuesta = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["CategoriaItemModel"].findByIdAndUpdate(req.params.id, req.body, { new: true });
         // Si no se encuentra la categoría con el ID proporcionado
         if (!respuesta) {
             return res.status(404).json({ error: 'No se encontró la categoría para actualizar.' });
@@ -919,29 +974,30 @@ router.put('/rCategoriaItems/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_
         res.status(500).json({ error: 'Ha ocurrido un error' });
     }
 }));
+/*
+
 // Ruta PATCH para actualizar parcialmente un documento
-router.patch('/rCategoriaItems/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
+router.patch('/rCategoriaItems/:id', async (req, res) => {
     try {
         const _id = req.params.id;
         const actualizacion = req.body;
         const opciones = { new: true }; // Para devolver el documento actualizado
         //const respuesta = await modelo.findByIdAndUpdate(id, actualizacion, opciones);
-        const respuesta = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["modelo"].findByIdAndUpdate(_id, actualizacion, opciones);
+        const respuesta = await modelo.findByIdAndUpdate(_id, actualizacion, opciones);
         if (respuesta) {
             res.json(respuesta);
-        }
-        else {
+        } else {
             res.status(404).json({ error: 'Documento no encontrado' });
         }
-    }
-    catch (error) {
+    } catch (error) {
         res.status(500).json({ error: 'Ha ocurrido un error' });
     }
-}));
+});
+*/
 router.delete('/rCategoriaItems/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        const respuesta = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["modelo"].findByIdAndDelete(id);
+        const respuesta = yield _schemas_categoriaItems__WEBPACK_IMPORTED_MODULE_2__["CategoriaItemModel"].findByIdAndDelete(id);
         if (respuesta) {
             res.json({ message: 'Documento eliminado correctamente' });
         }
@@ -954,12 +1010,6 @@ router.delete('/rCategoriaItems/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODU
     }
 }));
 // thunder   http://localhost:3000/api/rCategoriaItems/
-//put modificaar
-//router.post('/items', (req, res) => {
-//    const newItem = req.body; // El nuevo item se espera en el cuerpo de la solicitud
-//    items.push(newItem);
-//    res.status(201).json(newItem); // Responder con el item creado y un código de estado 201
-//});
 /* harmony default export */ __webpack_exports__["default"] = (router);
 
 
@@ -969,32 +1019,27 @@ router.delete('/rCategoriaItems/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODU
 /*!***********************************************************************!*\
   !*** ./apps/backend/src/app/categoriaitems/schemas/categoriaItems.ts ***!
   \***********************************************************************/
-/*! exports provided: CategoriaItemModel, CategoriaItemSchema, modelo */
+/*! exports provided: CategoriaItemModel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CategoriaItemModel", function() { return CategoriaItemModel; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CategoriaItemSchema", function() { return CategoriaItemSchema; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "modelo", function() { return modelo; });
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mongoose */ "mongoose");
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Items_schemas_items__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Items/schemas/items */ "./apps/backend/src/app/Items/schemas/items.ts");
-
 
 const Schema = mongoose__WEBPACK_IMPORTED_MODULE_0__["Schema"];
-const schema = new mongoose__WEBPACK_IMPORTED_MODULE_0__["Schema"]({
-    _id: { type: mongoose__WEBPACK_IMPORTED_MODULE_0__["Schema"].Types.ObjectId, auto: true },
-    descripcion: { type: String }
-});
+// Crear el esquema para los ítems (referencia al modelo Item)
 const CategoriaItemSchema = new Schema({
     descripcion: { type: String, required: true },
-    items: [_Items_schemas_items__WEBPACK_IMPORTED_MODULE_1__["ItemSchema"]] // Subesquema de items
+    items: [{
+            _id: { type: Schema.Types.ObjectId, ref: 'Item' },
+            descripcion: { type: String, required: true },
+            valor: { type: Number, required: true } // Valor del ítem
+        }]
 });
-const CategoriaItemModel = mongoose__WEBPACK_IMPORTED_MODULE_0__["model"]('CategoriaItems', CategoriaItemSchema, 'categoriaitems');
-
-const modelo = mongoose__WEBPACK_IMPORTED_MODULE_0__["model"]('categoriaItems', schema, 'categoriaitems');
-//                                        formulario             tabla o collection
+// Crear y exportar el modelo de Mongoose para CategoriaItem
+const CategoriaItemModel = mongoose__WEBPACK_IMPORTED_MODULE_0__["model"]('CategoriaItem', CategoriaItemSchema, 'categoriaitems');
 
 
 /***/ }),

@@ -1,44 +1,83 @@
 <div class="container mt-5">
+    <!-- Título destacado -->
     <div class="row">
-        <div class="col-lg-8 offset-lg-2">
+        <div class="col-lg-8 offset-lg-2 text-center">
+            <h1 class="display-4 font-weight-bold text-primary">Detalles de la Planilla</h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+
+    <!-- Contenedor principal con dos columnas -->
+    <div class="row mt-4">
+        <!-- Columna izquierda -->
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Agregar Ítems a la Planilla</h3>
-                    <form (ngSubmit)="agregarItem()">
-                        <div class="form-group mb-3">
-                            <label for="descripcion">Descripción del Ítem</label>
-                            <input id="descripcion" type="text" class="form-control" [(ngModel)]="nuevoItem.descripcion"
-                                   name="descripcion" placeholder="Ingrese la descripción del ítem" required />
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="valor">Valor</label>
-                            <input id="valor" type="number" class="form-control" [(ngModel)]="nuevoItem.valor"
-                                   name="valor" placeholder="Ingrese el valor del ítem" required />
-                        </div>
-                        <button type="submit" class="btn btn-success">Agregar Ítem</button>
-                    </form>
+                    <!-- Datos principales -->
+                    <div>
+                        <p class="d-none"><strong>ID Planilla:</strong> {{ idPlanilla }}</p>
+                        <p><strong>Descripción de la Planilla:</strong> {{ descripcionPlanilla }}</p>
+                        <p><strong>Efector:</strong> {{ efectorNombre }}</p>
+                        <p><strong>Servicio:</strong> {{ servicioNombre }}</p>
+                    </div>
 
-                    <hr />
+                    <!-- Selección de categoría e ítem -->
+                    <div class="form-group mt-3">
+                        <label for="categoria">Seleccionar Categoría:</label>
+                        <select id="categoria" class="form-control" [(ngModel)]="categoriaSeleccionada">
+                            <option *ngFor="let categoria of categorias" [value]="categoria._id">
+                                {{ categoria.descripcion }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="item">Seleccionar Item:</label>
+                        <select id="item" class="form-control" [(ngModel)]="itemSeleccionado">
+                            <option *ngFor="let item of items" [value]="item._id">
+                                {{ item.descripcion }}
+                            </option>
+                        </select>
+                    </div>
 
-                    <h4 class="mt-4">Ítems Agregados</h4>
-                    <table class="table table-striped">
+                    <div class="d-flex justify-content-end mt-4">
+                        <button class="btn btn-primary" (click)="aceptarSeleccion()">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Columna derecha -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Categorías de esta Planilla</h5>
+                    <!-- Tabla para mostrar categorías con sus ítems -->
+                    <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th hidden>ID Categoría</th> <!-- Columna oculta -->
                                 <th>Descripción</th>
-                                <th>Valor</th>
-                                <th>Acciones</th>
+                                <th>Total de Ítems</th>
+                                <th>Acciones</th> <!-- Nueva columna para acciones -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of items; let i = index">
-                                <td>{{ item.descripcion }}</td>
-                                <td>{{ item.valor }}</td>
+                            <tr *ngFor="let categoria of categoriasPlanilla">
+                                <td hidden>{{ categoria.id }}</td> <!-- Celda oculta -->
+                                <td>{{ categoria.descripcion }}</td>
+                                <td>{{ categoria.totalItems }}</td>
                                 <td>
-                                    <button class="btn btn-danger btn-sm" (click)="eliminarItem(i)">Eliminar</button>
+                                    <!-- Botón con ícono de lupa -->
+                                    <button class="btn btn-info btn-sm"
+                                            (click)="navegarADetalle(categoria.id, categoria.descripcion)">
+                                        <i class="fas fa-search"></i>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+
+
+
                 </div>
             </div>
         </div>
