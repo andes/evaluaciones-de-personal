@@ -25,3 +25,14 @@ label {
     display: block;
     /* Asegura que el label quede en su propia línea */
 }
+
+.contenedor-cuadro button {
+    display: flex;
+    align-items: center;
+    /* Centra verticalmente el contenido */
+}
+
+.contenedor-cuadro .material-icons {
+    margin-right: 8px;
+    /* Espacio entre el ícono y el texto */
+}

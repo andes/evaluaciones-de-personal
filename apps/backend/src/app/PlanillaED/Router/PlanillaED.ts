@@ -1,37 +1,76 @@
 import { Router, Request, Response } from 'express';
 import { PlanillaEDModel } from '../Schemas/PlanillaED';
+import { modelo as ItemsModel } from '../../Items/schemas/items';
 
 const router = Router();
 
-router.post('/planillasED', async (req: Request, res: Response) => {
-    console.log('Datos recibidos en la solicitud:', req.body);
-
-    const { descripcion, idEfector, idServicio, categorias } = req.body;
-
-    if (!descripcion || !idEfector || !idServicio) {
-        console.error('Error: Faltan campos obligatorios.');
-        return res.status(400).json({ message: 'Faltan campos obligatorios.' });
-    }
-
-    // Asignar fechaCreacion si no se proporciona
-    const fechaCreacion = req.body.fechaCreacion || new Date();
-
+router.get('/planillasED/:idPlanilla/categorias/:idCategoria/items', async (req: Request, res: Response) => {
     try {
-        const newPlanilla = new PlanillaEDModel({
-            descripcion,
+        const { idPlanilla, idCategoria } = req.params;
+
+        // Buscar la planilla por ID y popular las categorías y sus ítems
+        const planilla = await PlanillaEDModel.findById(idPlanilla)
+            .populate('categorias.categoria')  // Asegúrate de que 'categorias.categoria' es un campo de referencia adecuado
+            .lean();  // Usa .lean() para mejorar el rendimiento al no necesitar instanciar objetos de Mongoose
+
+        if (!planilla) {
+            return res.status(404).json({ message: 'Planilla no encontrada.' });
+        }
+
+        // Filtrar la categoría específica dentro de la planilla
+        const categoriaEncontrada = planilla.categorias.find(
+            (cat: any) => String(cat.categoria._id) === String(idCategoria)  // Asegúrate de que se compara correctamente el ID
+        );
+
+        if (!categoriaEncontrada) {
+            return res.status(404).json({ message: 'Categoría no encontrada en la planilla.' });
+        }
+
+        // Extraer los ítems con id, descripcion y valor
+        const itemsFiltrados = categoriaEncontrada.items.map((item: any) => ({
+            _id: item._id,  // Asegúrate de que 'item._id' es el campo correcto
+            descripcion: item.descripcion,
+            valor: item.valor,
+        }));
+
+        // Responder con los datos encontrados
+        res.json({
+            descripcionCategoria: categoriaEncontrada.descripcion,  // Devolver la descripción de la categoría
+            items: itemsFiltrados  // Devolver los ítems filtrados
+        });
+    } catch (error) {
+        console.error('Error al obtener los ítems de la categoría:', error);
+        res.status(500).json({ message: 'Error al obtener los ítems de la categoría.', error });
+    }
+});
+
+
+
+router.post('/planillasED', async (req, res) => {
+    try {
+        const { idEfector, idServicio, descripcion } = req.body;
+
+        // Verificar si ya existe una planilla con el mismo idEfector e idServicio
+        const planillaExistente = await PlanillaEDModel.findOne({ idEfector, idServicio });
+
+        if (planillaExistente) {
+            return res.status(400).json({ message: 'Ya existe una planilla con este Efector y Servicio.' });
+        }
+
+        // Si no existe, crear una nueva planilla
+        const nuevaPlanilla = new PlanillaEDModel({
             idEfector,
             idServicio,
-            categorias, // Se incluye el arreglo de categorías
-            fechaCreacion // Asignar la fecha automáticamente si no se envió
+            descripcion,
+            fechaCreacion: new Date(),
+            categorias: [],
         });
 
-        const savedPlanilla = await newPlanilla.save();
-        console.log('Planilla guardada con éxito:', savedPlanilla);
-
-        res.status(201).json(savedPlanilla);
+        const planillaGuardada = await nuevaPlanilla.save();
+        res.status(201).json(planillaGuardada);
     } catch (error) {
-        console.error('Error al guardar la planilla:', error);
-        res.status(500).json({ message: 'Error al guardar la planilla.', error });
+        console.error('Error al crear la planilla:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
     }
 });
 
@@ -148,5 +187,122 @@ router.delete('/planillasED', async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error al eliminar todas las planillas.', error });
     }
 });
+
+
+/**
+ */
+router.get('/planillasED/:idDocumento/items-disponibles', async (req: Request, res: Response) => {
+    try {
+        const { idDocumento } = req.params;
+
+        // Buscar el documento (planilla) por su ID
+        const planilla = await PlanillaEDModel.findById(idDocumento).lean();
+        if (!planilla) {
+            return res.status(404).json({ message: 'Documento no encontrado.' });
+        }
+
+        // Recolectar todos los IDs de ítems que ya están asociados en la planilla.
+        // Se asume que la planilla tiene un arreglo "categorias" y cada categoría tiene un arreglo "items"
+        const itemIdsEnDocumento: string[] = [];
+        if (planilla.categorias && Array.isArray(planilla.categorias)) {
+            planilla.categorias.forEach((cat: any) => {
+                if (cat.items && Array.isArray(cat.items)) {
+                    cat.items.forEach((item: any) => {
+                        // Se asegura de convertir el _id a string
+                        itemIdsEnDocumento.push(String(item._id));
+                    });
+                }
+            });
+        }
+
+        // Consultar en la colección de ítems todos aquellos que NO se encuentren en itemIdsEnDocumento
+        const itemsDisponibles = await ItemsModel.find({ _id: { $nin: itemIdsEnDocumento } })
+            .sort({ descripcion: 1 })
+            .lean();
+
+        res.json({ items: itemsDisponibles });
+    } catch (error) {
+        console.error('Error al obtener los ítems disponibles:', error);
+        res.status(500).json({ message: 'Error en el servidor.', error });
+    }
+
+
+
+
+
+});
+// items duplicado en documento (buscando por descripción)
+router.get('/planillasED/:idPlanilla/items/existe', async (req: Request, res: Response) => {
+    try {
+        const { idPlanilla } = req.params;
+        const { itemDesc } = req.query; // Cambiamos el nombre a itemDesc
+
+        // Validar que se haya enviado el itemDesc y que sea una cadena
+        if (!itemDesc || typeof itemDesc !== 'string') {
+            return res.status(400).json({ message: 'El parámetro itemDesc es requerido y debe ser una cadena.' });
+        }
+
+        // Buscar la planilla por su ID
+        const planilla = await PlanillaEDModel.findById(idPlanilla).lean();
+        if (!planilla) {
+            return res.status(404).json({ message: 'Planilla no encontrada.' });
+        }
+
+        // Recorrer todas las categorías y sus ítems para ver si alguno coincide con la descripción (comparación insensible a mayúsculas/minúsculas)
+        let exists = false;
+        if (planilla.categorias && Array.isArray(planilla.categorias)) {
+            for (const categoria of planilla.categorias) {
+                if (categoria.items && Array.isArray(categoria.items)) {
+                    const found = categoria.items.some((item: any) => {
+                        // Usamos toLowerCase y trim para comparar de forma más robusta
+                        return item.descripcion && item.descripcion.toLowerCase().trim() === itemDesc.toLowerCase().trim();
+                    });
+                    if (found) {
+                        exists = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Responder indicando si el ítem (por descripción) existe o no en el documento
+        return res.json({ exists });
+    } catch (error) {
+        console.error('Error al verificar existencia del ítem en la planilla:', error);
+        return res.status(500).json({ message: 'Error en el servidor.', error });
+    }
+});
+
+// Ruta para eliminar un ítem de una categoría dentro de un documento específico
+router.delete('/eliminar-item', async (req, res) => {
+    try {
+        const { idDocumento, descripcionItem } = req.body;
+
+        // Validar que se hayan enviado ambos parámetros
+        if (!idDocumento || !descripcionItem) {
+            return res.status(400).json({ message: "Se requieren idDocumento y descripcionItem" });
+        }
+
+        // Buscar el documento por id y eliminar el ítem de todas las categorías donde aparezca
+        const resultado = await PlanillaEDModel.findOneAndUpdate(
+            { _id: idDocumento },
+            { $pull: { "categorias.$[].items": { descripcion: descripcionItem } } },
+            { new: true } // Devuelve el documento actualizado
+        );
+
+        // Si no se encontró el documento
+        if (!resultado) {
+            return res.status(404).json({ message: "Documento no encontrado" });
+        }
+
+        // Respuesta exitosa
+        res.json({ message: "Ítem eliminado correctamente", resultado });
+
+    } catch (error) {
+        console.error("Error al eliminar ítem:", error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
 
 export default router;

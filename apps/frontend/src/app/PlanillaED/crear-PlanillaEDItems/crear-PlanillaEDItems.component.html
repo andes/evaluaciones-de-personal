@@ -1,85 +1,127 @@
-<div class="container mt-5">
-    <!-- Título destacado -->
+<div class="contenedor-general">
     <div class="row">
-        <div class="col-lg-8 offset-lg-2 text-center">
-            <h1 class="display-4 font-weight-bold text-primary">Detalles de la Planilla</h1>
-            <hr class="my-4" />
-        </div>
-    </div>
-
-    <!-- Contenedor principal con dos columnas -->
-    <div class="row mt-4">
-        <!-- Columna izquierda -->
-        <div class="col-md-6">
+        <!-- Columna del Menú a la izquierda -->
+        <div class="col-lg-3 col-md-4 col-12 contenedor-menu">
             <div class="card">
                 <div class="card-body">
-                    <!-- Datos principales -->
-                    <div>
-                        <p class="d-none"><strong>ID Planilla:</strong> {{ idPlanilla }}</p>
-                        <p><strong>Descripción de la Planilla:</strong> {{ descripcionPlanilla }}</p>
-                        <p><strong>Efector:</strong> {{ efectorNombre }}</p>
-                        <p><strong>Servicio:</strong> {{ servicioNombre }}</p>
+                    <!-- Título del menú -->
+                    <div class="titulo-container">
+                        <plex-title titulo="PLANILLA DE EVALUACIÓN"></plex-title>
                     </div>
-
-                    <!-- Selección de categoría e ítem -->
-                    <div class="form-group mt-3">
-                        <label for="categoria">Seleccionar Categoría:</label>
-                        <select id="categoria" class="form-control" [(ngModel)]="categoriaSeleccionada">
-                            <option *ngFor="let categoria of categorias" [value]="categoria._id">
-                                {{ categoria.descripcion }}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group mt-3">
-                        <label for="item">Seleccionar Item:</label>
-                        <select id="item" class="form-control" [(ngModel)]="itemSeleccionado">
-                            <option *ngFor="let item of items" [value]="item._id">
-                                {{ item.descripcion }}
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="d-flex justify-content-end mt-4">
-                        <button class="btn btn-primary" (click)="aceptarSeleccion()">Aceptar</button>
+                    <!-- Contenedor del menú -->
+                    <div class="contenedor-cuadro">
+                        <button plexButton class="btn btn-light border rounded" (click)="onPlanillaEDClick()">
+                            <span class="material-icons">list_alt</span> Planilla Evaluación Desempeño. Items
+                        </button>
+                        <button plexButton class="btn btn-light border rounded" (click)="onServiciosClick()">
+                            <span class="material-icons">description</span> Planilla Evaluación Desempeño. Agentes
+                        </button>
+                        <button plexButton class="btn btn-light border rounded" (click)="onAgentesClick()">
+                            <span class="material-icons">arrow_back</span> Volver
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Columna derecha -->
-        <div class="col-md-6">
+
+        <!-- Columna del Contenido principal -->
+        <div class="col-lg-9 col-md-8 col-12 contenedor-listado">
             <div class="card">
+                <!-- Cabecera con fondo primario y texto centrado -->
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0 font-weight-bold">DETALLES DE LA PLANILLA</h4>
+                </div>
+                <!-- Cuerpo de la tarjeta -->
                 <div class="card-body">
-                    <h5 class="card-title text-center">Categorías de esta Planilla</h5>
-                    <!-- Tabla para mostrar categorías con sus ítems -->
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th hidden>ID Categoría</th> <!-- Columna oculta -->
-                                <th>Descripción</th>
-                                <th>Total de Ítems</th>
-                                <th>Acciones</th> <!-- Nueva columna para acciones -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let categoria of categoriasPlanilla">
-                                <td hidden>{{ categoria.id }}</td> <!-- Celda oculta -->
-                                <td>{{ categoria.descripcion }}</td>
-                                <td>{{ categoria.totalItems }}</td>
-                                <td>
-                                    <!-- Botón con ícono de lupa -->
-                                    <button class="btn btn-info btn-sm"
-                                            (click)="navegarADetalle(categoria.id, categoria.descripcion)">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- Contenedor interno para separar el título destacado del resto del contenido -->
+                    <div class="container mt-5">
+                        <!-- Título destacado -->
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2 text-center">
 
+                                <hr class="my-4" />
+                            </div>
+                        </div>
 
+                        <!-- Contenedor principal con dos columnas internas -->
+                        <div class="row mt-4">
+                            <!-- Columna izquierda: Datos principales y selección -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <!-- Datos principales de la planilla -->
+                                        <div>
+                                            <p class="d-none"><strong>ID Planilla:</strong> {{ idPlanilla }}</p>
+                                            <p><strong>Descripción de la Planilla:</strong> {{ descripcionPlanilla }}
+                                            </p>
+                                            <p><strong>Efector:</strong> {{ efectorNombre }}</p>
+                                            <p><strong>Servicio:</strong> {{ servicioNombre }}</p>
+                                        </div>
 
+                                        <!-- Selección de categoría e ítem -->
+                                        <div class="form-group mt-3">
+                                            <label for="categoria">Seleccionar Categoría:</label>
+                                            <select id="categoria" class="form-control"
+                                                    [(ngModel)]="categoriaSeleccionada">
+                                                <option *ngFor="let categoria of categorias" [value]="categoria._id">
+                                                    {{ categoria.descripcion }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label for="item">Seleccionar Item:</label>
+                                            <select id="item" class="form-control" [(ngModel)]="itemSeleccionado">
+                                                <option *ngFor="let item of items" [value]="item._id">
+                                                    {{ item.descripcion }}
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <div class="d-flex justify-content-end mt-4">
+                                            <button class="btn btn-primary"
+                                                    (click)="aceptarSeleccion()">Aceptar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Columna derecha: Tabla de categorías e ítems -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center card-title-sm">Categorías de esta Planilla
+                                        </h5>
+
+                                        <!-- Tabla para mostrar las categorías con sus ítems -->
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th hidden>ID Categoría</th>
+                                                    <th>Descripción</th>
+                                                    <th>Total de Ítems</th>
+                                                    <th>Ver</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let categoria of categoriasPlanilla">
+                                                    <td hidden>{{ categoria.id }}</td>
+                                                    <td>{{ categoria.descripcion }}</td>
+                                                    <td>{{ categoria.totalItems }}</td>
+                                                    <td>
+                                                        <!-- Botón con ícono de lupa para ver detalles -->
+                                                        <button class="btn btn-info btn-sm"
+                                                                (click)="navegarADetalle(categoria.id, categoria.descripcion)">
+                                                            <i class="fas fa-search"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- Fin de la fila interna -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>

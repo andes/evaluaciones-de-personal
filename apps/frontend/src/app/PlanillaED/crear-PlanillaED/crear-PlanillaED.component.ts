@@ -82,6 +82,10 @@ export class CrearPlanillaEDComponent implements OnInit {
         });
     }
 
+    public onPlanillaEDClick(): void {
+        this.router.navigate(['/listar-planillaEDRouter']);
+    }
+
     volver() {
         this.router.navigate(['/ListarPlanillas']);
     }

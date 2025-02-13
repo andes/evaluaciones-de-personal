@@ -1,32 +1,30 @@
 <plex-layout>
     <plex-layout-main>
-        <plex-title titulo="Menu Planilla Evaluacion Desempeño">
-            <!-- Mensaje de bienvenida y ayuda -->
-            <plex-help icon="help" type="help" titulo="Ayuda para el usuario" subtitulo="Evaluaciones de Personal">
-                <ayuda></ayuda>
-            </plex-help>
-        </plex-title>
+        <!-- Contenedor del título alineado a la izquierda -->
+        <div class="titulo-container">
+            <plex-title titulo="PLANILLA EVALUACION">
+                <!-- Mensaje de bienvenida y ayuda -->
+                <plex-help icon="help" type="help" titulo="Ayuda para el usuario" subtitulo="Evaluaciones de Personal">
+                    <ayuda></ayuda>
+                </plex-help>
+            </plex-title>
+        </div>
 
-        <!-- Menú de botones -->
-        <div class="menu-buttons d-flex flex-column gap-3">
-            <button plexButton class="btn btn-light d-flex align-items-center gap-2 border rounded"
-                    (click)="onPlanillaEDClick()">
-                <span class="material-icons">list_alt</span> Planilla Evaluacion Desempeño. Items
-            </button>
+        <!-- Contenedor del menú (fondo gris) -->
+        <div class="contenedor-cuadro">
+            <!-- Menú de botones -->
+            <div class="menu-buttons">
+                <button plexButton class="btn btn-light border rounded" (click)="onPlanillaEDClick()">
+                    <span class="material-icons">list_alt</span> Planilla Evaluacion Desempeño. Items
+                </button>
+                <button plexButton class="btn btn-light border rounded" (click)="onServiciosClick()">
+                    <span class="material-icons">description</span> Planilla Evaluacion Desempeño. Agentes
+                </button>
+                <button plexButton class="btn btn-light border rounded" (click)="onAgentesClick()">
+                    <span class="material-icons">arrow_back</span> Volver
+                </button>
 
-            <button plexButton class="btn btn-light d-flex align-items-center gap-2 border rounded"
-                    (click)="onServiciosClick()">
-                <span class="material-icons">description</span> Planilla Evaluacion Desempeño. Agentes
-            </button>
-
-            <button plexButton class="btn btn-light d-flex align-items-center gap-2 border rounded"
-                    (click)="onAgentesClick()">
-                <span class="material-icons">arrow_back</span> Volver
-            </button>
-
-            <!--           <button plexButton class="btn btn-light d-flex align-items-center gap-2 border rounded"
-                    (click)="onCategoriasClick()">
-                <plex-icon name="folder"></plex-icon> Categorías
-            </button> -->
-            <button plexButton class="btn btn-light d-flex align-items-center gap-2 border rounded"
-                    (click)="onItemsClick()">
+            </div>
+        </div>
+    </plex-layout-main>
+</plex-layout>

@@ -49,13 +49,13 @@ export class PlanillaEDService {
     }
 
     guardarPlanillaED(planilla: any): Observable<any> {
-        if (!planilla.descripcion || !planilla.idEfector || !planilla.idServicio) {
-            console.error('Campos obligatorios faltantes:', planilla);
-            return throwError('Campos obligatorios faltantes');
-        }
         return this.http.post(`${this.baseUrl}/planillasED`, planilla).pipe(
             catchError((error) => {
-                console.error('Error al guardar la planilla:', error);
+                if (error.status === 400) {
+                    alert('Ya existe una planilla con este Efector y Servicio.');
+                } else {
+                    alert('Ocurrió un error al guardar la planilla.');
+                }
                 return throwError(error);
             })
         );
@@ -101,4 +101,35 @@ export class PlanillaEDService {
         const url = `${this.baseUrl}/planillasED/${planillaId}/categorias`;
         return this.http.get<any>(url);
     }
+
+    // Método para obtener los ítems por planillaId y categoriaId
+    obtenerItemsPorPlanillaYCategoria(planillaId: string, categoriaId: string): Observable<any> {
+        const url = `${this.baseUrl}/planillasED/${planillaId}/categorias/${categoriaId}/items`;
+        return this.http.get<any>(url).pipe(
+            catchError((error) => {
+                console.error('Error al obtener los items:', error);
+                return throwError(error);
+            })
+        );
+    }
+
+    //items duplicado en planilla
+    existsItemInPlanilla(planillaId: string, itemDesc: string): Observable<{ exists: boolean }> {
+        // Usamos encodeURIComponent para codificar la descripción correctamente
+        const url = `${this.baseUrl}/planillasED/${planillaId}/items/existe?itemDesc=${encodeURIComponent(itemDesc)}`;
+        return this.http.get<{ exists: boolean }>(url).pipe(
+            catchError((error) => {
+                console.error('Error al verificar existencia del ítem:', error);
+                return throwError(error);
+            })
+        );
+    }
+
+    eliminarItem(idDocumento: string, descripcionItem: string): Observable<any> {
+        const url = `${this.baseUrl}/eliminar-item`;
+        return this.http.request('delete', url, { body: { idDocumento, descripcionItem } });
+    }
+
 }
+
+

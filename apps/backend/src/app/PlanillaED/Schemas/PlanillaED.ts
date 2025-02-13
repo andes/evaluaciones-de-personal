@@ -15,7 +15,7 @@ export interface IPlanillaED extends mongoose.Document {
         descripcion: string;          // Descripción de la categoría
         categoria: ICategoriaItem;   // Referencia a la categoría
         items: {
-            id: string;
+            _id: string;
             descripcion: string;      // Descripción del ítem
             valor: number;            // Valor del ítem
         }[];                         // Arreglo de ítems dentro de la categoría con descripción y valor

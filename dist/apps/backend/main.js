@@ -328,34 +328,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! express */ "express");
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Schemas/PlanillaED */ "./apps/backend/src/app/PlanillaED/Schemas/PlanillaED.ts");
+/* harmony import */ var _Items_schemas_items__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Items/schemas/items */ "./apps/backend/src/app/Items/schemas/items.ts");
+
 
 
 
 const router = Object(express__WEBPACK_IMPORTED_MODULE_1__["Router"])();
-router.post('/planillasED', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
-    console.log('Datos recibidos en la solicitud:', req.body);
-    const { descripcion, idEfector, idServicio, categorias } = req.body;
-    if (!descripcion || !idEfector || !idServicio) {
-        console.error('Error: Faltan campos obligatorios.');
-        return res.status(400).json({ message: 'Faltan campos obligatorios.' });
-    }
-    // Asignar fechaCreacion si no se proporciona
-    const fechaCreacion = req.body.fechaCreacion || new Date();
+router.get('/planillasED/:idPlanilla/categorias/:idCategoria/items', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
     try {
-        const newPlanilla = new _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"]({
-            descripcion,
-            idEfector,
-            idServicio,
-            categorias,
-            fechaCreacion // Asignar la fecha automáticamente si no se envió
+        const { idPlanilla, idCategoria } = req.params;
+        // Buscar la planilla por ID y popular las categorías y sus ítems
+        const planilla = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].findById(idPlanilla)
+            .populate('categorias.categoria') // Asegúrate de que 'categorias.categoria' es un campo de referencia adecuado
+            .lean(); // Usa .lean() para mejorar el rendimiento al no necesitar instanciar objetos de Mongoose
+        if (!planilla) {
+            return res.status(404).json({ message: 'Planilla no encontrada.' });
+        }
+        // Filtrar la categoría específica dentro de la planilla
+        const categoriaEncontrada = planilla.categorias.find((cat) => String(cat.categoria._id) === String(idCategoria) // Asegúrate de que se compara correctamente el ID
+        );
+        if (!categoriaEncontrada) {
+            return res.status(404).json({ message: 'Categoría no encontrada en la planilla.' });
+        }
+        // Extraer los ítems con id, descripcion y valor
+        const itemsFiltrados = categoriaEncontrada.items.map((item) => ({
+            _id: item._id,
+            descripcion: item.descripcion,
+            valor: item.valor,
+        }));
+        // Responder con los datos encontrados
+        res.json({
+            descripcionCategoria: categoriaEncontrada.descripcion,
+            items: itemsFiltrados // Devolver los ítems filtrados
         });
-        const savedPlanilla = yield newPlanilla.save();
-        console.log('Planilla guardada con éxito:', savedPlanilla);
-        res.status(201).json(savedPlanilla);
     }
     catch (error) {
-        console.error('Error al guardar la planilla:', error);
-        res.status(500).json({ message: 'Error al guardar la planilla.', error });
+        console.error('Error al obtener los ítems de la categoría:', error);
+        res.status(500).json({ message: 'Error al obtener los ítems de la categoría.', error });
+    }
+}));
+router.post('/planillasED', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
+    try {
+        const { idEfector, idServicio, descripcion } = req.body;
+        // Verificar si ya existe una planilla con el mismo idEfector e idServicio
+        const planillaExistente = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].findOne({ idEfector, idServicio });
+        if (planillaExistente) {
+            return res.status(400).json({ message: 'Ya existe una planilla con este Efector y Servicio.' });
+        }
+        // Si no existe, crear una nueva planilla
+        const nuevaPlanilla = new _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"]({
+            idEfector,
+            idServicio,
+            descripcion,
+            fechaCreacion: new Date(),
+            categorias: [],
+        });
+        const planillaGuardada = yield nuevaPlanilla.save();
+        res.status(201).json(planillaGuardada);
+    }
+    catch (error) {
+        console.error('Error al crear la planilla:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
     }
 }));
 // Obtener todas las planillas
@@ -452,6 +485,101 @@ router.delete('/planillasED', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["
     }
     catch (error) {
         res.status(500).json({ message: 'Error al eliminar todas las planillas.', error });
+    }
+}));
+/**
+ */
+router.get('/planillasED/:idDocumento/items-disponibles', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
+    try {
+        const { idDocumento } = req.params;
+        // Buscar el documento (planilla) por su ID
+        const planilla = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].findById(idDocumento).lean();
+        if (!planilla) {
+            return res.status(404).json({ message: 'Documento no encontrado.' });
+        }
+        // Recolectar todos los IDs de ítems que ya están asociados en la planilla.
+        // Se asume que la planilla tiene un arreglo "categorias" y cada categoría tiene un arreglo "items"
+        const itemIdsEnDocumento = [];
+        if (planilla.categorias && Array.isArray(planilla.categorias)) {
+            planilla.categorias.forEach((cat) => {
+                if (cat.items && Array.isArray(cat.items)) {
+                    cat.items.forEach((item) => {
+                        // Se asegura de convertir el _id a string
+                        itemIdsEnDocumento.push(String(item._id));
+                    });
+                }
+            });
+        }
+        // Consultar en la colección de ítems todos aquellos que NO se encuentren en itemIdsEnDocumento
+        const itemsDisponibles = yield _Items_schemas_items__WEBPACK_IMPORTED_MODULE_3__["modelo"].find({ _id: { $nin: itemIdsEnDocumento } })
+            .sort({ descripcion: 1 })
+            .lean();
+        res.json({ items: itemsDisponibles });
+    }
+    catch (error) {
+        console.error('Error al obtener los ítems disponibles:', error);
+        res.status(500).json({ message: 'Error en el servidor.', error });
+    }
+}));
+// items duplicado en documento (buscando por descripción)
+router.get('/planillasED/:idPlanilla/items/existe', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
+    try {
+        const { idPlanilla } = req.params;
+        const { itemDesc } = req.query; // Cambiamos el nombre a itemDesc
+        // Validar que se haya enviado el itemDesc y que sea una cadena
+        if (!itemDesc || typeof itemDesc !== 'string') {
+            return res.status(400).json({ message: 'El parámetro itemDesc es requerido y debe ser una cadena.' });
+        }
+        // Buscar la planilla por su ID
+        const planilla = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].findById(idPlanilla).lean();
+        if (!planilla) {
+            return res.status(404).json({ message: 'Planilla no encontrada.' });
+        }
+        // Recorrer todas las categorías y sus ítems para ver si alguno coincide con la descripción (comparación insensible a mayúsculas/minúsculas)
+        let exists = false;
+        if (planilla.categorias && Array.isArray(planilla.categorias)) {
+            for (const categoria of planilla.categorias) {
+                if (categoria.items && Array.isArray(categoria.items)) {
+                    const found = categoria.items.some((item) => {
+                        // Usamos toLowerCase y trim para comparar de forma más robusta
+                        return item.descripcion && item.descripcion.toLowerCase().trim() === itemDesc.toLowerCase().trim();
+                    });
+                    if (found) {
+                        exists = true;
+                        break;
+                    }
+                }
+            }
+        }
+        // Responder indicando si el ítem (por descripción) existe o no en el documento
+        return res.json({ exists });
+    }
+    catch (error) {
+        console.error('Error al verificar existencia del ítem en la planilla:', error);
+        return res.status(500).json({ message: 'Error en el servidor.', error });
+    }
+}));
+// Ruta para eliminar un ítem de una categoría dentro de un documento específico
+router.delete('/eliminar-item', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
+    try {
+        const { idDocumento, descripcionItem } = req.body;
+        // Validar que se hayan enviado ambos parámetros
+        if (!idDocumento || !descripcionItem) {
+            return res.status(400).json({ message: "Se requieren idDocumento y descripcionItem" });
+        }
+        // Buscar el documento por id y eliminar el ítem de todas las categorías donde aparezca
+        const resultado = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].findOneAndUpdate({ _id: idDocumento }, { $pull: { "categorias.$[].items": { descripcion: descripcionItem } } }, { new: true } // Devuelve el documento actualizado
+        );
+        // Si no se encontró el documento
+        if (!resultado) {
+            return res.status(404).json({ message: "Documento no encontrado" });
+        }
+        // Respuesta exitosa
+        res.json({ message: "Ítem eliminado correctamente", resultado });
+    }
+    catch (error) {
+        console.error("Error al eliminar ítem:", error);
+        res.status(500).json({ message: "Error interno del servidor" });
     }
 }));
 /* harmony default export */ __webpack_exports__["default"] = (router);

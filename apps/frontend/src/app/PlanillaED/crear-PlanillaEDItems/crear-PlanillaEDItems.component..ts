@@ -104,35 +104,49 @@ export class CrearPlanillaEDItemsComponent implements OnInit {
         // Verificar que el ítem tiene todos los datos necesarios
         console.log('Ítem encontrado:', item);
 
-        // Construir el objeto correctamente
-        const categoriaConItems = {
-            categoria: categoria._id,
-            descripcionCategoria: categoria.descripcion,
-            items: [{
-                idItem: item._id,
-                descripcion: item.descripcion,
-                valor: item.valor
-            }]
-        };
-
-        // Mostrar en la consola antes de enviar
-        console.log('Datos enviados a la API:', categoriaConItems);
-
-        // Enviar al servicio
-        this._PlanillaEDService.agregarCategoriaItems(this.idPlanilla, categoriaConItems).subscribe({
+        // Verificar si el ítem ya existe en la planilla antes de guardarlo
+        this._PlanillaEDService.existsItemInPlanilla(this.idPlanilla, item.descripcion).subscribe({
             next: response => {
-                console.log('Categoría e ítems guardados con éxito:', response);
-                this.cargarCategoriasDePlanilla();
-                alert('Categoría e ítems guardados con éxito.');
+                if (response.exists) {
+                    alert('El ítem ya existe en la planilla.');
+                    return; // Detener el flujo aquí si el ítem ya existe
+                }
+
+                // Construir el objeto correctamente
+                const categoriaConItems = {
+                    categoria: categoria._id,
+                    descripcionCategoria: categoria.descripcion,
+                    items: [{
+                        idItem: item._id,
+                        descripcion: item.descripcion,
+                        valor: item.valor
+                    }]
+                };
+
+                // Mostrar en la consola antes de enviar
+                console.log('Datos enviados a la API:', categoriaConItems);
+
+                // Enviar al servicio
+                this._PlanillaEDService.agregarCategoriaItems(this.idPlanilla, categoriaConItems).subscribe({
+                    next: response => {
+                        console.log('Categoría e ítems guardados con éxito:', response);
+                        this.cargarCategoriasDePlanilla();
+                        alert('Categoría e ítems guardados con éxito.');
+                    },
+                    error: err => {
+                        console.error('Error al guardar la categoría e ítems:', err);
+                        if (err.error) {
+                            console.error('Detalles del error:', err.error);
+                        }
+                    }
+                });
             },
             error: err => {
-                console.error('Error al guardar la categoría e ítems:', err);
-                if (err.error) {
-                    console.error('Detalles del error:', err.error);
-                }
+                console.error('Error al verificar la existencia del ítem:', err);
             }
         });
     }
+
 
     navegarADetalle(categoriaId: string, descripcionCategoria: string): void {
         const queryParams = {

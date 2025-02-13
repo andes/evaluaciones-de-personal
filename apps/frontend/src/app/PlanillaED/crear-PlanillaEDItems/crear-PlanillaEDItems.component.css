@@ -74,3 +74,21 @@
     background: #007bff;
     color: white;
 }
+
+.card-title-sm {
+    font-size: 1.2rem;
+    /* Ajusta este valor según necesites */
+    font-weight: inherit;
+    /* Si quieres que mantenga el peso definido en .card-title */
+}
+
+.contenedor-cuadro button {
+    display: flex;
+    align-items: center;
+    /* Centra verticalmente el contenido */
+}
+
+.contenedor-cuadro .material-icons {
+    margin-right: 8px;
+    /* Espacio entre el ícono y el texto */
+}

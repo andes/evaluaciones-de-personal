@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+
 
 @Component({
     selector: 'app-menucomunes',
     templateUrl: './MenuPlanillaED.component.html',
-    styleUrls: ['./MenuPlanillaED.component.css']
+    styleUrls: ['./MenuPlanillaED.component.css'],
+    encapsulation: ViewEncapsulation.None, // 
+
 })
 export class MenuPlanillaEDComponent {
 
@@ -14,4 +17,5 @@ export class MenuPlanillaEDComponent {
         this.router.navigate(['/listar-planillaEDRouter']);
     }
 }
+
 

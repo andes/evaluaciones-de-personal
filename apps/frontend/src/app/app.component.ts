@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     public crearMenu() {
         this.menuList = [];
         this.menuList.push({ label: 'Parametros', icon: 'description', route: '/menucomunes' });
-        this.menuList.push({ label: 'Planillas de Evaluacion', icon: 'description', route: '/menuPlanillaED' });
+        this.menuList.push({ label: 'Planillas de Evaluacion', icon: 'description', route: '/listar-planillaEDRouter' });
         this.menuList.push({ label: 'Página Principal', icon: 'description', route: '/home' });
         // this.menuList.push({ label: 'Itemasggg', icon: 'home 1', route: '/edItems' });
         // this.menuList.push({ label: 'C', icon: 'home 1', route: '/edCategoriass' });

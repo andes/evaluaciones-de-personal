@@ -49,6 +49,10 @@ export class ListarPlanillaEDComponent implements OnInit {
     crearNuevoPlanillaEDM() {
         this.router.navigate(['crear-planillaEDRouter']);
     }
+
+    public onPlanillaEDClick(): void {
+        this.router.navigate(['/listar-planillaEDRouter']);
+    }
     /*
         editarPlanillaED(planillaed: PlanillaED) {
             this.router.navigate(['editar-planillaED', planillaed._id]);

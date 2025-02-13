@@ -266,22 +266,22 @@
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.css",
               "ext": ".css",
-              "mtime": 1733051481552.338
+              "mtime": 1739367158633.1545
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.html",
               "ext": ".html",
-              "mtime": 1734344375658.765
+              "mtime": 1739366348623.556
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.ts",
               "ext": ".ts",
-              "mtime": 1738154967294.5686
+              "mtime": 1739366348639.5562
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component..ts",
               "ext": ".ts",
-              "mtime": 1738231136493.5198
+              "mtime": 1738852191770.731
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.css",
@@ -301,22 +301,22 @@
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.html",
               "ext": ".html",
-              "mtime": 1737985861182.573
+              "mtime": 1739192307899.3887
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.ts",
               "ext": ".ts",
-              "mtime": 1737705026166.981
+              "mtime": 1739357846352.818
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.css",
               "ext": ".css",
-              "mtime": 1731335335678.193
+              "mtime": 1739367269499.0156
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.html",
               "ext": ".html",
-              "mtime": 1732184343848.931
+              "mtime": 1739362940570.341
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.ts",
@@ -351,7 +351,7 @@
             {
               "file": "apps/frontend/src/app/app.module.ts",
               "ext": ".ts",
-              "mtime": 1737974758310.723
+              "mtime": 1739362504115.0137
             },
             {
               "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.css",
@@ -486,17 +486,17 @@
             {
               "file": "apps/frontend/src/app/home/MenuPlanillaED.component.css",
               "ext": ".css",
-              "mtime": 1732028003703.655
+              "mtime": 1739367770571.4277
             },
             {
               "file": "apps/frontend/src/app/home/MenuPlanillaED.component.html",
               "ext": ".html",
-              "mtime": 1732111073304.931
+              "mtime": 1739271613952.7139
             },
             {
               "file": "apps/frontend/src/app/home/MenuPlanillaED.component.ts",
               "ext": ".ts",
-              "mtime": 1732111080069.041
+              "mtime": 1739367770475.4263
             },
             {
               "file": "apps/frontend/src/app/home/ayuda.component.ts",
@@ -591,7 +591,7 @@
             {
               "file": "apps/frontend/src/app/services/PlanillaED.Service.ts",
               "ext": ".ts",
-              "mtime": 1738243377499.2937
+              "mtime": 1739194790785.0718
             },
             {
               "file": "apps/frontend/src/app/services/categoria.service.ts",
@@ -611,7 +611,7 @@
             {
               "file": "apps/frontend/src/app/shared/location.services.ts",
               "ext": ".ts",
-              "mtime": 1715870079000
+              "mtime": 1739362497894.9092
             },
             {
               "file": "apps/frontend/src/app/shared/select-search.service.ts",
@@ -795,17 +795,17 @@
             {
               "file": "apps/backend/src/app/Items/schemas/items.ts",
               "ext": ".ts",
-              "mtime": 1738153134356.0422
+              "mtime": 1738153134356.042
             },
             {
               "file": "apps/backend/src/app/PlanillaED/Router/PlanillaED.ts",
               "ext": ".ts",
-              "mtime": 1738247657218.4343
+              "mtime": 1739194793961.1252
             },
             {
               "file": "apps/backend/src/app/PlanillaED/Schemas/PlanillaED.ts",
               "ext": ".ts",
-              "mtime": 1738246888704.8357
+              "mtime": 1738840338490.163
             },
             {
               "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",
@@ -835,17 +835,17 @@
             {
               "file": "apps/backend/src/app/categoriaitems/routes/categoriaItems.ts",
               "ext": ".ts",
-              "mtime": 1738230471653.6943
+              "mtime": 1738230471653.694
             },
             {
               "file": "apps/backend/src/app/categoriaitems/schemas/categoria.schema.ts",
               "ext": ".ts",
-              "mtime": 1738153134344.0422
+              "mtime": 1738153134344.042
             },
             {
               "file": "apps/backend/src/app/categoriaitems/schemas/categoriaItems.ts",
               "ext": ".ts",
-              "mtime": 1738154062247.7644
+              "mtime": 1738154062247.764
             },
             {
               "file": "apps/backend/src/app/connection.ts",
@@ -1807,22 +1807,22 @@
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.css",
         "ext": ".css",
-        "mtime": 1733051481552.338
+        "mtime": 1739367158633.1545
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.html",
         "ext": ".html",
-        "mtime": 1734344375658.765
+        "mtime": 1739366348623.556
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.ts",
         "ext": ".ts",
-        "mtime": 1738154967294.5686
+        "mtime": 1739366348639.5562
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component..ts",
         "ext": ".ts",
-        "mtime": 1738231136493.5198
+        "mtime": 1738852191770.731
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.css",
@@ -1842,22 +1842,22 @@
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.html",
         "ext": ".html",
-        "mtime": 1737985861182.573
+        "mtime": 1739192307899.3887
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.ts",
         "ext": ".ts",
-        "mtime": 1737705026166.981
+        "mtime": 1739357846352.818
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.css",
         "ext": ".css",
-        "mtime": 1731335335678.193
+        "mtime": 1739367269499.0156
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.html",
         "ext": ".html",
-        "mtime": 1732184343848.931
+        "mtime": 1739362940570.341
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.ts",
@@ -1892,7 +1892,7 @@
       {
         "file": "apps/frontend/src/app/app.module.ts",
         "ext": ".ts",
-        "mtime": 1737974758310.723
+        "mtime": 1739362504115.0137
       },
       {
         "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.css",
@@ -2027,17 +2027,17 @@
       {
         "file": "apps/frontend/src/app/home/MenuPlanillaED.component.css",
         "ext": ".css",
-        "mtime": 1732028003703.655
+        "mtime": 1739367770571.4277
       },
       {
         "file": "apps/frontend/src/app/home/MenuPlanillaED.component.html",
         "ext": ".html",
-        "mtime": 1732111073304.931
+        "mtime": 1739271613952.7139
       },
       {
         "file": "apps/frontend/src/app/home/MenuPlanillaED.component.ts",
         "ext": ".ts",
-        "mtime": 1732111080069.041
+        "mtime": 1739367770475.4263
       },
       {
         "file": "apps/frontend/src/app/home/ayuda.component.ts",
@@ -2132,7 +2132,7 @@
       {
         "file": "apps/frontend/src/app/services/PlanillaED.Service.ts",
         "ext": ".ts",
-        "mtime": 1738243377499.2937
+        "mtime": 1739194790785.0718
       },
       {
         "file": "apps/frontend/src/app/services/categoria.service.ts",
@@ -2152,7 +2152,7 @@
       {
         "file": "apps/frontend/src/app/shared/location.services.ts",
         "ext": ".ts",
-        "mtime": 1715870079000
+        "mtime": 1739362497894.9092
       },
       {
         "file": "apps/frontend/src/app/shared/select-search.service.ts",
@@ -2269,17 +2269,17 @@
       {
         "file": "apps/backend/src/app/Items/schemas/items.ts",
         "ext": ".ts",
-        "mtime": 1738153134356.0422
+        "mtime": 1738153134356.042
       },
       {
         "file": "apps/backend/src/app/PlanillaED/Router/PlanillaED.ts",
         "ext": ".ts",
-        "mtime": 1738247657218.4343
+        "mtime": 1739194793961.1252
       },
       {
         "file": "apps/backend/src/app/PlanillaED/Schemas/PlanillaED.ts",
         "ext": ".ts",
-        "mtime": 1738246888704.8357
+        "mtime": 1738840338490.163
       },
       {
         "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",
@@ -2309,17 +2309,17 @@
       {
         "file": "apps/backend/src/app/categoriaitems/routes/categoriaItems.ts",
         "ext": ".ts",
-        "mtime": 1738230471653.6943
+        "mtime": 1738230471653.694
       },
       {
         "file": "apps/backend/src/app/categoriaitems/schemas/categoria.schema.ts",
         "ext": ".ts",
-        "mtime": 1738153134344.0422
+        "mtime": 1738153134344.042
       },
       {
         "file": "apps/backend/src/app/categoriaitems/schemas/categoriaItems.ts",
         "ext": ".ts",
-        "mtime": 1738154062247.7644
+        "mtime": 1738154062247.764
       },
       {
         "file": "apps/backend/src/app/connection.ts",

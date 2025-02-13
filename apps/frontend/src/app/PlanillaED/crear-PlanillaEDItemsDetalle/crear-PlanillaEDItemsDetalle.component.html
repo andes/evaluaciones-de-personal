@@ -1,95 +1,76 @@
-<!-- Primer cuadro - Detalle de la planilla -->
-<div class="row mt-5">
-    <div class="col-lg-8 offset-lg-2 text-center">
-        <div class="card">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <!-- Primer cuadro: Detalle de la Planilla -->
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0 font-weight-bold">Detalle de la Planilla</h4>
+                </div>
+                <div class="card-body mt-4 text-left">
+                    <p><strong>Detalle de la Planilla:</strong> {{ descripcionPlanilla }}</p>
+                    <p><strong>Efector:</strong> {{ efectorNombre }}</p>
+                    <p><strong>Servicio:</strong> {{ servicioNombre }}</p>
+                    <p><strong>Categoría:</strong> {{ descripcionCategoria }}</p>
+                </div>
+            </div>
 
-            <div class="card-body mt-4 text-left">
+            <!-- Combo y Botón "Agregar Ítem" en línea -->
+            <div class="d-flex justify-content-end align-items-center mt-3" style="gap: 20px;">
+                <!-- Combo (select) a la izquierda del botón -->
 
-                <div class="form-group">
 
-                    <!-- Primer cuadro - Detalle de la planilla -->
-                    <div class="row mt-5">
-                        <div class="col-lg-8 offset-lg-2 text-center">
-                            <div class="card">
-                                <div class="card-header bg-primary text-white text-center">
-                                    <h4 class="mb-0 font-weight-bold">Detalle de la Planilla</h4>
-                                </div>
-                                <div class="card-body mt-4 text-left">
-                                    <p><strong>Detalle de la Planilla:</strong> {{ descripcionPlanilla }}</p>
-                                    <p><strong>Efector:</strong> {{ efectorNombre }}</p>
-                                    <p><strong>Servicio:</strong> {{ servicioNombre }}</p>
-                                    <div class="form-group d-none">
-                                        <label for="planillaId">ID de la Planilla:</label>
-                                        <input type="text" id="planillaId" class="form-control" [(ngModel)]="planillaId"
-                                               readonly />
-                                    </div>
-
-                                    <div class="form-group d-none">
-                                        <label for="categoriaId">ID de la Categoría:</label>
-                                        <input type="text" id="categoriaId" class="form-control"
-                                               [(ngModel)]="categoriaId" readonly />
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recuadro Categoría -->
-                    <div class="row mt-4">
-                        <div class="col-md-8 offset-md-2">
-                            <div class="card">
-                                <div class="card-header bg-primary text-white text-center">
-                                    <label class="font-weight-bold d-block mb-0" style="font-size: 1.25rem;">Categoría
-                                        seleccionada:</label>
-                                    <h5 class="mb-0" style="font-size: 1.25rem;">{{ descripcionCategoria }}</h5>
-                                </div>
-                                <div class="card-body">
-                                    <button class="btn btn-success mb-3" (click)="agregarItem()">
-                                        <i class="fas fa-plus"></i> Agregar otro item
-                                    </button>
-
-                                    <table class="table table-bordered mt-3">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Descripción</th>
-                                                <th>Valor</th>
-                                                <th>Eliminar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Item de ejemplo 1</td>
-                                                <td>100</td>
-                                                <td>
-                                                    <button class="btn btn-danger btn-sm">
-                                                        <i class="fas fa-trash-alt"></i> Eliminar
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Item de ejemplo 2</td>
-                                                <td>200</td>
-                                                <td>
-                                                    <button class="btn btn-danger btn-sm">
-                                                        <i class="fas fa-trash-alt"></i> Eliminar
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="d-flex justify-content-end mt-3">
+                    <select class="form-select" style="width: 300px;" [(ngModel)]="itemSeleccionado">
+                        <option value="" disabled selected>Selecciona un ítem</option>
+                        <option *ngFor="let item of todosLosItems" [value]="item._id">
+                            {{ item.descripcion }}
+                        </option>
+                    </select>
                 </div>
 
 
+
+                <!-- Botón Agregar Ítem -->
+                <button class="btn btn-success" (click)="agregarNuevoItem()">
+                    <i class="fas fa-plus"></i> Agregar Ítem
+                </button>
             </div>
+
+            <!-- Segundo cuadro: Lista de Ítems -->
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="mb-3 text-center">Lista de Ítems</h5>
+
+                    <table class="table table-bordered" *ngIf="items.length > 0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Descripción</th>
+                                <th class="text-center">Valor</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of items">
+                                <td>{{ item?.id }}</td>
+                                <td>{{ item?.descripcion }}</td>
+                                <td class="text-center">{{ item?.valor }}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-danger btn-sm" (click)="eliminarItem(item)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div *ngIf="items.length === 0" class="alert alert-warning mt-3 text-center">
+                        <p>No se encontraron ítems para esta categoría.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

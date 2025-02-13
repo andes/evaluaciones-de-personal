@@ -1,36 +1,59 @@
-<div class="container mt-5">
+<div class="contenedor-general">
     <div class="row">
-        <div class="col-lg-8 offset-lg-2">
+        <!-- Columna del Menú a la izquierda -->
+        <div class="col-lg-3 col-md-4 col-12 contenedor-menu">
             <div class="card">
                 <div class="card-body">
-                    <!-- Encabezado de la tabla -->
-                    <div class="header-container mb-3 d-flex justify-content-between align-items-center">
-                        <span class="titulo text-center mx-auto" style="font-weight: bold; font-size: 1.5rem;">
-                            LISTADO DE PLANILLAS
-                        </span>
-                        <button class="btn btn-success" (click)="crearNuevoPlanillaEDM()">NUEVO</button>
+                    <!-- Título del menú -->
+                    <div class="titulo-container">
+                        <plex-title titulo="PLANILLA DE EVALUACIÓN"></plex-title>
+
+                    </div>
+                    <!-- Contenedor del menú -->
+                    <div class="contenedor-cuadro">
+                        <button plexButton class="btn btn-light border rounded" (click)="onPlanillaEDClick()">
+                            <span class="material-icons">list_alt</span> Planilla Evaluación Desempeño. Items
+                        </button>
+                        <button plexButton class="btn btn-light border rounded" (click)="onPlanillaEDClick()">
+                            <span class="material-icons">list_alt</span> Planilla Evaluacion Desempeño. Items
+                        </button>
+                        <button plexButton class="btn btn-light border rounded" (click)="onAgentesClick()">
+                            <span class="material-icons">arrow_back</span> Volver
+                        </button>
                     </div>
 
-                    <!-- Input para buscar planillas -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna del Listado de Planillas -->
+        <div class="col-lg-9 col-md-8 col-12 contenedor-listado">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0 font-weight-bold">LISTADO DE PLANILLAS</h4>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-end mt-4">
+                        <button class="btn btn-success" (click)="crearNuevoPlanillaEDM()">NUEVO</button>
+                    </div>
                     <div class="mb-3">
                         <input type="text" [(ngModel)]="searchTerm" (input)="filtrarPlanillaED()"
                                placeholder="Buscar por descripción" class="form-control" />
                     </div>
-
-                    <!-- Tabla -->
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
                                     <th class="text-center">Fecha</th>
                                     <th class="text-center">Descripción</th>
-                                    <th class="text-center">Acciones</th>
+
+                                    <th class="text-center"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let planilla of filterPlanillaED">
                                     <td class="text-center">{{ planilla.fechaCreacion | date: 'dd/MM/yyyy' }}</td>
-                                    <td class="text-center">{{ planilla.descripcion }}</td>
+                                    <td class="text-left">{{ planilla.descripcion }}</td>
                                     <td class="text-center">
                                         <button class="btn btn-primary btn-sm" (click)="editarPlanillaED(planilla)">
                                             <i class="fas fa-edit"></i>
@@ -44,11 +67,7 @@
                             </tbody>
                         </table>
                     </div>
-
-                    <!-- Mensaje si no hay planillas -->
-                    <h5 style="text-align: start; margin-top: 10px;" *ngIf="filterPlanillaED.length == 0">
-                        No hay planillas para mostrar
-                    </h5>
+                    <h5 class="text-start mt-3" *ngIf="filterPlanillaED.length === 0">No hay planillas para mostrar</h5>
                 </div>
             </div>
         </div>
