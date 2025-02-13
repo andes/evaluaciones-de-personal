@@ -1,8 +1,9 @@
-// crear-PlanillaEDItemsDetalle.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PlanillaEDService } from '../../services/PlanillaED.Service';
-//inport {} from ../shared/
+import { Router } from '@angular/router';
+
+
 @Component({
     selector: 'app-crear-planilla-ed-items-detalle',
     templateUrl: './crear-PlanillaEDItemsDetalle.component.html',
@@ -21,6 +22,7 @@ export class CrearPlanillaEDItemsDetalleComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private planillaEDService: PlanillaEDService
     ) { }
 
@@ -133,7 +135,12 @@ export class CrearPlanillaEDItemsDetalleComponent implements OnInit {
                 alert('Ocurrió un error al eliminar el ítem.');
             }
         });
+
+
     }
 
 
+    public onPlanillaEDClick(): void {
+        this.router.navigate(['/listar-planillaEDRouter']);
+    }
 }

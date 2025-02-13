@@ -17,7 +17,7 @@
                         <button plexButton class="btn btn-light border rounded" (click)="onPlanillaEDClick()">
                             <span class="material-icons">list_alt</span> Planilla Evaluacion Desempeño. Items
                         </button>
-                        <button plexButton class="btn btn-light border rounded" (click)="onAgentesClick()">
+                        <button plexButton class="btn btn-light border rounded" (click)="onVolverClick()">
                             <span class="material-icons">arrow_back</span> Volver
                         </button>
                     </div>
@@ -55,14 +55,17 @@
                                     <td class="text-center">{{ planilla.fechaCreacion | date: 'dd/MM/yyyy' }}</td>
                                     <td class="text-left">{{ planilla.descripcion }}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-primary btn-sm" (click)="editarPlanillaED(planilla)">
+                                        <button class="btn btn-primary btn-sm mx-2"
+                                                (click)="editarPlanillaED(planilla)">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button class="btn btn-danger btn-sm"
+                                        <button class="btn btn-danger btn-sm mx-2"
                                                 (click)="eliminarPlanillaED(planilla._id)">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
+
+
                                 </tr>
                             </tbody>
                         </table>

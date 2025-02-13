@@ -160,4 +160,8 @@ export class CrearPlanillaEDItemsComponent implements OnInit {
         console.log('Navegando a detalle con parámetros:', queryParams);
         this.router.navigate([`/crear-planilla-ed-items-detalle/${categoriaId}`], { queryParams });
     }
+
+    public onPlanillaEDClick(): void {
+        this.router.navigate(['/listar-planillaEDRouter']);
+    }
 }
