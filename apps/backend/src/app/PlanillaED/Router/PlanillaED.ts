@@ -4,6 +4,37 @@ import { modelo as ItemsModel } from '../../Items/schemas/items';
 
 const router = Router();
 
+// lista todos los datos del documento segun id enviado para listado o pdf
+
+router.get('/planillasED/:id', async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        // Buscar la planilla por ID y popular las referencias de efector, servicio y categoría
+        const planilla = await PlanillaEDModel.findById(id)
+            .populate({ path: 'idEfector', select: 'nombre' })   // Trae la 'descripcion' del Efector
+            .populate({ path: 'idServicio', select: 'nombre' })  // Trae la 'descripcion' del Servicio
+            .populate({ path: 'categorias.categoria', select: 'descripcion' }) // Trae la 'descripcion' de la categoría
+            .lean();
+
+        if (!planilla) {
+            return res.status(404).json({ message: 'Planilla no encontrada.' });
+        }
+
+        res.json(planilla);
+    } catch (error) {
+        console.error('Error al obtener la planilla:', error);
+        res.status(500).json({ message: 'Error al obtener la planilla.', error });
+    }
+});
+
+
+//
+
+
+
+
+
 router.get('/planillasED/:idPlanilla/categorias/:idCategoria/items', async (req: Request, res: Response) => {
     try {
         const { idPlanilla, idCategoria } = req.params;
@@ -74,7 +105,7 @@ router.post('/planillasED', async (req, res) => {
     }
 });
 
-
+/*
 // Obtener todas las planillas
 router.get('/planillasED', async (req: Request, res: Response) => {
     try {
@@ -96,6 +127,32 @@ router.get('/planillasED', async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error al obtener las planillas.', error });
     }
 });
+*/
+
+router.get('/planillasED', async (req: Request, res: Response) => {
+    try {
+        const planillas = await PlanillaEDModel.find()
+            .populate('categorias.categoria')
+            .populate('idEfector', 'nombre')   // Popula el efector y obtiene solo el campo "nombre"
+            .populate('idServicio', 'nombre')  // Popula el servicio y obtiene solo el campo "nombre"
+            .lean();
+
+        // Ordenar las categorías dentro de cada planilla
+        planillas.forEach(planilla => {
+            if (planilla.categorias && Array.isArray(planilla.categorias)) {
+                planilla.categorias.sort((a, b) =>
+                    a.descripcion.localeCompare(b.descripcion)
+                );
+            }
+        });
+
+        res.json(planillas);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener las planillas.', error });
+    }
+});
+
+
 
 // Obtener categorías e ítems de una planilla específica
 router.get('/planillasED/:id/categorias', async (req: Request, res: Response) => {
@@ -185,6 +242,22 @@ router.delete('/planillasED', async (req: Request, res: Response) => {
         });
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar todas las planillas.', error });
+    }
+});
+
+// Eliminar una planilla por ID
+router.delete('/planillasED/:id', async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const result = await PlanillaEDModel.findByIdAndDelete(id);
+
+        if (!result) {
+            return res.status(404).json({ message: 'Planilla no encontrada.' });
+        }
+
+        res.json({ message: 'Planilla eliminada correctamente.', deletedPlanilla: result });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al eliminar la planilla.', error });
     }
 });
 

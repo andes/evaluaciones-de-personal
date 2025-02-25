@@ -44,6 +44,11 @@ export class PlanillaEDService {
         return this.http.get<any>(`http://localhost:3000/api/servicios/${id}`);
     }
 
+    eliminaPlanillaEDid(id: string): Observable<any> {
+        return this.http.delete<any>(`http://localhost:3000/api/planillasED/${id}`);
+    }
+
+
     obtenerCategorias(): Observable<any[]> {
         return this.http.get<any[]>(`${this.baseUrl}/categorias`);
     }
@@ -128,6 +133,17 @@ export class PlanillaEDService {
     eliminarItem(idDocumento: string, descripcionItem: string): Observable<any> {
         const url = `${this.baseUrl}/eliminar-item`;
         return this.http.request('delete', url, { body: { idDocumento, descripcionItem } });
+    }
+
+    //obtener planilla por id para listado 
+
+    getPlanillaEDById(id: string): Observable<any> {
+        return this.http.get<any>(`${this.baseUrl}/planillasED/${id}`).pipe(
+            catchError((error) => {
+                console.error('Error al obtener la planilla por ID:', error);
+                return throwError(error);
+            })
+        );
     }
 
 }

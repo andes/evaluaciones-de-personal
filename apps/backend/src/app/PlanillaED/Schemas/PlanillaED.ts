@@ -37,8 +37,8 @@ const CategoriaSchema = new Schema({
 const PlanillaEDSchema = new Schema({
     fechaCreacion: { type: Date, required: true },
     descripcion: { type: String, required: true },
-    idEfector: { type: Schema.Types.ObjectId, ref: 'Efector', required: true },
-    idServicio: { type: Schema.Types.ObjectId, ref: 'Servicio', required: true },
+    idEfector: { type: Schema.Types.ObjectId, ref: 'Efectores', required: true },
+    idServicio: { type: Schema.Types.ObjectId, ref: 'Servicios', required: true },
     categorias: [CategoriaSchema]  // Arreglo de categorías, que contiene ítems con descripciones y valores
 });
 

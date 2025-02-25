@@ -334,6 +334,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const router = Object(express__WEBPACK_IMPORTED_MODULE_1__["Router"])();
+// lista todos los datos del documento segun id enviado para listado o pdf
+router.get('/planillasED/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        // Buscar la planilla por ID y popular las referencias de efector, servicio y categoría
+        const planilla = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].findById(id)
+            .populate({ path: 'idEfector', select: 'nombre' }) // Trae la 'descripcion' del Efector
+            .populate({ path: 'idServicio', select: 'nombre' }) // Trae la 'descripcion' del Servicio
+            .populate({ path: 'categorias.categoria', select: 'descripcion' }) // Trae la 'descripcion' de la categoría
+            .lean();
+        if (!planilla) {
+            return res.status(404).json({ message: 'Planilla no encontrada.' });
+        }
+        res.json(planilla);
+    }
+    catch (error) {
+        console.error('Error al obtener la planilla:', error);
+        res.status(500).json({ message: 'Error al obtener la planilla.', error });
+    }
+}));
+//
 router.get('/planillasED/:idPlanilla/categorias/:idCategoria/items', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
     try {
         const { idPlanilla, idCategoria } = req.params;
@@ -391,12 +412,36 @@ router.post('/planillasED', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 }));
+/*
 // Obtener todas las planillas
+router.get('/planillasED', async (req: Request, res: Response) => {
+    try {
+        const planillas = await PlanillaEDModel.find()
+            .populate('categorias.categoria')
+            .lean(); // Convertir a objetos JSON planos
+
+        // Ordenar las categorías dentro de cada planilla
+        planillas.forEach(planilla => {
+            if (planilla.categorias && Array.isArray(planilla.categorias)) {
+                planilla.categorias.sort((a, b) =>
+                    a.descripcion.localeCompare(b.descripcion)
+                );
+            }
+        });
+
+        res.json(planillas);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener las planillas.', error });
+    }
+});
+*/
 router.get('/planillasED', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
     try {
         const planillas = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].find()
             .populate('categorias.categoria')
-            .lean(); // Convertir a objetos JSON planos
+            .populate('idEfector', 'nombre') // Popula el efector y obtiene solo el campo "nombre"
+            .populate('idServicio', 'nombre') // Popula el servicio y obtiene solo el campo "nombre"
+            .lean();
         // Ordenar las categorías dentro de cada planilla
         planillas.forEach(planilla => {
             if (planilla.categorias && Array.isArray(planilla.categorias)) {
@@ -485,6 +530,20 @@ router.delete('/planillasED', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["
     }
     catch (error) {
         res.status(500).json({ message: 'Error al eliminar todas las planillas.', error });
+    }
+}));
+// Eliminar una planilla por ID
+router.delete('/planillasED/:id', (req, res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const result = yield _Schemas_PlanillaED__WEBPACK_IMPORTED_MODULE_2__["PlanillaEDModel"].findByIdAndDelete(id);
+        if (!result) {
+            return res.status(404).json({ message: 'Planilla no encontrada.' });
+        }
+        res.json({ message: 'Planilla eliminada correctamente.', deletedPlanilla: result });
+    }
+    catch (error) {
+        res.status(500).json({ message: 'Error al eliminar la planilla.', error });
     }
 }));
 /**
@@ -615,8 +674,8 @@ const CategoriaSchema = new Schema({
 const PlanillaEDSchema = new Schema({
     fechaCreacion: { type: Date, required: true },
     descripcion: { type: String, required: true },
-    idEfector: { type: Schema.Types.ObjectId, ref: 'Efector', required: true },
-    idServicio: { type: Schema.Types.ObjectId, ref: 'Servicio', required: true },
+    idEfector: { type: Schema.Types.ObjectId, ref: 'Efectores', required: true },
+    idServicio: { type: Schema.Types.ObjectId, ref: 'Servicios', required: true },
     categorias: [CategoriaSchema] // Arreglo de categorías, que contiene ítems con descripciones y valores
 });
 // Exportar el modelo de Mongoose para la planilla
@@ -1694,7 +1753,7 @@ application.start();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/andes/sistemas/EvaluacionDesempeño/evaluaciondepersonal/apps/backend/src/main.ts */"./apps/backend/src/main.ts");
+module.exports = __webpack_require__(/*! /home/andes/sistemas/EvaluacionDesempeño/evaluaciones-de-personal/apps/backend/src/main.ts */"./apps/backend/src/main.ts");
 
 
 /***/ }),

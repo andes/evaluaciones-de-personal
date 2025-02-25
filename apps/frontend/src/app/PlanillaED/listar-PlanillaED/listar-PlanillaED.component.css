@@ -114,3 +114,13 @@ plex-title {
     align-items: center;
     /* Alinea verticalmente */
 }
+
+thead {
+    background-color: #f0f0f0;
+    /* Un gris suave */
+}
+
+thead th {
+    font-weight: bold;
+    padding: 10px;
+}

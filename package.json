@@ -53,6 +53,7 @@
         "debug": "^4.1.1",
         "handlebars": "^4.1.0",
         "jquery": "^3.4.1",
+        "jspdf": "^2.5.2",
         "mongoose": "^5.9.5",
         "mssql": "^6.2.0",
         "ng-recaptcha": "^7.0.1",

@@ -42,30 +42,39 @@
                     </div>
                     <div class="table-responsive">
                         <table class="table">
-                            <thead class="thead-light">
+                            <thead>
                                 <tr>
                                     <th class="text-center">Fecha</th>
                                     <th class="text-center">Descripción</th>
-
-                                    <th class="text-center"></th>
+                                    <th class="text-center">Efector</th>
+                                    <th class="text-center">Servicio</th>
+                                    <th class="text-center">Acciones</th>
                                 </tr>
                             </thead>
+
+
                             <tbody>
                                 <tr *ngFor="let planilla of filterPlanillaED">
                                     <td class="text-center">{{ planilla.fechaCreacion | date: 'dd/MM/yyyy' }}</td>
                                     <td class="text-left">{{ planilla.descripcion }}</td>
+                                    <td class="text-left">{{ planilla.idEfector?.nombre }}</td>
+                                    <td class="text-left">{{ planilla.idServicio?.nombre }}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-primary btn-sm mx-2"
-                                                (click)="editarPlanillaED(planilla)">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm mx-2"
-                                                (click)="eliminarPlanillaED(planilla._id)">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        <div class="d-flex justify-content-center gap-1">
+                                            <button class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
+                                                    title="Editar" (click)="editarPlanillaED(planilla)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
+                                                    title="Eliminar" (click)="eliminarPlanilla(planilla._id)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            <button class="btn btn-success btn-sm" data-bs-toggle="tooltip"
+                                                    title="Listar" (click)="ListarrPlanillaED(planilla._id)">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </button>
+                                        </div>
                                     </td>
-
-
                                 </tr>
                             </tbody>
                         </table>
