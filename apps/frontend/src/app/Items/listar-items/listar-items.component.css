@@ -33,3 +33,7 @@
     overflow-y: auto;
     /* Habilita el desplazamiento vertical */
 }
+
+.sin-margen-superior {
+    margin-top: 0 !important;
+}

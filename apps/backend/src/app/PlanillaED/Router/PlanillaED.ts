@@ -245,22 +245,6 @@ router.delete('/planillasED', async (req: Request, res: Response) => {
     }
 });
 
-// Eliminar una planilla por ID
-router.delete('/planillasED/:id', async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params;
-        const result = await PlanillaEDModel.findByIdAndDelete(id);
-
-        if (!result) {
-            return res.status(404).json({ message: 'Planilla no encontrada.' });
-        }
-
-        res.json({ message: 'Planilla eliminada correctamente.', deletedPlanilla: result });
-    } catch (error) {
-        res.status(500).json({ message: 'Error al eliminar la planilla.', error });
-    }
-});
-
 
 /**
  */

@@ -19,7 +19,8 @@
     display: flex;
     flex-direction: column;
     /* Organiza en columna */
-    justify-content: start;
+    justify-content: flex-start;
+    /* Reemplaza "start" por "flex-start" */
     align-items: stretch;
     overflow: hidden;
     /* Evita desbordes */
@@ -31,7 +32,8 @@
     /* Ocupa todo el alto de la pantalla */
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
+    /* Reemplaza "start" por "flex-start" */
     padding: 10px;
     background-color: #f8f9fa;
     /* Color de fondo del menú */
@@ -113,14 +115,4 @@ plex-title {
     /* Centra el título dentro del contenedor */
     align-items: center;
     /* Alinea verticalmente */
-}
-
-thead {
-    background-color: #f0f0f0;
-    /* Un gris suave */
-}
-
-thead th {
-    font-weight: bold;
-    padding: 10px;
 }

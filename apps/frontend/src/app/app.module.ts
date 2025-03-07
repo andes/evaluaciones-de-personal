@@ -28,8 +28,7 @@ import { CrearPlanillaEDComponent } from './PlanillaED/crear-PlanillaED/crear-Pl
 import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.';
 import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component';
 // plantilla
-
-
+import { sharedMenuComunesComponent } from './shared/menu/menuComunes/sharedmenuComunes.component';
 
 
 @NgModule({
@@ -48,6 +47,7 @@ import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-Planill
         CrearPlanillaEDComponent,
         CrearPlanillaEDItemsComponent,
         CrearPlanillaEDItemsDetalleComponent,
+        sharedMenuComunesComponent,
 
 
 

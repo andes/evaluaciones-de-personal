@@ -49,4 +49,12 @@ export class ListarItemsComponent implements OnInit {
     editarItems(items: Items) {
         this.router.navigate(['editar-items', items._id]);
     }
+
+    onPlanillaEDClick(): void {
+        // Lógica para manejar el click en "Planilla Evaluación"
+    }
+
+    onVolverClick(): void {
+        // Lógica para manejar el click en "Volver"
+    }
 }

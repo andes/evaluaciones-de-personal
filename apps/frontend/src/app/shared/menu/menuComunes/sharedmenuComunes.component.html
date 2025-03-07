@@ -1,0 +1,29 @@
+<div class="contenedor-general">
+    <div class="row">
+        <!-- Columna del Menú a la izquierda -->
+        <div class="col-lg-3 col-md-4 col-12 contenedor-menu">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Título del menú -->
+                    <div class="titulo-container">
+                        <plex-title [titulo]="tituloMenu"></plex-title>
+                    </div>
+                    <!-- Contenedor del menú -->
+                    <div class="contenedor-cuadro">
+                        <button plexButton class="btn btn-light border rounded" (click)="accionPlanillaEDClick()">
+                            <span class="material-icons">list_alt</span> Planilla Evaluación Desempeño. Items
+                        </button>
+                        <button plexButton class="btn btn-light border rounded" (click)="accionPlanillaEDClick()">
+                            <span class="material-icons">list_alt</span> Planilla Evaluacion Desempeño. Items
+                        </button>
+                        <button plexButton class="btn btn-light border rounded" (click)="accionVolverClick()">
+                            <span class="material-icons">arrow_back</span> Volver
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Espacio para proyectar contenido adicional -->
+        <ng-content></ng-content>
+    </div>
+</div>
