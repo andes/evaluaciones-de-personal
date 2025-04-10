@@ -17,105 +17,125 @@ import { CrearPlanillaEDComponent } from './PlanillaED/crear-PlanillaED/crear-Pl
 import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.';
 import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component';
 
+import { LoginComponent } from './users/login/login.component';
+import { RegisterComponent } from './users/register/register.component';
+
+import { AuthGuard } from './auth.guard';
 
 const appRoutes: Routes = [
 
-    {
-        path: 'menuparametros',
-        component: MenuComunesComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
+        {
+                path: 'menuparametros',
+                component: MenuComunesComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
 
-    {
-        path: 'menuPlanillaED',
-        component: MenuPlanillaEDComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
+        {
+                path: 'menuPlanillaED',
+                component: MenuPlanillaEDComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
 
-    {
-        path: 'home',
-        component: AppHomeComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
+        {
+                path: 'home',
+                component: AppHomeComponent,
+                canActivate: [],
+                pathMatch: 'full'
+        },
 
-    {
-        path: 'menucomunes',
-        component: MenuComunesComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
-
-
-    {
-        path: 'ListarCategoriasComponent',
-        component: ListarCategoriaComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
-    {
-        path: 'CrearCategoriasComponetpath',
-        component: CrearCategoriasComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
-    {
-        path: 'editar-categoria/:id',
-        component: EditCategoriasComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
-
-    {
-        path: 'ListarItems',
-        component: ListarItemsComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
-    {
-        path: 'CrearItemsComponetpath',
-        component: CrearItemsComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
-
-    {
-        path: 'editar-items/:id',
-        component: EditItemsComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
-
-    {
-        path: 'listar-planillaEDRouter',
-        component: ListarPlanillaEDComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
-
-    {
-        path: 'crear-planillaEDRouter',
-        component: CrearPlanillaEDComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
-
-    {
-        path: 'crear-planillaEDItems',
-        component: CrearPlanillaEDItemsComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
+        {
+                path: 'menucomunes',
+                component: MenuComunesComponent,
+                canActivate: [],
+                pathMatch: 'full'
+        },
 
 
-    {
-        path: 'crear-planilla-ed-items-detalle/:id',
-        component: CrearPlanillaEDItemsDetalleComponent,
-        canActivate: [],
-        pathMatch: 'full'
-    },
+        {
+                path: 'ListarCategoriasComponent',
+                component: ListarCategoriaComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+        {
+                path: 'CrearCategoriasComponetpath',
+                component: CrearCategoriasComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+        {
+                path: 'editar-categoria/:id',
+                component: EditCategoriasComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'ListarItems',
+                component: ListarItemsComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+        {
+                path: 'CrearItemsComponetpath',
+                component: CrearItemsComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'editar-items/:id',
+                component: EditItemsComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'listar-planillaEDRouter',
+                component: ListarPlanillaEDComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'crear-planillaEDRouter',
+                component: CrearPlanillaEDComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'crear-planillaEDItems',
+                component: CrearPlanillaEDItemsComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+
+        {
+                path: 'crear-planilla-ed-items-detalle/:id',
+                component: CrearPlanillaEDItemsDetalleComponent,
+
+                canActivate: [AuthGuard],
+
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'login',
+                component: LoginComponent
+        },
+        {
+                path: 'register',
+                component: RegisterComponent
+        },
+        {
+                path: '',
+                redirectTo: '/login',
+                pathMatch: 'full'
+        }
 
 ];
 

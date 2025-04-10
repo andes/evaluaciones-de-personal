@@ -1,6 +1,8 @@
 import { Request } from '@andes/api-tool';
 import { MongoQuery, ResourceBase, ResourceNotFound } from '@andes/core';
-import { User } from './user.schema';
+import { IUser } from './user.interface'; // 
+import { User } from './user.schema'; // 
+
 import { authenticate } from '../application';
 import * as mongoose from 'mongoose';
 

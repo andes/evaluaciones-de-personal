@@ -1,138 +1,144 @@
-import { application } from '../application';
-import { UsersCtr } from '../users/user.controller';
-import { Request } from '@andes/api-tool';
-import { sendUserEmail } from '../services/mail/mail';
-import { sendAdminEmail } from '../services/mail/mail';
-import { Types } from 'mongoose';
-import { environment } from '../../environments/environment';
+import * as express from 'express';
+import { Request, Response } from 'express';
 
-export const AuthRouter = application.router();
+import { User } from '../users/user.schema'; // Asegúrate de que la ruta del modelo sea correcta
+//import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 
-AuthRouter.get('/auth/prueba', async (req: Request, res, next) => {
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const router = express.Router();
+
+router.post('/login', async (req: Request, res: Response) => {
+    const { dni, password } = req.body;
+
+    console.log('🔔 Se recibió una solicitud de login');
+    console.log('📩 Datos recibidos en el body:', req.body);
+
     try {
-        return res.send('Primer llamado a la api');
-    } catch (err) {
-        return next(403);
-    }
-});
+        // Buscar usuario por dni
+        const user = await User.findOne({ dni });
+        console.log('🔍 Resultado de búsqueda de usuario:', user);
 
-AuthRouter.post('/auth/login', async (req: Request, res, next) => {
-    try {
-        const email = req.body.email;
-        const password = req.body.password;
-        const users = await UsersCtr.search({ email: email, active: true }, {}, req);
-        if (users.length > 0) {
-            const user = users[0];
-            const match = await user.comparePassword(password);
-            if (match) {
-                const session = new Types.ObjectId();
-                const newToken = await application.sign({
-                    session_id: session.toHexString(),
-                    user_id: user._id.toHexString()
-                });
-                return res.json({ token: newToken });
-            }
+        if (!user) {
+            return res.status(401).json({ message: 'Usuario no encontrado' });
         }
-        return next(403);
-    } catch (err) {
-        return next(403);
-    }
-});
 
-AuthRouter.post('/auth/create', async (req: Request, res, next) => {
-    //   try {
+        // Comparar contraseña ingresada
+        const isMatch = await user.comparePassword(password);
+        console.log('🔐 ¿Contraseña coincide?:', isMatch);
 
-    //       const createdUser = await UsersCtr.create(req.body, req);
-    //       const data = {
-    //           user: createdUser,
-    //           url: `${environment.app_host}/auth/activacion-cuenta/${createdUser.validationToken}`,
-    //           subject: 'Activación de cuenta'
-    //        }
-
-    //       await sendUserEmail(data, 'account-activation');
-
-    //       return res.json({ status: 'ok' });
-    //   } catch (err) {
-    //       return next(403);
-    //   }
-
-});
-
-//AuthRouter.post('/auth/regenerate/:email', async (req: Request, res, next) => {
-//      try {
-//    const email = req.params.email;
-//    const updatedUser = await UsersCtr.setNewToken(email, req);
-
-//    const data = {
-//        user: updatedUser,
-//        url: `${environment.app_host}/auth/regenerate-password/${updatedUser.validationToken}`,
-//        subject: 'Regenerar contraseña'
-//    }
-
-//    await sendUserEmail(data, 'password-reset');
-
-//    return res.json({ status: 'ok' });
-//} catch (err) {
-//   return next(403);
-//}
-//});
-
-AuthRouter.post('/auth/suggestions', application.authenticate(), async (req: Request, res, next) => {
-    try {
-        await sendAdminEmail(req.body);
-        return res.json({ status: 'ok' });
-    } catch (err) {
-        return next(403);
-    }
-});
-
-//AuthRouter.post('/auth/validate/:token', async (req: Request, res, next) => {
-//    try {
-//        const token = req.params.token;
-//        await UsersCtr.validateUser(token, req);
-//        return res.json({ status: 'ok' });
-//    } catch (err) {
-//        return next(403);
-//    }
-//});
-
-AuthRouter.post('/auth/resetPassword', async (req: Request, res, next) => {
-    try {
-        const { password, validationToken } = req.body;
-        const users = await UsersCtr.search({ validationToken: validationToken, active: true }, {}, req);
-        if (users.length > 0) {
-            await UsersCtr.update(users[0].id, { password, validationToken: null }, req);
-            return res.json({ status: 'ok' });
-        } else {
-            return res.json({ status: 404 });
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Contraseña incorrecta' });
         }
-    } catch (err) {
-        return next(403);
+
+        // Crear payload con los datos requeridos
+        const payload = {
+            id: user._id,
+            dni: user.dni,
+            legajo: user.legajo,
+            nombre: user.nombre,
+            rol: user.rol,
+            idefector: user.idefector,
+            idservicio: user.idservicio
+        };
+
+        console.log('📦 Payload del token:', payload);
+
+        // Generar token JWT
+        const token = jwt.sign(payload, process.env.JWT_SECRET as string, { expiresIn: '1h' });
+
+        console.log('✅ Token generado:', token);
+
+        // Retornar token al cliente
+        res.json({ token });
+    } catch (error) {
+        console.error('❌ Error en la ruta /login:', error);
+        res.status(500).json({ message: 'Error en el servidor', error: error.message });
     }
 });
 
-AuthRouter.post('/auth/updatePassword', application.authenticate(), async (req: Request, res, next) => {
+
+router.post('/register', async (req: Request, res: Response) => {
+    const { dni, password, legajo, nombre, rol, idefector, idservicio } = req.body;
+
+    console.log('🟡 Datos recibidos:', req.body); // 👉 Log del request
+
     try {
-        const { password, user_id } = req.body;
-        const user = await UsersCtr.findById(user_id, {});
-        if (user) {
-            await UsersCtr.update(user.id, { password }, req);
-            return res.json({ status: 'ok' });
-        } else {
-            return res.json({ status: 404 });
+        // Verificar si el usuario ya existe
+        const existingUser = await User.findOne({ dni });
+        console.log('🔍 Usuario existente:', existingUser); // 👉 Ver si ya existe
+
+        if (existingUser) {
+            return res.status(400).json({ message: 'El usuario ya existe' });
         }
-    } catch (err) {
-        return next(403);
+
+        // Crear un nuevo usuario
+        const newUser = new User({
+            dni,
+            password,
+            legajo,
+            nombre,
+            rol,
+            idefector,
+            idservicio
+        });
+
+        console.log('📦 Nuevo usuario a guardar:', newUser); // 👉 Antes de guardar
+
+        await newUser.save(); // Guardar en la base de datos
+
+        console.log('✅ Usuario guardado correctamente');
+
+        res.status(201).json({ message: 'Usuario creado correctamente', user: newUser });
+    } catch (error) {
+        console.error('❌ Error al registrar usuario:', error); // 👉 Este muestra el error real
+        res.status(500).json({ message: 'Error en el servidor', error: error.message });
     }
 });
 
-AuthRouter.get('/auth/session', application.authenticate(), async (req, res, next) => {
+router.get('/users', async (req: Request, res: Response) => {
     try {
-        const user_id = req.user.user_id;
-        const user = await UsersCtr.findById(user_id, { fields: 'nombre apellido telefono email documento permisos active' });
+        const users = await User.find({}, '-password'); // Excluir la contraseña
+        res.json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
+
+router.get('/users/:id', async (req: Request, res: Response) => {
+    try {
+        const user = await User.findById(req.params.id, '-password'); // Excluir la contraseña
+        if (!user) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
         res.json(user);
-
-    } catch (err) {
-        return next(403);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error en el servidor' });
     }
 });
+
+router.delete('/users/:id', async (req: Request, res: Response) => {
+    try {
+        const userId = req.params.id;
+
+        // Buscar y eliminar el usuario por su ID
+        const deletedUser = await User.findByIdAndDelete(userId);
+
+        if (!deletedUser) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        res.json({ message: 'Usuario eliminado correctamente', user: deletedUser });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
+
+
+export default router;

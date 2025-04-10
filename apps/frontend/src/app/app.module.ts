@@ -29,6 +29,9 @@ import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItem
 import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component';
 // plantilla
 import { sharedMenuComunesComponent } from './shared/menu/menuComunes/sharedmenuComunes.component';
+import { LoginComponent } from './users/login/login.component'
+import { RegisterComponent } from './users/register/register.component';
+
 
 
 @NgModule({
@@ -48,6 +51,8 @@ import { sharedMenuComunesComponent } from './shared/menu/menuComunes/sharedmenu
         CrearPlanillaEDItemsComponent,
         CrearPlanillaEDItemsDetalleComponent,
         sharedMenuComunesComponent,
+        LoginComponent,
+        RegisterComponent
 
 
 
@@ -63,7 +68,5 @@ import { sharedMenuComunesComponent } from './shared/menu/menuComunes/sharedmenu
     ],
     providers: [Plex, Server, CategoryService],
     bootstrap: [AppComponent]
-
-
 })
 export class AppModule { }

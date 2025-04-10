@@ -1,8 +1,13 @@
-<plex-app>
-    <div navIcon class="navbar-brand hover" tabindex="-1">
-        <div class="logo-nav">
-            <plex-icon size="36" name="arrow-left-thick"></plex-icon>
-        </div>
-    </div>
+<!-- Si no está autenticado, muestra el componente de login -->
+<div *ngIf="!isLoggedIn">
+    <app-login></app-login>
+</div>
 
-</plex-app>
+<!-- Si está autenticado, muestra el resto de la aplicación -->
+<div *ngIf="isLoggedIn">
+    <!-- Aquí va tu menú y demás contenido -->
+    <div class="menu">
+        <!-- Puedes incluir aquí tu menú -->
+    </div>
+    <router-outlet></router-outlet>
+</div>
