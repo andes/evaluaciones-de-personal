@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="header-container mb-3">
+                        <span class="titulo">LISTADO DE Categorias</span>
+                        <button class="btn btn-success" (click)="crearNuevaCategoriaM()">NUEVO</button>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Descripcion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let categoria of listCatgoria">
+                                <td class="text-left" *ngIf="false">{{categoria._id}}</td>
+
+                                <td class="text-left">{{categoria.descripcion}}</td>
+                                <td>
+                                    <!-- Botón Modificar más pequeño con un ícono -->
+                                    <button class="btn btn-primary btn-sm" (click)="editarCategoria(categoria)">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5 style="text-align: start; margin-top: 10px;" *ngIf="listCatgoria.length == 0">
+                        No hay Categoria para mostrar
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

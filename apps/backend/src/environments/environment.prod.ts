@@ -20,7 +20,6 @@ export const environment = {
     host: 'smtp.gmail.com',
     port: 587,
     secure: false,
-
     auth: {
       user: process.env.MAIL_USER || 'mail@mail.gob.ar',
       pass: process.env.MAIL_PASSWORD || 'somePass'

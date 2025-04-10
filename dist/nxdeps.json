@@ -40,52 +40,47 @@
             {
               "file": "apps/frontend-e2e/cypress.json",
               "ext": ".json",
-              "mtime": 1585050184428.6357
+              "mtime": 1744308480549.2454
             },
             {
               "file": "apps/frontend-e2e/src/fixtures/example.json",
               "ext": ".json",
-              "mtime": 1585050184429.488
+              "mtime": 1744308480659.5977
             },
             {
               "file": "apps/frontend-e2e/src/integration/app.spec.ts",
               "ext": ".ts",
-              "mtime": 1585050184429.7966
-            },
-            {
-              "file": "apps/frontend-e2e/src/plugins/index.js",
-              "ext": ".js",
-              "mtime": 1585050184430.098
+              "mtime": 1744308480690.6997
             },
             {
               "file": "apps/frontend-e2e/src/support/app.po.ts",
               "ext": ".ts",
-              "mtime": 1585050184430.842
+              "mtime": 1744308480731.4412
             },
             {
               "file": "apps/frontend-e2e/src/support/commands.ts",
               "ext": ".ts",
-              "mtime": 1586030361938.9785
+              "mtime": 1744308480766.239
             },
             {
               "file": "apps/frontend-e2e/src/support/index.ts",
               "ext": ".ts",
-              "mtime": 1585050184432.4226
+              "mtime": 1744308480799.8137
             },
             {
               "file": "apps/frontend-e2e/tsconfig.e2e.json",
               "ext": ".json",
-              "mtime": 1585050184432.8948
+              "mtime": 1744308480576.6958
             },
             {
               "file": "apps/frontend-e2e/tsconfig.json",
               "ext": ".json",
-              "mtime": 1585050184433.716
+              "mtime": 1744308480603.4624
             },
             {
               "file": "apps/frontend-e2e/tslint.json",
               "ext": ".json",
-              "mtime": 1585050184434.357
+              "mtime": 1744308480631.9788
             }
           ]
         }
@@ -201,162 +196,557 @@
             {
               "file": "apps/frontend/.DS_Store",
               "ext": "",
-              "mtime": 1715002567809.9
+              "mtime": 1744308480823.149
             },
             {
               "file": "apps/frontend/browserslist",
               "ext": "",
-              "mtime": 1585050184435.5122
-            },
-            {
-              "file": "apps/frontend/jest.config.js",
-              "ext": ".js",
-              "mtime": 1585050184436.3516
+              "mtime": 1744308480841.9612
             },
             {
               "file": "apps/frontend/src/.DS_Store",
               "ext": "",
-              "mtime": 1715006937491.6199
+              "mtime": 1744308480983.9197
             },
             {
               "file": "apps/frontend/src/app/.DS_Store",
               "ext": "",
-              "mtime": 1715006942556.8984
+              "mtime": 1744308481184.6968
             },
             {
               "file": "apps/frontend/src/app/app-routing.module.ts",
               "ext": ".ts",
-              "mtime": 1715709737364.9568
+              "mtime": 1744308481216.734
             },
             {
               "file": "apps/frontend/src/app/app.component.html",
               "ext": ".html",
-              "mtime": 1715709966049.7913
+              "mtime": 1744308481245.7505
             },
             {
               "file": "apps/frontend/src/app/app.component.scss",
               "ext": ".scss",
-              "mtime": 1587227941568.352
+              "mtime": 1744308481266.3054
             },
             {
               "file": "apps/frontend/src/app/app.component.spec.ts",
               "ext": ".ts",
-              "mtime": 1585050184437.3088
+              "mtime": 1744308481290.212
             },
             {
               "file": "apps/frontend/src/app/app.component.ts",
               "ext": ".ts",
-              "mtime": 1715709879991.0369
+              "mtime": 1744308481321.3442
             },
             {
               "file": "apps/frontend/src/app/app.module.ts",
               "ext": ".ts",
-              "mtime": 1715709340853.1426
+              "mtime": 1744308481347.1238
+            },
+            {
+              "file": "apps/frontend/src/app/auth.guard.ts",
+              "ext": ".ts",
+              "mtime": 1744308469393.2903
+            },
+            {
+              "file": "apps/frontend/src/app/auth.service.ts",
+              "ext": ".ts",
+              "mtime": 1744308469413.1606
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.css",
+              "ext": ".css",
+              "mtime": 1744308470158.4358
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.html",
+              "ext": ".html",
+              "mtime": 1744308470185.2463
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.spec.ts",
+              "ext": ".ts",
+              "mtime": 1744308470209.2466
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308470232.52
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.css",
+              "ext": ".css",
+              "mtime": 1744308470271.3538
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.html",
+              "ext": ".html",
+              "mtime": 1744308470298.0596
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308470324.5244
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.css",
+              "ext": ".css",
+              "mtime": 1744308470378.9258
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.html",
+              "ext": ".html",
+              "mtime": 1744308470405.3113
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.spec.ts",
+              "ext": ".ts",
+              "mtime": 1744308470431.2644
+            },
+            {
+              "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308470456.0088
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.css",
+              "ext": ".css",
+              "mtime": 1744308470519.0198
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.html",
+              "ext": ".html",
+              "mtime": 1744308470546.6455
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.spec.ts",
+              "ext": ".ts",
+              "mtime": 1744308470568.4573
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308470590.7063
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.css",
+              "ext": ".css",
+              "mtime": 1744308470632.977
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.html",
+              "ext": ".html",
+              "mtime": 1744308470655.5037
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308470674.6958
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.css",
+              "ext": ".css",
+              "mtime": 1744308470714.8567
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.html",
+              "ext": ".html",
+              "mtime": 1744308470735.258
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.spec.ts",
+              "ext": ".ts",
+              "mtime": 1744308470755.1113
+            },
+            {
+              "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308470772.7925
+            },
+            {
+              "file": "apps/frontend/src/app/editems/edcategoria.component.html",
+              "ext": ".html",
+              "mtime": 1744308470865.3286
+            },
+            {
+              "file": "apps/frontend/src/app/editems/edItems.component.css",
+              "ext": ".css",
+              "mtime": 1744308470807.316
+            },
+            {
+              "file": "apps/frontend/src/app/editems/edItems.component.html",
+              "ext": ".html",
+              "mtime": 1744308470826.4248
+            },
+            {
+              "file": "apps/frontend/src/app/editems/edItems.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308470843.6816
             },
             {
               "file": "apps/frontend/src/app/home/ayuda.component.ts",
               "ext": ".ts",
-              "mtime": 1587746958513.057
+              "mtime": 1744308481371.8704
             },
             {
               "file": "apps/frontend/src/app/home/ayuda.html",
               "ext": ".html",
-              "mtime": 1715709029614.5437
+              "mtime": 1744308481404.7034
+            },
+            {
+              "file": "apps/frontend/src/app/home/eDesmp.component.html",
+              "ext": ".html",
+              "mtime": 1744308471199.4683
+            },
+            {
+              "file": "apps/frontend/src/app/home/eDesmp.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308471215.3186
             },
             {
               "file": "apps/frontend/src/app/home/home.component.html",
               "ext": ".html",
-              "mtime": 1715709444768.7507
+              "mtime": 1744308481438.3083
             },
             {
               "file": "apps/frontend/src/app/home/home.component.ts",
               "ext": ".ts",
-              "mtime": 1592320451311.055
+              "mtime": 1744308481470.402
+            },
+            {
+              "file": "apps/frontend/src/app/home/menucomunes.component.css",
+              "ext": ".css",
+              "mtime": 1744308471260.818
+            },
+            {
+              "file": "apps/frontend/src/app/home/menucomunes.component.html",
+              "ext": ".html",
+              "mtime": 1744308471285.0818
+            },
+            {
+              "file": "apps/frontend/src/app/home/menucomunes.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308471303.2915
+            },
+            {
+              "file": "apps/frontend/src/app/home/MenuPlanillaED.component.css",
+              "ext": ".css",
+              "mtime": 1744308471098.446
+            },
+            {
+              "file": "apps/frontend/src/app/home/MenuPlanillaED.component.html",
+              "ext": ".html",
+              "mtime": 1744308471126.754
+            },
+            {
+              "file": "apps/frontend/src/app/home/MenuPlanillaED.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308471147.7854
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.html",
+              "ext": ".html",
+              "mtime": 1744308481601.7742
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308481633.4778
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/institution.module.ts",
+              "ext": ".ts",
+              "mtime": 1744308481500.852
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/institution.provider.ts",
+              "ext": ".ts",
+              "mtime": 1744308481535.7358
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/institution.routing.ts",
+              "ext": ".ts",
+              "mtime": 1744308481573.5027
+            },
+            {
+              "file": "apps/frontend/src/app/institutions/service/institution.service.ts",
+              "ext": ".ts",
+              "mtime": 1744308481656.3518
+            },
+            {
+              "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.css",
+              "ext": ".css",
+              "mtime": 1744308469469.172
+            },
+            {
+              "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.html",
+              "ext": ".html",
+              "mtime": 1744308469499.528
+            },
+            {
+              "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.spec.ts",
+              "ext": ".ts",
+              "mtime": 1744308469518.8794
+            },
+            {
+              "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308469539.349
+            },
+            {
+              "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.css",
+              "ext": ".css",
+              "mtime": 1744308469577.653
+            },
+            {
+              "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.html",
+              "ext": ".html",
+              "mtime": 1744308469601.5825
+            },
+            {
+              "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308469620.545
+            },
+            {
+              "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.css",
+              "ext": ".css",
+              "mtime": 1744308469654.0693
+            },
+            {
+              "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.html",
+              "ext": ".html",
+              "mtime": 1744308469678.5476
+            },
+            {
+              "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308469699.8706
+            },
+            {
+              "file": "apps/frontend/src/app/modelos/categoria.model.ts",
+              "ext": ".ts",
+              "mtime": 1744308471959.4995
+            },
+            {
+              "file": "apps/frontend/src/app/modelos/items.model.ts",
+              "ext": ".ts",
+              "mtime": 1744308471978.3086
+            },
+            {
+              "file": "apps/frontend/src/app/modelos/PlanillaED.Model.ts",
+              "ext": ".ts",
+              "mtime": 1744308471942.739
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.css",
+              "ext": ".css",
+              "mtime": 1744308469755.5925
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.html",
+              "ext": ".html",
+              "mtime": 1744308469782.906
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308469806.4558
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component..ts",
+              "ext": ".ts",
+              "mtime": 1744308469844.1123
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.css",
+              "ext": ".css",
+              "mtime": 1744308469874.4014
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.html",
+              "ext": ".html",
+              "mtime": 1744308469902.5151
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.css",
+              "ext": ".css",
+              "mtime": 1744308469950.345
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.html",
+              "ext": ".html",
+              "mtime": 1744308469978.406
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308470001.2402
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.css",
+              "ext": ".css",
+              "mtime": 1744308470047.3113
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.html",
+              "ext": ".html",
+              "mtime": 1744308470074.6184
+            },
+            {
+              "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308470098.235
+            },
+            {
+              "file": "apps/frontend/src/app/services/categoria.service.ts",
+              "ext": ".ts",
+              "mtime": 1744308472028.7263
+            },
+            {
+              "file": "apps/frontend/src/app/services/items.service.ts",
+              "ext": ".ts",
+              "mtime": 1744308472047.2898
+            },
+            {
+              "file": "apps/frontend/src/app/services/PlanillaED.Service.ts",
+              "ext": ".ts",
+              "mtime": 1744308472009.6348
+            },
+            {
+              "file": "apps/frontend/src/app/services/users.service.ts",
+              "ext": ".ts",
+              "mtime": 1744308472067.917
             },
             {
               "file": "apps/frontend/src/app/shared/directives/select-search.directive.ts",
               "ext": ".ts",
-              "mtime": 1641239343930.4302
+              "mtime": 1744308481750.8547
             },
             {
               "file": "apps/frontend/src/app/shared/location.services.ts",
               "ext": ".ts",
-              "mtime": 1592326570388.9548
+              "mtime": 1744308481677.6216
+            },
+            {
+              "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.css",
+              "ext": ".css",
+              "mtime": 1744308472585.6855
+            },
+            {
+              "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.html",
+              "ext": ".html",
+              "mtime": 1744308472614.1643
+            },
+            {
+              "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308472636.6133
             },
             {
               "file": "apps/frontend/src/app/shared/select-search.service.ts",
               "ext": ".ts",
-              "mtime": 1641239343930.7356
+              "mtime": 1744308481700.455
             },
             {
               "file": "apps/frontend/src/app/shared/utils.ts",
               "ext": ".ts",
-              "mtime": 1587247252545.8945
+              "mtime": 1744308481725.9705
+            },
+            {
+              "file": "apps/frontend/src/app/users/login/login.component.css",
+              "ext": ".css",
+              "mtime": 1744308472697.4219
+            },
+            {
+              "file": "apps/frontend/src/app/users/login/login.component.html",
+              "ext": ".html",
+              "mtime": 1744308472724.7332
+            },
+            {
+              "file": "apps/frontend/src/app/users/login/login.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308472747.9312
+            },
+            {
+              "file": "apps/frontend/src/app/users/register/register.component.css",
+              "ext": ".css",
+              "mtime": 1744308472794.1877
+            },
+            {
+              "file": "apps/frontend/src/app/users/register/register.component.html",
+              "ext": ".html",
+              "mtime": 1744308472822.3413
+            },
+            {
+              "file": "apps/frontend/src/app/users/register/register.component.ts",
+              "ext": ".ts",
+              "mtime": 1744308472846.5278
             },
             {
               "file": "apps/frontend/src/assets/.gitkeep",
               "ext": "",
-              "mtime": 1585050184439.183
+              "mtime": 1744308481776.2705
             },
             {
               "file": "apps/frontend/src/environments/environment.prod.ts",
               "ext": ".ts",
-              "mtime": 1587227941586.6663
+              "mtime": 1744308481804.6292
             },
             {
               "file": "apps/frontend/src/environments/environment.ts",
               "ext": ".ts",
-              "mtime": 1641239343931.7327
+              "mtime": 1744308481830.0862
             },
             {
               "file": "apps/frontend/src/favicon.ico",
               "ext": ".ico",
-              "mtime": 1585050184441.64
+              "mtime": 1744308481010.0007
             },
             {
               "file": "apps/frontend/src/index.html",
               "ext": ".html",
-              "mtime": 1715709666635.0652
+              "mtime": 1744308481042.3848
             },
             {
               "file": "apps/frontend/src/main.ts",
               "ext": ".ts",
-              "mtime": 1585050184442.5374
+              "mtime": 1744308481070.0742
             },
             {
               "file": "apps/frontend/src/polyfills.ts",
               "ext": ".ts",
-              "mtime": 1585050184443.0254
+              "mtime": 1744308481099.9158
             },
             {
               "file": "apps/frontend/src/styles.scss",
               "ext": ".scss",
-              "mtime": 1587746958673.3289
+              "mtime": 1744308481127.0027
             },
             {
               "file": "apps/frontend/src/test-setup.ts",
               "ext": ".ts",
-              "mtime": 1585050184443.535
+              "mtime": 1744308481157.7036
             },
             {
               "file": "apps/frontend/tsconfig.app.json",
               "ext": ".json",
-              "mtime": 1587401548655.741
+              "mtime": 1744308480871.148
             },
             {
               "file": "apps/frontend/tsconfig.json",
               "ext": ".json",
-              "mtime": 1585050184443.8281
+              "mtime": 1744308480901.5747
             },
             {
               "file": "apps/frontend/tsconfig.spec.json",
               "ext": ".json",
-              "mtime": 1585050184443.9722
+              "mtime": 1744308480928.072
             },
             {
               "file": "apps/frontend/tslint.json",
               "ext": ".json",
-              "mtime": 1585050184444.631
+              "mtime": 1744308480955.181
             }
           ]
         }
@@ -430,112 +820,202 @@
             {
               "file": "apps/backend/.eslintrc",
               "ext": "",
-              "mtime": 1585050184419.456
+              "mtime": 1744308479898.3872
             },
             {
               "file": "apps/backend/src/app/.gitkeep",
               "ext": "",
-              "mtime": 1585050184420.0083
+              "mtime": 1744308480029.9866
             },
             {
               "file": "apps/backend/src/app/application.ts",
               "ext": ".ts",
-              "mtime": 1715710073583.5544
+              "mtime": 1744308480059.1328
             },
             {
               "file": "apps/backend/src/app/auth/auth.routes.spec.ts",
               "ext": ".ts",
-              "mtime": 1586030361924.5732
+              "mtime": 1744308480112.158
             },
             {
               "file": "apps/backend/src/app/auth/auth.routes.ts",
               "ext": ".ts",
-              "mtime": 1715710986297.1155
+              "mtime": 1744308480138.764
+            },
+            {
+              "file": "apps/backend/src/app/categoriaitems/routes/categoriaItems.ts",
+              "ext": ".ts",
+              "mtime": 1744308466331.5178
+            },
+            {
+              "file": "apps/backend/src/app/categoriaitems/schemas/categoria.schema.ts",
+              "ext": ".ts",
+              "mtime": 1744308466377.559
+            },
+            {
+              "file": "apps/backend/src/app/categoriaitems/schemas/categoriaItems.ts",
+              "ext": ".ts",
+              "mtime": 1744308466402.4194
             },
             {
               "file": "apps/backend/src/app/connection.ts",
               "ext": ".ts",
-              "mtime": 1595461113831.218
+              "mtime": 1744308480084.0862
+            },
+            {
+              "file": "apps/backend/src/app/eDesempeno/routes/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1744308466459.6357
+            },
+            {
+              "file": "apps/backend/src/app/eDesempeno/schemas/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1744308466502.251
+            },
+            {
+              "file": "apps/backend/src/app/EDItems/routes/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1744308465586.704
+            },
+            {
+              "file": "apps/backend/src/app/EDItems/schemas/configEvaDesemp.ts",
+              "ext": ".ts",
+              "mtime": 1744308465627.0193
+            },
+            {
+              "file": "apps/backend/src/app/Efectores/Routes/efectores.ts",
+              "ext": ".ts",
+              "mtime": 1744308465680.7659
+            },
+            {
+              "file": "apps/backend/src/app/Efectores/schemas/efectores.ts",
+              "ext": ".ts",
+              "mtime": 1744308465722.0068
+            },
+            {
+              "file": "apps/backend/src/app/Items/routes/items.ts",
+              "ext": ".ts",
+              "mtime": 1744308465781.4932
+            },
+            {
+              "file": "apps/backend/src/app/Items/schemas/items.ts",
+              "ext": ".ts",
+              "mtime": 1744308465827.635
+            },
+            {
+              "file": "apps/backend/src/app/PlanillaED/Router/PlanillaED.ts",
+              "ext": ".ts",
+              "mtime": 1744308465893.252
+            },
+            {
+              "file": "apps/backend/src/app/PlanillaED/Schemas/PlanillaED.ts",
+              "ext": ".ts",
+              "mtime": 1744308465938.4453
             },
             {
               "file": "apps/backend/src/app/services/mail/mail.shema.ts",
               "ext": ".ts",
-              "mtime": 1586030361930.9346
+              "mtime": 1744308480166.4648
             },
             {
               "file": "apps/backend/src/app/services/mail/mail.ts",
               "ext": ".ts",
-              "mtime": 1715710326548.28
+              "mtime": 1744308480194.1172
+            },
+            {
+              "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",
+              "ext": ".ts",
+              "mtime": 1744308465994.9673
+            },
+            {
+              "file": "apps/backend/src/app/Servicios/Schemas/servicios.ts",
+              "ext": ".ts",
+              "mtime": 1744308466040.8384
             },
             {
               "file": "apps/backend/src/app/templates/email/account-activation.html",
               "ext": ".html",
-              "mtime": 1592320451279.499
+              "mtime": 1744308480225.5618
             },
             {
               "file": "apps/backend/src/app/templates/email/layout.html",
               "ext": ".html",
-              "mtime": 1592320451279.8457
+              "mtime": 1744308480259.0544
             },
             {
               "file": "apps/backend/src/app/templates/email/password-reset.html",
               "ext": ".html",
-              "mtime": 1592320451280.0703
+              "mtime": 1744308480292.004
             },
             {
               "file": "apps/backend/src/app/templates/email/user-suggestions.html",
               "ext": ".html",
-              "mtime": 1592320451280.6277
+              "mtime": 1744308480328.951
+            },
+            {
+              "file": "apps/backend/src/app/users/router/usuarios.router.ts",
+              "ext": ".ts",
+              "mtime": 1744308467486.6282
+            },
+            {
+              "file": "apps/backend/src/app/users/schema/usuarios.schema.ts",
+              "ext": ".ts",
+              "mtime": 1744308467521.6309
             },
             {
               "file": "apps/backend/src/app/users/user.controller.ts",
               "ext": ".ts",
-              "mtime": 1715710814176.603
+              "mtime": 1744308480362.1387
             },
             {
               "file": "apps/backend/src/app/users/user.interface.ts",
               "ext": ".ts",
-              "mtime": 1587227941565.3052
+              "mtime": 1744308480391.4639
+            },
+            {
+              "file": "apps/backend/src/app/users/user.models.ts",
+              "ext": ".ts",
+              "mtime": 1744308467436.907
             },
             {
               "file": "apps/backend/src/app/users/user.schema.ts",
               "ext": ".ts",
-              "mtime": 1592320451292.2117
+              "mtime": 1744308480424.8926
             },
             {
               "file": "apps/backend/src/assets/.gitkeep",
               "ext": "",
-              "mtime": 1585050184421.8748
+              "mtime": 1744308480453.1453
             },
             {
               "file": "apps/backend/src/environments/environment.prod.ts",
               "ext": ".ts",
-              "mtime": 1715708518447.4143
+              "mtime": 1744308480482.9233
             },
             {
               "file": "apps/backend/src/environments/environment.ts",
               "ext": ".ts",
-              "mtime": 1715708559754.1519
+              "mtime": 1744308480518.5125
             },
             {
               "file": "apps/backend/src/main.ts",
               "ext": ".ts",
-              "mtime": 1715710221965.6392
+              "mtime": 1744308480001.3481
             },
             {
               "file": "apps/backend/tsconfig.app.json",
               "ext": ".json",
-              "mtime": 1585050184426.6992
+              "mtime": 1744308479919.5615
             },
             {
               "file": "apps/backend/tsconfig.json",
               "ext": ".json",
-              "mtime": 1585050184427.384
+              "mtime": 1744308479954.1643
             },
             {
               "file": "apps/backend/tsconfig.spec.json",
               "ext": ".json",
-              "mtime": 1585050184427.843
+              "mtime": 1744308479975.92
             }
           ]
         }
@@ -692,6 +1172,14 @@
           "files": []
         }
       },
+      "bcryptjs": {
+        "type": "npm",
+        "name": "bcryptjs",
+        "data": {
+          "version": "^3.0.2",
+          "files": []
+        }
+      },
       "concurrently": {
         "type": "npm",
         "name": "concurrently",
@@ -740,11 +1228,27 @@
           "files": []
         }
       },
+      "jsonwebtoken": {
+        "type": "npm",
+        "name": "jsonwebtoken",
+        "data": {
+          "version": "^9.0.2",
+          "files": []
+        }
+      },
+      "jspdf": {
+        "type": "npm",
+        "name": "jspdf",
+        "data": {
+          "version": "^3.0.0",
+          "files": []
+        }
+      },
       "mongoose": {
         "type": "npm",
         "name": "mongoose",
         "data": {
-          "version": "^5.9.5",
+          "version": "^5.13.23",
           "files": []
         }
       },
@@ -801,6 +1305,22 @@
         "name": "ol",
         "data": {
           "version": "^5.3.3",
+          "files": []
+        }
+      },
+      "passport": {
+        "type": "npm",
+        "name": "passport",
+        "data": {
+          "version": "^0.7.0",
+          "files": []
+        }
+      },
+      "passport-local": {
+        "type": "npm",
+        "name": "passport-local",
+        "data": {
+          "version": "^1.0.0",
           "files": []
         }
       },
@@ -916,11 +1436,19 @@
           "files": []
         }
       },
+      "@types/bcryptjs": {
+        "type": "npm",
+        "name": "@types/bcryptjs",
+        "data": {
+          "version": "^3.0.0",
+          "files": []
+        }
+      },
       "@types/express": {
         "type": "npm",
         "name": "@types/express",
         "data": {
-          "version": "^4.17.3",
+          "version": "^4.0.35",
           "files": []
         }
       },
@@ -940,6 +1468,14 @@
           "files": []
         }
       },
+      "@types/jsonwebtoken": {
+        "type": "npm",
+        "name": "@types/jsonwebtoken",
+        "data": {
+          "version": "^9.0.9",
+          "files": []
+        }
+      },
       "@types/mongoose": {
         "type": "npm",
         "name": "@types/mongoose",
@@ -953,6 +1489,22 @@
         "name": "@types/node",
         "data": {
           "version": "^8.9.5",
+          "files": []
+        }
+      },
+      "@types/passport-jwt": {
+        "type": "npm",
+        "name": "@types/passport-jwt",
+        "data": {
+          "version": "^4.0.1",
+          "files": []
+        }
+      },
+      "@types/passport-local": {
+        "type": "npm",
+        "name": "@types/passport-local",
+        "data": {
+          "version": "^1.0.38",
           "files": []
         }
       },
@@ -1009,6 +1561,14 @@
         "name": "eslint-config-prettier",
         "data": {
           "version": "^6.10.1",
+          "files": []
+        }
+      },
+      "express": {
+        "type": "npm",
+        "name": "express",
+        "data": {
+          "version": "^4.21.2",
           "files": []
         }
       },
@@ -1117,11 +1677,6 @@
         {
           "type": "static",
           "source": "frontend",
-          "target": "@angular/common"
-        },
-        {
-          "type": "static",
-          "source": "frontend",
           "target": "@angular/platform-browser"
         },
         {
@@ -1137,7 +1692,22 @@
         {
           "type": "static",
           "source": "frontend",
+          "target": "@angular/common"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
           "target": "rxjs"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "mongoose"
+        },
+        {
+          "type": "static",
+          "source": "frontend",
+          "target": "jspdf"
         },
         {
           "type": "static",
@@ -1159,6 +1729,11 @@
         {
           "type": "static",
           "source": "backend",
+          "target": "express"
+        },
+        {
+          "type": "static",
+          "source": "backend",
           "target": "@andes/api-tool"
         },
         {
@@ -1174,12 +1749,27 @@
         {
           "type": "static",
           "source": "backend",
+          "target": "dotenv"
+        },
+        {
+          "type": "static",
+          "source": "backend",
           "target": "debug"
         },
         {
           "type": "static",
           "source": "backend",
           "target": "@andes/core"
+        },
+        {
+          "type": "static",
+          "source": "backend",
+          "target": "bcrypt"
+        },
+        {
+          "type": "static",
+          "source": "backend",
+          "target": "bcryptjs"
         }
       ],
       "@andes/api-tool": [],
@@ -1201,12 +1791,15 @@
       "@angular/router": [],
       "@types/mssql": [],
       "bcrypt": [],
+      "bcryptjs": [],
       "concurrently": [],
       "core-js": [],
       "crypto": [],
       "debug": [],
       "handlebars": [],
       "jquery": [],
+      "jsonwebtoken": [],
+      "jspdf": [],
       "mongoose": [],
       "mssql": [],
       "ng-recaptcha": [],
@@ -1215,6 +1808,8 @@
       "node-schedule": [],
       "nodemailer": [],
       "ol": [],
+      "passport": [],
+      "passport-local": [],
       "rxjs": [],
       "rxjs-compat": [],
       "shiro-trie": [],
@@ -1229,11 +1824,15 @@
       "@nrwl/jest": [],
       "@nrwl/node": [],
       "@nrwl/workspace": [],
+      "@types/bcryptjs": [],
       "@types/express": [],
       "@types/jest": [],
       "@types/jquery": [],
+      "@types/jsonwebtoken": [],
       "@types/mongoose": [],
       "@types/node": [],
+      "@types/passport-jwt": [],
+      "@types/passport-local": [],
       "@typescript-eslint/eslint-plugin": [],
       "@typescript-eslint/parser": [],
       "codelyzer": [],
@@ -1241,6 +1840,7 @@
       "dotenv": [],
       "eslint": [],
       "eslint-config-prettier": [],
+      "express": [],
       "jest": [],
       "jest-preset-angular": [],
       "mongodb-memory-server-global": [],
@@ -1257,316 +1857,806 @@
       {
         "file": "apps/frontend-e2e/cypress.json",
         "ext": ".json",
-        "mtime": 1585050184428.6357
+        "mtime": 1744308480549.2454
       },
       {
         "file": "apps/frontend-e2e/src/fixtures/example.json",
         "ext": ".json",
-        "mtime": 1585050184429.488
+        "mtime": 1744308480659.5977
       },
       {
         "file": "apps/frontend-e2e/src/integration/app.spec.ts",
         "ext": ".ts",
-        "mtime": 1585050184429.7966
+        "mtime": 1744308480690.6997
       },
       {
         "file": "apps/frontend-e2e/src/support/app.po.ts",
         "ext": ".ts",
-        "mtime": 1585050184430.842
+        "mtime": 1744308480731.4412
       },
       {
         "file": "apps/frontend-e2e/src/support/commands.ts",
         "ext": ".ts",
-        "mtime": 1586030361938.9785
+        "mtime": 1744308480766.239
       },
       {
         "file": "apps/frontend-e2e/src/support/index.ts",
         "ext": ".ts",
-        "mtime": 1585050184432.4226
+        "mtime": 1744308480799.8137
       },
       {
         "file": "apps/frontend-e2e/tsconfig.e2e.json",
         "ext": ".json",
-        "mtime": 1585050184432.8948
+        "mtime": 1744308480576.6958
       },
       {
         "file": "apps/frontend-e2e/tsconfig.json",
         "ext": ".json",
-        "mtime": 1585050184433.716
+        "mtime": 1744308480603.4624
       },
       {
         "file": "apps/frontend-e2e/tslint.json",
         "ext": ".json",
-        "mtime": 1585050184434.357
+        "mtime": 1744308480631.9788
       }
     ],
     "frontend": [
       {
         "file": "apps/frontend/.DS_Store",
         "ext": "",
-        "mtime": 1715002567809.9
+        "mtime": 1744308480823.149
       },
       {
         "file": "apps/frontend/browserslist",
         "ext": "",
-        "mtime": 1585050184435.5122
+        "mtime": 1744308480841.9612
       },
       {
         "file": "apps/frontend/src/.DS_Store",
         "ext": "",
-        "mtime": 1715006937491.6199
+        "mtime": 1744308480983.9197
       },
       {
         "file": "apps/frontend/src/app/.DS_Store",
         "ext": "",
-        "mtime": 1715006942556.8984
+        "mtime": 1744308481184.6968
       },
       {
         "file": "apps/frontend/src/app/app-routing.module.ts",
         "ext": ".ts",
-        "mtime": 1715709737364.9568
+        "mtime": 1744308481216.734
       },
       {
         "file": "apps/frontend/src/app/app.component.html",
         "ext": ".html",
-        "mtime": 1715709966049.791
+        "mtime": 1744308481245.7505
       },
       {
         "file": "apps/frontend/src/app/app.component.scss",
         "ext": ".scss",
-        "mtime": 1587227941568.352
+        "mtime": 1744308481266.3054
       },
       {
         "file": "apps/frontend/src/app/app.component.spec.ts",
         "ext": ".ts",
-        "mtime": 1585050184437.3088
+        "mtime": 1744308481290.212
       },
       {
         "file": "apps/frontend/src/app/app.component.ts",
         "ext": ".ts",
-        "mtime": 1715709879991.0369
+        "mtime": 1744308481321.3442
       },
       {
         "file": "apps/frontend/src/app/app.module.ts",
         "ext": ".ts",
-        "mtime": 1715709340853.1426
+        "mtime": 1744308481347.1238
+      },
+      {
+        "file": "apps/frontend/src/app/auth.guard.ts",
+        "ext": ".ts",
+        "mtime": 1744308469393.2903
+      },
+      {
+        "file": "apps/frontend/src/app/auth.service.ts",
+        "ext": ".ts",
+        "mtime": 1744308469413.1606
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.css",
+        "ext": ".css",
+        "mtime": 1744308470158.4358
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.html",
+        "ext": ".html",
+        "mtime": 1744308470185.2463
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.spec.ts",
+        "ext": ".ts",
+        "mtime": 1744308470209.2466
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308470232.52
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.css",
+        "ext": ".css",
+        "mtime": 1744308470271.3538
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.html",
+        "ext": ".html",
+        "mtime": 1744308470298.0596
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308470324.5244
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.css",
+        "ext": ".css",
+        "mtime": 1744308470378.9258
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.html",
+        "ext": ".html",
+        "mtime": 1744308470405.3113
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.spec.ts",
+        "ext": ".ts",
+        "mtime": 1744308470431.2644
+      },
+      {
+        "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308470456.0088
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.css",
+        "ext": ".css",
+        "mtime": 1744308470519.0198
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.html",
+        "ext": ".html",
+        "mtime": 1744308470546.6455
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.spec.ts",
+        "ext": ".ts",
+        "mtime": 1744308470568.4573
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308470590.7063
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.css",
+        "ext": ".css",
+        "mtime": 1744308470632.977
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.html",
+        "ext": ".html",
+        "mtime": 1744308470655.5037
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308470674.6958
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.css",
+        "ext": ".css",
+        "mtime": 1744308470714.8567
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.html",
+        "ext": ".html",
+        "mtime": 1744308470735.258
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.spec.ts",
+        "ext": ".ts",
+        "mtime": 1744308470755.1113
+      },
+      {
+        "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308470772.7925
+      },
+      {
+        "file": "apps/frontend/src/app/editems/edcategoria.component.html",
+        "ext": ".html",
+        "mtime": 1744308470865.3286
+      },
+      {
+        "file": "apps/frontend/src/app/editems/edItems.component.css",
+        "ext": ".css",
+        "mtime": 1744308470807.316
+      },
+      {
+        "file": "apps/frontend/src/app/editems/edItems.component.html",
+        "ext": ".html",
+        "mtime": 1744308470826.4248
+      },
+      {
+        "file": "apps/frontend/src/app/editems/edItems.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308470843.6816
       },
       {
         "file": "apps/frontend/src/app/home/ayuda.component.ts",
         "ext": ".ts",
-        "mtime": 1587746958513.057
+        "mtime": 1744308481371.8704
       },
       {
         "file": "apps/frontend/src/app/home/ayuda.html",
         "ext": ".html",
-        "mtime": 1715709029614.5437
+        "mtime": 1744308481404.7034
+      },
+      {
+        "file": "apps/frontend/src/app/home/eDesmp.component.html",
+        "ext": ".html",
+        "mtime": 1744308471199.4683
+      },
+      {
+        "file": "apps/frontend/src/app/home/eDesmp.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308471215.3186
       },
       {
         "file": "apps/frontend/src/app/home/home.component.html",
         "ext": ".html",
-        "mtime": 1715709444768.7507
+        "mtime": 1744308481438.3083
       },
       {
         "file": "apps/frontend/src/app/home/home.component.ts",
         "ext": ".ts",
-        "mtime": 1592320451311.055
+        "mtime": 1744308481470.402
+      },
+      {
+        "file": "apps/frontend/src/app/home/menucomunes.component.css",
+        "ext": ".css",
+        "mtime": 1744308471260.818
+      },
+      {
+        "file": "apps/frontend/src/app/home/menucomunes.component.html",
+        "ext": ".html",
+        "mtime": 1744308471285.0818
+      },
+      {
+        "file": "apps/frontend/src/app/home/menucomunes.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308471303.2915
+      },
+      {
+        "file": "apps/frontend/src/app/home/MenuPlanillaED.component.css",
+        "ext": ".css",
+        "mtime": 1744308471098.446
+      },
+      {
+        "file": "apps/frontend/src/app/home/MenuPlanillaED.component.html",
+        "ext": ".html",
+        "mtime": 1744308471126.754
+      },
+      {
+        "file": "apps/frontend/src/app/home/MenuPlanillaED.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308471147.7854
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.html",
+        "ext": ".html",
+        "mtime": 1744308481601.7742
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308481633.4778
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/institution.module.ts",
+        "ext": ".ts",
+        "mtime": 1744308481500.852
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/institution.provider.ts",
+        "ext": ".ts",
+        "mtime": 1744308481535.7358
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/institution.routing.ts",
+        "ext": ".ts",
+        "mtime": 1744308481573.5027
+      },
+      {
+        "file": "apps/frontend/src/app/institutions/service/institution.service.ts",
+        "ext": ".ts",
+        "mtime": 1744308481656.3518
+      },
+      {
+        "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.css",
+        "ext": ".css",
+        "mtime": 1744308469469.172
+      },
+      {
+        "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.html",
+        "ext": ".html",
+        "mtime": 1744308469499.528
+      },
+      {
+        "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.spec.ts",
+        "ext": ".ts",
+        "mtime": 1744308469518.8794
+      },
+      {
+        "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308469539.349
+      },
+      {
+        "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.css",
+        "ext": ".css",
+        "mtime": 1744308469577.653
+      },
+      {
+        "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.html",
+        "ext": ".html",
+        "mtime": 1744308469601.5825
+      },
+      {
+        "file": "apps/frontend/src/app/Items/editar-items/edit-items.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308469620.545
+      },
+      {
+        "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.css",
+        "ext": ".css",
+        "mtime": 1744308469654.0693
+      },
+      {
+        "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.html",
+        "ext": ".html",
+        "mtime": 1744308469678.5476
+      },
+      {
+        "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308469699.8706
+      },
+      {
+        "file": "apps/frontend/src/app/modelos/categoria.model.ts",
+        "ext": ".ts",
+        "mtime": 1744308471959.4995
+      },
+      {
+        "file": "apps/frontend/src/app/modelos/items.model.ts",
+        "ext": ".ts",
+        "mtime": 1744308471978.3086
+      },
+      {
+        "file": "apps/frontend/src/app/modelos/PlanillaED.Model.ts",
+        "ext": ".ts",
+        "mtime": 1744308471942.739
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.css",
+        "ext": ".css",
+        "mtime": 1744308469755.5925
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.html",
+        "ext": ".html",
+        "mtime": 1744308469782.906
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308469806.4558
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component..ts",
+        "ext": ".ts",
+        "mtime": 1744308469844.1123
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.css",
+        "ext": ".css",
+        "mtime": 1744308469874.4014
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.html",
+        "ext": ".html",
+        "mtime": 1744308469902.5151
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.css",
+        "ext": ".css",
+        "mtime": 1744308469950.345
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.html",
+        "ext": ".html",
+        "mtime": 1744308469978.406
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308470001.2402
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.css",
+        "ext": ".css",
+        "mtime": 1744308470047.3113
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.html",
+        "ext": ".html",
+        "mtime": 1744308470074.6184
+      },
+      {
+        "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308470098.235
+      },
+      {
+        "file": "apps/frontend/src/app/services/categoria.service.ts",
+        "ext": ".ts",
+        "mtime": 1744308472028.7263
+      },
+      {
+        "file": "apps/frontend/src/app/services/items.service.ts",
+        "ext": ".ts",
+        "mtime": 1744308472047.2898
+      },
+      {
+        "file": "apps/frontend/src/app/services/PlanillaED.Service.ts",
+        "ext": ".ts",
+        "mtime": 1744308472009.6348
+      },
+      {
+        "file": "apps/frontend/src/app/services/users.service.ts",
+        "ext": ".ts",
+        "mtime": 1744308472067.917
       },
       {
         "file": "apps/frontend/src/app/shared/directives/select-search.directive.ts",
         "ext": ".ts",
-        "mtime": 1641239343930.4302
+        "mtime": 1744308481750.8547
       },
       {
         "file": "apps/frontend/src/app/shared/location.services.ts",
         "ext": ".ts",
-        "mtime": 1592326570388.9548
+        "mtime": 1744308481677.6216
+      },
+      {
+        "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.css",
+        "ext": ".css",
+        "mtime": 1744308472585.6855
+      },
+      {
+        "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.html",
+        "ext": ".html",
+        "mtime": 1744308472614.1643
+      },
+      {
+        "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308472636.6133
       },
       {
         "file": "apps/frontend/src/app/shared/select-search.service.ts",
         "ext": ".ts",
-        "mtime": 1641239343930.7356
+        "mtime": 1744308481700.455
       },
       {
         "file": "apps/frontend/src/app/shared/utils.ts",
         "ext": ".ts",
-        "mtime": 1587247252545.8945
+        "mtime": 1744308481725.9705
+      },
+      {
+        "file": "apps/frontend/src/app/users/login/login.component.css",
+        "ext": ".css",
+        "mtime": 1744308472697.4219
+      },
+      {
+        "file": "apps/frontend/src/app/users/login/login.component.html",
+        "ext": ".html",
+        "mtime": 1744308472724.7332
+      },
+      {
+        "file": "apps/frontend/src/app/users/login/login.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308472747.9312
+      },
+      {
+        "file": "apps/frontend/src/app/users/register/register.component.css",
+        "ext": ".css",
+        "mtime": 1744308472794.1877
+      },
+      {
+        "file": "apps/frontend/src/app/users/register/register.component.html",
+        "ext": ".html",
+        "mtime": 1744308472822.3413
+      },
+      {
+        "file": "apps/frontend/src/app/users/register/register.component.ts",
+        "ext": ".ts",
+        "mtime": 1744308472846.5278
       },
       {
         "file": "apps/frontend/src/assets/.gitkeep",
         "ext": "",
-        "mtime": 1585050184439.183
+        "mtime": 1744308481776.2705
       },
       {
         "file": "apps/frontend/src/environments/environment.prod.ts",
         "ext": ".ts",
-        "mtime": 1587227941586.6663
+        "mtime": 1744308481804.6292
       },
       {
         "file": "apps/frontend/src/environments/environment.ts",
         "ext": ".ts",
-        "mtime": 1641239343931.7327
+        "mtime": 1744308481830.0862
       },
       {
         "file": "apps/frontend/src/favicon.ico",
         "ext": ".ico",
-        "mtime": 1585050184441.64
+        "mtime": 1744308481010.0007
       },
       {
         "file": "apps/frontend/src/index.html",
         "ext": ".html",
-        "mtime": 1715709666635.0652
+        "mtime": 1744308481042.3848
       },
       {
         "file": "apps/frontend/src/main.ts",
         "ext": ".ts",
-        "mtime": 1585050184442.5374
+        "mtime": 1744308481070.0742
       },
       {
         "file": "apps/frontend/src/polyfills.ts",
         "ext": ".ts",
-        "mtime": 1585050184443.0254
+        "mtime": 1744308481099.9158
       },
       {
         "file": "apps/frontend/src/styles.scss",
         "ext": ".scss",
-        "mtime": 1587746958673.3289
+        "mtime": 1744308481127.0027
       },
       {
         "file": "apps/frontend/src/test-setup.ts",
         "ext": ".ts",
-        "mtime": 1585050184443.535
+        "mtime": 1744308481157.7036
       },
       {
         "file": "apps/frontend/tsconfig.app.json",
         "ext": ".json",
-        "mtime": 1587401548655.741
+        "mtime": 1744308480871.148
       },
       {
         "file": "apps/frontend/tsconfig.json",
         "ext": ".json",
-        "mtime": 1585050184443.8281
+        "mtime": 1744308480901.5747
       },
       {
         "file": "apps/frontend/tsconfig.spec.json",
         "ext": ".json",
-        "mtime": 1585050184443.9722
+        "mtime": 1744308480928.072
       },
       {
         "file": "apps/frontend/tslint.json",
         "ext": ".json",
-        "mtime": 1585050184444.631
+        "mtime": 1744308480955.181
       }
     ],
     "backend": [
       {
         "file": "apps/backend/.eslintrc",
         "ext": "",
-        "mtime": 1585050184419.456
+        "mtime": 1744308479898.3872
       },
       {
         "file": "apps/backend/src/app/.gitkeep",
         "ext": "",
-        "mtime": 1585050184420.0083
+        "mtime": 1744308480029.9866
       },
       {
         "file": "apps/backend/src/app/application.ts",
         "ext": ".ts",
-        "mtime": 1715710073583.5544
+        "mtime": 1744308480059.1328
       },
       {
         "file": "apps/backend/src/app/auth/auth.routes.spec.ts",
         "ext": ".ts",
-        "mtime": 1586030361924.5732
+        "mtime": 1744308480112.158
       },
       {
         "file": "apps/backend/src/app/auth/auth.routes.ts",
         "ext": ".ts",
-        "mtime": 1715710986297.1155
+        "mtime": 1744308480138.764
+      },
+      {
+        "file": "apps/backend/src/app/categoriaitems/routes/categoriaItems.ts",
+        "ext": ".ts",
+        "mtime": 1744308466331.5178
+      },
+      {
+        "file": "apps/backend/src/app/categoriaitems/schemas/categoria.schema.ts",
+        "ext": ".ts",
+        "mtime": 1744308466377.559
+      },
+      {
+        "file": "apps/backend/src/app/categoriaitems/schemas/categoriaItems.ts",
+        "ext": ".ts",
+        "mtime": 1744308466402.4194
       },
       {
         "file": "apps/backend/src/app/connection.ts",
         "ext": ".ts",
-        "mtime": 1595461113831.218
+        "mtime": 1744308480084.0862
+      },
+      {
+        "file": "apps/backend/src/app/eDesempeno/routes/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1744308466459.6357
+      },
+      {
+        "file": "apps/backend/src/app/eDesempeno/schemas/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1744308466502.251
+      },
+      {
+        "file": "apps/backend/src/app/EDItems/routes/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1744308465586.704
+      },
+      {
+        "file": "apps/backend/src/app/EDItems/schemas/configEvaDesemp.ts",
+        "ext": ".ts",
+        "mtime": 1744308465627.0193
+      },
+      {
+        "file": "apps/backend/src/app/Efectores/Routes/efectores.ts",
+        "ext": ".ts",
+        "mtime": 1744308465680.7659
+      },
+      {
+        "file": "apps/backend/src/app/Efectores/schemas/efectores.ts",
+        "ext": ".ts",
+        "mtime": 1744308465722.0068
+      },
+      {
+        "file": "apps/backend/src/app/Items/routes/items.ts",
+        "ext": ".ts",
+        "mtime": 1744308465781.4932
+      },
+      {
+        "file": "apps/backend/src/app/Items/schemas/items.ts",
+        "ext": ".ts",
+        "mtime": 1744308465827.635
+      },
+      {
+        "file": "apps/backend/src/app/PlanillaED/Router/PlanillaED.ts",
+        "ext": ".ts",
+        "mtime": 1744308465893.252
+      },
+      {
+        "file": "apps/backend/src/app/PlanillaED/Schemas/PlanillaED.ts",
+        "ext": ".ts",
+        "mtime": 1744308465938.4453
       },
       {
         "file": "apps/backend/src/app/services/mail/mail.shema.ts",
         "ext": ".ts",
-        "mtime": 1586030361930.9346
+        "mtime": 1744308480166.4648
       },
       {
         "file": "apps/backend/src/app/services/mail/mail.ts",
         "ext": ".ts",
-        "mtime": 1715710326548.28
+        "mtime": 1744308480194.1172
+      },
+      {
+        "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",
+        "ext": ".ts",
+        "mtime": 1744308465994.9673
+      },
+      {
+        "file": "apps/backend/src/app/Servicios/Schemas/servicios.ts",
+        "ext": ".ts",
+        "mtime": 1744308466040.8384
       },
       {
         "file": "apps/backend/src/app/templates/email/account-activation.html",
         "ext": ".html",
-        "mtime": 1592320451279.499
+        "mtime": 1744308480225.5618
       },
       {
         "file": "apps/backend/src/app/templates/email/layout.html",
         "ext": ".html",
-        "mtime": 1592320451279.8457
+        "mtime": 1744308480259.0544
       },
       {
         "file": "apps/backend/src/app/templates/email/password-reset.html",
         "ext": ".html",
-        "mtime": 1592320451280.0703
+        "mtime": 1744308480292.004
       },
       {
         "file": "apps/backend/src/app/templates/email/user-suggestions.html",
         "ext": ".html",
-        "mtime": 1592320451280.6277
+        "mtime": 1744308480328.951
+      },
+      {
+        "file": "apps/backend/src/app/users/router/usuarios.router.ts",
+        "ext": ".ts",
+        "mtime": 1744308467486.6282
+      },
+      {
+        "file": "apps/backend/src/app/users/schema/usuarios.schema.ts",
+        "ext": ".ts",
+        "mtime": 1744308467521.6309
       },
       {
         "file": "apps/backend/src/app/users/user.controller.ts",
         "ext": ".ts",
-        "mtime": 1715710814176.603
+        "mtime": 1744308480362.1387
       },
       {
         "file": "apps/backend/src/app/users/user.interface.ts",
         "ext": ".ts",
-        "mtime": 1587227941565.3052
+        "mtime": 1744308480391.4639
+      },
+      {
+        "file": "apps/backend/src/app/users/user.models.ts",
+        "ext": ".ts",
+        "mtime": 1744308467436.907
       },
       {
         "file": "apps/backend/src/app/users/user.schema.ts",
         "ext": ".ts",
-        "mtime": 1592320451292.2117
+        "mtime": 1744308480424.8926
       },
       {
         "file": "apps/backend/src/assets/.gitkeep",
         "ext": "",
-        "mtime": 1585050184421.8748
+        "mtime": 1744308480453.1453
       },
       {
         "file": "apps/backend/src/environments/environment.prod.ts",
         "ext": ".ts",
-        "mtime": 1715708518447.4143
+        "mtime": 1744308480482.9233
       },
       {
         "file": "apps/backend/src/environments/environment.ts",
         "ext": ".ts",
-        "mtime": 1715708559754.1519
+        "mtime": 1744308480518.5125
       },
       {
         "file": "apps/backend/src/main.ts",
         "ext": ".ts",
-        "mtime": 1715710221965.6392
+        "mtime": 1744308480001.3481
       },
       {
         "file": "apps/backend/tsconfig.app.json",
         "ext": ".json",
-        "mtime": 1585050184426.6992
+        "mtime": 1744308479919.5615
       },
       {
         "file": "apps/backend/tsconfig.json",
         "ext": ".json",
-        "mtime": 1585050184427.384
+        "mtime": 1744308479954.1643
       },
       {
         "file": "apps/backend/tsconfig.spec.json",
         "ext": ".json",
-        "mtime": 1585050184427.843
+        "mtime": 1744308479975.92
       }
     ]
   }

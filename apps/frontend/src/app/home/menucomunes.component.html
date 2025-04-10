@@ -1,0 +1,29 @@
+<plex-layout>
+    <plex-layout-main>
+        <plex-title titulo="Menu Comunes">
+            <!-- Mensaje de bienvenida y ayuda -->
+            <plex-help icon="help" type="help" titulo="Ayuda para el usuario" subtitulo="Evaluaciones de Personal">
+                <ayuda></ayuda>
+            </plex-help>
+        </plex-title>
+
+        <!-- Menú de botones -->
+        <div class="menu-buttons d-flex flex-column gap-3">
+            <button plexButton class="btn btn-light d-flex align-items-center gap-2 border rounded"
+                    (click)="onEfectoresClick()">
+                <plex-icon name="hospital"></plex-icon> Efectoresss
+            </button>
+            <button plexButton class="btn btn-light d-flex align-items-center gap-2 border rounded"
+                    (click)="onServiciosClick()">
+                <plex-icon name="cogs"></plex-icon> Servicios
+            </button>
+            <button plexButton class="btn btn-light d-flex align-items-center gap-2 border rounded"
+                    (click)="onAgentesClick()">
+                <plex-icon name="user"></plex-icon> Agentes
+            </button>
+            <button plexButton class="btn btn-light d-flex align-items-center gap-2 border rounded"
+                    (click)="onCategoriasClick()">
+                <plex-icon name="folder"></plex-icon> Categorías
+            </button>
+            <button plexButton class="btn btn-light d-flex align-items-center gap-2 border rounded"
+                    (click)="onItemsClick()">
