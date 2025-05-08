@@ -14,8 +14,8 @@ const router = express.Router();
 router.post('/login', async (req: Request, res: Response) => {
     const { dni, password } = req.body;
 
-    console.log('🔔 Se recibió una solicitud de login');
-    console.log('📩 Datos recibidos en el body:', req.body);
+    console.log('Se recibió una solicitud de login');
+    console.log('Datos recibidos en el body:', req.body);
 
     try {
         // Buscar usuario por dni
@@ -28,7 +28,7 @@ router.post('/login', async (req: Request, res: Response) => {
 
         // Comparar contraseña ingresada
         const isMatch = await user.comparePassword(password);
-        console.log('🔐 ¿Contraseña coincide?:', isMatch);
+        console.log('¿Contraseña coincide?:', isMatch);
 
         if (!isMatch) {
             return res.status(401).json({ message: 'Contraseña incorrecta' });
@@ -45,15 +45,19 @@ router.post('/login', async (req: Request, res: Response) => {
             idservicio: user.idservicio
         };
 
-        console.log('📦 Payload del token:', payload);
+        console.log('Payload del token:', payload);
 
         // Generar token JWT
         const token = jwt.sign(payload, process.env.JWT_SECRET as string, { expiresIn: '1h' });
 
-        console.log('✅ Token generado:', token);
+        console.log('Token generado:', token);
 
-        // Retornar token al cliente
-        res.json({ token });
+        // Retornar token al fron
+        res.json({
+            token,
+            user: payload
+        });
+
     } catch (error) {
         console.error('❌ Error en la ruta /login:', error);
         res.status(500).json({ message: 'Error en el servidor', error: error.message });
@@ -62,9 +66,10 @@ router.post('/login', async (req: Request, res: Response) => {
 
 
 router.post('/register', async (req: Request, res: Response) => {
-    const { dni, password, legajo, nombre, rol, idefector, idservicio } = req.body;
+    const { dni, password, legajo, nombre, rol, idefector, idservicio, email } = req.body;
 
-    console.log('🟡 Datos recibidos:', req.body); // 👉 Log del request
+
+    console.log('Datos recibidos:', req.body); // 👉 Log del request
 
     try {
         // Verificar si el usuario ya existe
@@ -83,7 +88,8 @@ router.post('/register', async (req: Request, res: Response) => {
             nombre,
             rol,
             idefector,
-            idservicio
+            idservicio,
+            email
         });
 
         console.log('📦 Nuevo usuario a guardar:', newUser); // 👉 Antes de guardar

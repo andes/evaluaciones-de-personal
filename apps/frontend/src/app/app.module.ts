@@ -31,6 +31,10 @@ import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-Planill
 import { sharedMenuComunesComponent } from './shared/menu/menuComunes/sharedmenuComunes.component';
 import { LoginComponent } from './users/login/login.component'
 import { RegisterComponent } from './users/register/register.component';
+import { HeaderComponent } from './shared/header.component';
+import { ComunesComponent } from './shared/menu/comunes.component';
+import { PlanillaComponent } from './shared/menu/menuPlanillas/Planillas.component';
+
 
 
 
@@ -52,7 +56,11 @@ import { RegisterComponent } from './users/register/register.component';
         CrearPlanillaEDItemsDetalleComponent,
         sharedMenuComunesComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        HeaderComponent,
+        ComunesComponent,
+        PlanillaComponent
+
 
 
 

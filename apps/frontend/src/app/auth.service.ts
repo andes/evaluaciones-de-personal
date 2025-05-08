@@ -3,39 +3,105 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+
+interface DecodedToken {
+    nombre?: string;
+    rol?: string;
+    idefector?: string;
+    idservicio?: string;
+    // Puedes incluir otras propiedades si las necesitas
+}
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     private apiUrl = 'http://localhost:3000/api';
-    // BehaviorSubject para controlar el estado de autenticación
+    private tokenKey = 'token';
     private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    // Observable al que se pueden subscribir los componentes para saber si el usuario está autenticado
     public authStatus: Observable<boolean> = this.loggedInSubject.asObservable();
-    isAuthenticated: any;
 
-    constructor(private http: HttpClient, private router: Router) { }
+    // Datos del usuario decodificados
+    private usuario: {
+        nombre?: string;
+        rol?: string;
+        idefector?: string;
+        idservicio?: string;
+    } = {};
 
-    // Método para iniciar sesión (llama al API, etc.)
-    login(legajo: string, password: string): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}/login`, { legajo, password });
+    constructor(private http: HttpClient, private router: Router) {
+        this.setLoggedIn(!!this.token);
+        this.decodeStoredToken();  // 🔁 Decodifica si ya hay un token al cargar el servicio
     }
 
-    // Método para actualizar el estado de autenticación
-    setLoggedIn(status: boolean) {
-        this.loggedInSubject.next(status);
+    login(dni: string, password: string): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/login`, { dni, password });
     }
 
-    // Método para cerrar sesión (opcional)
+    guardarToken(token: string) {
+        localStorage.setItem(this.tokenKey, token);
+        this.decodeToken(token);
+        this.setLoggedIn(true);
+    }
+
     logout() {
-        localStorage.removeItem('token');
+        localStorage.removeItem(this.tokenKey);
+        this.usuario = {};
         this.setLoggedIn(false);
         this.router.navigate(['/login']);
     }
 
-    // Opcional: método para obtener el token
     get token(): string | null {
-        return localStorage.getItem('token');
+        return localStorage.getItem(this.tokenKey);
+    }
+
+    get isAuthenticated(): boolean {
+        return !!this.token;
+    }
+
+    setLoggedIn(status: boolean) {
+        this.loggedInSubject.next(status);
+    }
+    private decodeToken(token: string) {
+        try {
+            const decoded = jwtDecode(token) as DecodedToken;
+
+            this.usuario = {
+                nombre: decoded.nombre,
+                rol: decoded.rol,
+                idefector: decoded.idefector,
+                idservicio: decoded.idservicio
+            };
+        } catch (error) {
+            console.error('❌ Error al decodificar el token:', error);
+            this.usuario = {};
+        }
+    }
+
+
+    private decodeStoredToken() {
+        const token = this.token;
+        if (token) {
+            this.decodeToken(token);
+        }
+    }
+
+    // Métodos públicos para acceder a los datos del usuario
+    getNombre(): string {
+        return this.usuario.nombre || '';
+    }
+
+    getRol(): string {
+        return this.usuario.rol || '';
+    }
+
+    getEfector(): string {
+        return this.usuario.idefector || '';
+    }
+
+    getServicio(): string {
+        return this.usuario.idservicio || '';
     }
 }

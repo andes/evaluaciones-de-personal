@@ -22,14 +22,22 @@ import { RegisterComponent } from './users/register/register.component';
 
 import { AuthGuard } from './auth.guard';
 
+import { ComunesComponent } from './shared/menu/comunes.component';
+
 const appRoutes: Routes = [
 
         {
-                path: 'menuparametros',
-                component: MenuComunesComponent,
-                canActivate: [AuthGuard],
+                path: 'menucomunes',
+                component: ListarCategoriaComponent,
+                canActivate: [],
                 pathMatch: 'full'
         },
+
+        //  {
+        //         path: 'menuparametros',
+        //         component: ListarCategoriaComponent, // ¡Aquí está el cambio!
+        //         pathMatch: 'full'
+        // },
 
         {
                 path: 'menuPlanillaED',
@@ -38,19 +46,9 @@ const appRoutes: Routes = [
                 pathMatch: 'full'
         },
 
-        {
-                path: 'home',
-                component: AppHomeComponent,
-                canActivate: [],
-                pathMatch: 'full'
-        },
 
-        {
-                path: 'menucomunes',
-                component: MenuComunesComponent,
-                canActivate: [],
-                pathMatch: 'full'
-        },
+
+
 
 
         {
@@ -132,10 +130,12 @@ const appRoutes: Routes = [
                 component: RegisterComponent
         },
         {
-                path: '',
-                redirectTo: '/login',
+                path: 'home',
+                component: AppHomeComponent,
+                canActivate: [AuthGuard],
                 pathMatch: 'full'
         }
+
 
 ];
 

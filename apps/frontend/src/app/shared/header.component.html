@@ -1,0 +1,21 @@
+<div class="header-container">
+    <div class="header">
+        <h1>{{ titulo }}</h1>
+        <p *ngIf="nombreUsuario">Usuario: {{ nombreUsuario }}</p>
+        <!-- <p *ngIf="rol">Rol: {{ rol }}</p> -->
+        <!-- <p *ngIf="idefector">Efector: {{ idefector }}</p> -->
+        <!-- <p *ngIf="idservicio">Servicio: {{ idservicio }}</p> -->
+    </div>
+
+    <!-- Menú tipo Lavalamp -->
+    <plex-layout>
+        <plex-layout-main>
+            <nav>
+                <a *ngFor="let item of menuList" [routerLink]="item.route" (mouseover)="setAnimation(item.anim)">
+                    {{ item.label }}
+                </a>
+                <div class="animation" [ngClass]="animationClass"></div>
+            </nav>
+        </plex-layout-main>
+    </plex-layout>
+</div>
