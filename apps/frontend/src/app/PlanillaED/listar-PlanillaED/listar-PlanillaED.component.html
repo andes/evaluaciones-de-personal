@@ -1,32 +1,14 @@
+<div class="d-flex flex-column align-items-center mb-4">
+    <app-header></app-header>
+    <app-planilla></app-planilla>
+</div>
+
+<!-- 2. Contenedor general: centramos la fila -->
 <div class="contenedor-general">
-    <div class="row">
-        <!-- Columna del Menú a la izquierda -->
-        <div class="col-lg-3 col-md-4 col-12 contenedor-menu">
-            <div class="card">
-                <div class="card-body">
-                    <!-- Título del menú -->
-                    <div class="titulo-container">
-                        <plex-title titulo="PLANILLA DE EVALUACIÓN"></plex-title>
+    <div class="row justify-content-center">
 
-                    </div>
-                    <!-- Contenedor del menú -->
-                    <div class="contenedor-cuadro">
-                        <button plexButton class="btn btn-light border rounded" (click)="onPlanillaEDClick()">
-                            <span class="material-icons">list_alt</span> Planilla Evaluación Desempeño. Items
-                        </button>
-                        <button plexButton class="btn btn-light border rounded" (click)="onPlanillaEDClick()">
-                            <span class="material-icons">list_alt</span> Planilla Evaluacion Desempeño. Items
-                        </button>
-                        <button plexButton class="btn btn-light border rounded" (click)="onVolverClick()">
-                            <span class="material-icons">arrow_back</span> Volver
-                        </button>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-
-        <!-- Columna del Listado de Planillas -->
+        <!-- Columna del Listado de Planillas centrada -->
         <div class="col-lg-9 col-md-8 col-12 contenedor-listado">
             <div class="card">
                 <div class="card-header bg-primary text-white text-center">
@@ -51,8 +33,6 @@
                                     <th class="text-center">Acciones</th>
                                 </tr>
                             </thead>
-
-
                             <tbody>
                                 <tr *ngFor="let planilla of filterPlanillaED">
                                     <td class="text-center">{{ planilla.fechaCreacion | date: 'dd/MM/yyyy' }}</td>
@@ -79,7 +59,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <h5 class="text-start mt-3" *ngIf="filterPlanillaED.length === 0">No hay planillas para mostrar</h5>
+                    <h5 class="text-start mt-3" *ngIf="filterPlanillaED.length === 0">
+                        No hay planillas para mostrar
+                    </h5>
                 </div>
             </div>
         </div>

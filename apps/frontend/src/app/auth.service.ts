@@ -10,7 +10,7 @@ interface DecodedToken {
     rol?: string;
     idefector?: string;
     idservicio?: string;
-    // Puedes incluir otras propiedades si las necesitas
+
 }
 
 
@@ -23,7 +23,6 @@ export class AuthService {
     private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public authStatus: Observable<boolean> = this.loggedInSubject.asObservable();
 
-    // Datos del usuario decodificados
     private usuario: {
         nombre?: string;
         rol?: string;
@@ -33,7 +32,7 @@ export class AuthService {
 
     constructor(private http: HttpClient, private router: Router) {
         this.setLoggedIn(!!this.token);
-        this.decodeStoredToken();  // 🔁 Decodifica si ya hay un token al cargar el servicio
+        this.decodeStoredToken();
     }
 
     login(dni: string, password: string): Observable<any> {
@@ -88,7 +87,7 @@ export class AuthService {
         }
     }
 
-    // Métodos públicos para acceder a los datos del usuario
+
     getNombre(): string {
         return this.usuario.nombre || '';
     }

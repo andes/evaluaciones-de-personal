@@ -21,16 +21,24 @@ export class AppComponent implements OnInit {
         this.server.setBaseURL(environment.API);
         this.plex.updateTitle('EVALUACIONES DE PERSONAL');
 
-        // Se suscribe al estado de autenticación
+        // Suscripción al estado de autenticación
         this.authService.authStatus.subscribe(status => {
             this.isLoggedIn = status;
             if (status) {
                 this.crearMenu();
+            } else {
+                this.plex.updateMenu([]); // Oculta el menú si no está logueado
             }
         });
     }
 
-    ngOnInit() { }
+
+    ngOnInit() {
+        const token = this.authService.token;
+        if (token) {
+            this.authService.setLoggedIn(true); // Mantiene el login si hay token
+        }
+    }
 
     public crearMenu() {
         this.menuList = [];

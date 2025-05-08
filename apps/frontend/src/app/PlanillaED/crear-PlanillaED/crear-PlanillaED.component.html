@@ -1,31 +1,10 @@
+<div class="d-flex flex-column align-items-center mb-4">
+    <app-header></app-header>
+    <app-planilla></app-planilla>
+</div>
 <div class="contenedor-general">
-    <div class="row">
-        <!-- Columna del Menú a la izquierda -->
-        <div class="col-lg-3 col-md-4 col-12 contenedor-menu">
-            <div class="card">
-                <div class="card-body">
-                    <!-- Título del menú -->
-                    <div class="titulo-container">
-                        <plex-title titulo="PLANILLA DE EVALUACIÓN"></plex-title>
-                    </div>
-                    <!-- Contenedor del menú -->
-                    <div class="contenedor-cuadro">
-                        <button plexButton class="btn btn-light border rounded" (click)="onPlanillaEDClick()">
-                            <span class="material-icons">list_alt</span> Planilla Evaluación Desempeño. Items
-                        </button>
-                        <button plexButton class="btn btn-light border rounded" (click)="onServiciosClick()">
-                            <span class="material-icons">description</span> Planilla Evaluación Desempeño. Agentes
-                        </button>
-                        <button plexButton class="btn btn-light border rounded" (click)="onAgentesClick()">
-                            <span class="material-icons">arrow_back</span> Volver
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Columna del Contenido Principal (el formulario de crear planilla) -->
-        <div class="col-lg-9 col-md-8 col-12 contenedor-listado">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-12 contenedor-listado">
             <div class="card">
                 <div class="card-header bg-primary text-white text-center">
                     <h4 class="mb-0 font-weight-bold">AGREGAR NUEVA PLANILLA DE EVALUACIÓN</h4>

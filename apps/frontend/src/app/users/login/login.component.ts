@@ -1,4 +1,4 @@
-// src/app/login/login.component.ts
+
 import { Component } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
@@ -22,13 +22,13 @@ export class LoginComponent {
                     if (response && response.token) {
                         this.authService.guardarToken(response.token);
 
-                        // Si el backend envía info adicional del usuario:
+
                         if (response.user) {
                             localStorage.setItem('user', JSON.stringify(response.user));
                             console.log('Datos del usuario:', response.user);
                         }
 
-                        this.router.navigate(['/home']); // o a donde quieras
+                        this.router.navigate(['/home']);
                     } else {
                         this.errorMessage = 'DNI o contraseña incorrectos.';
                     }

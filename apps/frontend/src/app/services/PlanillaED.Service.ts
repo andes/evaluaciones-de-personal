@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
+
+const Swal = require('sweetalert2');
+
+
 
 export interface IPlanillaED extends Document {
     fechaCreacion: Date;
@@ -10,18 +15,19 @@ export interface IPlanillaED extends Document {
     descripcion: string;
     idServicio: string;  // ID de tipo string, que corresponde a un ObjectId de Mongoose
 }
+
 export interface Categoria {
     _id: string;
     descripcion: string;
 }
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class PlanillaEDService {
 
-    private baseUrl = 'http://localhost:3000/api'; // Cambia según la URL de tu backend
-
+    private baseUrl = 'http://localhost:3000/api';
     constructor(private http: HttpClient) { }
 
     getPlanillasED(): Observable<any[]> {
@@ -53,15 +59,26 @@ export class PlanillaEDService {
         return this.http.get<any[]>(`${this.baseUrl}/categorias`);
     }
 
+
     guardarPlanillaED(planilla: any): Observable<any> {
         return this.http.post(`${this.baseUrl}/planillasED`, planilla).pipe(
             catchError((error) => {
                 if (error.status === 400) {
-                    alert('Ya existe una planilla con este Efector y Servicio.');
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Atención',
+                        text: 'Ya existe una planilla con este Efector y Servicio.',
+                        confirmButtonText: 'Entendido'
+                    });
                 } else {
-                    alert('Ocurrió un error al guardar la planilla.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Ocurrió un error al guardar la planilla.',
+                        confirmButtonText: 'Cerrar'
+                    });
                 }
-                return throwError(error);
+                return throwError(() => error);
             })
         );
     }
@@ -120,7 +137,7 @@ export class PlanillaEDService {
 
     //items duplicado en planilla
     existsItemInPlanilla(planillaId: string, itemDesc: string): Observable<{ exists: boolean }> {
-        // Usamos encodeURIComponent para codificar la descripción correctamente
+
         const url = `${this.baseUrl}/planillasED/${planillaId}/items/existe?itemDesc=${encodeURIComponent(itemDesc)}`;
         return this.http.get<{ exists: boolean }>(url).pipe(
             catchError((error) => {

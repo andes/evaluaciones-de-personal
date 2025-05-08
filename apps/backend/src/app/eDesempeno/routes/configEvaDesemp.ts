@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { modelo } from '../schemas/configEvaDesemp';
-// import { application } from '../../application';
+
 
 const router = Router();
 
@@ -25,6 +25,16 @@ router.post('/rEvaDesemp', async (req, res) => {
         res.status(500).json({ error: 'Ha ocurrido un error' });
     }
 })
+
+router.delete('/rEvaDesemp', async (req, res) => {
+    try {
+        const resultado = await modelo.deleteMany({});
+        res.json({ message: `Se eliminaron ${resultado.deletedCount} registros.` });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al eliminar todos los registros.' });
+    }
+});
+
 
 
 
@@ -73,18 +83,6 @@ router.delete('/rEvaDesemp/:id', async (req, res) => {
         res.status(500).json({ error: 'Ha ocurrido un error' });
     }
 });
-
-// thunder   http://localhost:3000/api/rEvaDesemp/
-
-
-
-//put modificaar
-//router.post('/items', (req, res) => {
-//    const newItem = req.body; // El nuevo item se espera en el cuerpo de la solicitud
-//    items.pucategoriaitemssh(newItem);
-//    res.status(201).json(newItem); // Responder con el item creado y un código de estado 201
-//});
-
 
 export default router;
 

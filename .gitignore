@@ -22,4 +22,4 @@ typings/*
 .vscode
 
 #otros
-dist/nxdeps.json
+/dist/
