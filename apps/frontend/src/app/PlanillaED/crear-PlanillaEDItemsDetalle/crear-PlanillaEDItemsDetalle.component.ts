@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlanillaEDService } from '../../services/PlanillaED.Service';
-import { Router } from '@angular/router';
 
+const Swal = require('sweetalert2').default;
 
 @Component({
     selector: 'app-crear-planilla-ed-items-detalle',
@@ -10,15 +10,15 @@ import { Router } from '@angular/router';
     styleUrls: ['./crear-PlanillaEDItemsDetalle.component.css']
 })
 export class CrearPlanillaEDItemsDetalleComponent implements OnInit {
-    planillaId: string = '';
-    descripcionPlanilla: string = '';
-    efectorNombre: string = '';
-    servicioNombre: string = '';
-    descripcionCategoria: string = '';
-    categoriaId: string = '';
-    items: any[] = [];         // Ítems ya agregados a la planilla para la categoría
-    todosLosItems: any[] = []; // Lista de ítems disponibles para el combo
-    itemSeleccionado: string = ''; // ID del ítem seleccionado en el combo
+    planillaId = '';
+    descripcionPlanilla = '';
+    efectorNombre = '';
+    servicioNombre = '';
+    descripcionCategoria = '';
+    categoriaId = '';
+    items: any[] = [];
+    todosLosItems: any[] = [];
+    itemSeleccionado = '';
 
     constructor(
         private route: ActivatedRoute,
@@ -27,7 +27,6 @@ export class CrearPlanillaEDItemsDetalleComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        // Obtener parámetros de la URL
         this.route.queryParams.subscribe(params => {
             this.planillaId = params['planillaId'];
             this.descripcionPlanilla = params['descripcion'];
@@ -35,59 +34,52 @@ export class CrearPlanillaEDItemsDetalleComponent implements OnInit {
             this.servicioNombre = params['servicio'];
             this.descripcionCategoria = params['descripcionCategoria'];
             this.categoriaId = params['categoriaId'];
-
-            // Cargar los ítems existentes y los disponibles para el combo
             this.cargarItems();
             this.cargarTodosLosItems();
         });
     }
 
     cargarItems(): void {
-        // Obtener los ítems ya agregados a la planilla para esta categoría
         this.planillaEDService.obtenerItemsPorPlanillaYCategoria(this.planillaId, this.categoriaId)
-            .subscribe((response: any) => {
-                this.items = response.items;
-            }, error => {
-                console.error('Error al cargar los ítems:', error);
+            .subscribe({
+                next: (resp: any) => this.items = resp.items,
+                error: err => console.error('Error al cargar los ítems:', err)
             });
     }
 
     cargarTodosLosItems(): void {
         this.planillaEDService.obtenerItems().subscribe({
-            next: items => {
-                this.todosLosItems = items;
-                console.log('Todos los ítems cargados para el combo:', this.todosLosItems);
-            },
+            next: items => this.todosLosItems = items,
             error: err => console.error('Error al cargar ítems:', err)
         });
     }
 
     agregarNuevoItem(): void {
-        // Validar que se haya seleccionado un ítem
         if (!this.itemSeleccionado) {
             console.warn('Por favor, selecciona un ítem.');
             return;
         }
-
-        // Buscar el ítem seleccionado en el listado de todosLosItems
         const item = this.todosLosItems.find(i => i._id === this.itemSeleccionado);
-        if (!item) {
-            console.warn('Ítem seleccionado no encontrado en la lista.');
+        if (!item || !item.descripcion) {
+            console.warn('Ítem seleccionado no encontrado o sin descripción.');
             return;
         }
 
-        // Verificar si el ítem ya existe en la planilla (para evitar duplicados)
         this.planillaEDService.existsItemInPlanilla(this.planillaId, item.descripcion).subscribe({
             next: response => {
                 if (response.exists) {
-                    alert('El ítem ya existe en la planilla.');
-                    return; // Detener el flujo si el ítem ya existe
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Ítem duplicado',
+                        text: 'El ítem ya existe en la planilla.',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    return;
                 }
 
-                // Construir el objeto con la estructura requerida
                 const categoriaConItems = {
-                    categoria: this.categoriaId,                     // La categoría ya viene por query params
-                    descripcionCategoria: this.descripcionCategoria, // Usamos la descripción recibida
+                    categoria: this.categoriaId,
+                    descripcionCategoria: this.descripcionCategoria,
                     items: [{
                         idItem: item._id,
                         descripcion: item.descripcion,
@@ -95,52 +87,60 @@ export class CrearPlanillaEDItemsDetalleComponent implements OnInit {
                     }]
                 };
 
-                // Mostrar en consola lo que se enviará a la API
-                console.log('Datos enviados a la API:', categoriaConItems);
-
-                // Enviar el objeto al servicio para agregar la categoría e ítems
                 this.planillaEDService.agregarCategoriaItems(this.planillaId, categoriaConItems).subscribe({
-                    next: response => {
-                        console.log('Categoría e ítems guardados con éxito:', response);
-                        // Recargar los ítems para que se vea el cambio en la vista
+                    next: _ => {
                         this.cargarItems();
-                        alert('Categoría e ítems guardados con éxito.');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Guardado con éxito',
+                            text: 'Categoría e ítems guardados correctamente.',
+                            confirmButtonText: 'OK'
+                        });
                     },
                     error: err => {
-                        console.error('Error al guardar la categoría e ítems:', err);
+                        console.error('Error al guardar:', err);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'No se pudo guardar la categoría e ítems.',
+                            confirmButtonText: 'Cerrar'
+                        });
                     }
                 });
             },
             error: err => {
-                console.error('Error al verificar la existencia del ítem:', err);
+                console.error('Error al verificar existencia:', err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al verificar la existencia del ítem.',
+                    confirmButtonText: 'Cerrar'
+                });
             }
         });
     }
 
-    // Nuevo método para eliminar un ítem de la planilla
     eliminarItem(item: any): void {
-        console.log('Item recibido para eliminar:', item);
+
         if (!item || !item.descripcion) {
             console.error('El objeto item o su propiedad descripcion no están definidos.');
             return;
         }
-        console.log('Planilla ID:', this.planillaId);
         this.planillaEDService.eliminarItem(this.planillaId, item.descripcion).subscribe({
-            next: response => {
-                console.log('Ítem eliminado correctamente:', response);
-                this.cargarItems();
-            },
-            error: error => {
-                console.error('Error al eliminar ítem:', error);
-                alert('Ocurrió un error al eliminar el ítem.');
+            next: _ => this.cargarItems(),
+            error: err => {
+                console.error('Error al eliminar ítem:', err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al eliminar el ítem.',
+                    confirmButtonText: 'Cerrar'
+                });
             }
         });
-
-
     }
 
-
-    public onPlanillaEDClick(): void {
+    onPlanillaEDClick(): void {
         this.router.navigate(['/listar-planillaEDRouter']);
     }
 }

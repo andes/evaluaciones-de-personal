@@ -13,13 +13,3 @@ const ServicioSchema = new Schema<IServicio>({
 export const ServicioModel = mongoose.model<IServicio>('Servicios', ServicioSchema, 'servicios');
 
 export { ServicioSchema };
-/*
-
-const schema = new mongoose.Schema({
-    nombre: { type: String },
-
-});
-
-export const modelo = mongoose.model('servicios', schema, 'servicios');
-*/
-

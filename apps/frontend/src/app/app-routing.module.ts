@@ -22,7 +22,7 @@ import { RegisterComponent } from './users/register/register.component';
 
 import { AuthGuard } from './auth.guard';
 
-import { ComunesComponent } from './shared/menu/comunes.component';
+
 
 const appRoutes: Routes = [
 
@@ -33,11 +33,7 @@ const appRoutes: Routes = [
                 pathMatch: 'full'
         },
 
-        //  {
-        //         path: 'menuparametros',
-        //         component: ListarCategoriaComponent, // ¡Aquí está el cambio!
-        //         pathMatch: 'full'
-        // },
+
 
         {
                 path: 'menuPlanillaED',
@@ -45,11 +41,6 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },
-
-
-
-
-
 
         {
                 path: 'ListarCategoriasComponent',

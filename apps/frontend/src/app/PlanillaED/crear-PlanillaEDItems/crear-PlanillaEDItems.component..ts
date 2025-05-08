@@ -1,8 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlanillaEDService } from '../../services/PlanillaED.Service';
 import { CategoryService } from '../../services/categoria.service';
-import { Router } from '@angular/router';
+
+const Swal = require('sweetalert2').default;
 
 @Component({
     selector: 'app-crear-planilla-ed-items',
@@ -10,15 +12,15 @@ import { Router } from '@angular/router';
     styleUrls: ['./crear-PlanillaEDItems.component.css']
 })
 export class CrearPlanillaEDItemsComponent implements OnInit {
-    idPlanilla: string = '';
-    descripcionPlanilla: string = '';
-    efectorNombre: string = '';
-    servicioNombre: string = '';
+    idPlanilla = '';
+    descripcionPlanilla = '';
+    efectorNombre = '';
+    servicioNombre = '';
     categorias: any[] = [];
     categoriasPlanilla: any[] = [];
-    categoriaSeleccionada: string = '';
+    categoriaSeleccionada = '';
     items: any[] = [];
-    itemSeleccionado: string = '';
+    itemSeleccionado = '';
 
     constructor(
         private route: ActivatedRoute,
@@ -33,30 +35,22 @@ export class CrearPlanillaEDItemsComponent implements OnInit {
             this.descripcionPlanilla = params['descripcion'];
             this.efectorNombre = params['efector'];
             this.servicioNombre = params['servicio'];
-            console.log('Parametros recibidos:', params);
+            this.cargarItems();
+            this.cargarCategorias();
+            this.cargarCategoriasDePlanilla();
         });
-
-        this.cargarItems();
-        this.cargarCategorias();
-        this.cargarCategoriasDePlanilla();
     }
 
     cargarItems(): void {
         this._PlanillaEDService.obtenerItems().subscribe({
-            next: items => {
-                this.items = items;
-                console.log('Items cargados:', items);
-            },
+            next: items => this.items = items,
             error: err => console.error('Error al cargar items:', err)
         });
     }
 
     cargarCategorias(): void {
         this._CategoryService.obtenerCategoriasOrdenadas().subscribe({
-            next: categorias => {
-                this.categorias = categorias.sort((a, b) => a.descripcion.localeCompare(b.descripcion));
-                console.log('Categorías cargadas:', this.categorias);
-            },
+            next: categorias => this.categorias = categorias,
             error: err => console.error('Error al cargar categorías:', err)
         });
     }
@@ -67,101 +61,99 @@ export class CrearPlanillaEDItemsComponent implements OnInit {
             return;
         }
         this._PlanillaEDService.obtenerCategoriasPorPlanilla(this.idPlanilla).subscribe({
-            next: data => {
-                this.categoriasPlanilla = data.categorias;
-                console.log('Categorías de la planilla cargadas:', this.categoriasPlanilla);
-            },
+            next: data => this.categoriasPlanilla = data.categorias,
             error: err => console.error('Error al cargar categorías de la planilla:', err)
         });
     }
 
     aceptarSeleccion(): void {
-        console.log('Intentando agregar ítems...');
-
         if (!this.categoriaSeleccionada || !this.itemSeleccionado) {
-            console.warn('Por favor, selecciona una categoría y un ítem antes de continuar.');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Datos incompletos',
+                text: 'Selecciona categoría e ítem antes de continuar.',
+                confirmButtonText: 'Aceptar'
+            });
             return;
         }
 
-        // Depurar valores antes de buscarlos
-        console.log('Categoría seleccionada:', this.categoriaSeleccionada);
-        console.log('Ítem seleccionado:', this.itemSeleccionado);
-
-        // Buscar la categoría
         const categoria = this.categorias.find(cat => cat._id === this.categoriaSeleccionada);
-        if (!categoria) {
-            console.warn('Categoría seleccionada no encontrada.');
+        const item = this.items.find(i => i._id === this.itemSeleccionado);
+        if (!categoria || !item) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Selección inválida',
+                text: 'No se encontró la categoría o el ítem.',
+                confirmButtonText: 'Cerrar'
+            });
             return;
         }
 
-        // Buscar el ítem seleccionado
-        const item = this.items.find(item => item._id === this.itemSeleccionado);
-        if (!item) {
-            console.warn('Ítem seleccionado no encontrado en la lista de ítems.');
-            return;
-        }
-
-        // Verificar que el ítem tiene todos los datos necesarios
-        console.log('Ítem encontrado:', item);
-
-        // Verificar si el ítem ya existe en la planilla antes de guardarlo
         this._PlanillaEDService.existsItemInPlanilla(this.idPlanilla, item.descripcion).subscribe({
             next: response => {
                 if (response.exists) {
-                    alert('El ítem ya existe en la planilla.');
-                    return; // Detener el flujo aquí si el ítem ya existe
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Ítem duplicado',
+                        text: 'El ítem ya existe en la planilla.',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    return;
                 }
 
-                // Construir el objeto correctamente
                 const categoriaConItems = {
                     categoria: categoria._id,
                     descripcionCategoria: categoria.descripcion,
-                    items: [{
-                        idItem: item._id,
-                        descripcion: item.descripcion,
-                        valor: item.valor
-                    }]
+                    items: [{ idItem: item._id, descripcion: item.descripcion, valor: item.valor }]
                 };
 
-                // Mostrar en la consola antes de enviar
-                console.log('Datos enviados a la API:', categoriaConItems);
-
-                // Enviar al servicio
                 this._PlanillaEDService.agregarCategoriaItems(this.idPlanilla, categoriaConItems).subscribe({
-                    next: response => {
-                        console.log('Categoría e ítems guardados con éxito:', response);
+                    next: () => {
                         this.cargarCategoriasDePlanilla();
-                        alert('Categoría e ítems guardados con éxito.');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Guardado con éxito',
+                            text: 'Categoría e ítems guardados correctamente.',
+                            confirmButtonText: 'OK'
+                        });
                     },
                     error: err => {
                         console.error('Error al guardar la categoría e ítems:', err);
-                        if (err.error) {
-                            console.error('Detalles del error:', err.error);
-                        }
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'No se pudo guardar la categoría e ítems.',
+                            confirmButtonText: 'Cerrar'
+                        });
                     }
                 });
             },
             error: err => {
                 console.error('Error al verificar la existencia del ítem:', err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al verificar la existencia del ítem.',
+                    confirmButtonText: 'Cerrar'
+                });
             }
         });
     }
 
-
     navegarADetalle(categoriaId: string, descripcionCategoria: string): void {
-        const queryParams = {
-            planillaId: this.idPlanilla,
-            descripcion: this.descripcionPlanilla,
-            efector: this.efectorNombre,
-            servicio: this.servicioNombre,
-            descripcionCategoria,
-            categoriaId
-        };
-        console.log('Navegando a detalle con parámetros:', queryParams);
-        this.router.navigate([`/crear-planilla-ed-items-detalle/${categoriaId}`], { queryParams });
+        this.router.navigate([`/crear-planilla-ed-items-detalle/${categoriaId}`], {
+            queryParams: {
+                planillaId: this.idPlanilla,
+                descripcion: this.descripcionPlanilla,
+                efector: this.efectorNombre,
+                servicio: this.servicioNombre,
+                descripcionCategoria,
+                categoriaId
+            }
+        });
     }
 
-    public onPlanillaEDClick(): void {
+    onPlanillaEDClick(): void {
         this.router.navigate(['/listar-planillaEDRouter']);
     }
 }

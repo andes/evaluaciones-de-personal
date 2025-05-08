@@ -1,8 +1,7 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
 
-import { User } from '../users/user.schema'; // Asegúrate de que la ruta del modelo sea correcta
-//import jwt from 'jsonwebtoken';
+import { User } from '../users/user.schema';
 const jwt = require('jsonwebtoken');
 
 import dotenv from 'dotenv';
@@ -69,12 +68,12 @@ router.post('/register', async (req: Request, res: Response) => {
     const { dni, password, legajo, nombre, rol, idefector, idservicio, email } = req.body;
 
 
-    console.log('Datos recibidos:', req.body); // 👉 Log del request
+    console.log('Datos recibidos:', req.body); //  Log del request
 
     try {
         // Verificar si el usuario ya existe
         const existingUser = await User.findOne({ dni });
-        console.log('🔍 Usuario existente:', existingUser); // 👉 Ver si ya existe
+        console.log('🔍 Usuario existente:', existingUser); //  Ver si ya existe
 
         if (existingUser) {
             return res.status(400).json({ message: 'El usuario ya existe' });
@@ -92,7 +91,7 @@ router.post('/register', async (req: Request, res: Response) => {
             email
         });
 
-        console.log('📦 Nuevo usuario a guardar:', newUser); // 👉 Antes de guardar
+        console.log('📦 Nuevo usuario a guardar:', newUser); //  Antes de guardar
 
         await newUser.save(); // Guardar en la base de datos
 
@@ -100,7 +99,7 @@ router.post('/register', async (req: Request, res: Response) => {
 
         res.status(201).json({ message: 'Usuario creado correctamente', user: newUser });
     } catch (error) {
-        console.error('❌ Error al registrar usuario:', error); // 👉 Este muestra el error real
+        console.error('❌ Error al registrar usuario:', error); //  Este muestra el error real
         res.status(500).json({ message: 'Error en el servidor', error: error.message });
     }
 });
