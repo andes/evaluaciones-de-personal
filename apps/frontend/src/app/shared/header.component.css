@@ -1,0 +1,114 @@
+.header {
+    position: relative;
+    width: 100vw;
+    left: 0;
+    background-color: #0db9fd !important;
+    padding: 30px;
+    border-radius: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    z-index: 999;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header p {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 300;
+    opacity: 0.95;
+}
+
+.card-header-blanco {
+    background-color: white !important;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Menú Lavalamp */
+nav {
+    position: relative;
+    width: 100vw;
+    height: 70px;
+    background-color: #34495e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0;
+    overflow: hidden;
+    z-index: 998;
+}
+
+nav a {
+    flex: 1;
+    text-align: center;
+    height: 100%;
+    line-height: 70px;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    cursor: pointer;
+}
+
+/* Elemento animado tipo "lava lamp" */
+nav .animation {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    z-index: 0;
+    transition: all 0.4s ease;
+    border-radius: 0;
+}
+
+/* Estilos para cada posición animada (usamos % del ancho) */
+nav .start-home,
+a:nth-child(1):hover~.animation {
+    width: 20%;
+    left: 0%;
+    background-color: #1abc9c;
+}
+
+nav .start-about,
+a:nth-child(2):hover~.animation {
+    width: 20%;
+    left: 20%;
+    background-color: #e74c3c;
+}
+
+nav .start-blog,
+a:nth-child(3):hover~.animation {
+    width: 20%;
+    left: 40%;
+    background-color: #3498db;
+}
+
+nav .start-portefolio,
+a:nth-child(4):hover~.animation {
+    width: 20%;
+    left: 60%;
+    background-color: #9b59b6;
+}
+
+nav .start-contact,
+a:nth-child(5):hover~.animation {
+    width: 20%;
+    left: 80%;
+    background-color: #e67e22;
+}

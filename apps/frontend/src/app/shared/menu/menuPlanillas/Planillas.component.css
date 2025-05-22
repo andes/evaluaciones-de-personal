@@ -1,0 +1,29 @@
+.titulo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.titulo-container plex-title {
+    width: 100%;
+    text-align: center;
+}
+
+.titulo-texto {
+    width: 100%;
+    text-align: center;
+}
+
+.menu-fondo {
+    background-color: transparent;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.celeste-btn {
+    background-color: #0db9fd !important;
+    color: #fff !important;
+    border-color: #0db9fd !important;
+}

@@ -1,0 +1,118 @@
+/* Contenedor general que ocupa toda la pantalla */
+/* Contenedor del título alineado a la izquierda */
+.titulo-container {
+    display: flex;
+    /* Utiliza Flexbox */
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    padding: 10px 0;
+    /* Espaciado superior e inferior para el título */
+    width: 100%;
+    /* Ocupa el 100% del ancho disponible */
+}
+
+.contenedor-general {
+    height: 100vh;
+    /* Ocupa el 100% del alto de la pantalla */
+    display: flex;
+    flex-direction: column;
+    /* Organiza en columna */
+    justify-content: flex-start;
+    /* Reemplaza "start" por "flex-start" */
+    align-items: stretch;
+    overflow: hidden;
+    /* Evita desbordes */
+}
+
+/* Estilos para la columna del menú */
+.contenedor-menu {
+    height: 100vh;
+    /* Ocupa todo el alto de la pantalla */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Reemplaza "start" por "flex-start" */
+    padding: 10px;
+    background-color: #f8f9fa;
+    /* Color de fondo del menú */
+}
+
+.contenedor-cuadro {
+    background-color: #f0f0f0;
+    /* Fondo gris */
+    padding: 20px 30px;
+    /* Añadir espacio alrededor */
+    max-width: 400px;
+    /* Ancho máximo del contenedor */
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    margin-left: 10px;
+    /* Margen izquierdo para separar del borde */
+    text-align: left;
+    /* Alinea el texto a la izquierda */
+    display: flex;
+    /* Flexbox para el contenido */
+    flex-direction: column;
+    /* Acomoda los elementos en columna */
+    gap: 12px;
+    /* Espacio entre los elementos */
+    border: none;
+    /* Eliminar el borde */
+}
+
+.contenedor-cuadro button {
+    display: flex;
+    align-items: center;
+    /* Centra verticalmente el contenido */
+}
+
+.contenedor-cuadro .material-icons {
+    margin-right: 8px;
+    /* Espacio entre el ícono y el texto */
+}
+
+/* Contenedor de la tabla/listado */
+.contenedor-listado {
+    height: 100vh;
+    /* Ocupa toda la pantalla */
+    overflow-y: auto;
+    /* Agrega scroll si es necesario */
+    padding: 20px;
+}
+
+plex-title {
+    font-size: 18px;
+    /* Ajusta el tamaño de la fuente para hacerlo más pequeño */
+    font-weight: normal;
+    /* Si deseas que no esté en negrita */
+    text-align: left;
+    /* Alineación a la izquierda */
+}
+
+.titulo-evaluacion {
+    font-size: 18px;
+    /* Tamaño de fuente más pequeño */
+    font-weight: normal;
+    /* Elimina la negrita si prefieres */
+    text-align: center;
+    /* Centra el texto */
+    margin-left: 20px;
+    /* Margen izquierdo si quieres que se desplace un poco */
+    padding: 10px 0;
+    /* Espaciado superior e inferior */
+    color: #333;
+    /* Color del texto */
+    background: none;
+    /* Elimina cualquier fondo */
+    border: none;
+    /* Elimina cualquier borde */
+    width: 100%;
+    /* Asegura que ocupe todo el ancho del contenedor */
+    display: flex;
+    justify-content: center;
+    /* Centra el título dentro del contenedor */
+    align-items: center;
+    /* Alinea verticalmente */
+}

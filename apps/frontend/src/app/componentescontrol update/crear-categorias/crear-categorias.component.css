@@ -1,0 +1,9 @@
+.btn-custom-red {
+    background-color: red;
+    border: none;
+    color: white;
+}
+
+.btn-custom-red:hover {
+    background-color: darkred;
+}

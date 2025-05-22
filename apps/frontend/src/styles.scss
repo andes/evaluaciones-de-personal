@@ -1,8 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
 @import '../../../node_modules/@andes/plex/src/lib/styles.scss';
 
+body,
+app-root,
+.header-container {
+    margin: 0;
+    padding: 0;
+}
+
 // Overrides
-$nav-bar-color:  #4d7998;
+$nav-bar-color: #00bcd4;
 
 :root {
     // --nav-bar-color: #7a3e7b;
@@ -16,6 +22,7 @@ body {
 
 a.hover {
     color: $nav-bar-color !important;
+
     &:hover {
         color: darken($nav-bar-color, 20%) !important;
     }
@@ -30,6 +37,7 @@ plex-icon i.mdi-menu {
 .bg-inverse {
     background-color: var(--nav-bar-color) !important;
 }
+
 // Fin Overrides 
 
 .logo-nav {
@@ -40,6 +48,7 @@ plex-icon i.mdi-menu {
     background-color: var(--nav-bar-icon-color);
     width: 48px;
     height: 50px;
+
     plex-icon {
         height: 50px;
     }
@@ -50,7 +59,8 @@ plex-icon i.mdi-menu {
 p.lead {
     font-size: 1.25rem;
 }
-.secondary{
+
+.secondary {
     font-size: 1rem;
 }
 
@@ -61,22 +71,26 @@ plex-panel {
     .card {
         border: 0;
     }
+
     .card-header {
         background-color: #dae5ec;
         border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-        border-left: 4px solid rgba(0,0,0,0.125);
+        border-left: 4px solid rgba(0, 0, 0, 0.125);
         margin: 2px 0;
     }
+
     .card-block {
         padding-top: 0.2rem;
         padding-left: 0.5rem;
         border-left: 4px solid rgba(0, 0, 0, 0.125);
     }
+
     plex-accordion {
         plex-panel {
             .card-header {
                 background-color: #e6e6e6;
                 padding: 0.45rem 0.75rem;
+
                 h5 {
                     font-size: 1rem;
                 }
