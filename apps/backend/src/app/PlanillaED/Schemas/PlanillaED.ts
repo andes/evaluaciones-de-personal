@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 import { ICategoriaItem } from '../../categoriaitems/schemas/categoriaItems';
 
+
 const Schema = mongoose.Schema;
 
 // Interfaz extendida para incluir categorías e ítems

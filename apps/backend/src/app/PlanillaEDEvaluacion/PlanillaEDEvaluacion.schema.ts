@@ -2,17 +2,16 @@ import * as mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-// Interface para ítems
 const ItemEvaluacionSchema = new Schema(
     {
-        idItems: { type: String, required: true },
+        idItems: { type: String, required: false }, // opcional ahora
         descripcion: { type: String, required: true },
         valor: { type: Number, required: true }
     },
     { _id: false }
 );
 
-// Interface para categorías
+
 const CategoriaEvaluacionSchema = new Schema(
     {
         idCategoria: { type: mongoose.Schema.Types.ObjectId, ref: 'Categoria', required: true },
@@ -21,6 +20,7 @@ const CategoriaEvaluacionSchema = new Schema(
     },
     { _id: false }
 );
+
 
 // Interface para agentes evaluados
 const AgenteEvaluadoSchema = new Schema(
@@ -51,7 +51,7 @@ export interface IPlanillaEDEvaluacion extends mongoose.Document {
             idCategoria: mongoose.Schema.Types.ObjectId;
             descripcion: string;
             items: {
-                idItems: string;
+                idItems?: string;
                 descripcion: string;
                 valor: number;
             }[];
@@ -65,11 +65,7 @@ const PlanillaEDEvaluacionSchema = new Schema<IPlanillaEDEvaluacion>(
         idPlanillaED: { type: Schema.Types.ObjectId, ref: 'PlanillaED', required: true },
         periodo: {
             type: Date,
-            required: true,
-            validate: {
-                validator: (d: Date) => d.getDate() === 1,
-                message: 'El periodo debe corresponder al primer día del mes (solo mes y año)'
-            }
+            required: true
         },
         idAgenteEvaluador: { type: Schema.Types.ObjectId, ref: 'Agente', required: true },
         nombreAgenteEvaluador: { type: String, required: true },
@@ -83,6 +79,7 @@ const PlanillaEDEvaluacionSchema = new Schema<IPlanillaEDEvaluacion>(
     },
     { collection: 'planillaed_evaluaciones' }
 );
+
 
 // Exportación del modelo
 export const PlanillaEDEvaluacionModel = mongoose.model<IPlanillaEDEvaluacion>(
