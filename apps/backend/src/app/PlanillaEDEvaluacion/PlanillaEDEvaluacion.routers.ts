@@ -134,6 +134,160 @@ router.post('/:idPlanillaED/agente', async (req, res) => {
     }
 });
 
+//agrega items y categoria segun id planilla
+/*
+router.post('/:idEvaluacionED/agente/:idAgente/categorias-desde-plantilla', async (req, res) => {
+    console.log('➡️ Entró a la ruta POST /:idEvaluacionED/agente/:idAgente/categorias-desde-plantilla');
+
+    try {
+        const { idEvaluacionED, idAgente } = req.params;
+        console.log('📌 Params:', { idEvaluacionED, idAgente });
+
+        if (!mongoose.isValidObjectId(idEvaluacionED) || !mongoose.isValidObjectId(idAgente)) {
+            console.log('❌ ID inválido');
+            return res.status(400).json({ mensaje: 'ID inválido.' });
+        }
+
+        const evaluacion = await PlanillaEDEvaluacionModel.findById(idEvaluacionED);
+        if (!evaluacion) {
+            console.log('❌ Evaluación no encontrada');
+            return res.status(404).json({ mensaje: 'Evaluación no encontrada.' });
+        }
+
+        console.log('✅ Evaluación encontrada:', evaluacion._id);
+
+        const plantilla = await PlanillaEDModel.findById(evaluacion.idPlanillaED);
+        if (!plantilla) {
+            console.log('❌ Plantilla base no encontrada');
+            return res.status(404).json({ mensaje: 'Plantilla base no encontrada.' });
+        }
+
+        console.log('✅ Plantilla encontrada:', plantilla._id);
+
+        const categoriasDesdePlantilla = plantilla.categorias.map(function (cat) {
+            return {
+                idCategoria: cat.categoria._id,  // ✅ CORREGIDO: usamos solo el _id
+                descripcion: cat.descripcion,
+                items: cat.items.map(function (item) {
+                    return {
+                        idItems: item._id.toString(),
+                        descripcion: item.descripcion,
+                        valor: 0
+                    };
+                })
+            };
+        });
+
+
+        console.log('📦 Categorías generadas desde plantilla:', categoriasDesdePlantilla);
+
+        const agenteIndex = evaluacion.agentes.findIndex(function (a) {
+            return a.idAgente.toString() === idAgente;
+        });
+
+        if (agenteIndex === -1) {
+            console.log('❌ Agente no encontrado en la evaluación');
+            return res.status(404).json({ mensaje: 'Agente no encontrado en la evaluación.' });
+        }
+
+        console.log('✅ Agente encontrado en índice:', agenteIndex);
+
+        evaluacion.agentes[agenteIndex].categorias = categoriasDesdePlantilla;
+
+        await evaluacion.save();
+
+        console.log('💾 Evaluación guardada con nuevas categorías');
+
+        res.status(200).json({
+            mensaje: 'Categorías e ítems agregados al agente.',
+            evaluacion
+        });
+
+    } catch (error) {
+        console.error('❌ Error al agregar categorías e ítems:', error && error.message, error && error.stack);
+        res.status(500).json({
+            mensaje: 'Error interno al agregar categorías',
+            error: (error && error.message) || 'Error desconocido'
+        });
+    }
+});
+
+*/
+
+router.post('/:idEvaluacionED/agente/:idAgente/categorias-desde-plantilla', async (req, res) => {
+    console.log('➡️ Entró a la ruta POST /:idEvaluacionED/agente/:idAgente/categorias-desde-plantilla');
+
+    try {
+        const { idEvaluacionED, idAgente } = req.params;
+        console.log('📌 Params:', { idEvaluacionED, idAgente });
+
+        if (!mongoose.isValidObjectId(idEvaluacionED) || !mongoose.isValidObjectId(idAgente)) {
+            console.log('❌ ID inválido');
+            return res.status(400).json({ mensaje: 'ID inválido.' });
+        }
+
+        const evaluacion = await PlanillaEDEvaluacionModel.findById(idEvaluacionED);
+        if (!evaluacion) {
+            console.log('❌ Evaluación no encontrada');
+            return res.status(404).json({ mensaje: 'Evaluación no encontrada.' });
+        }
+
+        console.log('✅ Evaluación encontrada:', evaluacion._id);
+
+        const plantilla = await PlanillaEDModel.findById(evaluacion.idPlanillaED);
+        if (!plantilla) {
+            console.log('❌ Plantilla base no encontrada');
+            return res.status(404).json({ mensaje: 'Plantilla base no encontrada.' });
+        }
+
+        console.log('✅ Plantilla encontrada:', plantilla._id);
+
+        const categoriasDesdePlantilla = plantilla.categorias.map(cat => ({
+            idCategoria: cat.categoria._id,
+            descripcion: cat.descripcion,
+            items: cat.items.map(item => ({
+                //  idItems: item.idItems || generateUniqueIdSomehow(), // si no existe, crealo
+                descripcion: item.descripcion,
+                valor: 0
+            }))
+        }));
+
+        console.log('📦 Categorías generadas desde plantilla:', categoriasDesdePlantilla);
+
+        const agenteIndex = evaluacion.agentes.findIndex((a) => a.idAgente.toString() === idAgente);
+        if (agenteIndex === -1) {
+            console.log('❌ Agente no encontrado en la evaluación');
+            return res.status(404).json({ mensaje: 'Agente no encontrado en la evaluación.' });
+        }
+
+        console.log('✅ Agente encontrado en índice:', agenteIndex);
+
+        evaluacion.agentes[agenteIndex].categorias = categoriasDesdePlantilla;
+
+        await evaluacion.save();
+
+        console.log('💾 Evaluación guardada con nuevas categorías');
+
+        return res.status(200).json({
+            mensaje: 'Categorías e ítems agregados al agente.',
+            evaluacion
+        });
+
+    } catch (error) {
+        const mensajeError = (error && (error as any).message) || 'Error desconocido';
+        const stackError = (error && (error as any).stack) || 'Sin stack';
+
+        console.error('❌ Error al agregar categorías e ítems:', mensajeError, stackError);
+
+        return res.status(500).json({
+            mensaje: 'Error interno al agregar categorías',
+            error: mensajeError
+        });
+    }
+
+
+});
+
 
 
 export default router;

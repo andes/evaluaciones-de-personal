@@ -1,7 +1,8 @@
 import * as mongoose from 'mongoose';
-// Aquí sólo importas los modelos que realmente necesitas
 import { ICategoriaItem } from '../../categoriaitems/schemas/categoriaItems';  // No es necesario importar CategoriaItemSchema aquí
 import { IItem } from '../../Items/schemas/items';  // Deberías importar IItem si lo necesitas
+
+//  '../models/PlanillaModel';
 
 const Schema = mongoose.Schema;
 

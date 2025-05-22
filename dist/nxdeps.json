@@ -915,17 +915,27 @@
             {
               "file": "apps/backend/src/app/PlanillaED/Schemas/PlanillaED.ts",
               "ext": ".ts",
-              "mtime": 1746715380843.976
+              "mtime": 1747837790496.2202
             },
             {
               "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.routers.ts",
               "ext": ".ts",
-              "mtime": 1747402678365.915
+              "mtime": 1747918087161.157
             },
             {
               "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.schema.ts",
               "ext": ".ts",
-              "mtime": 1747394804243.4873
+              "mtime": 1747916765429.1604
+            },
+            {
+              "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacionDet.router.ts",
+              "ext": ".ts",
+              "mtime": 1747826394281.3167
+            },
+            {
+              "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacionDet.schema.ts",
+              "ext": ".ts",
+              "mtime": 1747834848054.7988
             },
             {
               "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",
@@ -1070,7 +1080,7 @@
             {
               "file": "apps/backend/src/main.ts",
               "ext": ".ts",
-              "mtime": 1747402635745.209
+              "mtime": 1747839387857.221
             },
             {
               "file": "apps/backend/tsconfig.app.json",
@@ -2672,17 +2682,27 @@
       {
         "file": "apps/backend/src/app/PlanillaED/Schemas/PlanillaED.ts",
         "ext": ".ts",
-        "mtime": 1746715380843.976
+        "mtime": 1747837790496.2202
       },
       {
         "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.routers.ts",
         "ext": ".ts",
-        "mtime": 1747402678365.915
+        "mtime": 1747918087161.157
       },
       {
         "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.schema.ts",
         "ext": ".ts",
-        "mtime": 1747394804243.4873
+        "mtime": 1747916765429.1604
+      },
+      {
+        "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacionDet.router.ts",
+        "ext": ".ts",
+        "mtime": 1747826394281.3167
+      },
+      {
+        "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacionDet.schema.ts",
+        "ext": ".ts",
+        "mtime": 1747834848054.7988
       },
       {
         "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",
@@ -2827,7 +2847,7 @@
       {
         "file": "apps/backend/src/main.ts",
         "ext": ".ts",
-        "mtime": 1747402635745.209
+        "mtime": 1747839387857.221
       },
       {
         "file": "apps/backend/tsconfig.app.json",

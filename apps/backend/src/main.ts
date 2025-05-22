@@ -27,8 +27,10 @@ application.add({ path: '/api', router: ServiciosRouter })
 application.add({ path: '/api', router: PlanillaEDRouter })
 application.add({ path: '/api', router: EdCategoriaItems })
 application.add({ path: '/api', router: agenterouter })
-application.add({ path: '/api', router: planillaEDEvaluacionRouter })
-application.add({ path: '/api/planilla-ed', router: planillaEDEvaluacionRouter });
+application.add({ path: '/api/planillaEvaluacion', router: planillaEDEvaluacionRouter });
+
+//application.add({ path: '/api', router: planillaEDEvaluacionRouter })
+//application.add({ path: '/api/planilla-ed', router: planillaEDEvaluacionRouter });
 
 // ruta para la autenticación (login)
 application.add({ path: '/api', router: AuthRouter });
