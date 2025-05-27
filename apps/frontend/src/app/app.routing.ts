@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { AppHomeComponent } from './home/home.component';
-import { MenuComunesComponent } from './home/menucomunes.component';
 import { MenuPlanillaEDComponent } from './home/MenuPlanillaED.component';
 
 import { ListarCategoriaComponent } from './componentes/listar-categorias/listar-categorias.component';
@@ -14,7 +13,7 @@ import { EditItemsComponent } from './Items/editar-items/edit-items.component';
 
 import { ListarPlanillaEDComponent } from './PlanillaED/listar-PlanillaED/listar-PlanillaED.component';
 import { CrearPlanillaEDComponent } from './PlanillaED/crear-PlanillaED/crear-PlanillaED.component';
-import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.';
+import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component';
 import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component';
 
 import { LoginComponent } from './users/login/login.component';
@@ -22,26 +21,18 @@ import { RegisterComponent } from './users/register/register.component';
 
 import { AuthGuard } from './auth.guard';
 
-
-
 const appRoutes: Routes = [
-
         {
                 path: 'menucomunes',
                 component: ListarCategoriaComponent,
-                canActivate: [],
                 pathMatch: 'full'
         },
-
-
-
         {
                 path: 'menuPlanillaED',
                 component: MenuPlanillaEDComponent,
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },
-
         {
                 path: 'ListarCategoriasComponent',
                 component: ListarCategoriaComponent,
@@ -60,7 +51,6 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },
-
         {
                 path: 'ListarItems',
                 component: ListarItemsComponent,
@@ -73,36 +63,30 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },
-
         {
                 path: 'editar-items/:id',
                 component: EditItemsComponent,
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },
-
         {
                 path: 'listar-planillaEDRouter',
                 component: ListarPlanillaEDComponent,
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },
-
         {
                 path: 'crear-planillaEDRouter',
                 component: CrearPlanillaEDComponent,
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },
-
         {
                 path: 'crear-planillaEDItems',
                 component: CrearPlanillaEDItemsComponent,
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },
-
-
         {
                 path: 'crear-planilla-ed-items-detalle/:id',
                 component: CrearPlanillaEDItemsDetalleComponent,
@@ -111,7 +95,6 @@ const appRoutes: Routes = [
 
                 pathMatch: 'full'
         },
-
         {
                 path: 'login',
                 component: LoginComponent
@@ -126,8 +109,6 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         }
-
-
 ];
 
 export const AppRouting: ModuleWithProviders<RouterModule> = RouterModule.forRoot(appRoutes);

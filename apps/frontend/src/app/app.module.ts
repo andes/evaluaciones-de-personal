@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { Server } from '@andes/shared';
-import { AppRouting } from './app-routing.module';
+import { AppRouting } from './app.routing';
 import { AppHomeComponent } from './home/home.component';
 
 import { NgxObserveModule } from 'ngx-observe';
@@ -25,7 +25,7 @@ import { EditItemsComponent } from './Items/editar-items/edit-items.component';
 //componentes PlanillaED
 import { ListarPlanillaEDComponent } from './PlanillaED/listar-PlanillaED/listar-PlanillaED.component';
 import { CrearPlanillaEDComponent } from './PlanillaED/crear-PlanillaED/crear-PlanillaED.component';
-import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.';
+import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component';
 import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component';
 // plantilla
 import { sharedMenuComunesComponent } from './shared/menu/menuComunes/sharedmenuComunes.component';
@@ -35,11 +35,18 @@ import { HeaderComponent } from './shared/header.component';
 import { ComunesComponent } from './shared/menu/comunes.component';
 import { PlanillaComponent } from './shared/menu/menuPlanillas/Planillas.component';
 
-
-
-
 @NgModule({
-    declarations: [AppComponent,
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        PlexModule,
+        NgxObserveModule,
+        ReactiveFormsModule,
+        AppRouting
+    ],
+    declarations: [
+        AppComponent,
         MenuComunesComponent,
         AppHomeComponent,
         AyudaComponent,
@@ -60,19 +67,6 @@ import { PlanillaComponent } from './shared/menu/menuPlanillas/Planillas.compone
         HeaderComponent,
         ComunesComponent,
         PlanillaComponent
-
-
-
-
-    ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        AppRouting,
-        NgxObserveModule,
-        PlexModule,
-        ReactiveFormsModule,
     ],
     providers: [Plex, Server, CategoryService],
     bootstrap: [AppComponent]

@@ -1,6 +1,5 @@
 import * as mongoose from 'mongoose';
 import * as debug from 'debug';
-
 import { environment } from '../environments/environment';
 
 function schemaDefaults(schema) {
@@ -22,7 +21,6 @@ export class Connections {
      */
     static initialize() {
         // Configura Mongoose
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (mongoose as any).Promise = global.Promise;
         mongoose.plugin(schemaDefaults);
 

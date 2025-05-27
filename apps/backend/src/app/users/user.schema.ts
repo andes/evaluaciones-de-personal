@@ -1,6 +1,7 @@
-import { Schema, Types, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { IUser } from './user.interface';
+
 const UserSchema = new Schema({
     dni: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -11,7 +12,6 @@ const UserSchema = new Schema({
     idservicio: { type: Schema.Types.ObjectId, ref: 'servicios' },
     email: { type: String, required: true, unique: true }  // 
 });
-
 
 
 UserSchema.pre<IUser>('save', async function (next) {
