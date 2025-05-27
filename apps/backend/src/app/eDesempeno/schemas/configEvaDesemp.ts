@@ -11,4 +11,3 @@ const schema = new mongoose.Schema(
 );
 
 export const modelo = mongoose.model('configEvaDesemp', schema, 'edItems');
-//                                   este formulario             tabla o collection

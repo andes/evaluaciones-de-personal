@@ -1,10 +1,7 @@
 import { Router } from 'express';
 import { ServicioModel } from '../Schemas/servicios';
-import { ServicioSchema } from '../Schemas/servicios';
-
 
 const router = Router();
-
 
 router.get('/rmServicios', async (req, res, next) => {
     try {
@@ -80,9 +77,6 @@ router.put('/rmServicios/:id', async (req, res) => {
 });
 
 
-
-
-
 router.delete('/rsServicios/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -96,10 +90,6 @@ router.delete('/rsServicios/:id', async (req, res) => {
         res.status(500).json({ error: 'Ha ocurrido un error' });
     }
 });
-
-// thunder   http://localhost:3000/api/rItems/
-
-
 
 
 export default router;

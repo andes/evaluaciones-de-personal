@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { modelo } from '../schemas/configEvaDesemp';
-// import { application } from '../../application';
 
 const router = Router();
 

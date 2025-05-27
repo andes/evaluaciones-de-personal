@@ -1,37 +1,17 @@
 import { Router } from 'express';
 import { CategoriaItemModel as modelo } from '../schemas/categoriaItems';
 
-// import { application } from '../../application';
-
 const router = Router();
 
 
 router.get('/rmCategoriaItems', async (req, res, next) => {
     try {
-        //  console.log('pepe');
         const data = await modelo.find().sort({ descripcion: 1 }); // 1 para orden ascendente
-        //  console.log('data dpepe', data);
         res.json(data);
     } catch (error) {
         next(error);
     }
 });
-/*
-router.get('/rmCategoriaItems/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const respuesta = await modelo.findById(id);
-        if (!respuesta) {
-            return res.status(404).json({ error: 'Documento no encontrado' });
-        }
-        res.json(respuesta);
-    } catch (error) {
-        console.error('Error al obtener el documento:', error);
-        res.status(500).json({ error: 'Ha ocurrido un error' });
-    }
-});
-*/
-
 
 
 
@@ -121,7 +101,6 @@ router.put('/rCategoriaItems/:id', async (req, res) => {
         res.status(500).json({ error: 'Ha ocurrido un error' });
     }
 });
-
 
 
 /*

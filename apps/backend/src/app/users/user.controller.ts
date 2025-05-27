@@ -1,10 +1,5 @@
-import { Request } from '@andes/api-tool';
-import { MongoQuery, ResourceBase, ResourceNotFound } from '@andes/core';
-import { IUser } from './user.interface'; // 
+import { MongoQuery, ResourceBase } from '@andes/core';
 import { User } from './user.schema'; // 
-
-import { authenticate } from '../application';
-import * as mongoose from 'mongoose';
 
 class UsersResource extends ResourceBase {
   Model = User;

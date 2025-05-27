@@ -6,9 +6,6 @@ const schema = new mongoose.Schema({
 });
 
 export const modelo = mongoose.model('items', schema, 'edItems');
-//                                   este formulario             tabla o collection
-
-
 
 const Schema = mongoose.Schema;
 

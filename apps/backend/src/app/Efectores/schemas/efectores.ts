@@ -1,8 +1,5 @@
 
 import * as mongoose from 'mongoose';
-
-
-
 const Schema = mongoose.Schema;
 
 export interface IEfector extends mongoose.Document {

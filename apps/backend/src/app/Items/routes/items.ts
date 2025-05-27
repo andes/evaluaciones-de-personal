@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { modelo } from '../schemas/items';
-// import { application } from '../../application';
 
 const router = Router();
 
@@ -22,7 +21,6 @@ router.get('/rmItems/:id', async (req, res) => {
     const respuesta = await modelo.findById(id);
     res.json(respuesta);
 });
-
 
 
 // Ver si la descripción existe
@@ -94,16 +92,12 @@ router.put('/rItems/:id', async (req, res) => {
 });
 
 
-
-
-
 // Ruta PATCH para actualizar parcialmente un documento
 router.patch('/rItems/:id', async (req, res) => {
     try {
         const _id = req.params.id;
         const actualizacion = req.body;
         const opciones = { new: true }; // Para devolver el documento actualizado
-        //const respuesta = await modelo.findByIdAndUpdate(id, actualizacion, opciones);
         const respuesta = await modelo.findByIdAndUpdate(_id, actualizacion, opciones);
         if (respuesta) {
             res.json(respuesta);

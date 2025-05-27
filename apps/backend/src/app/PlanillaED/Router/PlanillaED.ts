@@ -29,12 +29,6 @@ router.get('/planillasED/:id', async (req: Request, res: Response) => {
 });
 
 
-//
-
-
-
-
-
 router.get('/planillasED/:idPlanilla/categorias/:idCategoria/items', async (req: Request, res: Response) => {
     try {
         const { idPlanilla, idCategoria } = req.params;
@@ -74,7 +68,6 @@ router.get('/planillasED/:idPlanilla/categorias/:idCategoria/items', async (req:
         res.status(500).json({ message: 'Error al obtener los ítems de la categoría.', error });
     }
 });
-
 
 
 router.post('/planillasED', async (req, res) => {
@@ -151,7 +144,6 @@ router.get('/planillasED', async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error al obtener las planillas.', error });
     }
 });
-
 
 
 // Obtener categorías e ítems de una planilla específica
@@ -282,12 +274,9 @@ router.get('/planillasED/:idDocumento/items-disponibles', async (req: Request, r
         console.error('Error al obtener los ítems disponibles:', error);
         res.status(500).json({ message: 'Error en el servidor.', error });
     }
-
-
-
-
-
 });
+
+
 // items duplicado en documento (buscando por descripción)
 router.get('/planillasED/:idPlanilla/items/existe', async (req: Request, res: Response) => {
     try {

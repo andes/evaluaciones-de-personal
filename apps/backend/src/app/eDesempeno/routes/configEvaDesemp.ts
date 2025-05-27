@@ -35,13 +35,10 @@ router.delete('/rEvaDesemp', async (req, res) => {
     }
 });
 
-
-
-
 //post arrays
 router.post('/rEvaDesemp', async (req, res) => {
     try {
-        // Verificar si     req.body es un array
+        // Verificar si req.body es un array
         if (Array.isArray(req.body)) {
             const newItems = await modelo.insertMany(req.body);
             res.json(newItems);
@@ -66,7 +63,6 @@ router.put('/rEvaDesemp/:id', async (req, res) => {
 });
 
 // Ruta PATCH para actualizar parcialmente un documento
-
 
 //pach 2
 
