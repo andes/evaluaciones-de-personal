@@ -1,0 +1,24 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Agregar Nueva Categoría</h3>
+                    <form (ngSubmit)="crearNuevaCategoria()">
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <input id="descripcion" type="text" class="form-control"
+                                   [(ngModel)]="nuevaCatdegoria.descripcion" name="descripcion"
+                                   placeholder="Ingrese la descripción de la categoría" required />
+                        </div>
+                        <div class="d-flex justify-content-between mt-3">
+                            <button type="submit" class="btn btn-success" (click)="volver()">Guardar</button>
+                            <button type="button" class="btn btn-danger" (click)="volver()">Volver</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

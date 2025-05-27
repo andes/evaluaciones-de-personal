@@ -1,14 +1,17 @@
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-home',
-    templateUrl: './home.component.html'
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
-export class AppHomeComponent {
+export class AppHomeComponent implements OnInit {
+    public ayuda: boolean = true;
 
-    public ayuda = true;
+    constructor() { }
 
+    ngOnInit(): void {
+
+    }
 }
-
-
-

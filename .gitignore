@@ -1,3 +1,6 @@
+# Archivos de configuración
+config.private.ts
+
 # Logs
 logs
 **/*.log
@@ -9,11 +12,13 @@ logs
 **.js
 *.map
 **.map
-
 !swagger/static*/*.js
 
 # Dependency directories
 node_modules
+dist
 typings
 typings/*
 .vscode
+
+#otros

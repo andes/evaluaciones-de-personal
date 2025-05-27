@@ -1,0 +1,45 @@
+/* Contenedor del título alineado a la izquierda */
+.titulo-container {
+    display: flex;
+    justify-content: flex-start;
+    /* Alinea el contenido a la izquierda */
+    padding-left: 0;
+    /* Elimina el padding para que quede pegado al borde izquierdo */
+    max-width: 400px;
+    /* Mantiene el ancho máximo deseado */
+}
+
+/* Contenedor del cuadro gris */
+.contenedor-cuadro {
+    background-color: #f0f0f0;
+    /* Fondo gris */
+    padding: 20px;
+    /* Espaciado interno */
+    max-width: 400px;
+    /* Ancho máximo del contenedor */
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    margin-left: 0;
+    /* Elimina el margen izquierdo para alinearlo a la izquierda */
+    text-align: left;
+    /* Alinea el texto a la izquierda */
+    display: flex;
+    /* Flexbox para el contenido */
+    flex-direction: column;
+    /* Acomoda los elementos en columna */
+    gap: 12px;
+    /* Espacio entre los elementos */
+    border: 2px solid #333333;
+    /* Borde con el color del título */
+}
+
+.contenedor-cuadro button {
+    display: flex;
+    align-items: center;
+    /* Centra verticalmente el contenido */
+}
+
+.contenedor-cuadro .material-icons {
+    margin-right: 8px;
+    /* Espacio entre el ícono y el texto */
+}
