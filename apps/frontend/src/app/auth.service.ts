@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
 interface DecodedToken {
+    id?: string;
     nombre?: string;
     rol?: string;
     idefector?: string;
@@ -24,6 +25,7 @@ export class AuthService {
     public authStatus: Observable<boolean> = this.loggedInSubject.asObservable();
 
     private usuario: {
+        id?: string;
         nombre?: string;
         rol?: string;
         idefector?: string;
@@ -66,8 +68,10 @@ export class AuthService {
     private decodeToken(token: string) {
         try {
             const decoded = jwtDecode(token) as DecodedToken;
+            console.log('🔍 Token decodificado:', decoded);
 
             this.usuario = {
+                id: decoded.id,
                 nombre: decoded.nombre,
                 rol: decoded.rol,
                 idefector: decoded.idefector,
@@ -86,7 +90,9 @@ export class AuthService {
             this.decodeToken(token);
         }
     }
-
+    getId(): string {
+        return this.usuario.id || '';
+    }
 
     getNombre(): string {
         return this.usuario.nombre || '';
@@ -97,6 +103,7 @@ export class AuthService {
     }
 
     getEfector(): string {
+        console.log(' getEfector():', this.usuario.idefector);
         return this.usuario.idefector || '';
     }
 

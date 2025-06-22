@@ -21,6 +21,7 @@ router.get('/rmServicios', async (req, res, next) => {
 router.get('/rmServicios/:id', async (req, res) => {
     const id = req.params.id;
     const respuesta = await ServicioModel.findById(id);
+    console.log('Respuesta del servidor:', id); // Log de la respuesta
     res.json(respuesta);
 });
 

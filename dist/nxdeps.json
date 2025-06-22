@@ -214,6 +214,21 @@
               "mtime": 1715870079000
             },
             {
+              "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.css",
+              "ext": ".css",
+              "mtime": 1749119466119.93
+            },
+            {
+              "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.html",
+              "ext": ".html",
+              "mtime": 1750254008112.7437
+            },
+            {
+              "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.ts",
+              "ext": ".ts",
+              "mtime": 1750614438296.7708
+            },
+            {
               "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.css",
               "ext": ".css",
               "mtime": 1746715380847.976
@@ -251,87 +266,87 @@
             {
               "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.css",
               "ext": ".css",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.html",
               "ext": ".html",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.css",
               "ext": ".css",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.html",
               "ext": ".html",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component..ts",
               "ext": ".ts",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.css",
               "ext": ".css",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.html",
               "ext": ".html",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.css",
               "ext": ".css",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.html",
               "ext": ".html",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.css",
               "ext": ".css",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.html",
               "ext": ".html",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380851.9763
+              "mtime": 1746715380851.976
             },
             {
               "file": "apps/frontend/src/app/app-routing.module.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1748257731536.21
             },
             {
               "file": "apps/frontend/src/app/app.component.html",
               "ext": ".html",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/app.component.scss",
@@ -346,132 +361,132 @@
             {
               "file": "apps/frontend/src/app/app.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/app.module.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1748257731516.21
             },
             {
               "file": "apps/frontend/src/app/auth.guard.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/auth.service.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1748346659527.629
             },
             {
               "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.css",
               "ext": ".css",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.html",
               "ext": ".html",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.spec.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.css",
               "ext": ".css",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.html",
               "ext": ".html",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.css",
               "ext": ".css",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.html",
               "ext": ".html",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.spec.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.css",
               "ext": ".css",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.html",
               "ext": ".html",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.spec.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.css",
               "ext": ".css",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.html",
               "ext": ".html",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.css",
               "ext": ".css",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.html",
               "ext": ".html",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.spec.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/editems/edItems.component.css",
@@ -491,22 +506,22 @@
             {
               "file": "apps/frontend/src/app/editems/edcategoria.component.html",
               "ext": ".html",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/home/MenuPlanillaED.component.css",
               "ext": ".css",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/home/MenuPlanillaED.component.html",
               "ext": ".html",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/home/MenuPlanillaED.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/home/ayuda.component.ts",
@@ -521,7 +536,7 @@
             {
               "file": "apps/frontend/src/app/home/eDesmp.component.html",
               "ext": ".html",
-              "mtime": 1746715380855.9763
+              "mtime": 1746715380855.976
             },
             {
               "file": "apps/frontend/src/app/home/eDesmp.component.ts",
@@ -531,12 +546,12 @@
             {
               "file": "apps/frontend/src/app/home/home.component.css",
               "ext": ".css",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/home/home.component.html",
               "ext": ".html",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/home/home.component.ts",
@@ -546,17 +561,17 @@
             {
               "file": "apps/frontend/src/app/home/menucomunes.component.css",
               "ext": ".css",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/home/menucomunes.component.html",
               "ext": ".html",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/home/menucomunes.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.html",
@@ -591,37 +606,57 @@
             {
               "file": "apps/frontend/src/app/modelos/PlanillaED.Model.ts",
               "ext": ".ts",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
+            },
+            {
+              "file": "apps/frontend/src/app/modelos/agentes..models.ts",
+              "ext": ".ts",
+              "mtime": 1748872944631.663
             },
             {
               "file": "apps/frontend/src/app/modelos/categoria.model.ts",
               "ext": ".ts",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/modelos/items.model.ts",
               "ext": ".ts",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/services/PlanillaED.Service.ts",
               "ext": ".ts",
-              "mtime": 1746715380859.9763
+              "mtime": 1750327503048.342
+            },
+            {
+              "file": "apps/frontend/src/app/services/PlanillaEDCabecera.service.ts",
+              "ext": ".ts",
+              "mtime": 1748863866758.758
+            },
+            {
+              "file": "apps/frontend/src/app/services/PlanillaEDDetalle.service.ts",
+              "ext": ".ts",
+              "mtime": 1750612893042.5483
+            },
+            {
+              "file": "apps/frontend/src/app/services/agentes.service.ts",
+              "ext": ".ts",
+              "mtime": 1748873653467.291
             },
             {
               "file": "apps/frontend/src/app/services/categoria.service.ts",
               "ext": ".ts",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/services/items.service.ts",
               "ext": ".ts",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/services/users.service.ts",
               "ext": ".ts",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/shared/directives/select-search.directive.ts",
@@ -631,17 +666,17 @@
             {
               "file": "apps/frontend/src/app/shared/header.component.css",
               "ext": ".css",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/shared/header.component.html",
               "ext": ".html",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/shared/header.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380859.9763
+              "mtime": 1748259629975.45
             },
             {
               "file": "apps/frontend/src/app/shared/location.services.ts",
@@ -651,47 +686,47 @@
             {
               "file": "apps/frontend/src/app/shared/menu/comunes.component.css",
               "ext": ".css",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/shared/menu/comunes.component.html",
               "ext": ".html",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/shared/menu/comunes.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.css",
               "ext": ".css",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.html",
               "ext": ".html",
-              "mtime": 1746715380859.9763
+              "mtime": 1746715380859.976
             },
             {
               "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/app/shared/menu/menuPlanillas/Planillas.component.css",
               "ext": ".css",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/app/shared/menu/menuPlanillas/Planillas.component.html",
               "ext": ".html",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/app/shared/menu/menuPlanillas/Planillas.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/app/shared/select-search.service.ts",
@@ -706,32 +741,32 @@
             {
               "file": "apps/frontend/src/app/users/login/login.component.css",
               "ext": ".css",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/app/users/login/login.component.html",
               "ext": ".html",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/app/users/login/login.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/app/users/register/register.component.css",
               "ext": ".css",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/app/users/register/register.component.html",
               "ext": ".html",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/app/users/register/register.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/assets/.gitkeep",
@@ -756,7 +791,7 @@
             {
               "file": "apps/frontend/src/index.html",
               "ext": ".html",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/main.ts",
@@ -771,7 +806,7 @@
             {
               "file": "apps/frontend/src/styles.scss",
               "ext": ".scss",
-              "mtime": 1746715380863.9766
+              "mtime": 1746715380863.976
             },
             {
               "file": "apps/frontend/src/test-setup.ts",
@@ -900,7 +935,7 @@
             {
               "file": "apps/backend/src/app/Items/routes/items.ts",
               "ext": ".ts",
-              "mtime": 1746715380843.976
+              "mtime": 1750612671835.3555
             },
             {
               "file": "apps/backend/src/app/Items/schemas/items.ts",
@@ -910,37 +945,37 @@
             {
               "file": "apps/backend/src/app/PlanillaED/Router/PlanillaED.ts",
               "ext": ".ts",
-              "mtime": 1746715380843.976
+              "mtime": 1750334865747.9763
             },
             {
               "file": "apps/backend/src/app/PlanillaED/Schemas/PlanillaED.ts",
               "ext": ".ts",
-              "mtime": 1747837790496.2202
+              "mtime": 1747837790496.22
             },
             {
-              "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.routers.ts",
+              "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionCabecera.router.ts",
               "ext": ".ts",
-              "mtime": 1747918087161.157
+              "mtime": 1749649296584.304
             },
             {
-              "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.schema.ts",
+              "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionCabecera.schema.ts",
               "ext": ".ts",
-              "mtime": 1747916765429.1604
+              "mtime": 1749649721563.468
             },
             {
-              "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacionDet.router.ts",
+              "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionDetalle.router.ts",
               "ext": ".ts",
-              "mtime": 1747826394281.3167
+              "mtime": 1750612671827.3555
             },
             {
-              "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacionDet.schema.ts",
+              "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionDetalle.schema.ts",
               "ext": ".ts",
-              "mtime": 1747834848054.7988
+              "mtime": 1749734427841.002
             },
             {
               "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",
               "ext": ".ts",
-              "mtime": 1746715380843.976
+              "mtime": 1748613651608.458
             },
             {
               "file": "apps/backend/src/app/Servicios/Schemas/servicios.ts",
@@ -971,6 +1006,11 @@
               "file": "apps/backend/src/app/auth/auth.routes.ts",
               "ext": ".ts",
               "mtime": 1746715380843.976
+            },
+            {
+              "file": "apps/backend/src/app/auth.middleware.ts",
+              "ext": ".ts",
+              "mtime": 1748514634880.001
             },
             {
               "file": "apps/backend/src/app/categoriaitems/routes/categoriaItems.ts",
@@ -1080,7 +1120,7 @@
             {
               "file": "apps/backend/src/main.ts",
               "ext": ".ts",
-              "mtime": 1747839387857.221
+              "mtime": 1749558244642.609
             },
             {
               "file": "apps/backend/tsconfig.app.json",
@@ -1456,7 +1496,7 @@
         "type": "npm",
         "name": "sweetalert2",
         "data": {
-          "version": "^11.21.0",
+          "version": "^11.22.0",
           "files": []
         }
       },
@@ -1876,6 +1916,11 @@
         {
           "type": "static",
           "source": "backend",
+          "target": "jsonwebtoken"
+        },
+        {
+          "type": "static",
+          "source": "backend",
           "target": "debug"
         },
         {
@@ -2048,6 +2093,21 @@
         "mtime": 1715870079000
       },
       {
+        "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.css",
+        "ext": ".css",
+        "mtime": 1749119466119.93
+      },
+      {
+        "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.html",
+        "ext": ".html",
+        "mtime": 1750254008112.7437
+      },
+      {
+        "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.ts",
+        "ext": ".ts",
+        "mtime": 1750614438296.7708
+      },
+      {
         "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.css",
         "ext": ".css",
         "mtime": 1746715380847.976
@@ -2085,87 +2145,87 @@
       {
         "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.css",
         "ext": ".css",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.html",
         "ext": ".html",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.css",
         "ext": ".css",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.html",
         "ext": ".html",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component..ts",
         "ext": ".ts",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.css",
         "ext": ".css",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.html",
         "ext": ".html",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.css",
         "ext": ".css",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.html",
         "ext": ".html",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.css",
         "ext": ".css",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.html",
         "ext": ".html",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/listar-PlanillaED/listar-PlanillaED.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380851.9763
+        "mtime": 1746715380851.976
       },
       {
         "file": "apps/frontend/src/app/app-routing.module.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1748257731536.21
       },
       {
         "file": "apps/frontend/src/app/app.component.html",
         "ext": ".html",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/app.component.scss",
@@ -2180,132 +2240,132 @@
       {
         "file": "apps/frontend/src/app/app.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/app.module.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1748257731516.21
       },
       {
         "file": "apps/frontend/src/app/auth.guard.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/auth.service.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1748346659527.629
       },
       {
         "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.css",
         "ext": ".css",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.html",
         "ext": ".html",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.spec.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentes/crear-categorias/crear-categorias.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.css",
         "ext": ".css",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.html",
         "ext": ".html",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentes/editar-categorias/edit-categoria.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.css",
         "ext": ".css",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.html",
         "ext": ".html",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.spec.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentes/listar-categorias/listar-categorias.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.css",
         "ext": ".css",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.html",
         "ext": ".html",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.spec.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentescontrol update/crear-categorias/crear-categorias.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.css",
         "ext": ".css",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.html",
         "ext": ".html",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentescontrol update/editar-categorias/edit-categoria.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.css",
         "ext": ".css",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.html",
         "ext": ".html",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.spec.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/componentescontrol update/listar-categorias/listar-categorias.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/editems/edItems.component.css",
@@ -2325,22 +2385,22 @@
       {
         "file": "apps/frontend/src/app/editems/edcategoria.component.html",
         "ext": ".html",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/home/MenuPlanillaED.component.css",
         "ext": ".css",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/home/MenuPlanillaED.component.html",
         "ext": ".html",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/home/MenuPlanillaED.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/home/ayuda.component.ts",
@@ -2355,7 +2415,7 @@
       {
         "file": "apps/frontend/src/app/home/eDesmp.component.html",
         "ext": ".html",
-        "mtime": 1746715380855.9763
+        "mtime": 1746715380855.976
       },
       {
         "file": "apps/frontend/src/app/home/eDesmp.component.ts",
@@ -2365,12 +2425,12 @@
       {
         "file": "apps/frontend/src/app/home/home.component.css",
         "ext": ".css",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/home/home.component.html",
         "ext": ".html",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/home/home.component.ts",
@@ -2380,17 +2440,17 @@
       {
         "file": "apps/frontend/src/app/home/menucomunes.component.css",
         "ext": ".css",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/home/menucomunes.component.html",
         "ext": ".html",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/home/menucomunes.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/institutions/components/institutions-list/institution-list.component.html",
@@ -2425,37 +2485,57 @@
       {
         "file": "apps/frontend/src/app/modelos/PlanillaED.Model.ts",
         "ext": ".ts",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
+      },
+      {
+        "file": "apps/frontend/src/app/modelos/agentes..models.ts",
+        "ext": ".ts",
+        "mtime": 1748872944631.663
       },
       {
         "file": "apps/frontend/src/app/modelos/categoria.model.ts",
         "ext": ".ts",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/modelos/items.model.ts",
         "ext": ".ts",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/services/PlanillaED.Service.ts",
         "ext": ".ts",
-        "mtime": 1746715380859.9763
+        "mtime": 1750327503048.342
+      },
+      {
+        "file": "apps/frontend/src/app/services/PlanillaEDCabecera.service.ts",
+        "ext": ".ts",
+        "mtime": 1748863866758.758
+      },
+      {
+        "file": "apps/frontend/src/app/services/PlanillaEDDetalle.service.ts",
+        "ext": ".ts",
+        "mtime": 1750612893042.5483
+      },
+      {
+        "file": "apps/frontend/src/app/services/agentes.service.ts",
+        "ext": ".ts",
+        "mtime": 1748873653467.291
       },
       {
         "file": "apps/frontend/src/app/services/categoria.service.ts",
         "ext": ".ts",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/services/items.service.ts",
         "ext": ".ts",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/services/users.service.ts",
         "ext": ".ts",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/shared/directives/select-search.directive.ts",
@@ -2465,17 +2545,17 @@
       {
         "file": "apps/frontend/src/app/shared/header.component.css",
         "ext": ".css",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/shared/header.component.html",
         "ext": ".html",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/shared/header.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380859.9763
+        "mtime": 1748259629975.45
       },
       {
         "file": "apps/frontend/src/app/shared/location.services.ts",
@@ -2485,47 +2565,47 @@
       {
         "file": "apps/frontend/src/app/shared/menu/comunes.component.css",
         "ext": ".css",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/shared/menu/comunes.component.html",
         "ext": ".html",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/shared/menu/comunes.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.css",
         "ext": ".css",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.html",
         "ext": ".html",
-        "mtime": 1746715380859.9763
+        "mtime": 1746715380859.976
       },
       {
         "file": "apps/frontend/src/app/shared/menu/menuComunes/sharedmenuComunes.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/app/shared/menu/menuPlanillas/Planillas.component.css",
         "ext": ".css",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/app/shared/menu/menuPlanillas/Planillas.component.html",
         "ext": ".html",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/app/shared/menu/menuPlanillas/Planillas.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/app/shared/select-search.service.ts",
@@ -2540,32 +2620,32 @@
       {
         "file": "apps/frontend/src/app/users/login/login.component.css",
         "ext": ".css",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/app/users/login/login.component.html",
         "ext": ".html",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/app/users/login/login.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/app/users/register/register.component.css",
         "ext": ".css",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/app/users/register/register.component.html",
         "ext": ".html",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/app/users/register/register.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/assets/.gitkeep",
@@ -2590,7 +2670,7 @@
       {
         "file": "apps/frontend/src/index.html",
         "ext": ".html",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/main.ts",
@@ -2605,7 +2685,7 @@
       {
         "file": "apps/frontend/src/styles.scss",
         "ext": ".scss",
-        "mtime": 1746715380863.9766
+        "mtime": 1746715380863.976
       },
       {
         "file": "apps/frontend/src/test-setup.ts",
@@ -2667,7 +2747,7 @@
       {
         "file": "apps/backend/src/app/Items/routes/items.ts",
         "ext": ".ts",
-        "mtime": 1746715380843.976
+        "mtime": 1750612671835.3555
       },
       {
         "file": "apps/backend/src/app/Items/schemas/items.ts",
@@ -2677,37 +2757,37 @@
       {
         "file": "apps/backend/src/app/PlanillaED/Router/PlanillaED.ts",
         "ext": ".ts",
-        "mtime": 1746715380843.976
+        "mtime": 1750334865747.9763
       },
       {
         "file": "apps/backend/src/app/PlanillaED/Schemas/PlanillaED.ts",
         "ext": ".ts",
-        "mtime": 1747837790496.2202
+        "mtime": 1747837790496.22
       },
       {
-        "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.routers.ts",
+        "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionCabecera.router.ts",
         "ext": ".ts",
-        "mtime": 1747918087161.157
+        "mtime": 1749649296584.304
       },
       {
-        "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.schema.ts",
+        "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionCabecera.schema.ts",
         "ext": ".ts",
-        "mtime": 1747916765429.1604
+        "mtime": 1749649721563.468
       },
       {
-        "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacionDet.router.ts",
+        "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionDetalle.router.ts",
         "ext": ".ts",
-        "mtime": 1747826394281.3167
+        "mtime": 1750612671827.3555
       },
       {
-        "file": "apps/backend/src/app/PlanillaEDEvaluacion/PlanillaEDEvaluacionDet.schema.ts",
+        "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionDetalle.schema.ts",
         "ext": ".ts",
-        "mtime": 1747834848054.7988
+        "mtime": 1749734427841.002
       },
       {
         "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",
         "ext": ".ts",
-        "mtime": 1746715380843.976
+        "mtime": 1748613651608.458
       },
       {
         "file": "apps/backend/src/app/Servicios/Schemas/servicios.ts",
@@ -2738,6 +2818,11 @@
         "file": "apps/backend/src/app/auth/auth.routes.ts",
         "ext": ".ts",
         "mtime": 1746715380843.976
+      },
+      {
+        "file": "apps/backend/src/app/auth.middleware.ts",
+        "ext": ".ts",
+        "mtime": 1748514634880.001
       },
       {
         "file": "apps/backend/src/app/categoriaitems/routes/categoriaItems.ts",
@@ -2847,7 +2932,7 @@
       {
         "file": "apps/backend/src/main.ts",
         "ext": ".ts",
-        "mtime": 1747839387857.221
+        "mtime": 1749558244642.609
       },
       {
         "file": "apps/backend/tsconfig.app.json",

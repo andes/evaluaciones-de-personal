@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
         this.menuList = [
             { label: 'Parametros', route: '/menucomunes', anim: 'start-home' },
             { label: 'Planillas', route: '/listar-planillaEDRouter', anim: 'start-about' },
-            { label: 'Evaluacion', route: '/home', anim: 'start-blog' },
+            { label: 'Evaluacion', route: '/evaluacion-cabecera', anim: 'start-blog' },
             { label: 'Categorias', route: '/ListarCategoriasComponent', anim: 'start-portefolio' },
             { label: 'Items', route: '/ListarItems', anim: 'start-contact' }
         ];

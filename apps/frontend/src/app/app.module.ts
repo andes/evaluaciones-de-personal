@@ -34,6 +34,8 @@ import { RegisterComponent } from './users/register/register.component';
 import { HeaderComponent } from './shared/header.component';
 import { ComunesComponent } from './shared/menu/comunes.component';
 import { PlanillaComponent } from './shared/menu/menuPlanillas/Planillas.component';
+//evaluacion
+import { EvaluacionCabeceraComponent } from './Evalluacion/evaluacionCabecera.component';
 
 
 
@@ -59,7 +61,8 @@ import { PlanillaComponent } from './shared/menu/menuPlanillas/Planillas.compone
         RegisterComponent,
         HeaderComponent,
         ComunesComponent,
-        PlanillaComponent
+        PlanillaComponent,
+        EvaluacionCabeceraComponent
 
 
 

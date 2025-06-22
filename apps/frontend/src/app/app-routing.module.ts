@@ -16,6 +16,7 @@ import { ListarPlanillaEDComponent } from './PlanillaED/listar-PlanillaED/listar
 import { CrearPlanillaEDComponent } from './PlanillaED/crear-PlanillaED/crear-PlanillaED.component';
 import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component.';
 import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component';
+import { EvaluacionCabeceraComponent } from './Evalluacion/evaluacionCabecera.component';
 
 import { LoginComponent } from './users/login/login.component';
 import { RegisterComponent } from './users/register/register.component';
@@ -125,7 +126,14 @@ const appRoutes: Routes = [
                 component: AppHomeComponent,
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
-        }
+        },
+
+        {
+                path: 'evaluacion-cabecera',
+                component: EvaluacionCabeceraComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
 
 
 ];
