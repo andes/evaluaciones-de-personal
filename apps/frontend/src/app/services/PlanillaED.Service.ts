@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -11,9 +12,9 @@ const Swal = require('sweetalert2');
 
 export interface IPlanillaED extends Document {
     fechaCreacion: Date;
-    idEfector: string;  // ID de tipo string, que corresponde a un ObjectId de Mongoose
+    idEfector: string;
     descripcion: string;
-    idServicio: string;  // ID de tipo string, que corresponde a un ObjectId de Mongoose
+    idServicio: string;
 }
 
 export interface Categoria {
@@ -35,6 +36,7 @@ export class PlanillaEDService {
     }
 
     obtenerEfectores(): Observable<any[]> {
+        // console.log(' Llamando al backend con ID de efector:', id);
         return this.http.get<any[]>('http://localhost:3000/api/rmEfectores');
     }
 
@@ -42,13 +44,26 @@ export class PlanillaEDService {
         return this.http.get<any[]>('http://localhost:3000/api/rmServicios');
     }
 
+    obtenerServicioPorId(id: string): Observable<any> {
+        return this.http.get<any>(`http://localhost:3000/api/rmServicios/${id}`);
+    }
+
+
     obtenerEfectorPorId(id: string): Observable<any> {
         return this.http.get<any>(`http://localhost:3000/api/efectores/${id}`);
     }
 
-    obtenerServicioPorId(id: string): Observable<any> {
-        return this.http.get<any>(`http://localhost:3000/api/servicios/${id}`);
+    obtenerEfectorPorIdE(id: string): Observable<any> {
+        return this.http.get<any>(`http://localhost:3000/api/rmEfectores/${id}`);
     }
+
+
+    // planillaED.service.ts
+    obtenerServicioPorIdE(id: string): Observable<any> {
+        console.log('Llamando al backend con ID de servicio:', id);
+        return this.http.get<any>(`http://localhost:3000/api/rmServicios/${id}`);
+    }
+
 
     eliminaPlanillaEDid(id: string): Observable<any> {
         return this.http.delete<any>(`http://localhost:3000/api/planillasED/${id}`);
@@ -162,5 +177,28 @@ export class PlanillaEDService {
             })
         );
     }
+
+    //crear cabecera 
+    crearCabecera(data: any): Observable<any> {
+        return this.http.post(`${this.baseUrl}/evaluacioncabecera`, data).pipe(
+            catchError((error) => {
+                console.error('Error al guardar cabecera:', error);
+                return throwError(error);
+            })
+        );
+    }
+
+    crearCabeceraEvaluacion(cabecera: any) {
+        return this.http.post('http://localhost:3000/api/planillaed', cabecera);
+    }
+
+    getPlanillaPorEfectorYServicio(idEfector: string, idServicio: string): Observable<any> {
+        const params = new HttpParams()
+            .set('idEfector', idEfector)
+            .set('idServicio', idServicio);
+
+        return this.http.get(`${this.baseUrl}/planillasED/buscar-por-efector-servicio`, { params });
+    }
+
 
 }

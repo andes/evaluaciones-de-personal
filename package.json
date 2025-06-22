@@ -72,7 +72,7 @@
         "rxjs": "~6.4.0",
         "rxjs-compat": "^6.5.4",
         "shiro-trie": "^0.4.9",
-        "sweetalert2": "^11.21.0",
+        "sweetalert2": "^11.22.0",
         "zone.js": "^0.9.1"
     },
     "devDependencies": {

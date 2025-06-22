@@ -7,8 +7,11 @@ import PlanillaEDRouter from './app/PlanillaED/Router/PlanillaED';
 import AuthRouter from './app/auth/auth.routes';
 import { UsersRouter } from './app/users/user.controller';
 import agenterouter from './app/agentes/agentes.router';
+import EvaluacionCabeceraRouter from './app/PlanillaEDEvaluacion/EvaluacionCabecera.router';
+import planillaEDDetalleRouter from './app/PlanillaEDEvaluacion/EvaluacionDetalle.router'; // Ajustá el path según tu estructura
 
-import planillaEDEvaluacionRouter from './app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.routers';
+
+//import planillaEDEvaluacionRouter from './app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.routers';
 
 
 require('dotenv').config();
@@ -27,10 +30,12 @@ application.add({ path: '/api', router: ServiciosRouter })
 application.add({ path: '/api', router: PlanillaEDRouter })
 application.add({ path: '/api', router: EdCategoriaItems })
 application.add({ path: '/api', router: agenterouter })
-application.add({ path: '/api/planillaEvaluacion', router: planillaEDEvaluacionRouter });
 
-//application.add({ path: '/api', router: planillaEDEvaluacionRouter })
-//application.add({ path: '/api/planilla-ed', router: planillaEDEvaluacionRouter });
+application.add({ path: '/api', router: EvaluacionCabeceraRouter });
+application.add({ path: '/api', router: planillaEDDetalleRouter });
+
+
+//console.log('Ruta activa: POST http://localhost:3000/api/evaluacioncabecera');
 
 // ruta para la autenticación (login)
 application.add({ path: '/api', router: AuthRouter });
