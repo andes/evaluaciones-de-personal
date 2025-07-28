@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { RouterModule } from '@angular/router';
+
 import { AppComponent } from './app.component';
 import { Server } from '@andes/shared';
 import { AppRouting } from './app-routing.module';
@@ -22,6 +24,8 @@ import { EditCategoriasComponent } from './componentes/editar-categorias/edit-ca
 import { ListarItemsComponent } from './Items/listar-items/listar-items.component';
 import { CrearItemsComponent } from './Items/crear-items/crear-items.component';
 import { EditItemsComponent } from './Items/editar-items/edit-items.component';
+import { TipoEvaluacionComponent } from './componentes/TipoEvaluacion.component';
+
 //componentes PlanillaED
 import { ListarPlanillaEDComponent } from './PlanillaED/listar-PlanillaED/listar-PlanillaED.component';
 import { CrearPlanillaEDComponent } from './PlanillaED/crear-PlanillaED/crear-PlanillaED.component';
@@ -36,6 +40,9 @@ import { ComunesComponent } from './shared/menu/comunes.component';
 import { PlanillaComponent } from './shared/menu/menuPlanillas/Planillas.component';
 //evaluacion
 import { EvaluacionCabeceraComponent } from './Evalluacion/evaluacionCabecera.component';
+import { EvaluacionAgenteComponent } from './Evalluacion/evaluacionAgente.component';
+import { EvaluacionItemsComponent } from './Evalluacion/evaluacionItems.component';
+
 
 
 
@@ -62,7 +69,11 @@ import { EvaluacionCabeceraComponent } from './Evalluacion/evaluacionCabecera.co
         HeaderComponent,
         ComunesComponent,
         PlanillaComponent,
-        EvaluacionCabeceraComponent
+        EvaluacionCabeceraComponent,
+        EvaluacionAgenteComponent,
+        EvaluacionItemsComponent,
+        TipoEvaluacionComponent,
+
 
 
 
@@ -73,6 +84,7 @@ import { EvaluacionCabeceraComponent } from './Evalluacion/evaluacionCabecera.co
         FormsModule,
         HttpClientModule,
         AppRouting,
+        RouterModule,
         NgxObserveModule,
         PlexModule,
         ReactiveFormsModule,

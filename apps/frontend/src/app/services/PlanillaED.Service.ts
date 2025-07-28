@@ -123,16 +123,20 @@ export class PlanillaEDService {
                 })
             );
     }
-
+    //agregar items nuevo a la planilla con categoria y itemsy id evaluacion solicitada
     agregarCategoriaItems(planillaId: string, categoriaConItems: any): Observable<any> {
-        console.log('utlimo error Datos enviados a la API:', categoriaConItems);
-        return this.http.put(`${this.baseUrl}/planillasED/${planillaId}/categorias`, categoriaConItems).pipe(
+        const url = `${this.baseUrl}/planillasED/${planillaId}/categorias`;
+        console.log('URL llamada API:', url);
+        console.log('Datos enviados a la API:', categoriaConItems);
+
+        return this.http.put(url, categoriaConItems).pipe(
             catchError((error) => {
                 console.error('Error al agregar categoría e ítems:', error);
                 return throwError(error);
             })
         );
     }
+
 
     obtenerCategoriasPorPlanilla(planillaId: string): Observable<any> {
         const url = `${this.baseUrl}/planillasED/${planillaId}/categorias`;
@@ -198,6 +202,15 @@ export class PlanillaEDService {
             .set('idServicio', idServicio);
 
         return this.http.get(`${this.baseUrl}/planillasED/buscar-por-efector-servicio`, { params });
+    }
+    getPlanillaPorTipoEvaluacion(idTipoEvaluacion: string): Observable<any> {
+        const url = `${this.baseUrl}/planillasED/buscar-por-tipo-evaluacion/${idTipoEvaluacion}`;
+        return this.http.get<any>(url).pipe(
+            catchError((error) => {
+                console.error('Error al buscar planilla por tipoEvaluacion', error);
+                return throwError(error);
+            })
+        );
     }
 
 

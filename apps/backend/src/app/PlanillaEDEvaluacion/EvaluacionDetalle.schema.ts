@@ -3,13 +3,18 @@ import * as mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
-    idItem: { type: Schema.Types.ObjectId, required: true, ref: 'Item' },
+    idItem: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'configEvaDesemp'
+    },
     descripcion: { type: String, required: true },
     puntaje: { type: Number, required: true }
 });
 
+
 const CategoriaSchema = new Schema({
-    idCategoria: { type: Schema.Types.ObjectId, required: true, ref: 'Categoria' },
+    idCategoria: { type: Schema.Types.ObjectId, required: true, ref: 'CategoriaItem' },
     descripcionCategoria: { type: String, required: true },
     items: { type: [ItemSchema], required: true }
 });
