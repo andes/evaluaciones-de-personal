@@ -28,6 +28,10 @@ export class PlanillaEDCabeceraService {
         return this.http.get<PlanillaEDCabecera>(`${this.apiUrl}/${id}`);
     }
 
+    // Método alternativo que retorna la respuesta completa (con success y data)
+    //  obtenerCabeceraG(id: string): Observable<{ success: boolean; data: PlanillaEDCabecera }> {
+    //    return this.http.get<{ success: boolean; data: PlanillaEDCabecera }>(`${this.apiUrl}/${id}`);
+    //}
 
 
     crearCabeceraEvaluacion(cabecera: any): Observable<any> {
@@ -42,4 +46,31 @@ export class PlanillaEDCabeceraService {
     eliminarCabecera(id: string): Observable<any> {
         return this.http.delete(`${this.apiUrl}/${id}`);
     }
+    // Verifica si ya existe una cabecera con la combinación de periodo, agente evaluador, efector y servicio
+    verificarExistenciaCabecera(cabecera: any): Observable<{ success: boolean; existe: boolean; data?: any }> {
+        return this.http.post<{ success: boolean; existe: boolean; data?: any }>(
+            `${this.apiUrl}/existe`,
+            cabecera
+        );
+    }
+
+    // Buscar cabeceras por evaluador, efector y servicio, ordenadas por periodo ascendente para grilla en Plnillilaedcabeceera
+    buscarCabecerasPorEvaluadorEfectorServicio(
+        idUsuarioEvaluador: string,
+        idEfector: string,
+        idServicio: string
+    ): Observable<any> {
+        const url = `${this.apiUrl}/buscar?idUsuarioEvaluador=${idUsuarioEvaluador}&idEfector=${idEfector}&idServicio=${idServicio}`;
+        return this.http.get<any>(url);
+    }
+
+    getCabeceraEvaluacion(id: string): Observable<any> {
+        return this.http.get(`http://localhost:3000/api/evaluacioncabecera/${id}`);
+    }
+
+    obtenerCabeceraG(id: string): Observable<{ success: boolean; data: PlanillaEDCabecera }> {
+        return this.http.get<{ success: boolean; data: PlanillaEDCabecera }>(`http://localhost:3000/api/evaluacioncabecera/${id}`);
+    }
+
+
 }

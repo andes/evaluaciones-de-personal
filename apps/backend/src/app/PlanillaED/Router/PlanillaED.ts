@@ -125,6 +125,36 @@ router.get('/planillasED', async (req: Request, res: Response) => {
     }
 });
 
+
+// Buscar planilla por idTipoEvaluacion
+router.get('/planillasED/buscar-por-tipo-evaluacion/:idTipoEvaluacion', async (req: Request, res: Response) => {
+    try {
+        const { idTipoEvaluacion } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(idTipoEvaluacion)) {
+            return res.status(400).json({ message: 'ID de tipo de evaluación inválido' });
+        }
+
+        const planilla = await PlanillaEDModel.findOne({
+            'tipoEvaluacion.idTipoEvaluacion': new mongoose.Types.ObjectId(idTipoEvaluacion)
+        })
+            .populate('idEfector', 'nombre')
+            .populate('idServicio', 'nombre')
+            .populate('categorias.categoria', 'descripcion')
+            .lean();
+
+        if (!planilla) {
+            return res.status(404).json({ message: 'No se encontró planilla para ese tipo de evaluación' });
+        }
+
+        res.json(planilla);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al buscar por tipoEvaluacion', error });
+    }
+});
+
+
+
 // Obtener planilla por ID
 router.get('/planillasED/:id', async (req: Request, res: Response) => {
     try {
@@ -146,12 +176,23 @@ router.get('/planillasED/:id', async (req: Request, res: Response) => {
 // Crear nueva planilla
 router.post('/planillasED', async (req: Request, res: Response) => {
     try {
-        const { idEfector, idServicio, descripcion } = req.body;
+        const { idEfector, idServicio, descripcion, tipoEvaluacion } = req.body;
 
         const existe = await PlanillaEDModel.findOne({ idEfector, idServicio });
-        if (existe) return res.status(400).json({ message: 'Ya existe una planilla para este efector y servicio' });
+        if (existe) {
+            return res.status(400).json({ message: 'Ya existe una planilla para este efector y servicio' });
+        }
 
-        const nueva = new PlanillaEDModel({ idEfector, idServicio, descripcion, fechaCreacion: new Date(), categorias: [] });
+        // Crear nueva planilla incluyendo tipoEvaluacion
+        const nueva = new PlanillaEDModel({
+            idEfector,
+            idServicio,
+            descripcion,
+            fechaCreacion: new Date(),
+            tipoEvaluacion,  // { idTipoEvaluacion, nombre }
+            categorias: []
+        });
+
         const guardada = await nueva.save();
         res.status(201).json(guardada);
     } catch (error) {
@@ -159,9 +200,11 @@ router.post('/planillasED', async (req: Request, res: Response) => {
     }
 });
 
-// Actualizar planilla (agregar o modificar categoría)
+
+// Actualizar planilla (agregar o modificar categoría) ver si aca agrega items a planilla existe
 router.put('/planillasED/:id/categorias', async (req: Request, res: Response) => {
     try {
+        console.log('Datos recibidos:', req.body);
         const { categoria, descripcionCategoria, items } = req.body;
         const { id } = req.params;
 
@@ -173,20 +216,45 @@ router.put('/planillasED/:id/categorias', async (req: Request, res: Response) =>
         if (!planilla) return res.status(404).json({ message: 'Planilla no encontrada' });
 
         const existente = planilla.categorias.find(cat => String(cat.categoria) === String(categoria));
+
         if (existente) {
             existente.descripcion = descripcionCategoria;
-            const nuevos = items.filter(item => !existente.items.some(i => String(i._id) === String(item._id)));
-            existente.items = [...existente.items, ...nuevos];
+
+            const nuevos = items.filter(item =>
+                !existente.items.some(i => i.descripcion === item.descripcion)
+            );
+
+            if (nuevos.length > 0) {
+                existente.items = [
+                    ...existente.items,
+                    ...nuevos.map(item => ({
+                        _id: item._id || item.idItem, // 👈 incluimos el _id requerido por el schema
+                        descripcion: item.descripcion,
+                        valor: item.valor
+                    }))
+                ];
+                planilla.markModified('categorias');
+            }
         } else {
-            planilla.categorias.push({ categoria, descripcion: descripcionCategoria, items });
+            planilla.categorias.push({
+                categoria,
+                descripcion: descripcionCategoria,
+                items: items.map(item => ({
+                    _id: item._id || item.idItem,
+                    descripcion: item.descripcion,
+                    valor: item.valor
+                }))
+            });
         }
 
         await planilla.save();
         res.json({ message: 'Planilla actualizada', planilla });
     } catch (error) {
+        console.error('Error al actualizar planilla:', error);
         res.status(500).json({ message: 'Error al actualizar', error });
     }
 });
+
 
 // Eliminar todas las planillas
 router.delete('/planillasED', async (_req: Request, res: Response) => {

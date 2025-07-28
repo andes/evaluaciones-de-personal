@@ -1,3 +1,6 @@
+/* ------------------------------------------
+   Encabezado y título
+   ------------------------------------------ */
 .titulo-container {
     display: flex;
     justify-content: center;
@@ -6,9 +9,11 @@
     text-align: center;
 }
 
-.titulo-container plex-title {
-    width: 100%;
-    text-align: center;
+.titulo-texto {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333333;
+    margin: 0;
 }
 
 .titulo-texto {
@@ -16,9 +21,47 @@
     text-align: center;
 }
 
+/* ------------------------------------------
+   Fondo del menú
+   ------------------------------------------ */
 .menu-fondo {
     background-color: transparent;
-
     padding: 1rem;
     border-radius: 10px;
+}
+
+/* ------------------------------------------
+   Sobreescritura de estilos de botones
+   ------------------------------------------ */
+/* Selector específico para pisar Plex/Bootstrap */
+.contenedor-cuadro button[plexButton].btn {
+    background-color: #ffffff !important;
+    border-color: #cccccc !important;
+    color: #333333 !important;
+}
+
+/* Feedback al hover o focus */
+.contenedor-cuadro button[plexButton].btn:hover,
+.contenedor-cuadro button[plexButton].btn:focus {
+    background-color: #f8f9fa !important;
+    border-color: #bbbbbb !important;
+}
+
+
+/* Botones con ancho automático según su contenido */
+.btn-w-auto {
+    width: auto;
+    min-width: 120px;
+}
+
+/* Scroll horizontal en móviles si no caben */
+@media (max-width: 576px) {
+    .contenedor-cuadro {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+}
+
+.boton-menu {
+    flex: 0 0 100%;
 }

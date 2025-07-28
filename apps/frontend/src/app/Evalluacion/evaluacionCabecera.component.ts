@@ -4,8 +4,7 @@ import { PlanillaEDService } from '../services/PlanillaED.Service';
 import { PlanillaEDCabeceraService } from '../services/PlanillaEDCabecera.service';
 import { AgentesService } from '../services/agentes.service';
 import { PlanillaEDDetalleService } from '../services/PlanillaEDDetalle.service';
-
-
+import { TipoEvaluacionService, TipoEvaluacion } from '../services/tipoevaluacion.service';
 const Swal = require('sweetalert2').default;
 
 @Component({
@@ -14,24 +13,29 @@ const Swal = require('sweetalert2').default;
     styleUrls: ['./evaluacionCabecera.component.css']
 })
 export class EvaluacionCabeceraComponent implements OnInit {
+    tiposEvaluacion: TipoEvaluacion[] = [];
     evaluacionCabecera: any = {};
+    cabeceraSeleccionada: any = null;
+    idTipoEvaluacion: string = '';
 
     nombreAgenteEvaluador: string = '';
     efectorNombre: string = '';
     servicioNombre: string = '';
     idGuardado: string | null = null;
     tipoBusqueda: string = 'nombre';
+    cabecerasEncontradas: any[] = [];
 
     get textoBusqueda(): string {
         return this.tipoBusqueda === 'nombre' ? 'Buscar por Nombre' : 'Buscar por Legajo';
     }
+    evaluacion: any = {};
 
     agentesDisponibles: any[] = [];
     filtroAgente: string = '';
     categoriasDesdePlanilla: any[] = [];
 
     mostrarModal: boolean = false;
-    isLoading: boolean = true; // Para manejar el estado de carga
+    isLoading: boolean = true;
 
     constructor(
         private authService: AuthService,
@@ -39,10 +43,12 @@ export class EvaluacionCabeceraComponent implements OnInit {
         private planillaEDCabeceraService: PlanillaEDCabeceraService,
         private agentesService: AgentesService,
         private evaluacionDetalleService: PlanillaEDDetalleService,
+        private _tipoEvaluacionService: TipoEvaluacionService,
     ) { }
 
     ngOnInit(): void {
         this.obtenerAgentesDisponibles();
+        this.cargarTiposEvaluacion();
         this.nombreAgenteEvaluador = this.authService.getNombre();
 
         const efectorId = this.authService.getEfector();
@@ -59,28 +65,16 @@ export class EvaluacionCabeceraComponent implements OnInit {
             usuario: this.authService.getNombre(),
             fechaMod: new Date().toISOString()
         };
-        //obtener planilla correspondiente al efector y servicio
+
+        // Obtener planilla correspondiente al efector y servicio
         console.log('🔍 Buscando planilla con:', { efectorId, servicioId });
-        this.planillaService.getPlanillaPorEfectorYServicio(efectorId, servicioId).subscribe({
-            next: (data) => {
-                if (data && data._id) {
-                    console.log('✅ Planilla encontrada:', data);
-                    console.log('📂 Categorías de la planilla:', data.categorias);
-                    this.categoriasDesdePlanilla = data.categorias || [];
-                } else {
-                    console.warn('⚠️ La respuesta no contiene una planilla válida:', data);
-                }
-            },
-            error: (err) => {
-                if (err.status === 404) {
-                    console.warn(`🔍 No se encontró ninguna planilla para:
-                     idEfector: ${efectorId}
-                    ➤ idServicio: ${servicioId}`);
-                } else {
-                    console.error('❌ Error al obtener la planilla:', err);
-                }
-            }
-        });
+
+
+
+
+
+
+
 
         // Obtener nombre del efector
         this.planillaService.obtenerEfectorPorIdE(efectorId).subscribe({
@@ -107,6 +101,8 @@ export class EvaluacionCabeceraComponent implements OnInit {
                 this.isLoading = false;
             }
         });
+        // cargar grilla de cabeceras
+        this.buscarCabeceras();
     }
 
     obtenerAgentesDisponibles() {
@@ -122,6 +118,7 @@ export class EvaluacionCabeceraComponent implements OnInit {
     }
 
     isLoadingAgentes: boolean = false;
+
     guardarCabecera(): void {
         if (!this.evaluacionCabecera.periodo) {
             Swal.fire({
@@ -133,24 +130,47 @@ export class EvaluacionCabeceraComponent implements OnInit {
             return;
         }
 
-        this.planillaEDCabeceraService.crearCabeceraEvaluacion(this.evaluacionCabecera).subscribe({
+        //  verificar si existe la cabecera
+        this.planillaEDCabeceraService.verificarExistenciaCabecera(this.evaluacionCabecera).subscribe({
             next: (respuesta) => {
-                this.idGuardado = (respuesta.data && respuesta.data._id) || (respuesta.data && respuesta.data.id) || 'Sin ID';
-                this.mostrarModal = true;
-                this.obtenerAgentesDisponibles();
+                if (respuesta.existe) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Evaluacion existente',
+                        text: 'Ya existe una evaluacion con ese periodo, agente evaluador, efector y servicio.',
+                        confirmButtonText: 'Aceptar'
+                    });
+                } else {
+                    // No existe, evaluacion nueva
+                    this.planillaEDCabeceraService.crearCabeceraEvaluacion(this.evaluacionCabecera).subscribe({
+                        next: (respuestaCreacion) => {
+                            this.idGuardado = (respuestaCreacion.data && respuestaCreacion.data._id) || (respuestaCreacion.data && respuestaCreacion.data.id) || 'Sin ID';
+                            this.mostrarModal = true;
+                            this.obtenerAgentesDisponibles();
 
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Registro guardado',
-                    text: 'La cabecera fue guardada exitosamente.',
-                    confirmButtonText: 'Aceptar'
-                });
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Registro guardado',
+                                text: 'La cabecera fue guardada exitosamente.',
+                                confirmButtonText: 'Aceptar'
+                            });
+                        },
+                        error: (error) => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error al guardar',
+                                text: 'Hubo un problema al guardar la cabecera. Verificá los datos.',
+                                confirmButtonText: 'Cerrar'
+                            });
+                        }
+                    });
+                }
             },
             error: (error) => {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error al guardar',
-                    text: 'Hubo un problema al guardar la cabecera. Verificá los datos.',
+                    title: 'Error de verificación',
+                    text: 'No se pudo verificar si la cabecera ya existe.',
                     confirmButtonText: 'Cerrar'
                 });
             }
@@ -172,12 +192,12 @@ export class EvaluacionCabeceraComponent implements OnInit {
     }
 
     evaluarAgente(agente: any): void {
-        // Transformamos las categorías de la planilla a la estructura esperada
+        // Transformar las categorías
         const categoriasTransformadas = this.categoriasDesdePlanilla.map(cat => ({
             idCategoria: cat.categoria._id,
             descripcionCategoria: cat.categoria.descripcion,
             items: cat.items.map(item => ({
-                idItem: item._id,  // Puede ser falso por ahora
+                idItem: item._id,
                 descripcion: item.descripcion,
                 puntaje: 0
             }))
@@ -193,43 +213,105 @@ export class EvaluacionCabeceraComponent implements OnInit {
             categorias: categoriasTransformadas
         };
 
-        console.log('Detalle a enviar:\n', JSON.stringify(detalleEvaluacion, null, 2));
-
-        // 💾 Primero guardamos la evaluación
-        this.evaluacionDetalleService.crearEvaluacionDetalle(detalleEvaluacion).subscribe({
-            next: () => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Evaluación guardada',
-                    text: `Evaluación de ${agente.nombre} registrada.`,
-                    confirmButtonText: 'Aceptar'
-                });
-
-                // ✅ Luego corregimos los IDs falsos por los reales
-                this.evaluacionDetalleService
-                    .corregirItemsPorDescripcion(detalleEvaluacion._id)
-                    .subscribe({
+        // verificarsi ya existe esta evaluación para evitar duplicados
+        this.evaluacionDetalleService.existeEvaluacion(this.idGuardado!, agente._id).subscribe({
+            next: (respuesta) => {
+                if (respuesta.existe) {
+                    // Si ya existe, alerta y no guardar
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Agente ya evaluado',
+                        text: `El agente ${agente.legajo} ${agente.nombre} ya fue evaluado en esta planilla.`,
+                        confirmButtonText: 'Aceptar'
+                    });
+                } else {
+                    // Si no existe, guardar
+                    this.evaluacionDetalleService.crearEvaluacionDetalle(detalleEvaluacion).subscribe({
                         next: () => {
-                            console.log('✅ Corrección de IDs de ítems realizada con éxito');
+                            this.evaluacionDetalleService
+                                .corregirItemsPorDescripcion(detalleEvaluacion._id)
+                                .subscribe({
+                                    next: () => {
+                                        console.log('✅ Corrección de IDs de ítems realizada con éxito');
+
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Evaluación guardada',
+                                            text: `Se agregó el agente: ${agente.legajo} ${agente.nombre}`,
+                                            showCancelButton: true,
+                                            confirmButtonText: 'Sí, agregar otro',
+                                            cancelButtonText: 'No, continuar',
+                                        }).then((result: any) => {
+                                            if (result.isConfirmed) {
+                                                this.obtenerAgentesDisponibles();
+                                            } else {
+                                                // ir a evaluar agente
+                                            }
+                                        });
+                                    },
+                                    error: (err) => {
+                                        console.error('❌ Error al corregir los IDs de ítems:', err);
+                                    }
+                                });
                         },
                         error: (err) => {
-                            console.error('❌ Error al corregir los IDs de ítems:', err);
+                            console.error('Error al guardar evaluación:', err);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'No se pudo guardar la evaluación.',
+                                confirmButtonText: 'Cerrar'
+                            });
                         }
                     });
+                }
             },
             error: (err) => {
-                console.error('Error al guardar evaluación:', err);
+                console.error('Error al verificar existencia:', err);
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'No se pudo guardar la evaluación.',
+                    text: 'No se pudo verificar la evaluación existente.',
                     confirmButtonText: 'Cerrar'
                 });
             }
         });
     }
+    cargarPlanillaPorTipoEvaluacion(): void {
+        console.log('🟡 Se disparó cargarPlanillaPorTipoEvaluacion()');
+        console.log('📥 idTipoEvaluacion actual:', this.idTipoEvaluacion);
 
-    // ✅ Este método debe estar fuera de `evaluarAgente`, dentro de la clase
+        if (!this.idTipoEvaluacion) {
+            console.warn('⚠️ No se seleccionó un tipo de evaluación válido');
+            return;
+        }
+
+        this.planillaService.getPlanillaPorTipoEvaluacion(this.idTipoEvaluacion).subscribe({
+            next: (data) => {
+                console.log('✅ Respuesta recibida desde el backend:', data);
+
+                if (data && data._id) {
+                    console.log('📦 Planilla válida encontrada:', data._id);
+                    this.categoriasDesdePlanilla = data.categorias || [];
+                    console.log('📂 Categorías cargadas:', this.categoriasDesdePlanilla);
+                } else {
+                    console.warn('⚠️ La respuesta no contiene una planilla válida:', data);
+                }
+            },
+            error: (err) => {
+                console.error('❌ Error en la petición HTTP:', err);
+            }
+        });
+    }
+
+    //select tipo evaluacion
+    cargarTiposEvaluacion() {
+        this._tipoEvaluacionService.obtenerTipos().subscribe((data: TipoEvaluacion[]) => {
+            this.tiposEvaluacion = data;
+        });
+    }
+
+
     generateFakeObjectId(): string {
         const hex = '0123456789abcdef';
         let objectId = '';
@@ -238,4 +320,25 @@ export class EvaluacionCabeceraComponent implements OnInit {
         }
         return objectId;
     }
+
+    //grilla evaluacionnes por usuario, efector y servicio
+    buscarCabeceras(): void {
+        const idUsuarioEvaluador = this.authService.getId();
+        const idEfector = this.authService.getEfector();
+        const idServicio = this.authService.getServicio();
+
+        this.planillaEDCabeceraService
+            .buscarCabecerasPorEvaluadorEfectorServicio(idUsuarioEvaluador, idEfector, idServicio)
+            .subscribe({
+                next: (data) => {
+                    console.log('📄 Cabeceras encontradas:', data);
+                    this.cabecerasEncontradas = data.data || [];  // ✅ corregido
+                },
+                error: (err) => {
+                    console.error('❌ Error al buscar cabeceras:', err);
+                    this.cabecerasEncontradas = [];
+                }
+            });
+    }
+
 }

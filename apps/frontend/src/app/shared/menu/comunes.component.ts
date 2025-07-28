@@ -1,6 +1,8 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+
+
 @Component({
     selector: 'app-comunes',
     templateUrl: './comunes.component.html',
@@ -12,8 +14,15 @@ export class ComunesComponent {
 
     onPlanillaEDClick() {
         console.log('Clic en Planilla Evaluación Desempeño. Items');
-        this.router.navigate(['/listar-planillaEDRouter']); // Ejemplo de navegación
+        // this.router.navigate(['/listar-planillaEDRouter']);
     }
+
+    onTipoEvaluacion() {
+        console.log('Clic en Tipo Evaluación');
+        this.router.navigate(['/tipo-evaluacion']);
+
+    }
+
 
     onServiciosClick() {
 

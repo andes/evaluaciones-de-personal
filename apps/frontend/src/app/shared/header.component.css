@@ -112,3 +112,16 @@ a:nth-child(5):hover~.animation {
     left: 80%;
     background-color: #e67e22;
 }
+
+.animation {
+    transition: all 0.3s ease;
+    height: 2px;
+    background-color: #17a2b8;
+    /* celeste */
+    margin-top: 2px;
+}
+
+.nav-link:hover {
+    color: #ffc107 !important;
+    /* amarillo al pasar el mouse */
+}

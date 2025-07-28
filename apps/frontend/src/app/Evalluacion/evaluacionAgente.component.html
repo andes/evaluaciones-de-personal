@@ -1,0 +1,158 @@
+<div class="d-flex flex-column align-items-center mb-4">
+    <app-header></app-header>
+</div>
+
+<div class="d-flex justify-content-center mt-4">
+    <div class="col-lg-9 col-md-10 col-12 contenedor-listado">
+        <div class="card mt-3">
+            <div class="card-header bg-primary text-white mb-4">
+
+                <!-- Título centrado -->
+                <div class="d-flex flex-column text-white align-items-center">
+                    <h5 class="fw-bold text-center mb-2">Detalle Evaluación Agente</h5>
+
+
+                    <div
+                         class="d-flex flex-column flex-md-row justify-content-center text-white small align-items-center">
+                        <div *ngIf="cabecera.Efector" class="me-md-2 me-0 mb-2 mb-md-0">
+                            <span class="fw-semibold">Efector:</span> {{ cabecera.Efector.nombre }}
+                        </div>
+
+                        <span class="mx-md-2 d-none d-md-inline"> / </span>
+
+                        <div *ngIf="cabecera.Servicio" class="mt-2 mt-md-0">
+                            <span class="fw-semibold">Servicio:</span> {{ cabecera.Servicio.nombre }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Período y Agente Evaluador en fila -->
+                <div class="row gx-3 gy-2 mt-3 justify-content-center">
+
+                    <div class="col-md-6" *ngIf="cabecera.periodo">
+                        <div class="d-flex align-items-center border rounded shadow-sm bg-light text-dark">
+                            <div class="px-2 py-1 text-muted fw-semibold" style="min-width: 150px;">
+                                Período:
+                            </div>
+                            <div class="px-2 py-1">
+                                {{ cabecera.periodo | date:'MM/yyyy' }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" *ngIf="cabecera.agenteevaluador">
+                        <div class="d-flex align-items-center border rounded shadow-sm bg-light text-dark">
+                            <div class="px-2 py-1 text-muted fw-semibold" style="min-width: 150px;">
+                                Agente Evaluador:
+                            </div>
+                            <div class="px-2 py-1">
+                                {{ cabecera.agenteevaluador.nombreUsuarioEvaluador }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card-body p-3">
+
+                <div class="form-group mb-3 d-none">
+                    <label for="idCabecera">ID recibido por ruta</label>
+                    <input type="text" id="idCabecera" class="form-control" [value]="idCabecera" readonly>
+                </div>
+
+                <div class="card mt-4 w-100">
+
+                    <div class="card-body">
+
+                        <!-- Fila completa en una línea -->
+                        <div class="d-flex flex-column flex-md-row align-items-center gap-3">
+                            x
+                            <!-- Input + label para buscar -->
+                            <div class="d-flex align-items-center mb-3 mb-md-0">
+                                <label for="busquedaAgente" class="form-label fw-semibold me-2 mb-0"
+                                       style="min-width: 180px;">
+                                    Buscar agente por nombre
+                                </label>
+                                <input id="busquedaAgente" type="text" class="form-control" [(ngModel)]="filtroAgente"
+                                       placeholder="Escribí un nombre" style="min-width: 250px;" />
+                            </div>
+
+                            <!-- Select de agentes -->
+                            <select class="form-select" [(ngModel)]="agenteSeleccionado">
+                                <option [ngValue]="null" disabled selected>-- Elegí un agente --</option>
+                                <option *ngFor="let agente of agentesFiltrados" [ngValue]="agente">
+                                    {{ agente.nombre }}
+                                </option>
+                            </select>
+
+
+                            <div class="mb-3 mb-md-0">
+                                <button class="btn btn-outline-success"
+                                        (click)="evaluarAgente(agenteSeleccionado)">Agregar
+                                </button>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Nuevo card para la grilla de agentes -->
+                    <div class="card mt-4">
+                        <div class="card-body p-3">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover mb-0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="d-none">ID</th>
+                                            <th class="text-center">Nombre</th>
+                                            <th class="text-center">Evaluar</th>
+                                            <!-- Nueva columna Cerrar -->
+                                            <th class="text-center">Cerrar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let agente of agentesYaEvaluados">
+                                            <td class="d-none">{{ agente.idAgenteEvaluado }}</td>
+                                            <td>{{ agente.nombreAgenteEvaluado }}</td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-outline-primary"
+                                                        (click)="verItemsEvaluacion(agente)"
+                                                        title="Ver detalles del agente">
+                                                    <i class="fas fa-file-alt"></i>
+                                                </button>
+                                            </td>
+
+                                            <!-- Celda Cerrar -->
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-outline-danger"
+                                                        (click)="cerrarEvaluacion(agente)" title="Cerrar evaluación">
+                                                    <i class="fas fa-times-circle"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Ajusta el colspan a 4 -->
+                                        <tr *ngIf="!agentesYaEvaluados || agentesYaEvaluados.length === 0">
+                                            <td colspan="4" class="text-center py-3">
+                                                No hay agentes evaluados aún.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="!cabecera && !idCabecera" class="alert alert-info mt-3">
+                        No se encontró información de la cabecera.
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

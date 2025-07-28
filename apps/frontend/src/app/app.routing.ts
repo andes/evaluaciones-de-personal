@@ -3,6 +3,9 @@ import { ModuleWithProviders } from '@angular/core';
 import { AppHomeComponent } from './home/home.component';
 import { MenuPlanillaEDComponent } from './home/MenuPlanillaED.component';
 
+//parametros
+import { TipoEvaluacionComponent } from './componentes/TipoEvaluacion.component';
+//parametros
 import { ListarCategoriaComponent } from './componentes/listar-categorias/listar-categorias.component';
 import { CrearCategoriasComponent } from './componentes/crear-categorias/crear-categorias.component';
 import { EditCategoriasComponent } from './componentes/editar-categorias/edit-categoria.component';
@@ -16,9 +19,12 @@ import { CrearPlanillaEDComponent } from './PlanillaED/crear-PlanillaED/crear-Pl
 import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component';
 import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component';
 import { EvaluacionCabeceraComponent } from './Evalluacion/evaluacionCabecera.component';
+import { EvaluacionAgenteComponent } from './Evalluacion/evaluacionAgente.component';
+import { EvaluacionItemsComponent } from './Evalluacion/evaluacionItems.component';
 
 import { LoginComponent } from './users/login/login.component';
 import { RegisterComponent } from './users/register/register.component';
+
 
 import { AuthGuard } from './auth.guard';
 
@@ -118,7 +124,28 @@ const appRoutes: Routes = [
                 pathMatch: 'full'
         },
 
+        {
+                path: 'evaluacion-agente/:id',
+                component: EvaluacionAgenteComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'evaluacion-items/:idEvaluacion/:idAgente',
+                component: EvaluacionItemsComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'tipo-evaluacion',
+                component: TipoEvaluacionComponent
+        },
+
 
 ];
+
+
 
 export const AppRouting: ModuleWithProviders<RouterModule> = RouterModule.forRoot(appRoutes);

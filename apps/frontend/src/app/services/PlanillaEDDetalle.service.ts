@@ -33,6 +33,27 @@ export class PlanillaEDDetalleService {
     corregirItemsPorDescripcion(idEvaluacion: string) {
         return this.http.put(`${this.baseUrl}/evaluaciondetalle/corregir-items/${idEvaluacion}`, {});
     }
+    // Verifica si ya existe una evaluación para esa cabecera y agente
+    existeEvaluacion(idCabecera: string, idAgente: string): Observable<any> {
+        return this.http.get(`${this.baseUrl}/evaluaciondetalle/existe/${idCabecera}/${idAgente}`);
+    }
 
+    // Obtiene todos los agentes evaluados por id cabaecera
+    obtenerAgentesEvaluadosPorCabecera(idCabecera: string): Observable<any> {
+        return this.http.get(`${this.baseUrl}/evaluaciondetalle/por-cabecera/${idCabecera}/agentes`);
+    }
+    // Obtiene las categorías e ítems para un agente evaluado en una evaluación específica (evaluacionitems.ts)
+    obtenerCategoriasEItemsPorEvaluacion(idEvaluacion: string, idAgente: string): Observable<any> {
+        return this.http.get(`${this.baseUrl}/evaluaciondetalle/categorias-items/${idEvaluacion}/${idAgente}`);
+    }
+
+    // Busca un ítem específico dentro de una evaluación por agente
+    obtenerItemPorEvaluacionYAgente(
+        idEvaluacion: string,
+        idAgente: string,
+        idItem: string
+    ): Observable<any> {
+        return this.http.get(`${this.baseUrl}/evaluaciondetalle/item/${idEvaluacion}/${idAgente}/${idItem}`);
+    }
 
 }

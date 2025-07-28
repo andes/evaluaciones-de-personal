@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlanillaEDService } from '../../services/PlanillaED.Service';
 import { Router } from '@angular/router';
+import { TipoEvaluacionService, TipoEvaluacion } from '../../services/tipoevaluacion.service';
 
 @Component({
     selector: 'app-crear-planilla',
@@ -8,21 +9,34 @@ import { Router } from '@angular/router';
     styleUrls: ['./crear-PlanillaED.component.css']
 })
 export class CrearPlanillaEDComponent implements OnInit {
-    nuevoPlanillaED: any = {
-        fechaCreacion: new Date(),
-        descripcion: '',
-        efector: '',   // ID del efector
-        servicio: ''    // ID del servicio
-    };
-
+    tiposEvaluacion: TipoEvaluacion[] = [];
     efectores: any[] = [];
     servicios: any[] = [];
 
-    constructor(private _PlanillaEDService: PlanillaEDService, private router: Router) { }
+    nuevoPlanillaED: any = {
+        fechaCreacion: new Date(),
+        descripcion: '',
+        efector: '',
+        servicio: '',
+        tipoEvaluacion: ''
+    };
+
+    constructor(
+        private _PlanillaEDService: PlanillaEDService,
+        private router: Router,
+        private _tipoEvaluacionService: TipoEvaluacionService,
+    ) { }
 
     ngOnInit(): void {
         this.cargarEfectores();
         this.cargarServicios();
+        this.cargarTiposEvaluacion();
+    }
+
+    cargarTiposEvaluacion() {
+        this._tipoEvaluacionService.obtenerTipos().subscribe((data: TipoEvaluacion[]) => {
+            this.tiposEvaluacion = data;
+        });
     }
 
     cargarEfectores() {
@@ -38,26 +52,38 @@ export class CrearPlanillaEDComponent implements OnInit {
     }
 
     guardarPlanilla() {
-        // Verifica si los campos están completos
-        if (!this.nuevoPlanillaED.descripcion || !this.nuevoPlanillaED.efector || !this.nuevoPlanillaED.servicio) {
+        if (
+            !this.nuevoPlanillaED.descripcion ||
+            !this.nuevoPlanillaED.efector ||
+            !this.nuevoPlanillaED.servicio ||
+            !this.nuevoPlanillaED.tipoEvaluacion
+        ) {
             alert('Debe completar todos los campos obligatorios.');
             return;
         }
 
-        // Crea el objeto para enviar al servicio
+        const tipo = this.tiposEvaluacion.find(t => t._id === this.nuevoPlanillaED.tipoEvaluacion);
+
+        if (!tipo) {
+            alert('Tipo de evaluación no válido.');
+            return;
+        }
+
         const nuevaPlanilla = {
             descripcion: this.nuevoPlanillaED.descripcion,
-            idEfector: this.nuevoPlanillaED.efector,  // Usar idEfector en lugar de efector
-            idServicio: this.nuevoPlanillaED.servicio, // Usar idServicio en lugar de servicio
-            fechaCreacion: this.nuevoPlanillaED.fechaCreacion
+            idEfector: this.nuevoPlanillaED.efector,
+            idServicio: this.nuevoPlanillaED.servicio,
+            fechaCreacion: this.nuevoPlanillaED.fechaCreacion,
+            tipoEvaluacion: {
+                idTipoEvaluacion: tipo._id,
+                nombre: tipo.nombre
+            }
         };
 
-        // Llama al servicio para guardar la planilla
         this._PlanillaEDService.guardarPlanillaED(nuevaPlanilla).subscribe({
             next: (response) => {
                 console.log('Planilla guardada exitosamente:', response);
 
-                // Encuentra el nombre del efector y servicio para pasar en la redirección
                 const efector = this.efectores.find(e => e._id === nuevaPlanilla.idEfector);
                 const servicio = this.servicios.find(s => s._id === nuevaPlanilla.idServicio);
 
@@ -65,13 +91,12 @@ export class CrearPlanillaEDComponent implements OnInit {
                 const servicioNombre = servicio ? servicio.nombre : '';
                 alert('Planilla creada con éxito.');
 
-                // Redirige a la siguiente página con los parámetros
                 this.router.navigate(['/crear-planillaEDItems'], {
                     queryParams: {
                         id: response._id,
                         descripcion: nuevaPlanilla.descripcion,
-                        efector: efectorNombre, // Asignamos el nombre del efector o un string vacío
-                        servicio: servicioNombre // Asignamos el nombre del servicio o un string vacío
+                        efector: efectorNombre,
+                        servicio: servicioNombre
                     }
                 });
             },
