@@ -65,37 +65,70 @@
 
                     <div class="card-body">
 
-                        <!-- Fila completa en una línea -->
-                        <div class="d-flex flex-column flex-md-row align-items-center gap-3">
-                            x
-                            <!-- Input + label para buscar -->
-                            <div class="d-flex align-items-center mb-3 mb-md-0">
-                                <label for="busquedaAgente" class="form-label fw-semibold me-2 mb-0"
-                                       style="min-width: 180px;">
-                                    Buscar agente por nombre
-                                </label>
-                                <input id="busquedaAgente" type="text" class="form-control" [(ngModel)]="filtroAgente"
-                                       placeholder="Escribí un nombre" style="min-width: 250px;" />
+                        <!-- Fila de búsqueda y selección de agentes -->
+                        <div class="d-flex flex-column gap-3">
+
+                            <!-- Label arriba -->
+                            <div class="d-flex flex-column">
+
+
+                                <!-- Input y select en la misma línea debajo -->
+                                <div class="d-flex align-items-center gap-3 flex-wrap">
+
+                                    <!-- Label -->
+                                    <label for="busquedaAgente" class="form-label fw-semibold mb-0">
+                                        Agente:
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </label>
+
+                                    <!-- Input pequeño -->
+                                    <input id="busquedaAgente" type="text" class="form-control"
+                                           [(ngModel)]="filtroAgente" placeholder="Buscar" style="width: 150px;" />
+
+                                    <!-- Select de agentes -->
+                                    <select class="form-select" [(ngModel)]="agenteSeleccionado"
+                                            style="min-width: 250px;">
+                                        <option [ngValue]="null" disabled selected>-- Elegí un agente --</option>
+                                        <option *ngFor="let agente of agentesFiltrados" [ngValue]="agente">
+                                            {{ agente.nombre }}
+                                        </option>
+                                    </select>
+
+                                </div>
+
                             </div>
 
-                            <!-- Select de agentes -->
-                            <select class="form-select" [(ngModel)]="agenteSeleccionado">
-                                <option [ngValue]="null" disabled selected>-- Elegí un agente --</option>
-                                <option *ngFor="let agente of agentesFiltrados" [ngValue]="agente">
-                                    {{ agente.nombre }}
-                                </option>
-                            </select>
 
+                            <div class="d-flex justify-content-between align-items-center w-100">
 
-                            <div class="mb-3 mb-md-0">
-                                <button class="btn btn-outline-success"
-                                        (click)="evaluarAgente(agenteSeleccionado)">Agregar
+                                <!-- Label y Select juntos a la izquierda -->
+                                <div class="d-flex align-items-center gap-2">
+                                    <label for="tipoEvaluacion" class="form-label fw-semibold mb-0">
+                                        Tipo de Evaluación:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </label>
+
+                                    <select id="tipoEvaluacion" class="form-select" [(ngModel)]="idTipoEvaluacion"
+                                            style="min-width: 250px;">
+                                        <option [ngValue]="null" disabled selected>-- Seleccioná tipo --</option>
+                                        <option *ngFor="let tipo of tiposEvaluacion" [ngValue]="tipo._id">
+                                            {{ tipo.nombre }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- Botón a la derecha -->
+                                <button class="btn btn-outline-success" (click)="evaluarAgente(agenteSeleccionado)">
+                                    Agregar
                                 </button>
 
-
                             </div>
 
+
+
+
                         </div>
+
+
 
                     </div>
 
@@ -127,10 +160,15 @@
 
                                             <!-- Celda Cerrar -->
                                             <td class="text-center">
-                                                <button class="btn btn-sm btn-outline-danger"
-                                                        (click)="cerrarEvaluacion(agente)" title="Cerrar evaluación">
-                                                    <i class="fas fa-times-circle"></i>
+                                                <button class="btn btn-sm"
+                                                        [ngClass]="agente.cerrado ? 'btn-outline-secondary' : 'btn-outline-danger'"
+                                                        (click)="abrirModalCerrar(idCabecera, agente.nombreAgenteEvaluado)"
+                                                        [disabled]="agente.cerrado"
+                                                        title="{{ agente.cerrado ? 'Evaluación ya cerrada' : 'Cerrar evaluación' }}">
+                                                    <i
+                                                       [ngClass]="agente.cerrado ? 'fas fa-lock' : 'fas fa-lock-open'"></i>
                                                 </button>
+
                                             </td>
                                         </tr>
 
@@ -153,6 +191,49 @@
 
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal  cerrar evaluación -->
+<div *ngIf="mostrarModalCerrar" class="modal-backdrop-custom">
+    <div class="custom-modal">
+        <div class="custom-modal-header">
+            <h5 class="modal-title">🔒 Cerrar Evaluación</h5>
+            <p class="mb-0 text-muted small">Agente: <strong>{{ nombreAgenteCerrar }}</strong></p>
+            <button type="button" class="close" (click)="cerrarModalCerrar()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <div class="custom-modal-body">
+            <!-- ID de la Evaluación -->
+            <div class="mb-3 d-none">
+                <label class="form-label fw-semibold">ID Evaluación</label>
+                <div class="text-muted">{{ idCabeceraEvaluacion }}</div>
+            </div>
+
+            <!-- Select de Motivo de Cierre -->
+            <div class="mb-3">
+                <label for="motivoCierre" class="form-label fw-semibold">Motivo de Cierre</label>
+                <select id="motivoCierre" class="form-select" [(ngModel)]="motivoSeleccionado">
+                    <option [ngValue]="null" disabled selected>Seleccione un motivo</option>
+                    <option *ngFor="let motivo of motivosCierre" [ngValue]="motivo">
+                        {{ motivo.nombre }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- Fecha de cierre -->
+            <div class="mb-3">
+                <label for="fechaCierre" class="form-label fw-semibold">Fecha de Cierre</label>
+                <input type="date" id="fechaCierre" class="form-control" [(ngModel)]="fechaCierre" />
+            </div>
+        </div>
+
+        <div class="custom-modal-footer text-end">
+            <button class="btn btn-secondary" (click)="cerrarModalCerrar()">Cancelar</button>
+            <button class="btn btn-success" (click)="confirmarCierre()">Cerrar Evaluación</button>
         </div>
     </div>
 </div>
