@@ -9,7 +9,6 @@ import { TipoCierreEvaluacionModel } from '../TipoCierreEvaluacion/TipoCierreEva
 const router = Router();
 
 
-
 router.post('/planillaedcabecera', async (req: Request, res: Response) => {
     try {
         const {
@@ -53,10 +52,13 @@ router.post('/planillaedcabecera', async (req: Request, res: Response) => {
             },
             Efector: efectorConNombre,
             Servicio: servicioConNombre,
+
+
+            fechaCierre: new Date('1900-01-01'),
+
             usuario,
             fechaMod: new Date(),
 
-            // 👇 Aquí agregamos el valor fijo
             tipoCierreEvaluacion: {
                 id: new mongoose.Types.ObjectId("688240f09cca123543c84b04"),
                 nombre: "Evaluación Abierta"
@@ -80,6 +82,7 @@ router.post('/planillaedcabecera', async (req: Request, res: Response) => {
         });
     }
 });
+
 
 
 
@@ -234,6 +237,61 @@ router.delete('/evaluacioncabecera', async (req: Request, res: Response) => {
         res.status(500).json({
             success: false,
             message: 'Error al eliminar todas las cabeceras',
+            error: error instanceof Error ? error.message : 'Error desconocido'
+        });
+    }
+});
+
+// ✅ Actualizar tipoCierreEvaluacion y fechaCierre por ID
+router.put('/evaluacioncabecera/cierre/:id', async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { tipoCierreEvaluacion, fechaCierre } = req.body;
+
+        if (!tipoCierreEvaluacion || !tipoCierreEvaluacion.id || !tipoCierreEvaluacion.nombre || !fechaCierre) {
+            return res.status(400).json({
+                success: false,
+                message: 'Faltan datos en el cuerpo de la solicitud'
+            });
+        }
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                success: false,
+                message: 'ID inválido'
+            });
+        }
+
+        const actualizada = await PlanillaEvaluacionCabeceraModel.findByIdAndUpdate(
+            id,
+            {
+                tipoCierreEvaluacion: {
+                    id: new mongoose.Types.ObjectId(tipoCierreEvaluacion.id),
+                    nombre: tipoCierreEvaluacion.nombre
+                },
+                fechaCierre: new Date(fechaCierre),
+                fechaMod: new Date()
+            },
+            { new: true }
+        );
+
+        if (!actualizada) {
+            return res.status(404).json({
+                success: false,
+                message: 'No se encontró la evaluación para actualizar'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: actualizada,
+            message: 'Evaluación actualizada correctamente'
+        });
+    } catch (error) {
+        console.error('❌ Error al actualizar evaluación:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al actualizar evaluación',
             error: error instanceof Error ? error.message : 'Error desconocido'
         });
     }

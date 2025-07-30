@@ -22,7 +22,7 @@ export class ListarItemsComponent implements OnInit {
         this._Itemservice.getItems().subscribe(
             (data: Items[]) => {
                 this.listitems = data;
-                this.filteredItems = data; // Inicializa filteredItems con todos los ítems
+                this.filteredItems = data; // Inicializa  con todos los ítems
             },
             (error) => {
                 // Manejo de errores

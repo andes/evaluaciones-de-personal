@@ -6,7 +6,7 @@ const ItemSchema = new Schema({
     idItem: {
         type: Schema.Types.ObjectId,
         required: true,
-        ref: 'configEvaDesemp'
+        ref: 'configEvaDesemp'   // Aquí el nombre exacto de tu modelo
     },
     descripcion: { type: String, required: true },
     puntaje: { type: Number, required: true }

@@ -216,17 +216,17 @@
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionAgente.component.css",
               "ext": ".css",
-              "mtime": 1750763641112.894
+              "mtime": 1753880372615.2979
             },
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionAgente.component.html",
               "ext": ".html",
-              "mtime": 1753459931950.5986
+              "mtime": 1753884577744.0496
             },
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionAgente.component.ts",
               "ext": ".ts",
-              "mtime": 1753472576478.3086
+              "mtime": 1753888709903.2542
             },
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.css",
@@ -306,7 +306,7 @@
             {
               "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.ts",
               "ext": ".ts",
-              "mtime": 1746715380851.976
+              "mtime": 1753713087603.3325
             },
             {
               "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.css",
@@ -676,7 +676,7 @@
             {
               "file": "apps/frontend/src/app/services/PlanillaEDCabecera.service.ts",
               "ext": ".ts",
-              "mtime": 1750898658838.258
+              "mtime": 1753887085874.226
             },
             {
               "file": "apps/frontend/src/app/services/PlanillaEDDetalle.service.ts",
@@ -687,6 +687,11 @@
               "file": "apps/frontend/src/app/services/PlanillaEDIItems.service.ts",
               "ext": ".ts",
               "mtime": 1752243619034.558
+            },
+            {
+              "file": "apps/frontend/src/app/services/TipoCierreEvaluacionService.ts",
+              "ext": ".ts",
+              "mtime": 1753884025047.5237
             },
             {
               "file": "apps/frontend/src/app/services/agentes.service.ts",
@@ -1010,12 +1015,12 @@
             {
               "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionCabecera.router.ts",
               "ext": ".ts",
-              "mtime": 1753451866886.135
+              "mtime": 1753885915316.3718
             },
             {
               "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionCabecera.schema.ts",
               "ext": ".ts",
-              "mtime": 1753366468384.821
+              "mtime": 1753800001381.83
             },
             {
               "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionDetalle.router.ts",
@@ -2175,17 +2180,17 @@
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionAgente.component.css",
         "ext": ".css",
-        "mtime": 1750763641112.894
+        "mtime": 1753880372615.2979
       },
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionAgente.component.html",
         "ext": ".html",
-        "mtime": 1753459931950.5986
+        "mtime": 1753884577744.0496
       },
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionAgente.component.ts",
         "ext": ".ts",
-        "mtime": 1753472576478.3086
+        "mtime": 1753888709903.2542
       },
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.css",
@@ -2265,7 +2270,7 @@
       {
         "file": "apps/frontend/src/app/Items/listar-items/listar-items.component.ts",
         "ext": ".ts",
-        "mtime": 1746715380851.976
+        "mtime": 1753713087603.3325
       },
       {
         "file": "apps/frontend/src/app/PlanillaED/crear-PlanillaED/crear-PlanillaED.component.css",
@@ -2635,7 +2640,7 @@
       {
         "file": "apps/frontend/src/app/services/PlanillaEDCabecera.service.ts",
         "ext": ".ts",
-        "mtime": 1750898658838.258
+        "mtime": 1753887085874.226
       },
       {
         "file": "apps/frontend/src/app/services/PlanillaEDDetalle.service.ts",
@@ -2646,6 +2651,11 @@
         "file": "apps/frontend/src/app/services/PlanillaEDIItems.service.ts",
         "ext": ".ts",
         "mtime": 1752243619034.558
+      },
+      {
+        "file": "apps/frontend/src/app/services/TipoCierreEvaluacionService.ts",
+        "ext": ".ts",
+        "mtime": 1753884025047.5237
       },
       {
         "file": "apps/frontend/src/app/services/agentes.service.ts",
@@ -2902,12 +2912,12 @@
       {
         "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionCabecera.router.ts",
         "ext": ".ts",
-        "mtime": 1753451866886.135
+        "mtime": 1753885915316.3718
       },
       {
         "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionCabecera.schema.ts",
         "ext": ".ts",
-        "mtime": 1753366468384.821
+        "mtime": 1753800001381.83
       },
       {
         "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionDetalle.router.ts",

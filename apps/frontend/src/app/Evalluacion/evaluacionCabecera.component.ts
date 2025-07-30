@@ -74,6 +74,29 @@ export class EvaluacionCabeceraComponent implements OnInit {
 
 
 
+        ///////////  este metodo debo reemplazar para buscar planilla por tipo de planila
+        /*     this.planillaService.getPlanillaPorTipoEvaluacion(idTipoEvaluacion).subscribe({
+                 next: (data) => {
+                     if (data && data._id) {
+                         console.log('✅ Planilla encontrada por tipoEvaluacion:', data);
+                         console.log('📂 Categorías de la planilla:', data.categorias);
+                         this.categoriasDesdePlanilla = data.categorias || [];
+                     } else {
+                         console.warn('⚠️ La respuesta no contiene una planilla válida:', data);
+                     }
+                 },
+                 error: (err) => {
+                     if (err.status === 404) {
+                         console.warn(`🔍 No se encontró ninguna planilla para:
+                     ➤ idTipoEvaluacion: ${idTipoEvaluacion}`);
+                     } else {
+                         console.error('❌ Error al obtener la planilla:', err);
+                     }
+                 }
+             });
+             */
+
+        ///////////  este metodo debo reemplazar para buscar planilla por tipo de planila
 
 
         // Obtener nombre del efector
@@ -130,7 +153,7 @@ export class EvaluacionCabeceraComponent implements OnInit {
             return;
         }
 
-        //  verificar si existe la cabecera
+        //  verific si existe la cabecera
         this.planillaEDCabeceraService.verificarExistenciaCabecera(this.evaluacionCabecera).subscribe({
             next: (respuesta) => {
                 if (respuesta.existe) {

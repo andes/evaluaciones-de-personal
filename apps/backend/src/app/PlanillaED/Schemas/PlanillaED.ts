@@ -16,7 +16,7 @@ export interface IPlanillaED extends mongoose.Document {
     idEfector: mongoose.Schema.Types.ObjectId;
     descripcion: string;
     idServicio: mongoose.Schema.Types.ObjectId;
-    tipoEvaluacion: TipoEvaluacion;
+    tipoEvaluacion: TipoEvaluacion;  // Nuevo campo agregado
     categorias: {
         descripcion: string;
         categoria: ICategoriaItem;

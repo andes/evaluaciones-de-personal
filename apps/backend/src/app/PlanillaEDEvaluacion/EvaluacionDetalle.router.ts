@@ -59,8 +59,8 @@ router.get('/evaluaciondetalle/:id', async (req: Request, res: Response) => {
         }
 
         const evaluacion = await EvaluacionDetalleModel.findById(id)
-            .populate({ path: 'categorias.idCategoria', select: 'descripcionCategoria' })
-            .populate({ path: 'categorias.items.idItem', select: 'descripcion' })
+            .populate({ path: 'categorias.idCategoria', select: 'descripcionCategoria' }) // Trae info de Categoría
+            .populate({ path: 'categorias.items.idItem', select: 'descripcion' }) // Trae info de Item
             .lean();
 
         if (!evaluacion) {

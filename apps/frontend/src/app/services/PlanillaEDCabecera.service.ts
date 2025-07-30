@@ -72,5 +72,10 @@ export class PlanillaEDCabeceraService {
         return this.http.get<{ success: boolean; data: PlanillaEDCabecera }>(`http://localhost:3000/api/evaluacioncabecera/${id}`);
     }
 
+    actualizarCierreEvaluacion(id: string, cierreData: { tipoCierreEvaluacion: { id: string; nombre: string }, fechaCierre: string }): Observable<any> {
+        const url = `http://localhost:3000/api/evaluacioncabecera/cierre/${id}`;
+        return this.http.put(url, cierreData);
+    }
+
 
 }

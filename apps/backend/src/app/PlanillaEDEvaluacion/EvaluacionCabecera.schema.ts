@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-//  agente evaluador 
+//  agente evaluador — ahora objeto único
 interface IAgenteEvaluador {
     idUsuarioEvaluador: mongoose.Types.ObjectId;
     nombreUsuarioEvaluador: string;
@@ -14,7 +14,7 @@ interface IEfector {
     nombre: string;
 }
 
-//  servicio
+// servicio
 interface IServicio {
     idServicio: mongoose.Types.ObjectId;
     nombre: string;
@@ -32,12 +32,13 @@ export interface IPlanillaEvaluacionCabecera extends mongoose.Document {
     agenteevaluador: IAgenteEvaluador;
     Efector: IEfector;
     Servicio: IServicio;
-    tipoCierreEvaluacion?: ITipoCierreEvaluacion; // <-- campo nuevo
+    fechaCierre?: Date; // <-- campo nuevo agregado
+    tipoCierreEvaluacion?: ITipoCierreEvaluacion;
     usuario: string;
     fechaMod: Date;
 }
 
-
+// Schema actualizado
 const PlanillaEvaluacionCabeceraSchema = new Schema<IPlanillaEvaluacionCabecera>(
     {
         periodo: {
@@ -83,6 +84,10 @@ const PlanillaEvaluacionCabeceraSchema = new Schema<IPlanillaEvaluacionCabecera>
             },
             required: true
         },
+        // 👇 campo nuevo
+        fechaCierre: {
+            type: Date
+        },
         tipoCierreEvaluacion: {
             id: {
                 type: Schema.Types.ObjectId,
@@ -108,7 +113,7 @@ const PlanillaEvaluacionCabeceraSchema = new Schema<IPlanillaEvaluacionCabecera>
     }
 );
 
-
+// Exportación del modelo
 export const PlanillaEvaluacionCabeceraModel = mongoose.model<IPlanillaEvaluacionCabecera>(
     'PlanillaEvaluacionCabecera',
     PlanillaEvaluacionCabeceraSchema,
