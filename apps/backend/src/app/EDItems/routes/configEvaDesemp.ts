@@ -7,23 +7,21 @@ router.get('/rEvaDesemp', async (req, res, next) => {
 
     const data = await modelo.find();
     res.json(data);
-    res.send("hola")
+
 });
 
 router.get('/rEvaDesemp/:id', async (req, res) => {
-    const id = req.params.id;
-    const respuesta = await modelo.findById(id);
-    res.json(respuesta);
-});
-
-router.post('/rEvaDesemp', async (req, res) => {
     try {
-        const newItems = await modelo.create(req.body);
-        res.json(newItems);
+        const id = req.params.id;
+        const respuesta = await modelo.findById(id);
+        if (!respuesta) {
+            return res.status(404).json({ error: 'Documento no encontrado' });
+        }
+        res.json(respuesta);
     } catch (error) {
-        res.status(500).json({ error: 'Ha ocurrido un error' });
+        res.status(500).json({ error: 'Error al buscar el documento' });
     }
-})
+});
 
 
 
