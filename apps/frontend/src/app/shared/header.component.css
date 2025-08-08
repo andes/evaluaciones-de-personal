@@ -12,6 +12,10 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
     z-index: 999;
+
+    background: linear-gradient(-45deg, #0db9fd, #0a8ecf, #17a2b8, #0db9fd);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
 }
 
 .header h1 {

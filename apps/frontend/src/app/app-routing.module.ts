@@ -14,6 +14,7 @@ import { EditCategoriasComponent } from './componentes/editar-categorias/edit-ca
 import { ListarItemsComponent } from './Items/listar-items/listar-items.component';
 import { CrearItemsComponent } from './Items/crear-items/crear-items.component'
 import { EditItemsComponent } from './Items/editar-items/edit-items.component';
+import { ItemsRComponent } from './Items/itemsR.component';
 
 import { ListarPlanillaEDComponent } from './PlanillaED/listar-PlanillaED/listar-PlanillaED.component';
 import { CrearPlanillaEDComponent } from './PlanillaED/crear-PlanillaED/crear-PlanillaED.component';
@@ -22,6 +23,7 @@ import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-Planill
 import { EvaluacionCabeceraComponent } from './Evalluacion/evaluacionCabecera.component';
 import { EvaluacionAgenteComponent } from './Evalluacion/evaluacionAgente.component';
 import { EvaluacionItemsComponent } from './Evalluacion/evaluacionItems.component';
+import { AgentesComponent } from './componentes/agentes.component';
 
 import { LoginComponent } from './users/login/login.component';
 import { RegisterComponent } from './users/register/register.component';
@@ -41,13 +43,20 @@ const appRoutes: Routes = [
         },
 
 
-
         {
                 path: 'menuPlanillaED',
                 component: MenuPlanillaEDComponent,
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },
+
+        {
+                path: 'agentes',
+                component: AgentesComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
 
         {
                 path: 'ListarCategoriasComponent',
@@ -70,7 +79,7 @@ const appRoutes: Routes = [
 
         {
                 path: 'ListarItems',
-                component: ListarItemsComponent,
+                component: ItemsRComponent,
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },

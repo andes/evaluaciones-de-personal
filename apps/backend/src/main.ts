@@ -12,6 +12,7 @@ import planillaEDDetalleRouter from './app/PlanillaEDEvaluacion/EvaluacionDetall
 import EvaluacionItemsRouter from './app/PlanillaEDEvaluacion/EvaluacionItems.router'
 import TipoEvaluacionRouter from './app/parametros/TipoEvaluacion.router';
 import TipoCierreEvaluacionRouter from './app/TipoCierreEvaluacion/TipoCierreEvaluacion.router';
+import ItemsRRouter from './app/Items/routes/itemsR.router';
 
 
 //import planillaEDEvaluacionRouter from './app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.routers';
@@ -22,6 +23,7 @@ console.log('🔍 JWT_SECRET leído desde .env:', process.env.JWT_SECRET);
 
 const { Connections } = require('./app/connection');
 const { application } = require('./app/application');
+
 Connections.initialize();
 
 // Rutas
@@ -35,6 +37,7 @@ application.add({ path: '/api', router: EdCategoriaItems })
 application.add({ path: '/api', router: agenterouter })
 application.add({ path: '/api/rmTipoEvaluacion', router: TipoEvaluacionRouter });
 application.add({ path: '/api', router: TipoCierreEvaluacionRouter });
+application.add({ path: '/api', router: ItemsRRouter });
 
 
 

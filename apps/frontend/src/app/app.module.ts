@@ -22,6 +22,7 @@ import { CrearCategoriasComponent } from './componentes/crear-categorias/crear-c
 import { EditCategoriasComponent } from './componentes/editar-categorias/edit-categoria.component';
 //componentes items
 import { ListarItemsComponent } from './Items/listar-items/listar-items.component';
+import { ItemsRComponent } from './Items/itemsR.component';
 import { CrearItemsComponent } from './Items/crear-items/crear-items.component';
 import { EditItemsComponent } from './Items/editar-items/edit-items.component';
 import { TipoEvaluacionComponent } from './componentes/TipoEvaluacion.component';
@@ -42,7 +43,7 @@ import { PlanillaComponent } from './shared/menu/menuPlanillas/Planillas.compone
 import { EvaluacionCabeceraComponent } from './Evalluacion/evaluacionCabecera.component';
 import { EvaluacionAgenteComponent } from './Evalluacion/evaluacionAgente.component';
 import { EvaluacionItemsComponent } from './Evalluacion/evaluacionItems.component';
-
+import { AgentesComponent } from './componentes/agentes.component';
 
 
 
@@ -73,6 +74,8 @@ import { EvaluacionItemsComponent } from './Evalluacion/evaluacionItems.componen
         EvaluacionAgenteComponent,
         EvaluacionItemsComponent,
         TipoEvaluacionComponent,
+        ItemsRComponent,
+        AgentesComponent,
 
 
 

@@ -1,8 +1,6 @@
 <app-header></app-header>
-
-<div class="contenedor-principal d-flex">
-    <!-- Menú lateral -->
-    <app-comunes></app-comunes>
+<div class="contenedor-principal">
+    <app-comunes class="menu-horizontal"></app-comunes>
 
     <!-- Contenedor principal a todo ancho -->
     <div class="container-fluid mt-4 px-5">
@@ -12,10 +10,15 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <!-- Header con título y botón -->
-                        <div class="header-container mb-4 d-flex justify-content-between align-items-center">
-                            <h2 class="m-0">Tipos de Evaluación</h2>
-                            <button class="btn btn-success" (click)="abrirModal()">NUEVO</button>
+
+                        <div class="mb-4">
+                            <div class="text-center">
+                                <h2 class="m-0">Tipo de Evaluación</h2>
+                            </div>
+
+                            <div class="d-flex justify-content-end mt-3">
+                                <button class="btn btn-success" (click)="abrirModal()">NUEVA</button>
+                            </div>
                         </div>
 
                         <!-- Tabla con ancho completo -->
