@@ -31,7 +31,8 @@ router.post('/evaluaciondetalle', async (req: Request, res: Response) => {
             idPlanillaEvaluacionCabecera: new mongoose.Types.ObjectId(idPlanillaEvaluacionCabecera),
             agenteEvaluado: {
                 idAgenteEvaluado: new mongoose.Types.ObjectId(agenteEvaluado.idAgenteEvaluado),
-                nombreAgenteEvaluado: agenteEvaluado.nombreAgenteEvaluado
+                nombreAgenteEvaluado: agenteEvaluado.nombreAgenteEvaluado,
+                legajo: agenteEvaluado.legajo
             },
             categorias: categoriasTransformadas
         });
@@ -93,7 +94,8 @@ router.put('/evaluaciondetalle/:id', async (req: Request, res: Response) => {
                 idPlanillaEvaluacionCabecera: new mongoose.Types.ObjectId(idPlanillaEvaluacionCabecera),
                 agenteEvaluado: {
                     idAgenteEvaluado: new mongoose.Types.ObjectId(agenteEvaluado.idAgenteEvaluado),
-                    nombreAgenteEvaluado: agenteEvaluado.nombreAgenteEvaluado
+                    nombreAgenteEvaluado: agenteEvaluado.nombreAgenteEvaluado,
+                    legajo: agenteEvaluado.legajo // 
                 },
                 categorias
             },
@@ -292,6 +294,7 @@ router.get(
                 {
                     'agenteEvaluado.idAgenteEvaluado': 1,
                     'agenteEvaluado.nombreAgenteEvaluado': 1,
+                    'agenteEvaluado.legajo': 1, // <-- agregar
                     _id: 0
                 }
             ).lean();

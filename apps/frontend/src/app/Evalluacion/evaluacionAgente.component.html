@@ -140,15 +140,17 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th class="d-none">ID</th>
+                                            <th class="text-center">Legajo</th>
                                             <th class="text-center">Nombre</th>
                                             <th class="text-center">Evaluar</th>
-                                            <!-- Nueva columna Cerrar -->
                                             <th class="text-center">Cerrar</th>
+                                            <th class="text-center">Imprimir</th> <!-- ✅ nueva columna -->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let agente of agentesYaEvaluados">
                                             <td class="d-none">{{ agente.idAgenteEvaluado }}</td>
+                                            <td class="text-center">{{ agente.legajo }}</td>
                                             <td>{{ agente.nombreAgenteEvaluado }}</td>
                                             <td class="text-center">
                                                 <button class="btn btn-sm btn-outline-primary"
@@ -157,8 +159,6 @@
                                                     <i class="fas fa-file-alt"></i>
                                                 </button>
                                             </td>
-
-                                            <!-- Celda Cerrar -->
                                             <td class="text-center">
                                                 <button class="btn btn-sm"
                                                         [ngClass]="agente.cerrado ? 'btn-outline-secondary' : 'btn-outline-danger'"
@@ -168,18 +168,24 @@
                                                     <i
                                                        [ngClass]="agente.cerrado ? 'fas fa-lock' : 'fas fa-lock-open'"></i>
                                                 </button>
-
+                                            </td>
+                                            <td class="text-center"> <!-- ✅ botón imprimir -->
+                                                <button class="btn btn-sm btn-outline-secondary"
+                                                        (click)="imprimirEvaluacion(agente)"
+                                                        title="Imprimir evaluación">
+                                                    <i class="fas fa-print"></i>
+                                                </button>
                                             </td>
                                         </tr>
 
-                                        <!-- Ajusta el colspan a 4 -->
                                         <tr *ngIf="!agentesYaEvaluados || agentesYaEvaluados.length === 0">
-                                            <td colspan="4" class="text-center py-3">
+                                            <td colspan="6" class="text-center py-3"> <!-- ajustado colspan -->
                                                 No hay agentes evaluados aún.
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>

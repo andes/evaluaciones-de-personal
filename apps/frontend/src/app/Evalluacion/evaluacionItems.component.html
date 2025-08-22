@@ -65,14 +65,15 @@
         <!-- Contenedor inputs fiel a tu estructura -->
         <div class="d-flex justify-content-end align-items-start gap-2">
 
-          <!-- Evaluación -->
+          <!-- Evaluación 
           <div class="d-flex flex-column text-end" style="flex: 0 0 90px;">
             <label for="evaluacionInput" class="form-label fw-bold mb-1 small" style="line-height: 1;">
               Eval.:
             </label>
             <input type="text" id="evaluacionInput" class="form-control form-control-sm px-1 py-1"
-                   style="font-size: .75rem; height: calc(1.5em + .5rem);" placeholder="E">
+                   style="font-size: .75rem; height: calc(1.5em + .5rem);" [value]="idEvaluacion" readonly>
           </div>
+          -->
 
           <!-- Promedio -->
           <div class="d-flex flex-column text-end" style="flex: 0 0 80px;">
@@ -80,7 +81,8 @@
               Prom:
             </label>
             <input type="text" id="promedioActual" class="form-control form-control-sm px-1 py-1"
-                   style="font-size: .75rem; height: calc(1.5em + .5rem);" placeholder="0–10">
+                   style="font-size: .75rem; height: calc(1.5em + .5rem);" [value]="promedioPuntaje.toFixed(2)"
+                   readonly>
           </div>
 
           <!-- Items -->
@@ -89,10 +91,12 @@
               Ítems:
             </label>
             <input type="text" id="itemsEvaluados" class="form-control form-control-sm px-1 py-1"
-                   style="font-size: .75rem; height: calc(1.5em + .5rem);" placeholder="#">
+                   style="font-size: .75rem; height: calc(1.5em + .5rem);"
+                   [value]="totalItemsConValor + ' / ' + totalItems" readonly>
           </div>
 
         </div>
+
 
 
       </div>
