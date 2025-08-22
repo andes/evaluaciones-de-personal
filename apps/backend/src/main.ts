@@ -9,14 +9,14 @@ import { UsersRouter } from './app/users/user.controller';
 import agenterouter from './app/agentes/agentes.router';
 import EvaluacionCabeceraRouter from './app/PlanillaEDEvaluacion/EvaluacionCabecera.router';
 import planillaEDDetalleRouter from './app/PlanillaEDEvaluacion/EvaluacionDetalle.router';
-import EvaluacionItemsRouter from './app/PlanillaEDEvaluacion/EvaluacionItems.router'
+import { evaluacionResultadosRouter } from './app/PlanillaEDEvaluacion/EvaluacionResultados.router';
+import evaluacionlistadorouter from './app/PlanillaEDEvaluacion/EvaluacionListados.router';
+
+
+import EvaluacionItemsRouter from './app/PlanillaEDEvaluacion/EvaluacionItems.router';
 import TipoEvaluacionRouter from './app/parametros/TipoEvaluacion.router';
 import TipoCierreEvaluacionRouter from './app/TipoCierreEvaluacion/TipoCierreEvaluacion.router';
 import ItemsRRouter from './app/Items/routes/itemsR.router';
-
-
-//import planillaEDEvaluacionRouter from './app/PlanillaEDEvaluacion/PlanillaEDEvaluacion.routers';
-
 
 require('dotenv').config();
 console.log('🔍 JWT_SECRET leído desde .env:', process.env.JWT_SECRET);
@@ -38,6 +38,8 @@ application.add({ path: '/api', router: agenterouter })
 application.add({ path: '/api/rmTipoEvaluacion', router: TipoEvaluacionRouter });
 application.add({ path: '/api', router: TipoCierreEvaluacionRouter });
 application.add({ path: '/api', router: ItemsRRouter });
+application.add({ path: '/api', router: evaluacionResultadosRouter });
+application.add({ path: '/api', router: evaluacionlistadorouter });
 
 
 

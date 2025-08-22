@@ -9,6 +9,12 @@ const Swal = require('sweetalert2').default;
 import { Router } from '@angular/router';
 import { PlanillaEDService } from '../services/PlanillaED.Service';
 import { TipoCierreEvaluacionService, TipoCierreEvaluacion } from '../services/TipoCierreEvaluacionService';
+import { EvaluacionService, EvaluacionCompleta } from '../services/PlanillaEDListados.service';
+import { EvaluacionResultadosService, ApiResponse } from '../services/evaluacionResulado.service';
+
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
 
 
 import { AuthService } from '../auth.service';
@@ -40,6 +46,18 @@ export class EvaluacionAgenteComponent implements OnInit {
     fechaCierre: string = '';
     idCabeceraEvaluacion: string = '';
     nombreAgenteCerrar: string = '';
+    totalItemsConValor: number = 0;
+    promedioPuntaje: number = 0;
+
+    totales: {
+        totalItems?: number;
+        itemsConValor?: number;
+        sumaPuntajes?: number;
+        promedio?: number;
+    } = {};
+
+
+
 
     get agentesFiltrados() {
         const filtro = this.filtroAgente.toLowerCase();
@@ -57,31 +75,47 @@ export class EvaluacionAgenteComponent implements OnInit {
         private evaluacionDetalleService: PlanillaEDDetalleService,
         private _tipoEvaluacionService: TipoEvaluacionService,
         private planillaService: PlanillaEDService,
-        private tipoCierreEvaluacionService: TipoCierreEvaluacionService
+        private tipoCierreEvaluacionService: TipoCierreEvaluacionService,
+        private evaluacionService: EvaluacionService,
+        private evaluacionResultadosService: EvaluacionResultadosService,
+
     ) { }
 
 
     ngOnInit(): void {
+
+
         this.cargarTiposEvaluacion();
-        // this.cargarTiposEvaluacion(); // Removed this line
+
         this.route.paramMap.subscribe(params => {
             const id = params.get('id');
             if (id) {
                 this.idCabecera = id;
                 console.log('📌 ID recibido desde ruta:', id);
                 this.obtenerCabeceraConMeta(id);
-                this.cargarAgentesEvaluados(id);  // ← ¡ACÁ SE LLAMA!
+                this.cargarAgentesEvaluados(id);
             }
         });
 
         this.obtenerAgentesDisponibles();
 
 
-        const agente = this.agenteSeleccionado; // Example of how to define 'agente'
+        const agente = this.agenteSeleccionado;
         this.evaluacionDetalleService.existeEvaluacion(this.idCabecera, agente._id)
 
-
+        this.route.paramMap.subscribe(params => {
+            const id = params.get('id'); // 🔹 aquí se obtiene el id de la ruta
+            if (id) {
+                this.idCabecera = id;
+                console.log('📌 ID recibido desde ruta:', id);
+                this.obtenerCabeceraConMeta(id);
+                this.cargarAgentesEvaluados(id);
+                this.cargarTotales(id); // 🔹 llamamos a la función de totales
+            }
+        });
     }
+
+
     cargarTiposEvaluacion() {
         this._tipoEvaluacionService.obtenerTipos().subscribe((data: TipoEvaluacion[]) => {
             this.tiposEvaluacion = data;
@@ -129,8 +163,9 @@ export class EvaluacionAgenteComponent implements OnInit {
         });
     }
     evaluarAgente(agente: any): void {
-        console.log('🟢 Evaluar agente:', agente);
+        console.log(' Evaluar agente:', agente);
 
+        // Validar que se haya seleccionado un tipo de evaluación
         if (!this.idTipoEvaluacion) {
             Swal.fire({
                 icon: 'warning',
@@ -140,19 +175,23 @@ export class EvaluacionAgenteComponent implements OnInit {
             return;
         }
 
+        // Obtener la planilla por tipo de evaluación
         this.planillaService.getPlanillaPorTipoEvaluacion(this.idTipoEvaluacion).subscribe({
             next: (planilla) => {
+                // Validar existencia de planilla
                 if (!planilla || !planilla._id) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error',
-                        text: 'No se encontró una planilla válida.',
+                        title: 'Planilla no encontrada',
+                        text: 'No se encontró una planilla válida para el tipo de evaluación seleccionado. Por favor, elegí un tipo existente.',
                     });
-                    return;
+                    return; // Detiene el flujo y no graba nada
                 }
 
+                // Guardar categorías de la planilla
                 this.categoriasDesdePlanilla = planilla.categorias || [];
 
+                // Transformar categorías e ítems
                 const categoriasTransformadas = this.categoriasDesdePlanilla.map(cat => ({
                     idCategoria: cat.categoria._id,
                     descripcionCategoria: cat.categoria.descripcion,
@@ -163,6 +202,7 @@ export class EvaluacionAgenteComponent implements OnInit {
                     }))
                 }));
 
+                // Crear objeto de detalle de evaluación
                 const detalleEvaluacion = {
                     _id: this.generateFakeObjectId(),
                     idPlanillaEvaluacionCabecera: this.idCabecera,
@@ -173,6 +213,7 @@ export class EvaluacionAgenteComponent implements OnInit {
                     categorias: categoriasTransformadas
                 };
 
+                // Verificar si el agente ya fue evaluado
                 this.evaluacionDetalleService.existeEvaluacion(this.idCabecera, agente._id)
                     .subscribe({
                         next: (respuesta) => {
@@ -183,8 +224,10 @@ export class EvaluacionAgenteComponent implements OnInit {
                                     text: `El agente ${agente.legajo} ${agente.nombre} ya fue evaluado.`,
                                 });
                             } else {
+                                // Crear la evaluación
                                 this.evaluacionDetalleService.crearEvaluacionDetalle(detalleEvaluacion).subscribe({
                                     next: () => {
+                                        // Corregir ítems por descripción
                                         this.evaluacionDetalleService.corregirItemsPorDescripcion(detalleEvaluacion._id).subscribe({
                                             next: () => {
                                                 this.cargarAgentesEvaluados(this.idCabecera);
@@ -221,16 +264,14 @@ export class EvaluacionAgenteComponent implements OnInit {
                             Swal.fire('Error', 'No se pudo verificar la evaluación existente.', 'error');
                         }
                     });
-
             },
             error: (err) => {
                 console.error('❌ Error al obtener planilla:', err);
-                Swal.fire('Error', 'No se pudo obtener la planilla.', 'error');
+                Swal.fire('Error', 'Ocurrió un error al obtener la planilla.', 'error');
             }
         });
-
-
     }
+
 
 
     generateFakeObjectId(): string {
@@ -300,6 +341,9 @@ export class EvaluacionAgenteComponent implements OnInit {
     }
 
 
+    //verifica que la evaluacion seleccionada exista
+
+
     confirmarCierre(): void {
         // Validar que se haya seleccionado un motivo y una fecha
         if (!this.motivoSeleccionado || !this.fechaCierre) {
@@ -349,6 +393,169 @@ export class EvaluacionAgenteComponent implements OnInit {
             });
 
     }
+
+    cargarTotales(idCabecera: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.evaluacionResultadosService.contarItemsConValor(idCabecera).subscribe({
+                next: (resp) => {
+                    this.totalItemsConValor = resp.totalItems || 0;
+                    this.evaluacionResultadosService.sumaPromediaPuntajes(idCabecera).subscribe({
+                        next: (resp2) => {
+                            this.promedioPuntaje = resp2.promedio || 0;
+                            resolve();
+                        },
+                        error: reject
+                    });
+                },
+                error: reject
+            });
+        });
+    }
+
+
+
+
+    imprimirEvaluacion(agente: any): void {
+        const idAgente = agente.idAgenteEvaluado;
+        const idCabecera = this.idCabecera;
+
+        if (!idCabecera || !idAgente) {
+            Swal.fire('Error', 'Faltan datos para generar el PDF', 'error');
+            return;
+        }
+
+        this.cargarTotales(idCabecera).then(() => {
+            this.evaluacionService.obtenerEvaluacionCompleta(idCabecera).subscribe({
+                next: (resp) => {
+                    if (!resp || !resp.detalles) {
+                        Swal.fire('Error', 'No se encontraron detalles para la evaluación', 'error');
+                        return;
+                    }
+
+                    const detalleAgente = resp.detalles.find(
+                        d => d.agenteEvaluado.idAgenteEvaluado === idAgente
+                    );
+
+                    if (!detalleAgente) {
+                        Swal.fire('Error', 'No se encontró la evaluación de este agente', 'error');
+                        return;
+                    }
+
+                    const doc = new jsPDF();
+
+                    // Cabecera principal
+                    doc.setFontSize(18);
+                    doc.setFont("helvetica", "bold");
+                    doc.text("Evaluación de Desempeño", 105, 15, { align: "center" });
+
+                    // Datos del agente
+                    doc.setFontSize(12);
+                    doc.setFont("helvetica", "normal");
+                    doc.text(`Legajo: ${detalleAgente.agenteEvaluado.legajo || '-'}`, 10, 30);
+                    doc.text(`Nombre: ${detalleAgente.agenteEvaluado.nombreAgenteEvaluado.toUpperCase()}`, 10, 38);
+
+                    // Datos de la evaluación
+                    doc.text(`Efector: ${resp.cabecera.Efector.nombre}`, 10, 50);
+                    doc.text(`Servicio: ${resp.cabecera.Servicio.nombre}`, 10, 58);
+                    doc.text(`Período: ${new Date(resp.cabecera.periodo).toLocaleDateString()}`, 10, 66);
+
+                    // Construimos las filas por categoría e ítems, sin encabezado
+                    const bodyRows: any[] = [];
+                    detalleAgente.categorias.forEach((cat: any) => {
+                        // Fila con el nombre de la categoría en verde
+                        bodyRows.push([{
+                            content: cat.descripcionCategoria,
+                            colSpan: 2,
+                            styles: { halign: 'left', fontStyle: 'bold', fillColor: [144, 238, 144] } // verde claro
+                        }]);
+                        // Filas de los ítems
+                        cat.items.forEach((item: any) => {
+                            bodyRows.push([item.descripcion, item.puntaje]);
+                        });
+                    });
+
+                    autoTable(doc, {
+                        body: bodyRows,
+                        startY: 75,
+                        theme: 'grid',
+                        styles: { fontSize: 11 },
+                        columnStyles: {
+                            0: { cellWidth: 150 },
+                            1: { cellWidth: 40, halign: 'center' }
+                        }
+                    });
+
+                    // 🔹 Obtenemos finalY de la tabla
+                    let finalY = 75;
+                    if ((doc as any).lastAutoTable) {
+                        finalY = (doc as any).lastAutoTable.finalY;
+                    }
+
+                    // Cuadro con totales debajo de la tabla
+                    doc.setDrawColor(0);
+                    doc.setFillColor(240, 240, 240);
+                    doc.rect(10, finalY + 10, 190, 20, 'FD');
+
+                    doc.setFontSize(12);
+                    doc.setFont("helvetica", "bold");
+                    doc.text(`Total de ítems con valor: ${this.totalItemsConValor}`, 15, finalY + 18);
+                    doc.text(`Promedio de puntaje: ${this.promedioPuntaje.toFixed(2)}`, 15, finalY + 25);
+
+                    // Pie de página
+                    const pageHeight = doc.internal.pageSize.height;
+                    doc.setFontSize(10);
+                    doc.setFont("helvetica", "normal");
+                    doc.text(`Generado el ${new Date().toLocaleDateString()} - Sistema de Evaluación`, 105, pageHeight - 10, { align: "center" });
+
+                    doc.save(`Evaluacion_${detalleAgente.agenteEvaluado.nombreAgenteEvaluado}.pdf`);
+                },
+                error: (err) => {
+                    console.error('Error al obtener evaluación completa:', err);
+                    Swal.fire('Error', 'No se pudo generar el PDF', 'error');
+                }
+            });
+        });
+    }
+
+
+
+
+
+
+
+
+    /*
+        obtenerTotales(idCabecera: string): void {
+            // Total de items
+            this.evaluacionService.contarItems(idCabecera).subscribe({
+                next: (resp: any) => {
+                    if (resp.success) this.totalItems = resp.totalItems;
+                },
+                error: (err) => console.error('Error al contar items', err)
+            });
+    
+            // Total de items con valor > 0
+            this.evaluacionService.contarItemsConValor(idCabecera).subscribe({
+                next: (resp: any) => {
+                    if (resp.success) this.totalItemsConValor = resp.totalItems;
+                },
+                error: (err) => console.error('Error al contar items con valor', err)
+            });
+    
+            // Suma y promedio
+            this.evaluacionService.sumarPromediarPuntajes(idCabecera).subscribe({
+                next: (resp: any) => {
+                    if (resp.success) {
+                        this.sumaPuntajes = resp.sumaPuntajes;
+                        this.promedioPuntajes = resp.promedio;
+                        this.cantidadItems = resp.cantidad;
+                    }
+                },
+                error: (err) => console.error('Error al sumar/promediar puntajes', err)
+            });
+        }
+        */
+
     cerrarModalCerrar(): void {
         this.mostrarModalCerrar = false;
         this.motivoSeleccionado = null;

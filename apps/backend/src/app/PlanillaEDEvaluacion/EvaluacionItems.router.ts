@@ -5,16 +5,19 @@ import { EvaluacionDetalleModel } from './EvaluacionDetalle.schema';
 import * as mongoose from 'mongoose';
 
 const router = Router();
-
 router.put('/evaluacionItems/actualizar-puntaje', async (req, res) => {
-
-
-
     try {
         console.log('➡️ Entró a /evaluacionItems/actualizar-puntaje');
         console.log('📦 Datos recibidos:', req.body);
 
         const { idPlanillaEvaluacionCabecera, idAgenteEvaluado, idItem, nuevoPuntaje } = req.body;
+
+        // Log para ver qué IDs llegan
+        console.log('🆔 IDs recibidos:', {
+            idPlanillaEvaluacionCabecera,
+            idAgenteEvaluado,
+            idItem
+        });
 
         // Validación de IDs
         if (
@@ -22,7 +25,11 @@ router.put('/evaluacionItems/actualizar-puntaje', async (req, res) => {
             !mongoose.Types.ObjectId.isValid(idAgenteEvaluado) ||
             !mongoose.Types.ObjectId.isValid(idItem)
         ) {
-            console.warn('❌ Uno o más IDs son inválidos');
+            console.warn('❌ Uno o más IDs son inválidos:', {
+                idPlanillaEvaluacionCabecera,
+                idAgenteEvaluado,
+                idItem
+            });
             return res.status(400).json({ success: false, message: 'Uno o más IDs son inválidos' });
         }
 

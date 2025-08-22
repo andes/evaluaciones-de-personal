@@ -25,6 +25,8 @@ export class EvaluacionCabeceraComponent implements OnInit {
     tipoBusqueda: string = 'nombre';
     cabecerasEncontradas: any[] = [];
 
+
+
     get textoBusqueda(): string {
         return this.tipoBusqueda === 'nombre' ? 'Buscar por Nombre' : 'Buscar por Legajo';
     }
@@ -231,7 +233,8 @@ export class EvaluacionCabeceraComponent implements OnInit {
             idPlanillaEvaluacionCabecera: this.idGuardado,
             agenteEvaluado: {
                 idAgenteEvaluado: agente._id,
-                nombreAgenteEvaluado: agente.nombre
+                nombreAgenteEvaluado: agente.nombre,
+                legajo: agente.legajo // <--- agregado
             },
             categorias: categoriasTransformadas
         };
@@ -305,27 +308,47 @@ export class EvaluacionCabeceraComponent implements OnInit {
         console.log('📥 idTipoEvaluacion actual:', this.idTipoEvaluacion);
 
         if (!this.idTipoEvaluacion) {
-            console.warn('⚠️ No se seleccionó un tipo de evaluación válido');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Tipo de evaluación requerido',
+                text: 'Debes seleccionar un tipo de evaluación antes de continuar.',
+                confirmButtonText: 'Aceptar'
+            });
             return;
         }
 
         this.planillaService.getPlanillaPorTipoEvaluacion(this.idTipoEvaluacion).subscribe({
-            next: (data) => {
-                console.log('✅ Respuesta recibida desde el backend:', data);
-
-                if (data && data._id) {
-                    console.log('📦 Planilla válida encontrada:', data._id);
-                    this.categoriasDesdePlanilla = data.categorias || [];
-                    console.log('📂 Categorías cargadas:', this.categoriasDesdePlanilla);
-                } else {
-                    console.warn('⚠️ La respuesta no contiene una planilla válida:', data);
+            next: (planilla) => {
+                if (!planilla || !planilla._id) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Planilla no encontrada',
+                        text: 'No se encontró una planilla válida para el tipo de evaluación seleccionado. Por favor, seleccioná otro.',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    // Limpiamos cualquier planilla cargada previamente
+                    this.categoriasDesdePlanilla = [];
+                    return;
                 }
+
+                // Si encontramos planilla válida, cargamos las categorías
+                this.categoriasDesdePlanilla = planilla.categorias || [];
+                console.log('📦 Planilla válida encontrada:', planilla._id);
+                console.log('📂 Categorías cargadas:', this.categoriasDesdePlanilla);
             },
             error: (err) => {
-                console.error('❌ Error en la petición HTTP:', err);
+                console.error('❌ Error al obtener planilla por tipo de evaluación:', err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al obtener planilla',
+                    text: 'Ocurrió un error al consultar la planilla. Verificá la conexión o el backend.',
+                    confirmButtonText: 'Aceptar'
+                });
+                this.categoriasDesdePlanilla = [];
             }
         });
     }
+
 
     //select tipo evaluacion
     cargarTiposEvaluacion() {
