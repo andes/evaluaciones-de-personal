@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PlanillaEDCabeceraService, PlanillaEDCabecera } from '../services/PlanillaEDCabecera.service';
 import { PlanillaEDDetalleService } from '../services/PlanillaEDDetalle.service';
-import { PlanillaEDService } from '../services/PlanillaED.Service';
 import { PlanillaEDItemsService } from '../services/PlanillaEDIItems.service';
 import { EvaluacionResultadosService } from '../services/evaluacionResulado.service';
-
-import * as bootstrap from 'bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-evaluacion-items',
@@ -20,19 +18,24 @@ export class EvaluacionItemsComponent implements OnInit {
     cabecera: PlanillaEDCabecera | null = null;
     nombreAgenteEvaluado: string = '';
     categorias: any[] = [];
+
     mostrarModalValor: boolean = false;
     valorIngresado: number | null = null;
-    itemSeleccionado: any = null; totalItems: number = 0;
+    itemSeleccionado: any = null;
+
+    // Totales
+    totalItems: number = 0;
     totalItemsConValor: number = 0;
-    promedioPuntaje: number = 0;
+    sumaPuntajes: number = 0;
+    promedioPuntajes: number = 0;
 
     constructor(
         private route: ActivatedRoute,
         private cabeceraService: PlanillaEDCabeceraService,
         private detalleService: PlanillaEDDetalleService,
-        //private planillaEDItemsService: PlanillaEDService,
         private planillaEDItemsService: PlanillaEDItemsService,
-        private evaluacionResultadosService: EvaluacionResultadosService
+        private resultadosService: EvaluacionResultadosService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -44,35 +47,9 @@ export class EvaluacionItemsComponent implements OnInit {
                 this.idEvaluacion = idEval;
                 this.idAgente = idAg;
 
-                this.obtenerCabecera(this.idEvaluacion);
-                this.obtenerCategoriasEItems(this.idEvaluacion, this.idAgente);
-
-                // 📊 Consumir resultados
-                this.evaluacionResultadosService.contarItems(this.idEvaluacion).subscribe({
-                    next: resp => {
-                        this.totalItems = resp.totalItems || 0;
-                        console.log('Total items:', this.totalItems);
-                    },
-                    error: err => console.error('Error contarItems:', err)
-                });
-
-                this.evaluacionResultadosService.contarItemsConValor(this.idEvaluacion).subscribe({
-                    next: resp => {
-                        this.totalItemsConValor = resp.totalItems || 0;
-                        console.log('Items con valor:', this.totalItemsConValor);
-                    },
-                    error: err => console.error('Error contarItemsConValor:', err)
-                });
-
-                this.evaluacionResultadosService.sumaPromediaPuntajes(this.idEvaluacion).subscribe({
-                    next: resp => {
-                        this.promedioPuntaje = resp.promedio || 0;
-                        console.log('Suma puntajes:', resp.sumaPuntajes);
-                        console.log('Cantidad:', resp.cantidad);
-                        console.log('Promedio:', this.promedioPuntaje);
-                    },
-                    error: err => console.error('Error sumaPromediaPuntajes:', err)
-                });
+                this.obtenerCabecera();
+                this.obtenerCategoriasEItems();
+                this.cargarResultadosEvaluacion();
             }
         });
 
@@ -81,35 +58,26 @@ export class EvaluacionItemsComponent implements OnInit {
         });
     }
 
-
-
-
-    obtenerCabecera(id: string): void {
-        this.cabeceraService.obtenerCabeceraG(id).subscribe({
-            next: (resp) => {
-                this.cabecera = resp.data;
-            },
-            error: (err) => {
-                console.error('❌ Error al obtener la cabecera:', err);
-            }
+    obtenerCabecera(): void {
+        if (!this.idEvaluacion) return;
+        this.cabeceraService.obtenerCabeceraG(this.idEvaluacion).subscribe({
+            next: (resp) => this.cabecera = resp.data,
+            error: (err) => console.error('❌ Error al obtener la cabecera:', err)
         });
     }
 
-    obtenerCategoriasEItems(idEval: string, idAgente: string): void {
-        this.detalleService.obtenerCategoriasEItemsPorEvaluacion(idEval, idAgente).subscribe({
-            next: (resp) => {
-                this.categorias = resp.data;
-                console.log('📦 Categorías e ítems:', this.categorias);
-            },
-            error: (err) => {
-                console.error('❌ Error al cargar categorías e ítems:', err);
-            }
+    obtenerCategoriasEItems(): void {
+        if (!this.idEvaluacion || !this.idAgente) return;
+        this.detalleService.obtenerCategoriasEItemsPorEvaluacion(this.idEvaluacion, this.idAgente).subscribe({
+            next: (resp) => this.categorias = resp.data,
+            error: (err) => console.error('❌ Error al cargar categorías e ítems:', err)
         });
     }
 
     evaluarItem(item: any): void {
         this.itemSeleccionado = item;
-        this.valorIngresado = item.puntaje != null ? item.puntaje : null;
+        this.valorIngresado = (item.puntaje !== undefined && item.puntaje !== null) ? item.puntaje : null;
+
         this.mostrarModalValor = true;
     }
 
@@ -119,75 +87,60 @@ export class EvaluacionItemsComponent implements OnInit {
         this.itemSeleccionado = null;
     }
 
+    guardarValor(): void {
+        if (!this.itemSeleccionado || this.valorIngresado == null) {
+            this.cerrarModalValor();
+            return;
+        }
 
+        const idItemString = typeof this.itemSeleccionado.idItem === 'string'
+            ? this.itemSeleccionado.idItem
+            : this.itemSeleccionado.idItem._id || this.itemSeleccionado.idItem;
+
+        const payload = {
+            idPlanillaEvaluacionCabecera: this.idEvaluacion,
+            idAgenteEvaluado: this.idAgente,
+            idItem: idItemString,
+            nuevoPuntaje: this.valorIngresado
+        };
+
+        this.planillaEDItemsService.actualizarPuntaje(payload).subscribe({
+            next: (resp) => {
+                if (resp.success) {
+                    this.itemSeleccionado.puntaje = this.valorIngresado;
+                    this.cargarResultadosEvaluacion(); // 🔄 actualizar totales
+                } else {
+                    console.error('❌ Error backend:', resp.message);
+                }
+                this.cerrarModalValor();
+            },
+            error: (err) => {
+                console.error('❌ Error backend:', err);
+                this.cerrarModalValor();
+            }
+        });
+    }
 
     cargarResultadosEvaluacion(): void {
-        if (!this.idEvaluacion) return;
+        if (!this.idEvaluacion || !this.idAgente) return;
 
-        // 1) Total items
-        this.evaluacionResultadosService.contarItems(this.idEvaluacion).subscribe({
-            next: (resp) => {
-                this.totalItems = resp && resp.totalItems != null ? resp.totalItems : 0;
-                console.log('📊 Total items:', this.totalItems);
-            },
-            error: (err) => console.error('❌ Error al contar items:', err)
-        });
+        this.resultadosService.obtenerTotales(this.idEvaluacion, this.idAgente).subscribe(resp => {
+            this.totalItems = Number(resp.totalItems) || 0;
+            this.sumaPuntajes = Number(resp.totalPuntaje) || 0;
 
-        // 2) Total con valor
-        this.evaluacionResultadosService.contarItemsConValor(this.idEvaluacion).subscribe({
-            next: (resp) => {
-                this.totalItemsConValor = resp && resp.totalItems != null ? resp.totalItems : 0;
-                console.log('📊 Total items con valor:', this.totalItemsConValor);
-            },
-            error: (err) => console.error('❌ Error al contar items con valor:', err)
-        });
-
-        // 3) Promedio
-        this.evaluacionResultadosService.sumaPromediaPuntajes(this.idEvaluacion).subscribe({
-            next: (resp) => {
-                this.promedioPuntaje = resp && resp.promedio != null ? resp.promedio : 0;
-                console.log('📊 Promedio puntaje:', this.promedioPuntaje);
-            },
-            error: (err) => console.error('❌ Error al obtener promedio:', err)
-        });
+            this.resultadosService.contarItemsConValor(this.idEvaluacion, this.idAgente).subscribe(respValor => {
+                this.totalItemsConValor = Number(respValor.totalItems) || 0;
+                this.promedioPuntajes = this.totalItemsConValor > 0
+                    ? this.sumaPuntajes / this.totalItemsConValor
+                    : 0;
+                console.log('📊 Totales actualizados', this.totalItemsConValor, this.promedioPuntajes);
+            }, err => console.error(err));
+        }, err => console.error(err));
     }
 
-    guardarValor(): void {
-        if (this.itemSeleccionado && this.valorIngresado != null) {
-            const idItemString = typeof this.itemSeleccionado.idItem === 'string'
-                ? this.itemSeleccionado.idItem
-                : this.itemSeleccionado.idItem._id || this.itemSeleccionado.idItem;
-
-            const payload = {
-                idPlanillaEvaluacionCabecera: this.idEvaluacion,
-                idAgenteEvaluado: this.idAgente,
-                idItem: idItemString,
-                nuevoPuntaje: this.valorIngresado
-            };
-
-            console.log('➡️ Payload a enviar:', payload);
-
-            this.planillaEDItemsService.actualizarPuntaje(payload).subscribe({
-                next: (resp) => {
-                    if (resp.success) {
-                        console.log('✅ Puntaje actualizado en backend:', resp.item);
-                        this.itemSeleccionado.puntaje = this.valorIngresado;
-                    } else {
-                        console.error('❌ Error backend:', resp.message);
-                    }
-                    this.cerrarModalValor();
-                },
-                error: (err) => {
-                    console.error('❌ Error backend:', err);
-                    this.cerrarModalValor();
-                }
-            });
-        } else {
-            this.cerrarModalValor();
-        }
+    volver(): void {
+        this.router.navigate(['/evaluacion-agente', this.idEvaluacion]);
     }
-
-
 
 
 }

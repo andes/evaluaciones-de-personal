@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-//  agente evaluador — ahora objeto único
+// agente evaluador
 interface IAgenteEvaluador {
     idUsuarioEvaluador: mongoose.Types.ObjectId;
     nombreUsuarioEvaluador: string;
@@ -24,21 +24,23 @@ interface IServicio {
 interface ITipoCierreEvaluacion {
     id: mongoose.Types.ObjectId;
     nombre: string;
+    fecha: Date;
+    detalle: string;
 }
 
-// Interfaz principal
+// interfaz principal
 export interface IPlanillaEvaluacionCabecera extends mongoose.Document {
     periodo: Date;
     agenteevaluador: IAgenteEvaluador;
     Efector: IEfector;
     Servicio: IServicio;
-    fechaCierre?: Date; // <-- campo nuevo agregado
+    fechaCierre?: Date;
     tipoCierreEvaluacion?: ITipoCierreEvaluacion;
     usuario: string;
     fechaMod: Date;
 }
 
-// Schema actualizado
+// schema
 const PlanillaEvaluacionCabeceraSchema = new Schema<IPlanillaEvaluacionCabecera>(
     {
         periodo: {
@@ -84,7 +86,6 @@ const PlanillaEvaluacionCabeceraSchema = new Schema<IPlanillaEvaluacionCabecera>
             },
             required: true
         },
-        // 👇 campo nuevo
         fechaCierre: {
             type: Date
         },
@@ -95,6 +96,13 @@ const PlanillaEvaluacionCabeceraSchema = new Schema<IPlanillaEvaluacionCabecera>
             },
             nombre: {
                 type: String
+            },
+            fecha: {
+                type: Date
+            },
+            detalle: {
+                type: String,
+                maxlength: 5000 // puedes ajustar según necesidad
             }
         },
         usuario: {
@@ -113,7 +121,7 @@ const PlanillaEvaluacionCabeceraSchema = new Schema<IPlanillaEvaluacionCabecera>
     }
 );
 
-// Exportación del modelo
+// exportación del modelo
 export const PlanillaEvaluacionCabeceraModel = mongoose.model<IPlanillaEvaluacionCabecera>(
     'PlanillaEvaluacionCabecera',
     PlanillaEvaluacionCabeceraSchema,

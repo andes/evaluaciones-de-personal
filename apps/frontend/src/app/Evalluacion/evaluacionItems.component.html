@@ -6,6 +6,8 @@
 <div class="d-flex justify-content-center mt-4">
   <div class="col-lg-9 col-md-10 col-12 contenedor-listado">
     <div class="card mt-3">
+
+      <!-- HEADER DE LA CARD -->
       <div class="card-header bg-primary text-white mb-4">
         <div class="d-flex flex-column text-white align-items-center">
           <h5 class="fw-bold text-center mb-2">Detalle Evaluación del Agente</h5>
@@ -48,13 +50,9 @@
         </div>
       </div>
 
-
-
-
-
+      <!-- BLOQUE AGENTE EVALUADO -->
       <div class="border rounded bg-light p-3 d-flex flex-column">
 
-        <!-- 1) Bloque superior centrado -->
         <div class="text-center mb-3">
           <h6 class="fw-bold mb-1">Agente Evaluado:</h6>
           <p class="fw-bold fs-5 mb-0 text-primary">
@@ -62,64 +60,64 @@
           </p>
         </div>
 
-        <!-- Contenedor inputs fiel a tu estructura -->
-        <div class="d-flex justify-content-end align-items-start gap-2">
+        <!-- FILA: BOTÓN VOLVER + TOTALES -->
+        <div class="d-flex justify-content-between align-items-start gap-2">
 
-          <!-- Evaluación 
-          <div class="d-flex flex-column text-end" style="flex: 0 0 90px;">
-            <label for="evaluacionInput" class="form-label fw-bold mb-1 small" style="line-height: 1;">
-              Eval.:
-            </label>
-            <input type="text" id="evaluacionInput" class="form-control form-control-sm px-1 py-1"
-                   style="font-size: .75rem; height: calc(1.5em + .5rem);" [value]="idEvaluacion" readonly>
-          </div>
-          -->
+          <!-- Botón Volver a la izquierda -->
+          <div>
+            <button class="btn btn-secondary" (click)="volver()">
+              ← Volver
+            </button>
 
-          <!-- Promedio -->
-          <div class="d-flex flex-column text-end" style="flex: 0 0 80px;">
-            <label for="promedioActual" class="form-label fw-bold mb-1 small" style="line-height: 1;">
-              Prom:
-            </label>
-            <input type="text" id="promedioActual" class="form-control form-control-sm px-1 py-1"
-                   style="font-size: .75rem; height: calc(1.5em + .5rem);" [value]="promedioPuntaje.toFixed(2)"
-                   readonly>
           </div>
 
-          <!-- Items -->
-          <div class="d-flex flex-column text-end" style="flex: 0 0 90px;">
-            <label for="itemsEvaluados" class="form-label fw-bold mb-1 small" style="line-height: 1;">
-              Ítems:
-            </label>
-            <input type="text" id="itemsEvaluados" class="form-control form-control-sm px-1 py-1"
-                   style="font-size: .75rem; height: calc(1.5em + .5rem);"
-                   [value]="totalItemsConValor + ' / ' + totalItems" readonly>
-          </div>
+          <!-- Totales a la derecha -->
+          <div class="d-flex align-items-start gap-2">
 
+            <!-- Promedio -->
+            <div class="d-flex flex-column text-end" style="flex: 0 0 80px;">
+              <label for="promedioActual" class="form-label fw-bold mb-1 small" style="line-height: 1;">
+                Prom:
+              </label>
+              <input type="text" id="promedioActual" class="form-control form-control-sm text-center px-1 py-1"
+                     style="font-size: .75rem; height: calc(1.5em + .5rem);" [(ngModel)]="promedioPuntajes"
+                     [ngModelOptions]="{standalone: true}" readonly>
+            </div>
+
+            <!-- Items evaluados -->
+            <div class="d-flex flex-column text-end" style="flex: 0 0 90px;">
+              <label for="itemsEvaluados" class="form-label fw-bold mb-1 small" style="line-height: 1;">
+                Ítems:
+              </label>
+              <input type="text" id="itemsEvaluados" class="form-control form-control-sm text-center px-1 py-1"
+                     style="font-size: .75rem; height: calc(1.5em + .5rem);" [(ngModel)]="totalItemsConValor"
+                     [ngModelOptions]="{standalone: true}" readonly>
+            </div>
+
+            <!-- Total Puntaje -->
+            <div class="d-flex flex-column text-end" style="flex: 0 0 90px;">
+              <label for="totalPuntaje" class="form-label fw-bold mb-1 small" style="line-height: 1;">
+                Puntaje Total:
+              </label>
+              <input type="text" id="totalPuntaje" class="form-control form-control-sm text-center px-1 py-1"
+                     style="font-size: .75rem; height: calc(1.5em + .5rem);" [(ngModel)]="sumaPuntajes"
+                     [ngModelOptions]="{standalone: true}" readonly>
+            </div>
+
+          </div>
         </div>
-
-
 
       </div>
 
-
-
-
-
-
-
-
-
-
+      <!-- BODY: CATEGORIAS E ITEMS -->
       <div class="card-body p-3">
         <div *ngIf="categorias.length > 0; else sinItems">
 
-          <!-- Iterar categorías con tabla por cada una -->
           <div *ngFor="let categoria of categorias; let i = index" class="mb-4">
             <h5 class="fw-bold text-dark">{{ categoria.descripcionCategoria }}</h5>
 
             <div class="table-responsive">
               <table class="table table-bordered table-hover">
-                <!-- Mostrar encabezado SOLO en la primera tabla -->
                 <thead class="thead-light" *ngIf="i === 0">
                   <tr>
                     <th class="d-none">ID Ítem</th>
@@ -128,7 +126,6 @@
                     <th class="text-center">Evaluar</th>
                   </tr>
                 </thead>
-
                 <tbody>
                   <tr *ngFor="let item of categoria.items">
                     <td class="d-none">{{ item._id }}</td>
@@ -137,7 +134,6 @@
                     <td class="text-center">
                       <button class="btn btn-sm btn-outline-success ms-2" (click)="evaluarItem(item)">
                         <i class="bi bi-file-earmark-text"></i>
-
                       </button>
                     </td>
                   </tr>
@@ -145,6 +141,7 @@
               </table>
             </div>
           </div>
+
         </div>
 
         <ng-template #sinItems>
@@ -152,8 +149,7 @@
         </ng-template>
       </div>
 
-
-      <!-- Modal personalizado para ingresar puntaje -->
+      <!-- MODAL -->
       <div *ngIf="mostrarModalValor" class="modal-backdrop-custom">
         <div class="custom-modal">
           <div class="custom-modal-header">
@@ -164,23 +160,17 @@
           </div>
 
           <div class="custom-modal-body">
-
-            <!-- Nombre del ítem -->
             <div class="mb-3">
               <label class="form-label fw-semibold">Valor del Ítem</label>
-              <div class="text-muted">
-                {{ itemSeleccionado?.descripcion }}
-              </div>
+              <div class="text-muted">{{ itemSeleccionado?.descripcion }}</div>
             </div>
 
-            <div style="border: 1px solid #ced4da; border-radius: 8px; background-color: #f8f9fa; padding: 12px; margin-bottom: 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);"
-                 class="d-flex align-items-center gap-3">
-              <label for="valorItem" class="mb-0 fw-semibold text-dark">Valor:</label>&nbsp;&nbsp;
+            <div class="d-flex align-items-center gap-3"
+                 style="border: 1px solid #ced4da; border-radius: 8px; background-color: #f8f9fa; padding: 12px; margin-bottom: 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+              <label for="valorItem" class="mb-0 fw-semibold text-dark">Valor:</label>
               <input type="number" class="form-control form-control-sm" id="valorItem" [(ngModel)]="valorIngresado"
                      placeholder="0000" style="width: 100px;" max="9999" />
             </div>
-
-
           </div>
 
           <div class="custom-modal-footer text-end">
@@ -189,9 +179,6 @@
           </div>
         </div>
       </div>
-
-
-
 
     </div>
   </div>

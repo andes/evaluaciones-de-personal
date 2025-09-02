@@ -25,19 +25,14 @@ export class EvaluacionCabeceraComponent implements OnInit {
     tipoBusqueda: string = 'nombre';
     cabecerasEncontradas: any[] = [];
 
-
-
-    get textoBusqueda(): string {
-        return this.tipoBusqueda === 'nombre' ? 'Buscar por Nombre' : 'Buscar por Legajo';
-    }
     evaluacion: any = {};
-
     agentesDisponibles: any[] = [];
     filtroAgente: string = '';
     categoriasDesdePlanilla: any[] = [];
 
     mostrarModal: boolean = false;
     isLoading: boolean = true;
+    isLoadingAgentes: boolean = false;
 
     constructor(
         private authService: AuthService,
@@ -45,7 +40,7 @@ export class EvaluacionCabeceraComponent implements OnInit {
         private planillaEDCabeceraService: PlanillaEDCabeceraService,
         private agentesService: AgentesService,
         private evaluacionDetalleService: PlanillaEDDetalleService,
-        private _tipoEvaluacionService: TipoEvaluacionService,
+        private _tipoEvaluacionService: TipoEvaluacionService
     ) { }
 
     ngOnInit(): void {
@@ -67,39 +62,6 @@ export class EvaluacionCabeceraComponent implements OnInit {
             usuario: this.authService.getNombre(),
             fechaMod: new Date().toISOString()
         };
-
-        // Obtener planilla correspondiente al efector y servicio
-        console.log('🔍 Buscando planilla con:', { efectorId, servicioId });
-
-
-
-
-
-
-        ///////////  este metodo debo reemplazar para buscar planilla por tipo de planila
-        /*     this.planillaService.getPlanillaPorTipoEvaluacion(idTipoEvaluacion).subscribe({
-                 next: (data) => {
-                     if (data && data._id) {
-                         console.log('✅ Planilla encontrada por tipoEvaluacion:', data);
-                         console.log('📂 Categorías de la planilla:', data.categorias);
-                         this.categoriasDesdePlanilla = data.categorias || [];
-                     } else {
-                         console.warn('⚠️ La respuesta no contiene una planilla válida:', data);
-                     }
-                 },
-                 error: (err) => {
-                     if (err.status === 404) {
-                         console.warn(`🔍 No se encontró ninguna planilla para:
-                     ➤ idTipoEvaluacion: ${idTipoEvaluacion}`);
-                     } else {
-                         console.error('❌ Error al obtener la planilla:', err);
-                     }
-                 }
-             });
-             */
-
-        ///////////  este metodo debo reemplazar para buscar planilla por tipo de planila
-
 
         // Obtener nombre del efector
         this.planillaService.obtenerEfectorPorIdE(efectorId).subscribe({
@@ -126,23 +88,29 @@ export class EvaluacionCabeceraComponent implements OnInit {
                 this.isLoading = false;
             }
         });
-        // cargar grilla de cabeceras
+
+        // Cargar grilla de cabeceras
         this.buscarCabeceras();
     }
 
+    get textoBusqueda(): string {
+        return this.tipoBusqueda === 'nombre' ? 'Buscar por Nombre' : 'Buscar por Legajo';
+    }
+
     obtenerAgentesDisponibles() {
+        this.isLoadingAgentes = true;
         this.agentesService.obtenerTodosAgentes().subscribe({
             next: (agentes) => {
                 this.agentesDisponibles = agentes;
+                this.isLoadingAgentes = false;
             },
             error: (err) => {
                 console.error('Error al obtener agentes:', err);
                 this.agentesDisponibles = [];
+                this.isLoadingAgentes = false;
             }
         });
     }
-
-    isLoadingAgentes: boolean = false;
 
     guardarCabecera(): void {
         if (!this.evaluacionCabecera.periodo) {
@@ -155,47 +123,28 @@ export class EvaluacionCabeceraComponent implements OnInit {
             return;
         }
 
-        //  verific si existe la cabecera
-        this.planillaEDCabeceraService.verificarExistenciaCabecera(this.evaluacionCabecera).subscribe({
-            next: (respuesta) => {
-                if (respuesta.existe) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Evaluacion existente',
-                        text: 'Ya existe una evaluacion con ese periodo, agente evaluador, efector y servicio.',
-                        confirmButtonText: 'Aceptar'
-                    });
-                } else {
-                    // No existe, evaluacion nueva
-                    this.planillaEDCabeceraService.crearCabeceraEvaluacion(this.evaluacionCabecera).subscribe({
-                        next: (respuestaCreacion) => {
-                            this.idGuardado = (respuestaCreacion.data && respuestaCreacion.data._id) || (respuestaCreacion.data && respuestaCreacion.data.id) || 'Sin ID';
-                            this.mostrarModal = true;
-                            this.obtenerAgentesDisponibles();
+        this.planillaEDCabeceraService.crearCabeceraEvaluacion(this.evaluacionCabecera).subscribe({
+            next: (respuestaCreacion) => {
+                const data = respuestaCreacion.data || {};
+                this.idGuardado = data._id || data.id || 'Sin ID';
 
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Registro guardado',
-                                text: 'La cabecera fue guardada exitosamente.',
-                                confirmButtonText: 'Aceptar'
-                            });
-                        },
-                        error: (error) => {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error al guardar',
-                                text: 'Hubo un problema al guardar la cabecera. Verificá los datos.',
-                                confirmButtonText: 'Cerrar'
-                            });
-                        }
-                    });
-                }
+                // Actualizar grilla antes de abrir el modal
+                this.buscarCabeceras();
+                this.mostrarModal = true;
+                this.obtenerAgentesDisponibles();
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro guardado',
+                    text: 'La cabecera fue guardada exitosamente.',
+                    confirmButtonText: 'Aceptar'
+                });
             },
             error: (error) => {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error de verificación',
-                    text: 'No se pudo verificar si la cabecera ya existe.',
+                    title: 'Error al guardar',
+                    text: 'Hubo un problema al guardar la cabecera. Verificá los datos.',
                     confirmButtonText: 'Cerrar'
                 });
             }
@@ -207,17 +156,13 @@ export class EvaluacionCabeceraComponent implements OnInit {
         if (!filtro) return this.agentesDisponibles;
 
         return this.agentesDisponibles.filter(agente => {
-            if (this.tipoBusqueda === 'nombre') {
-                return agente.nombre.toLowerCase().includes(filtro);
-            } else if (this.tipoBusqueda === 'legajo') {
-                return agente.legajo.toString().toLowerCase().includes(filtro);
-            }
+            if (this.tipoBusqueda === 'nombre') return agente.nombre.toLowerCase().includes(filtro);
+            if (this.tipoBusqueda === 'legajo') return agente.legajo.toString().toLowerCase().includes(filtro);
             return false;
         });
     }
 
     evaluarAgente(agente: any): void {
-        // Transformar las categorías
         const categoriasTransformadas = this.categoriasDesdePlanilla.map(cat => ({
             idCategoria: cat.categoria._id,
             descripcionCategoria: cat.categoria.descripcion,
@@ -234,16 +179,14 @@ export class EvaluacionCabeceraComponent implements OnInit {
             agenteEvaluado: {
                 idAgenteEvaluado: agente._id,
                 nombreAgenteEvaluado: agente.nombre,
-                legajo: agente.legajo // <--- agregado
+                legajo: agente.legajo
             },
             categorias: categoriasTransformadas
         };
 
-        // verificarsi ya existe esta evaluación para evitar duplicados
         this.evaluacionDetalleService.existeEvaluacion(this.idGuardado!, agente._id).subscribe({
             next: (respuesta) => {
                 if (respuesta.existe) {
-                    // Si ya existe, alerta y no guardar
                     Swal.fire({
                         icon: 'warning',
                         title: 'Agente ya evaluado',
@@ -251,34 +194,24 @@ export class EvaluacionCabeceraComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
                 } else {
-                    // Si no existe, guardar
                     this.evaluacionDetalleService.crearEvaluacionDetalle(detalleEvaluacion).subscribe({
                         next: () => {
-                            this.evaluacionDetalleService
-                                .corregirItemsPorDescripcion(detalleEvaluacion._id)
-                                .subscribe({
-                                    next: () => {
-                                        console.log('✅ Corrección de IDs de ítems realizada con éxito');
-
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'Evaluación guardada',
-                                            text: `Se agregó el agente: ${agente.legajo} ${agente.nombre}`,
-                                            showCancelButton: true,
-                                            confirmButtonText: 'Sí, agregar otro',
-                                            cancelButtonText: 'No, continuar',
-                                        }).then((result: any) => {
-                                            if (result.isConfirmed) {
-                                                this.obtenerAgentesDisponibles();
-                                            } else {
-                                                // ir a evaluar agente
-                                            }
-                                        });
-                                    },
-                                    error: (err) => {
-                                        console.error('❌ Error al corregir los IDs de ítems:', err);
-                                    }
-                                });
+                            this.evaluacionDetalleService.corregirItemsPorDescripcion(detalleEvaluacion._id).subscribe({
+                                next: () => {
+                                    console.log('✅ Corrección de IDs de ítems realizada con éxito');
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Evaluación guardada',
+                                        text: `Se agregó el agente: ${agente.legajo} ${agente.nombre}`,
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Sí, agregar otro',
+                                        cancelButtonText: 'No, continuar',
+                                    }).then(result => {
+                                        if (result.isConfirmed) this.obtenerAgentesDisponibles();
+                                    });
+                                },
+                                error: (err) => console.error('❌ Error al corregir los IDs de ítems:', err)
+                            });
                         },
                         error: (err) => {
                             console.error('Error al guardar evaluación:', err);
@@ -303,10 +236,8 @@ export class EvaluacionCabeceraComponent implements OnInit {
             }
         });
     }
-    cargarPlanillaPorTipoEvaluacion(): void {
-        console.log('🟡 Se disparó cargarPlanillaPorTipoEvaluacion()');
-        console.log('📥 idTipoEvaluacion actual:', this.idTipoEvaluacion);
 
+    cargarPlanillaPorTipoEvaluacion(): void {
         if (!this.idTipoEvaluacion) {
             Swal.fire({
                 icon: 'warning',
@@ -323,25 +254,20 @@ export class EvaluacionCabeceraComponent implements OnInit {
                     Swal.fire({
                         icon: 'error',
                         title: 'Planilla no encontrada',
-                        text: 'No se encontró una planilla válida para el tipo de evaluación seleccionado. Por favor, seleccioná otro.',
+                        text: 'No se encontró una planilla válida para el tipo de evaluación seleccionado.',
                         confirmButtonText: 'Aceptar'
                     });
-                    // Limpiamos cualquier planilla cargada previamente
                     this.categoriasDesdePlanilla = [];
                     return;
                 }
-
-                // Si encontramos planilla válida, cargamos las categorías
                 this.categoriasDesdePlanilla = planilla.categorias || [];
-                console.log('📦 Planilla válida encontrada:', planilla._id);
-                console.log('📂 Categorías cargadas:', this.categoriasDesdePlanilla);
             },
             error: (err) => {
-                console.error('❌ Error al obtener planilla por tipo de evaluación:', err);
+                console.error('❌ Tipo de Evaluacion no existe', err);
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error al obtener planilla',
-                    text: 'Ocurrió un error al consultar la planilla. Verificá la conexión o el backend.',
+                    title: 'Tipo de Evaluacion inexistente',
+                    text: 'Seleccionó un tipo evaluación que no tiene items cargados.',
                     confirmButtonText: 'Aceptar'
                 });
                 this.categoriasDesdePlanilla = [];
@@ -349,25 +275,19 @@ export class EvaluacionCabeceraComponent implements OnInit {
         });
     }
 
-
-    //select tipo evaluacion
     cargarTiposEvaluacion() {
         this._tipoEvaluacionService.obtenerTipos().subscribe((data: TipoEvaluacion[]) => {
             this.tiposEvaluacion = data;
         });
     }
 
-
     generateFakeObjectId(): string {
         const hex = '0123456789abcdef';
         let objectId = '';
-        for (let i = 0; i < 24; i++) {
-            objectId += hex[Math.floor(Math.random() * 16)];
-        }
+        for (let i = 0; i < 24; i++) objectId += hex[Math.floor(Math.random() * 16)];
         return objectId;
     }
 
-    //grilla evaluacionnes por usuario, efector y servicio
     buscarCabeceras(): void {
         const idUsuarioEvaluador = this.authService.getId();
         const idEfector = this.authService.getEfector();
@@ -377,8 +297,7 @@ export class EvaluacionCabeceraComponent implements OnInit {
             .buscarCabecerasPorEvaluadorEfectorServicio(idUsuarioEvaluador, idEfector, idServicio)
             .subscribe({
                 next: (data) => {
-                    console.log('📄 Cabeceras encontradas:', data);
-                    this.cabecerasEncontradas = data.data || [];  // ✅ corregido
+                    this.cabecerasEncontradas = data.data || [];
                 },
                 error: (err) => {
                     console.error('❌ Error al buscar cabeceras:', err);
@@ -386,5 +305,4 @@ export class EvaluacionCabeceraComponent implements OnInit {
                 }
             });
     }
-
 }

@@ -8,12 +8,12 @@ const router = Router();
 router.put('/evaluacionItems/actualizar-puntaje', async (req, res) => {
     try {
         console.log('➡️ Entró a /evaluacionItems/actualizar-puntaje');
-        console.log('📦 Datos recibidos:', req.body);
+        console.log('Datos recibidos:', req.body);
 
         const { idPlanillaEvaluacionCabecera, idAgenteEvaluado, idItem, nuevoPuntaje } = req.body;
 
         // Log para ver qué IDs llegan
-        console.log('🆔 IDs recibidos:', {
+        console.log(' IDs recibidos:', {
             idPlanillaEvaluacionCabecera,
             idAgenteEvaluado,
             idItem
@@ -25,7 +25,7 @@ router.put('/evaluacionItems/actualizar-puntaje', async (req, res) => {
             !mongoose.Types.ObjectId.isValid(idAgenteEvaluado) ||
             !mongoose.Types.ObjectId.isValid(idItem)
         ) {
-            console.warn('❌ Uno o más IDs son inválidos:', {
+            console.warn('Uno o más IDs son inválidos:', {
                 idPlanillaEvaluacionCabecera,
                 idAgenteEvaluado,
                 idItem
@@ -45,7 +45,7 @@ router.put('/evaluacionItems/actualizar-puntaje', async (req, res) => {
         });
 
         if (!evaluacion) {
-            console.warn('❌ Evaluación no encontrada');
+            console.warn('Evaluación no encontrada');
             return res.status(404).json({ success: false, message: 'Evaluación no encontrada' });
         }
 
@@ -62,7 +62,7 @@ router.put('/evaluacionItems/actualizar-puntaje', async (req, res) => {
         }
 
         if (!itemActualizado) {
-            console.warn('❌ Ítem no encontrado en evaluación');
+            console.warn(' Ítem no encontrado en evaluación');
             return res.status(404).json({ success: false, message: 'Ítem no encontrado en evaluación' });
         }
 
@@ -77,7 +77,7 @@ router.put('/evaluacionItems/actualizar-puntaje', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('❌ Error al actualizar puntaje:', error);
+        console.error('Error al actualizar puntaje:', error);
         return res.status(500).json({
             success: false,
             message: 'Error interno al actualizar puntaje',
@@ -87,7 +87,7 @@ router.put('/evaluacionItems/actualizar-puntaje', async (req, res) => {
 });
 
 router.put('/evaluaciondetalle/test', (req, res) => {
-    console.log('🧪 Recibido en test:', req.body);
+    console.log(' Recibido en test:', req.body);
     res.json({ recibido: req.body });
 });
 

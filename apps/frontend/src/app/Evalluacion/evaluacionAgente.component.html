@@ -117,9 +117,15 @@
                                 </div>
 
                                 <!-- Botón a la derecha -->
-                                <button class="btn btn-outline-success" (click)="evaluarAgente(agenteSeleccionado)">
-                                    Agregar
-                                </button>
+                                <div class="d-flex justify-content-end mt-3">
+                                    <button class="btn btn-outline-success me-2"
+                                            (click)="evaluarAgente(agenteSeleccionado)">
+                                        Agregar
+                                    </button>
+                                    <button class="btn btn-outline-success" (click)="volverACabecera()">
+                                        ← Volver
+                                    </button>
+                                </div>
 
                             </div>
 
@@ -144,7 +150,7 @@
                                             <th class="text-center">Nombre</th>
                                             <th class="text-center">Evaluar</th>
                                             <th class="text-center">Cerrar</th>
-                                            <th class="text-center">Imprimir</th> <!-- ✅ nueva columna -->
+                                            <th class="text-center">Imprimir</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -172,6 +178,7 @@
                                             <td class="text-center"> <!-- ✅ botón imprimir -->
                                                 <button class="btn btn-sm btn-outline-secondary"
                                                         (click)="imprimirEvaluacion(agente)"
+                                                        [disabled]="!agente.idAgenteEvaluado && !agente._id"
                                                         title="Imprimir evaluación">
                                                     <i class="fas fa-print"></i>
                                                 </button>
