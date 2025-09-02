@@ -5,17 +5,25 @@ import { modelo as ItemModel } from '../Items/schemas/items'
 import * as mongoose from 'mongoose';
 
 const router = Router();
-
 router.post('/evaluaciondetalle', async (req: Request, res: Response) => {
     try {
         const { _id, idPlanillaEvaluacionCabecera, agenteEvaluado, categorias } = req.body;
 
-        // Validación
-        if (!_id || !idPlanillaEvaluacionCabecera || !agenteEvaluado || !agenteEvaluado.idAgenteEvaluado || !agenteEvaluado.nombreAgenteEvaluado || !categorias) {
+        // 🔹 Validación de campos obligatorios
+        if (
+            !_id ||
+            !idPlanillaEvaluacionCabecera ||
+            !agenteEvaluado ||
+            !agenteEvaluado.idAgenteEvaluado ||
+            !agenteEvaluado.nombreAgenteEvaluado ||
+            !agenteEvaluado.legajo ||
+            !categorias ||
+            !Array.isArray(categorias)
+        ) {
             return res.status(400).json({ success: false, message: 'Faltan campos requeridos' });
         }
 
-        // Convertir IDs a `ObjectId`
+        // 🔹 Transformar categorías e ítems a ObjectId
         const categoriasTransformadas = categorias.map((categoria: any) => ({
             idCategoria: new mongoose.Types.ObjectId(categoria.idCategoria),
             descripcionCategoria: categoria.descripcionCategoria,
@@ -26,6 +34,7 @@ router.post('/evaluaciondetalle', async (req: Request, res: Response) => {
             }))
         }));
 
+        // 🔹 Construir el objeto de evaluación con tipoCierreEvaluacion fijo
         const nuevaEvaluacion = new EvaluacionDetalleModel({
             _id: new mongoose.Types.ObjectId(_id),
             idPlanillaEvaluacionCabecera: new mongoose.Types.ObjectId(idPlanillaEvaluacionCabecera),
@@ -34,9 +43,17 @@ router.post('/evaluaciondetalle', async (req: Request, res: Response) => {
                 nombreAgenteEvaluado: agenteEvaluado.nombreAgenteEvaluado,
                 legajo: agenteEvaluado.legajo
             },
+            tipoCierreEvaluacion: {
+                idTipoCierreEvaluacion: new mongoose.Types.ObjectId("688240f09cca123543c84b04"), // ID fijo
+                nombreTipoCierreEvaluacion: "Evaluación Abierta",
+                detalle: "Evaluación Abierta",
+                fechaCierre: new Date(),
+                descripcion: ""
+            },
             categorias: categoriasTransformadas
         });
 
+        // 🔹 Guardar en la DB
         const evaluacionGuardada = await nuevaEvaluacion.save();
 
         res.status(201).json({
@@ -49,6 +66,7 @@ router.post('/evaluaciondetalle', async (req: Request, res: Response) => {
         res.status(500).json({ success: false, message: 'Error interno al crear evaluación', error });
     }
 });
+
 
 
 router.get('/evaluaciondetalle/:id', async (req: Request, res: Response) => {

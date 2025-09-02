@@ -221,12 +221,12 @@
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionAgente.component.html",
               "ext": ".html",
-              "mtime": 1755860826187.1943
+              "mtime": 1756460559857.154
             },
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionAgente.component.ts",
               "ext": ".ts",
-              "mtime": 1755872484093.6685
+              "mtime": 1756462757572.778
             },
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.css",
@@ -236,12 +236,12 @@
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.html",
               "ext": ".html",
-              "mtime": 1755710330899.594
+              "mtime": 1756466162435.969
             },
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.ts",
               "ext": ".ts",
-              "mtime": 1755870919558.6365
+              "mtime": 1756478807008.9304
             },
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionItems.component.css",
@@ -251,12 +251,12 @@
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionItems.component.html",
               "ext": ".html",
-              "mtime": 1755079435509.523
+              "mtime": 1756304386735.52
             },
             {
               "file": "apps/frontend/src/app/Evalluacion/evaluacionItems.component.ts",
               "ext": ".ts",
-              "mtime": 1755079123957.042
+              "mtime": 1756304515269.708
             },
             {
               "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.css",
@@ -741,7 +741,7 @@
             {
               "file": "apps/frontend/src/app/services/evaluacionResulado.service.ts",
               "ext": ".ts",
-              "mtime": 1755870672662.3706
+              "mtime": 1756218690468.095
             },
             {
               "file": "apps/frontend/src/app/services/items.service.ts",
@@ -1070,22 +1070,22 @@
             {
               "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionCabecera.schema.ts",
               "ext": ".ts",
-              "mtime": 1753800001381.83
+              "mtime": 1756475435830.2856
             },
             {
               "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionDetalle.router.ts",
               "ext": ".ts",
-              "mtime": 1755709378395.207
+              "mtime": 1756817772920.1274
             },
             {
               "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionDetalle.schema.ts",
               "ext": ".ts",
-              "mtime": 1755709402635.6248
+              "mtime": 1756812456732.7449
             },
             {
               "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionItems.router.ts",
               "ext": ".ts",
-              "mtime": 1754997868028.683
+              "mtime": 1756811954896.8735
             },
             {
               "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionListados.router.ts",
@@ -1095,7 +1095,7 @@
             {
               "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionResultados.router.ts",
               "ext": ".ts",
-              "mtime": 1755078806436.443
+              "mtime": 1756218550361.8132
             },
             {
               "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",
@@ -2259,12 +2259,12 @@
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionAgente.component.html",
         "ext": ".html",
-        "mtime": 1755860826187.1943
+        "mtime": 1756460559857.154
       },
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionAgente.component.ts",
         "ext": ".ts",
-        "mtime": 1755872484093.6685
+        "mtime": 1756462757572.778
       },
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.css",
@@ -2274,12 +2274,12 @@
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.html",
         "ext": ".html",
-        "mtime": 1755710330899.594
+        "mtime": 1756466162435.969
       },
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionCabecera.component.ts",
         "ext": ".ts",
-        "mtime": 1755870919558.6365
+        "mtime": 1756478807008.9304
       },
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionItems.component.css",
@@ -2289,12 +2289,12 @@
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionItems.component.html",
         "ext": ".html",
-        "mtime": 1755079435509.523
+        "mtime": 1756304386735.52
       },
       {
         "file": "apps/frontend/src/app/Evalluacion/evaluacionItems.component.ts",
         "ext": ".ts",
-        "mtime": 1755079123957.042
+        "mtime": 1756304515269.708
       },
       {
         "file": "apps/frontend/src/app/Items/crear-items/crear-items.component.css",
@@ -2779,7 +2779,7 @@
       {
         "file": "apps/frontend/src/app/services/evaluacionResulado.service.ts",
         "ext": ".ts",
-        "mtime": 1755870672662.3706
+        "mtime": 1756218690468.095
       },
       {
         "file": "apps/frontend/src/app/services/items.service.ts",
@@ -3041,22 +3041,22 @@
       {
         "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionCabecera.schema.ts",
         "ext": ".ts",
-        "mtime": 1753800001381.83
+        "mtime": 1756475435830.2856
       },
       {
         "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionDetalle.router.ts",
         "ext": ".ts",
-        "mtime": 1755709378395.207
+        "mtime": 1756817772920.1274
       },
       {
         "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionDetalle.schema.ts",
         "ext": ".ts",
-        "mtime": 1755709402635.6248
+        "mtime": 1756812456732.7449
       },
       {
         "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionItems.router.ts",
         "ext": ".ts",
-        "mtime": 1754997868028.683
+        "mtime": 1756811954896.8735
       },
       {
         "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionListados.router.ts",
@@ -3066,7 +3066,7 @@
       {
         "file": "apps/backend/src/app/PlanillaEDEvaluacion/EvaluacionResultados.router.ts",
         "ext": ".ts",
-        "mtime": 1755078806436.443
+        "mtime": 1756218550361.8132
       },
       {
         "file": "apps/backend/src/app/Servicios/Routes/Servicios.ts",

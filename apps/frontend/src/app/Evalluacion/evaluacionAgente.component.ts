@@ -28,6 +28,7 @@ import { AuthService } from '../auth.service';
 export class EvaluacionAgenteComponent implements OnInit {
 
     idCabecera: string = '';
+    idAgente: string = '';
 
 
     tiposEvaluacion: TipoEvaluacion[] = [];
@@ -49,6 +50,8 @@ export class EvaluacionAgenteComponent implements OnInit {
     totalItemsConValor: number = 0;
     promedioPuntaje: number = 0;
 
+
+
     totales: {
         totalItems?: number;
         itemsConValor?: number;
@@ -56,7 +59,9 @@ export class EvaluacionAgenteComponent implements OnInit {
         promedio?: number;
     } = {};
 
-
+    sumaPuntajes: number = 0;
+    totalesPuntajes: number = 0;
+    totalesItems: number = 0;
 
 
     get agentesFiltrados() {
@@ -84,8 +89,12 @@ export class EvaluacionAgenteComponent implements OnInit {
 
     ngOnInit(): void {
 
+        this.cargarTotales('idCabeceraEjemplo', 'idAgenteEjemplo')
+            .then(() => console.log('Totales cargados'))
+            .catch(err => console.error(err));
 
         this.cargarTiposEvaluacion();
+
 
         this.route.paramMap.subscribe(params => {
             const id = params.get('id');
@@ -110,7 +119,8 @@ export class EvaluacionAgenteComponent implements OnInit {
                 console.log('📌 ID recibido desde ruta:', id);
                 this.obtenerCabeceraConMeta(id);
                 this.cargarAgentesEvaluados(id);
-                this.cargarTotales(id); // 🔹 llamamos a la función de totales
+                this.cargarTotales(this.idCabecera, this.idAgente);
+
             }
         });
     }
@@ -394,23 +404,46 @@ export class EvaluacionAgenteComponent implements OnInit {
 
     }
 
-    cargarTotales(idCabecera: string): Promise<void> {
+    seleccionarAgente(agente: any) {
+        this.agenteSeleccionado = agente;
+
+        if (agente && (agente._id || agente.idAgenteEvaluado)) {
+            const idAgente = agente.idAgenteEvaluado || agente._id;
+
+            this.cargarTotales(this.idCabecera, idAgente)
+                .then(() => console.log('Totales cargados'))
+                .catch((err) => console.error('Error al cargar totales:', err));
+        }
+    }
+    cargarTotales(idCabecera: string, idAgente: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.evaluacionResultadosService.contarItemsConValor(idCabecera).subscribe({
+            console.log('📌 Llamando a obtenerTotales con:', { idCabecera, idAgente });
+
+            this.evaluacionResultadosService.obtenerTotales(idCabecera, idAgente).subscribe({
                 next: (resp) => {
-                    this.totalItemsConValor = resp.totalItems || 0;
-                    this.evaluacionResultadosService.sumaPromediaPuntajes(idCabecera).subscribe({
-                        next: (resp2) => {
-                            this.promedioPuntaje = resp2.promedio || 0;
-                            resolve();
-                        },
-                        error: reject
-                    });
+                    console.log('📌 Respuesta de la API obtenerTotales:', resp);
+
+                    const totalItems = resp && resp.totalItems ? resp.totalItems : 0;
+                    const sumaPuntajes = resp && resp.totalPuntaje ? resp.totalPuntaje : 0;
+
+                    this.totalItemsConValor = totalItems;
+                    this.sumaPuntajes = sumaPuntajes;
+                    this.promedioPuntaje = totalItems > 0 ? sumaPuntajes / totalItems : 0;
+
+                    console.log(`📌 Totales calculados -> totalItems: ${totalItems}, sumaPuntajes: ${sumaPuntajes}, promedio: ${this.promedioPuntaje}`);
+
+                    resolve();
                 },
-                error: reject
+                error: (err) => {
+                    console.error('❌ Error en obtenerTotales:', err);
+                    reject(err);
+                }
             });
         });
     }
+
+
+
 
 
 
@@ -424,9 +457,17 @@ export class EvaluacionAgenteComponent implements OnInit {
             return;
         }
 
-        this.cargarTotales(idCabecera).then(() => {
-            this.evaluacionService.obtenerEvaluacionCompleta(idCabecera).subscribe({
-                next: (resp) => {
+        // 🔹 Primero cargamos los totales desde el backend
+        this.cargarTotales(idCabecera, idAgente).then(() => {
+            console.log('📌 Totales cargados:', this.totalItemsConValor, this.sumaPuntajes, this.promedioPuntaje);
+
+            const totalItems = this.totalItemsConValor;
+            const sumaPuntajes = this.sumaPuntajes;
+            const promedio = this.promedioPuntaje;
+
+            // 🔹 Obtenemos la evaluación completa
+            this.evaluacionService.obtenerEvaluacionCompleta(idCabecera).subscribe(
+                (resp) => {
                     if (!resp || !resp.detalles) {
                         Swal.fire('Error', 'No se encontraron detalles para la evaluación', 'error');
                         return;
@@ -443,32 +484,30 @@ export class EvaluacionAgenteComponent implements OnInit {
 
                     const doc = new jsPDF();
 
-                    // Cabecera principal
+                    // 🔹 Cabecera principal
                     doc.setFontSize(18);
                     doc.setFont("helvetica", "bold");
                     doc.text("Evaluación de Desempeño", 105, 15, { align: "center" });
 
-                    // Datos del agente
+                    // 🔹 Datos del agente
                     doc.setFontSize(12);
                     doc.setFont("helvetica", "normal");
                     doc.text(`Legajo: ${detalleAgente.agenteEvaluado.legajo || '-'}`, 10, 30);
                     doc.text(`Nombre: ${detalleAgente.agenteEvaluado.nombreAgenteEvaluado.toUpperCase()}`, 10, 38);
 
-                    // Datos de la evaluación
+                    // 🔹 Datos de la evaluación
                     doc.text(`Efector: ${resp.cabecera.Efector.nombre}`, 10, 50);
                     doc.text(`Servicio: ${resp.cabecera.Servicio.nombre}`, 10, 58);
                     doc.text(`Período: ${new Date(resp.cabecera.periodo).toLocaleDateString()}`, 10, 66);
 
-                    // Construimos las filas por categoría e ítems, sin encabezado
+                    // 🔹 Construcción de filas por categoría e ítems
                     const bodyRows: any[] = [];
                     detalleAgente.categorias.forEach((cat: any) => {
-                        // Fila con el nombre de la categoría en verde
                         bodyRows.push([{
                             content: cat.descripcionCategoria,
                             colSpan: 2,
-                            styles: { halign: 'left', fontStyle: 'bold', fillColor: [144, 238, 144] } // verde claro
+                            styles: { halign: 'left', fontStyle: 'bold', fillColor: [144, 238, 144] }
                         }]);
-                        // Filas de los ítems
                         cat.items.forEach((item: any) => {
                             bodyRows.push([item.descripcion, item.puntaje]);
                         });
@@ -485,35 +524,61 @@ export class EvaluacionAgenteComponent implements OnInit {
                         }
                     });
 
-                    // 🔹 Obtenemos finalY de la tabla
+                    // 🔹 Final de tabla
                     let finalY = 75;
                     if ((doc as any).lastAutoTable) {
                         finalY = (doc as any).lastAutoTable.finalY;
                     }
 
-                    // Cuadro con totales debajo de la tabla
+                    // 🔹 Cuadro con totales
                     doc.setDrawColor(0);
                     doc.setFillColor(240, 240, 240);
-                    doc.rect(10, finalY + 10, 190, 20, 'FD');
+                    doc.rect(10, finalY + 10, 190, 35, 'FD');
 
                     doc.setFontSize(12);
                     doc.setFont("helvetica", "bold");
-                    doc.text(`Total de ítems con valor: ${this.totalItemsConValor}`, 15, finalY + 18);
-                    doc.text(`Promedio de puntaje: ${this.promedioPuntaje.toFixed(2)}`, 15, finalY + 25);
+                    doc.text(`Total de ítems con valor: ${totalItems}`, 15, finalY + 18);
+                    doc.text(`Suma de puntajes: ${sumaPuntajes}`, 15, finalY + 25);
+                    doc.text(`Promedio de puntaje: ${promedio.toFixed(2)}`, 15, finalY + 32);
 
-                    // Pie de página
+                    // 🔹 Estado y fecha de cierre (FUERA DEL CUADRO)
+                    let tipoCierre = '-';
+                    if (resp.cabecera.tipoCierreEvaluacion && resp.cabecera.tipoCierreEvaluacion.nombre) {
+                        tipoCierre = resp.cabecera.tipoCierreEvaluacion.nombre;
+                    }
+
+                    let fechaCierreTexto = '';
+                    if (tipoCierre !== 'Evaluación Abierta') {
+                        fechaCierreTexto = resp.cabecera.fechaCierre
+                            ? new Date(resp.cabecera.fechaCierre).toLocaleDateString()
+                            : '-';
+                    }
+
+                    doc.setFont("helvetica", "normal");
+                    doc.setFontSize(11);
+                    // Lo colocamos justo debajo del cuadro de totales
+                    doc.text(`Estado de la evaluación: ${tipoCierre}`, 15, finalY + 50);
+                    if (fechaCierreTexto) {
+                        doc.text(`Fecha de Cierre: ${fechaCierreTexto}`, 15, finalY + 58);
+                    }
+
+                    // 🔹 Pie de página
                     const pageHeight = doc.internal.pageSize.height;
                     doc.setFontSize(10);
                     doc.setFont("helvetica", "normal");
                     doc.text(`Generado el ${new Date().toLocaleDateString()} - Sistema de Evaluación`, 105, pageHeight - 10, { align: "center" });
 
+                    // 🔹 Guardamos el PDF
                     doc.save(`Evaluacion_${detalleAgente.agenteEvaluado.nombreAgenteEvaluado}.pdf`);
                 },
-                error: (err) => {
+                (err) => {
                     console.error('Error al obtener evaluación completa:', err);
                     Swal.fire('Error', 'No se pudo generar el PDF', 'error');
                 }
-            });
+            );
+        }).catch(err => {
+            console.error('Error al cargar totales:', err);
+            Swal.fire('Error', 'No se pudieron cargar los totales', 'error');
         });
     }
 
@@ -524,37 +589,9 @@ export class EvaluacionAgenteComponent implements OnInit {
 
 
 
-    /*
-        obtenerTotales(idCabecera: string): void {
-            // Total de items
-            this.evaluacionService.contarItems(idCabecera).subscribe({
-                next: (resp: any) => {
-                    if (resp.success) this.totalItems = resp.totalItems;
-                },
-                error: (err) => console.error('Error al contar items', err)
-            });
-    
-            // Total de items con valor > 0
-            this.evaluacionService.contarItemsConValor(idCabecera).subscribe({
-                next: (resp: any) => {
-                    if (resp.success) this.totalItemsConValor = resp.totalItems;
-                },
-                error: (err) => console.error('Error al contar items con valor', err)
-            });
-    
-            // Suma y promedio
-            this.evaluacionService.sumarPromediarPuntajes(idCabecera).subscribe({
-                next: (resp: any) => {
-                    if (resp.success) {
-                        this.sumaPuntajes = resp.sumaPuntajes;
-                        this.promedioPuntajes = resp.promedio;
-                        this.cantidadItems = resp.cantidad;
-                    }
-                },
-                error: (err) => console.error('Error al sumar/promediar puntajes', err)
-            });
-        }
-        */
+
+
+
 
     cerrarModalCerrar(): void {
         this.mostrarModalCerrar = false;
