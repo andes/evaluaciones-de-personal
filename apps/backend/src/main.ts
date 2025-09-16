@@ -11,8 +11,6 @@ import EvaluacionCabeceraRouter from './app/PlanillaEDEvaluacion/EvaluacionCabec
 import planillaEDDetalleRouter from './app/PlanillaEDEvaluacion/EvaluacionDetalle.router';
 import { evaluacionResultadosRouter } from './app/PlanillaEDEvaluacion/EvaluacionResultados.router';
 import evaluacionlistadorouter from './app/PlanillaEDEvaluacion/EvaluacionListados.router';
-
-
 import EvaluacionItemsRouter from './app/PlanillaEDEvaluacion/EvaluacionItems.router';
 import TipoEvaluacionRouter from './app/parametros/TipoEvaluacion.router';
 import TipoCierreEvaluacionRouter from './app/TipoCierreEvaluacion/TipoCierreEvaluacion.router';
@@ -28,32 +26,27 @@ Connections.initialize();
 
 // Rutas
 application.add({ path: '/api', router: UsersRouter });
-application.add({ path: '/api', router: EdItemsRouter })
-application.add({ path: '/api', router: ItemsRouter })
-application.add({ path: '/api', router: EfectorRouter })
-application.add({ path: '/api', router: ServiciosRouter })
-application.add({ path: '/api', router: PlanillaEDRouter })
-application.add({ path: '/api', router: EdCategoriaItems })
-application.add({ path: '/api', router: agenterouter })
+application.add({ path: '/api', router: EdItemsRouter });
+application.add({ path: '/api', router: ItemsRouter });
+application.add({ path: '/api', router: EfectorRouter });
+application.add({ path: '/api', router: ServiciosRouter });
+application.add({ path: '/api', router: PlanillaEDRouter });
+application.add({ path: '/api', router: EdCategoriaItems });
+application.add({ path: '/api', router: agenterouter });
 application.add({ path: '/api/rmTipoEvaluacion', router: TipoEvaluacionRouter });
 application.add({ path: '/api', router: TipoCierreEvaluacionRouter });
 application.add({ path: '/api', router: ItemsRRouter });
 application.add({ path: '/api', router: evaluacionResultadosRouter });
 application.add({ path: '/api', router: evaluacionlistadorouter });
 
-
-
-
-application.add({ path: '/api', router: EvaluacionCabeceraRouter });
+// 
 application.add({ path: '/api', router: planillaEDDetalleRouter });
+application.add({ path: '/api', router: EvaluacionCabeceraRouter });
 application.add({ path: '/api', router: EvaluacionItemsRouter });
 
-
-//console.log('Ruta activa: POST http://localhost:3000/api/evaluacioncabecera');
-
-// ruta para la autenticación (login)
+// Ruta para autenticación
 application.add({ path: '/api', router: AuthRouter });
 application.add({ path: '/api/auth', router: AuthRouter });
 
-application.router()
+application.router();
 application.start();

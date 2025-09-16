@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
             { label: 'Planillas', route: '/listar-planillaEDRouter', anim: 'start-about' },
             { label: 'Evaluacion', route: '/evaluacion-cabecera', anim: 'start-blog' },
             { label: 'Informes', route: '/ListarCategoriasComponent', anim: 'start-portefolio' },
-            { label: 'Acerca de', route: '/ListarItems', anim: 'start-contact' }
+            { label: 'Acerca de', route: '/acercade', anim: 'start-contact' }
         ];
         this.plex.updateMenu(this.menuList);
     }

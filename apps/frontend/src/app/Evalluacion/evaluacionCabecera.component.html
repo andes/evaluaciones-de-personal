@@ -137,6 +137,7 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Legajo</th>
+                                <th>Tipo Cierre</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -145,17 +146,21 @@
                                 <td>{{ agente.nombre }}</td>
                                 <td>{{ agente.legajo }}</td>
                                 <td>
+                                    {{ agente.tipoCierreEvaluacion?.detalle || 'Pendiente' }}
+                                </td>
+                                <td>
                                     <button class="btn btn-sm btn-primary" (click)="evaluarAgente(agente)">
                                         Elegir
                                     </button>
                                 </td>
                             </tr>
                             <tr *ngIf="agentesDisponibles.length === 0">
-                                <td colspan="3" class="text-center">No hay agentes disponibles.</td>
+                                <td colspan="4" class="text-center">No hay agentes disponibles.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
             </div>
 
             <div class="custom-modal-footer text-end">

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { throwError } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -55,5 +56,26 @@ export class PlanillaEDDetalleService {
     ): Observable<any> {
         return this.http.get(`${this.baseUrl}/evaluaciondetalle/item/${idEvaluacion}/${idAgente}/${idItem}`);
     }
+    // ✅ Nuevo método para cerrar evaluación
+
+    cerrarEvaluacion(
+        idEvaluacionCabecera: string,
+        idAgente: string,
+        tipoCierre: any
+    ) {
+        if (!idEvaluacionCabecera || !idAgente) {
+            console.error('idEvaluacionCabecera o idAgente indefinido', { idEvaluacionCabecera, idAgente });
+            return throwError(() => new Error('idEvaluacionCabecera o idAgente indefinido'));
+        }
+
+        // El backend espera un objeto con la propiedad tipoCierreEvaluacion
+        const body = { tipoCierreEvaluacion: tipoCierre };
+
+        return this.http.put(
+            `${this.baseUrl}/evaluaciondetalle/${idEvaluacionCabecera}/agente/${idAgente}/tipo-cierreCabecera`,
+            body
+        );
+    }
+
 
 }

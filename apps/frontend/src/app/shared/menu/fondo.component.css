@@ -1,0 +1,15 @@
+.fondo-card {
+    background-color: #ffffff;
+    background-image: url('/assets/img/fondo.png');
+    background-size: 40% auto;
+    /* más chica: 95% del ancho */
+    background-position: center -60%;
+    background-repeat: no-repeat;
+
+    height: 90vh;
+    /* alto fijo del contenedor */
+    width: 98%;
+    margin: 0 auto;
+    color: black;
+    border: none;
+}

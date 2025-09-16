@@ -2,9 +2,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { AppHomeComponent } from './home/home.component';
 import { MenuPlanillaEDComponent } from './home/MenuPlanillaED.component';
+import { fondocomponent } from './shared/menu/fondo.component';
 
 //parametros
 import { TipoEvaluacionComponent } from './componentes/TipoEvaluacion.component';
+import { AcercaDeComponent } from './home/acercade';
 //parametros
 import { ListarCategoriaComponent } from './componentes/listar-categorias/listar-categorias.component';
 import { CrearCategoriasComponent } from './componentes/crear-categorias/crear-categorias.component';
@@ -34,6 +36,19 @@ const appRoutes: Routes = [
         {
                 path: 'menucomunes',
                 component: ListarCategoriaComponent,
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'acercade', component: AcercaDeComponent,
+                canActivate: [],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'fondofondo',
+                component: fondocomponent,
+                canActivate: [],
                 pathMatch: 'full'
         },
 
