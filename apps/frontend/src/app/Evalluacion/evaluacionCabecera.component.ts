@@ -96,7 +96,7 @@ export class EvaluacionCabeceraComponent implements OnInit {
     get textoBusqueda(): string {
         return this.tipoBusqueda === 'nombre' ? 'Buscar por Nombre' : 'Buscar por Legajo';
     }
-
+    //bucar ma;ana “Abrí la charla ‘Agregar tipo cierre en la grilla’”
     obtenerAgentesDisponibles() {
         this.isLoadingAgentes = true;
         this.agentesService.obtenerTodosAgentes().subscribe({
@@ -163,6 +163,20 @@ export class EvaluacionCabeceraComponent implements OnInit {
     }
 
     evaluarAgente(agente: any): void {
+        // ✅ Verificar primero si hay tipo de evaluación válido
+
+        console.log('👀 Agente recibido:', agente);
+        if (!this.idTipoEvaluacion || !this.categoriasDesdePlanilla || this.categoriasDesdePlanilla.length === 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Tipo de Evaluación inválido',
+                text: 'Debe seleccionar un tipo de evaluación válido antes de asignar un agente.',
+                confirmButtonText: 'Aceptar'
+            });
+            return;
+        }
+
+        // 🔄 Transformar las categorías de la planilla
         const categoriasTransformadas = this.categoriasDesdePlanilla.map(cat => ({
             idCategoria: cat.categoria._id,
             descripcionCategoria: cat.categoria.descripcion,
@@ -173,6 +187,7 @@ export class EvaluacionCabeceraComponent implements OnInit {
             }))
         }));
 
+        // 📝 Armar objeto de detalle de evaluación
         const detalleEvaluacion = {
             _id: this.generateFakeObjectId(),
             idPlanillaEvaluacionCabecera: this.idGuardado,
@@ -184,6 +199,7 @@ export class EvaluacionCabeceraComponent implements OnInit {
             categorias: categoriasTransformadas
         };
 
+        // 🔍 Verificar si el agente ya fue evaluado
         this.evaluacionDetalleService.existeEvaluacion(this.idGuardado!, agente._id).subscribe({
             next: (respuesta) => {
                 if (respuesta.existe) {
@@ -194,8 +210,10 @@ export class EvaluacionCabeceraComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
                 } else {
+                    // 💾 Crear la evaluación del agente
                     this.evaluacionDetalleService.crearEvaluacionDetalle(detalleEvaluacion).subscribe({
                         next: () => {
+                            // 🔧 Corregir ítems (IDs) después de crear
                             this.evaluacionDetalleService.corregirItemsPorDescripcion(detalleEvaluacion._id).subscribe({
                                 next: () => {
                                     console.log('✅ Corrección de IDs de ítems realizada con éxito');
@@ -236,6 +254,7 @@ export class EvaluacionCabeceraComponent implements OnInit {
             }
         });
     }
+
 
     cargarPlanillaPorTipoEvaluacion(): void {
         if (!this.idTipoEvaluacion) {

@@ -50,6 +50,9 @@ export class EvaluacionAgenteComponent implements OnInit {
     totalItemsConValor: number = 0;
     promedioPuntaje: number = 0;
 
+    idEvaluacionDetalle!: string;
+    idAgenteCerrar!: string;
+
 
 
     totales: {
@@ -322,28 +325,79 @@ export class EvaluacionAgenteComponent implements OnInit {
         }
     }
 
-    abrirModalCerrar(idEvaluacion: string, nombreAgente: string) {
-        this.idCabeceraEvaluacion = idEvaluacion;
-        this.nombreAgenteCerrar = nombreAgente; // guardás el nombre
+    abrirModalCerrar(idEvaluacionDetalle: string, idAgente: string, nombreAgente: string) {
+        console.log('🔹 abrirModalCerrar llamado con:', { idEvaluacionDetalle, idAgente, nombreAgente });
+        this.idEvaluacionDetalle = idEvaluacionDetalle; // para cerrarEvaluacion()
+        this.idAgenteCerrar = idAgente;                // para cerrarEvaluacion()
+        this.nombreAgenteCerrar = nombreAgente;        // solo para mostrar en el modal
         this.fechaCierre = this.obtenerFechaHoy();
         this.mostrarModalCerrar = true;
+
         this.tipoCierreEvaluacionService.obtenerTodos().subscribe({
             next: (motivos: TipoCierreEvaluacion[]) => {
-                // Mapear para que cada motivo tenga 'id' y 'nombre'
                 this.motivosCierre = motivos.map(motivo => ({
-                    id: (motivo as any).id || (motivo as any)._id,  // aseguro que tenga 'id'
+                    id: (motivo as any).id || (motivo as any)._id,
                     nombre: motivo.nombre
                 }));
-
                 console.log('✅ Motivos de cierre mapeados:', this.motivosCierre);
             },
+            error: (err) => console.error('❌ Error al obtener motivos:', err)
+        });
+    }
+
+
+
+    confirmarCierre() {
+        if (!this.idEvaluacionDetalle || !this.idAgenteCerrar) {
+            console.error('⚠️ Faltan datos para cerrar evaluación:', this.idEvaluacionDetalle, this.idAgenteCerrar);
+            return;
+        }
+
+        if (!this.motivoSeleccionado) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: 'Debe seleccionar un tipo de cierre antes de continuar.'
+            });
+            return;
+        }
+
+        // Armar el objeto tipoCierre con los campos que espera el backend
+        const tipoCierre = {
+            idTipoCierreEvaluacion: this.motivoSeleccionado._id,
+            nombreTipoCierreEvaluacion: this.motivoSeleccionado.nombre,
+            detalle: this.motivoSeleccionado.detalle || '',
+            descripcion: this.motivoSeleccionado.descripcion || ''
+        };
+
+        console.log("📦 Objeto tipoCierre que mando:", tipoCierre);
+
+        this.planillaEDDetalleService.cerrarEvaluacion(
+            this.idEvaluacionDetalle,   // en realidad es idCabecera
+            this.idAgenteCerrar,
+            tipoCierre
+        ).subscribe({
+            next: () => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Evaluación cerrada correctamente'
+                });
+                this.mostrarModalCerrar = false;
+            },
             error: (err) => {
-                console.error('❌ Error al obtener motivos:', err);
+                console.error('❌ Error al cerrar evaluación:', err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudo cerrar la evaluación. Intente nuevamente.'
+                });
             }
         });
-
-
     }
+
+
+
 
     obtenerFechaHoy(): string {
         const today = new Date();
@@ -353,43 +407,92 @@ export class EvaluacionAgenteComponent implements OnInit {
 
     //verifica que la evaluacion seleccionada exista
 
-
-    confirmarCierre(): void {
-        // Validar que se haya seleccionado un motivo y una fecha
-        if (!this.motivoSeleccionado || !this.fechaCierre) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campos incompletos',
-                text: 'Debes seleccionar un motivo y una fecha de cierre.'
-            });
-            return;
+    /*
+    meotod viejo apuenta a cavecera, obsoleto
+        confirmarCierre(): void {
+            // Validar que se haya seleccionado un motivo y una fecha
+            if (!this.motivoSeleccionado || !this.fechaCierre) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campos incompletos',
+                    text: 'Debes seleccionar un motivo y una fecha de cierre.'
+                });
+                return;
+            }
+    
+            // Armar el payload con los datos requeridos por el backend
+            const cierrePayload = {
+                tipoCierreEvaluacion: {
+                    id: this.motivoSeleccionado.id,
+                    nombre: this.motivoSeleccionado.nombre
+                },
+                fechaCierre: this.fechaCierre
+            };
+            console.log('Payload enviado:', cierrePayload);
+            console.log(' ID de evaluación:', this.idCabeceraEvaluacion);
+    
+            this.planillaCabeceraService.actualizarCierreEvaluacion(this.idCabeceraEvaluacion, cierrePayload)
+                .subscribe({
+                    next: (res) => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Éxito',
+                            text: 'La evaluación fue cerrada correctamente.'
+                        });
+    
+                        // Cerrar el modal y limpiar campos
+                        this.cerrarModalCerrar();
+    
+                        // (Opcional) Recargar agentes evaluados si querés que se actualice automáticamente
+                        this.cargarAgentesEvaluados(this.idCabecera);
+                    },
+                    error: (err) => {
+                        console.error('❌ Error al cerrar evaluación:', err);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ocurrió un error al cerrar la evaluación.'
+                        });
+                    }
+    
+                });
+    
         }
-
-        // Armar el payload con los datos requeridos por el backend
-        const cierrePayload = {
-            tipoCierreEvaluacion: {
-                id: this.motivoSeleccionado.id,
-                nombre: this.motivoSeleccionado.nombre
-            },
-            fechaCierre: this.fechaCierre
-        };
-        console.log('Payload enviado:', cierrePayload);
-        console.log(' ID de evaluación:', this.idCabeceraEvaluacion);
-
-        this.planillaCabeceraService.actualizarCierreEvaluacion(this.idCabeceraEvaluacion, cierrePayload)
-            .subscribe({
-                next: (res) => {
+    */
+    /*
+        confirmarCierre(): void {
+            if (!this.motivoSeleccionado || !this.fechaCierre) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campos incompletos',
+                    text: 'Debes seleccionar un motivo y una fecha de cierre.'
+                });
+                return;
+            }
+    
+            const payload = {
+                tipoCierreEvaluacion: {
+                    idTipoCierreEvaluacion: this.motivoSeleccionado.id,
+                    nombreTipoCierreEvaluacion: this.motivoSeleccionado.nombre,
+                    detalle: this.motivoSeleccionado.detalle || '',
+                    descripcion: this.motivoSeleccionado.descripcion || ''
+                }
+            };
+    
+            // Usar los IDs correctos
+            this.planillaEDDetalleService.cerrarEvaluacion(
+                this.idEvaluacionDetalle,  // <- id del documento EvaluacionDetalle
+                this.idAgenteCerrar,       // <- id del agente evaluado
+                payload
+            ).subscribe({
+                next: (resp) => {
                     Swal.fire({
                         icon: 'success',
                         title: 'Éxito',
                         text: 'La evaluación fue cerrada correctamente.'
                     });
-
-                    // Cerrar el modal y limpiar campos
-                    this.cerrarModalCerrar();
-
-                    // (Opcional) Recargar agentes evaluados si querés que se actualice automáticamente
-                    this.cargarAgentesEvaluados(this.idCabecera);
+                    this.cerrarModalCerrar();  // Cierra modal
+                    this.cargarAgentesEvaluados(this.idCabecera); // refresca la grilla si es necesario
                 },
                 error: (err) => {
                     console.error('❌ Error al cerrar evaluación:', err);
@@ -399,10 +502,9 @@ export class EvaluacionAgenteComponent implements OnInit {
                         text: 'Ocurrió un error al cerrar la evaluación.'
                     });
                 }
-
             });
-
-    }
+        }
+    */
 
     seleccionarAgente(agente: any) {
         this.agenteSeleccionado = agente;
@@ -541,11 +643,10 @@ export class EvaluacionAgenteComponent implements OnInit {
                     doc.text(`Suma de puntajes: ${sumaPuntajes}`, 15, finalY + 25);
                     doc.text(`Promedio de puntaje: ${promedio.toFixed(2)}`, 15, finalY + 32);
 
-                    // 🔹 Estado y fecha de cierre (FUERA DEL CUADRO)
-                    let tipoCierre = '-';
-                    if (resp.cabecera.tipoCierreEvaluacion && resp.cabecera.tipoCierreEvaluacion.nombre) {
-                        tipoCierre = resp.cabecera.tipoCierreEvaluacion.nombre;
-                    }
+                    // 🔹 Estado y fecha de cierre (FUERA DEL CUADRO) usando dato de la grilla compatible TS antiguo
+                    const tipoCierre = (agente.tipoCierreEvaluacion && agente.tipoCierreEvaluacion.nombreTipoCierreEvaluacion)
+                        ? agente.tipoCierreEvaluacion.nombreTipoCierreEvaluacion
+                        : '-';
 
                     let fechaCierreTexto = '';
                     if (tipoCierre !== 'Evaluación Abierta') {
@@ -556,7 +657,6 @@ export class EvaluacionAgenteComponent implements OnInit {
 
                     doc.setFont("helvetica", "normal");
                     doc.setFontSize(11);
-                    // Lo colocamos justo debajo del cuadro de totales
                     doc.text(`Estado de la evaluación: ${tipoCierre}`, 15, finalY + 50);
                     if (fechaCierreTexto) {
                         doc.text(`Fecha de Cierre: ${fechaCierreTexto}`, 15, finalY + 58);

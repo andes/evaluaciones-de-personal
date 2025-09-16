@@ -1,0 +1,26 @@
+.acerca-de-card {
+    background-color: #0c1c2c;
+    /* azul oscuro */
+    color: #ffffff;
+    /* texto blanco */
+    border-radius: 12px;
+    /* bordes redondeados */
+    padding: 20px 30px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.acerca-de-titulo {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #1f92ff;
+    /* un azul más brillante para el título */
+}
+
+.acerca-de-texto {
+    font-size: 1rem;
+    line-height: 1.6;
+}

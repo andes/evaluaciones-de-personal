@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { Server } from '@andes/shared';
 import { AppRouting } from './app-routing.module';
 import { AppHomeComponent } from './home/home.component';
+import { AcercaDeComponent } from './home/acercade';
 
 import { NgxObserveModule } from 'ngx-observe';
 import { PlexModule, Plex } from '@andes/plex';
@@ -16,6 +17,7 @@ import { AyudaComponent } from './home/ayuda.component';
 import { CategoryService } from './services/categoria.service';
 import { MenuComunesComponent } from './home/menucomunes.component';
 import { MenuPlanillaEDComponent } from './home/MenuPlanillaED.component';
+import { fondocomponent } from './shared/menu/fondo.component';
 //componente categorias
 import { ListarCategoriaComponent } from './componentes/listar-categorias/listar-categorias.component';
 import { CrearCategoriasComponent } from './componentes/crear-categorias/crear-categorias.component';
@@ -76,6 +78,8 @@ import { AgentesComponent } from './componentes/agentes.component';
         TipoEvaluacionComponent,
         ItemsRComponent,
         AgentesComponent,
+        fondocomponent,
+        AcercaDeComponent
 
 
 

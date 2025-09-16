@@ -1,10 +1,14 @@
 import { Router, Request, Response } from 'express';
 import { EvaluacionDetalleModel } from './EvaluacionDetalle.schema';
+
 import { modelo as ItemModel } from '../Items/schemas/items'
 
 import * as mongoose from 'mongoose';
 
 const router = Router();
+
+
+
 router.post('/evaluaciondetalle', async (req: Request, res: Response) => {
     try {
         const { _id, idPlanillaEvaluacionCabecera, agenteEvaluado, categorias } = req.body;
@@ -92,6 +96,120 @@ router.get('/evaluaciondetalle/:id', async (req: Request, res: Response) => {
         res.status(500).json({ success: false, message: 'Error interno al obtener evaluación', error });
     }
 });
+
+// PUT: actualizar solo tipoCierreEvaluacion 
+
+router.put(
+    '/evaluaciondetalle/:idCabecera/agente/:idAgente/tipo-cierreCabecera',
+    async (req: Request, res: Response) => {
+        try {
+            const { idCabecera, idAgente } = req.params;
+            const { tipoCierreEvaluacion } = req.body;
+
+            // Validar ObjectIds
+            if (
+                !mongoose.Types.ObjectId.isValid(idCabecera) ||
+                !mongoose.Types.ObjectId.isValid(idAgente)
+            ) {
+                return res.status(400).json({ success: false, message: 'IDs inválidos' });
+            }
+
+            // Buscar evaluación por idPlanillaEvaluacionCabecera y idAgente
+            const evaluacion = await EvaluacionDetalleModel.findOne({
+                idPlanillaEvaluacionCabecera: new mongoose.Types.ObjectId(idCabecera),
+                'agenteEvaluado.idAgenteEvaluado': new mongoose.Types.ObjectId(idAgente),
+            });
+
+            if (!evaluacion) {
+                return res.status(404).json({ success: false, message: 'Evaluación no encontrada' });
+            }
+
+            // Actualizar tipoCierreEvaluacion
+            evaluacion.set('tipoCierreEvaluacion', {
+                idTipoCierreEvaluacion: new mongoose.Types.ObjectId(tipoCierreEvaluacion.idTipoCierreEvaluacion),
+                nombreTipoCierreEvaluacion: tipoCierreEvaluacion.nombreTipoCierreEvaluacion,
+                detalle: tipoCierreEvaluacion.detalle,
+                descripcion: tipoCierreEvaluacion.descripcion,
+                fechaCierre: new Date(),
+            });
+
+            await evaluacion.save();
+
+            return res.status(200).json({
+                success: true,
+                message: 'Tipo de cierre actualizado correctamente',
+                data: evaluacion,
+            });
+
+        } catch (error) {
+            console.error('❌ Error al actualizar tipoCierreEvaluacion:', error);
+            return res.status(500).json({
+                success: false,
+                message: 'Error interno',
+                error: error instanceof Error ? error.message : error
+            });
+        }
+    }
+);
+
+/*
+router.put(
+    '/evaluaciondetalle/:idEvaluacionDetalle/agente/:idAgente/tipo-cierre',
+    async (req: Request, res: Response) => {
+        try {
+            const { idEvaluacionDetalle, idAgente } = req.params;
+            const { tipoCierreEvaluacion } = req.body;
+
+            // Validar ObjectIds
+            if (
+                !mongoose.Types.ObjectId.isValid(idEvaluacionDetalle) ||
+                !mongoose.Types.ObjectId.isValid(idAgente)
+            ) {
+                return res.status(400).json({ success: false, message: 'IDs inválidos' });
+            }
+
+            // Buscar evaluación por _id y idAgente
+            const evaluacion = await EvaluacionDetalleModel.findOne({
+                _id: idEvaluacionDetalle,
+                'agenteEvaluado.idAgenteEvaluado': idAgente,
+            });
+
+            if (!evaluacion) {
+                return res.status(404).json({ success: false, message: 'Evaluación no encontrada' });
+            }
+
+            // Actualizar tipoCierreEvaluacion
+            evaluacion.set('tipoCierreEvaluacion', {
+                idTipoCierreEvaluacion: new mongoose.Types.ObjectId(tipoCierreEvaluacion.idTipoCierreEvaluacion),
+                nombreTipoCierreEvaluacion: tipoCierreEvaluacion.nombreTipoCierreEvaluacion,
+                detalle: tipoCierreEvaluacion.detalle,
+                descripcion: tipoCierreEvaluacion.descripcion,
+                fechaCierre: new Date(),
+            });
+
+            // Guardar cambios
+            await evaluacion.save();
+
+            return res.status(200).json({
+                success: true,
+                message: 'Tipo de cierre actualizado correctamente',
+                data: evaluacion,
+            });
+
+        } catch (error) {
+            console.error('❌ Error al actualizar tipoCierreEvaluacion:', error);
+            return res.status(500).json({
+                success: false,
+                message: 'Error interno',
+                error: error instanceof Error ? error.message : error
+            });
+        }
+    }
+    
+);
+
+*/
+
 
 
 router.put('/evaluaciondetalle/:id', async (req: Request, res: Response) => {
@@ -294,7 +412,8 @@ router.get(
     }
 );
 
-// GET todas las evaluaciones (agentes) para una cabecera específica
+
+// GET todas las evaluaciones (agentes) para una cabecera específica + tipoCierreEvaluacion
 router.get(
     '/evaluaciondetalle/por-cabecera/:idCabecera/agentes',
     async (req: Request, res: Response) => {
@@ -306,32 +425,34 @@ router.get(
                     .json({ success: false, message: 'ID de cabecera inválido' });
             }
 
-            // Encuentra sólo agenteEvaluado.* y excluye _id
+            // Traemos agenteEvaluado y tipoCierreEvaluacion
             const agentes = await EvaluacionDetalleModel.find(
                 { idPlanillaEvaluacionCabecera: idCabecera },
                 {
                     'agenteEvaluado.idAgenteEvaluado': 1,
                     'agenteEvaluado.nombreAgenteEvaluado': 1,
-                    'agenteEvaluado.legajo': 1, // <-- agregar
+                    'agenteEvaluado.legajo': 1,
+                    'tipoCierreEvaluacion': 1,
                     _id: 0
                 }
             ).lean();
 
-            // agentes tendrá esta forma:
-            // [ { agenteEvaluado: { idAgenteEvaluado: ..., nombreAgenteEvaluado: ... } }, … ]
-
-            // Opcional: desenrollar el objeto
-            const lista = agentes.map(a => a.agenteEvaluado);
+            // Normalizamos la salida para que quede más claro en la grilla
+            const lista = agentes.map(a => ({
+                ...a.agenteEvaluado,
+                tipoCierreEvaluacion: a.tipoCierreEvaluacion || null
+            }));
 
             return res.status(200).json({ success: true, data: lista });
         } catch (error) {
-            console.error(error);
+            console.error('❌ Error al obtener agentes con tipoCierreEvaluacion:', error);
             return res
                 .status(500)
                 .json({ success: false, message: 'Error interno', error: (error as Error).message });
         }
     }
 );
+
 
 // GET categorías e ítems según ID de evaluación. componente EvaluacionItemsComponent
 
