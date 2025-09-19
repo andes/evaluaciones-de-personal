@@ -34,10 +34,9 @@ export class EditCategoriasComponent implements OnInit {
     ngOnInit(): void {
 
         this.categoriaService.obtenerCategoria(this.categoriaId).subscribe(data => {
-            // recibiendo correctamente la categoría
-            console.log('Datos de la categoría:', data);
 
-            // Asignar los valores al formulario
+
+
             this.editCategoriaForm.patchValue({
                 _id: data._id,  // 
                 descripcion: data.descripcion
@@ -52,23 +51,16 @@ export class EditCategoriasComponent implements OnInit {
     onSubmit(): void {
         if (this.editCategoriaForm.valid) {
             this.categoriaService.actualizarCategoria(this.categoriaId, this.editCategoriaForm.value).subscribe(() => {
-                // Redirigir a la lista de categorías después de la actualización
+
                 this.router.navigate(['/ListarCategoriasComponent']);
             });
         }
     }
 
     cancelar(): void {
-        // Redirigir a la lista de categorías si se cancela la edición
+
         this.router.navigate(['/categorias']);
     }
-    //   descripcionUnicaValidator(control: AbstractControl): Observable<ValidationErrors | null> {
-    //       const descripcion = control.value;
-    //       return this.categoriaService.verificarDescripcionUnica(descripcion).pipe(
-    //           map(isTaken => {
-    //               return isTaken ? { descripcionExistente: true } : null;
-    //           })
-    //       );
-    //   }
+
 
 }

@@ -1,4 +1,4 @@
-//import { Component, Input } from '@angular/core';
+
 import { ActivatedRoute } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { PlanillaEDCabeceraService, PlanillaEDCabecera } from '../services/PlanillaEDCabecera.service';
@@ -103,7 +103,7 @@ export class EvaluacionAgenteComponent implements OnInit {
             const id = params.get('id');
             if (id) {
                 this.idCabecera = id;
-                console.log('📌 ID recibido desde ruta:', id);
+
                 this.obtenerCabeceraConMeta(id);
                 this.cargarAgentesEvaluados(id);
             }
@@ -119,7 +119,7 @@ export class EvaluacionAgenteComponent implements OnInit {
             const id = params.get('id'); // 🔹 aquí se obtiene el id de la ruta
             if (id) {
                 this.idCabecera = id;
-                console.log('📌 ID recibido desde ruta:', id);
+
                 this.obtenerCabeceraConMeta(id);
                 this.cargarAgentesEvaluados(id);
                 this.cargarTotales(this.idCabecera, this.idAgente);
@@ -139,9 +139,9 @@ export class EvaluacionAgenteComponent implements OnInit {
     obtenerCabeceraConMeta(id: string): void {
         this.planillaCabeceraService.obtenerCabeceraG(id).subscribe({
             next: (respuesta) => {
-                console.log('🌐 Respuesta completa:', respuesta);
+
                 this.cabecera = respuesta.data;
-                console.log('🧾 Cabecera recibida:', this.cabecera);
+
             },
             error: (error) => {
                 console.error('❌ Error al obtener la cabecera:', error);
@@ -153,7 +153,7 @@ export class EvaluacionAgenteComponent implements OnInit {
         this.agentesService.obtenerTodosAgentes().subscribe({
             next: (agentes) => {
                 this.agentesDisponibles = agentes;
-                console.log('📋 Agentes cargados:', this.agentesDisponibles);
+
             },
             error: (err) => {
                 console.error('❌ Error al obtener agentes:', err);
@@ -167,7 +167,7 @@ export class EvaluacionAgenteComponent implements OnInit {
             next: (resp) => {
                 if (resp.success) {
                     this.agentesYaEvaluados = resp.data;
-                    console.log('✅ Agentes evaluados:', this.agentesYaEvaluados);
+
                 }
             },
             error: (err) => {
@@ -176,9 +176,8 @@ export class EvaluacionAgenteComponent implements OnInit {
         });
     }
     evaluarAgente(agente: any): void {
-        console.log(' Evaluar agente:', agente);
 
-        // Validar que se haya seleccionado un tipo de evaluación
+
         if (!this.idTipoEvaluacion) {
             Swal.fire({
                 icon: 'warning',
@@ -188,23 +187,21 @@ export class EvaluacionAgenteComponent implements OnInit {
             return;
         }
 
-        // Obtener la planilla por tipo de evaluación
+
         this.planillaService.getPlanillaPorTipoEvaluacion(this.idTipoEvaluacion).subscribe({
             next: (planilla) => {
-                // Validar existencia de planilla
+
                 if (!planilla || !planilla._id) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Planilla no encontrada',
                         text: 'No se encontró una planilla válida para el tipo de evaluación seleccionado. Por favor, elegí un tipo existente.',
                     });
-                    return; // Detiene el flujo y no graba nada
+                    return;
                 }
 
-                // Guardar categorías de la planilla
                 this.categoriasDesdePlanilla = planilla.categorias || [];
 
-                // Transformar categorías e ítems
                 const categoriasTransformadas = this.categoriasDesdePlanilla.map(cat => ({
                     idCategoria: cat.categoria._id,
                     descripcionCategoria: cat.categoria.descripcion,
@@ -215,7 +212,6 @@ export class EvaluacionAgenteComponent implements OnInit {
                     }))
                 }));
 
-                // Crear objeto de detalle de evaluación
                 const detalleEvaluacion = {
                     _id: this.generateFakeObjectId(),
                     idPlanillaEvaluacionCabecera: this.idCabecera,
@@ -226,7 +222,7 @@ export class EvaluacionAgenteComponent implements OnInit {
                     categorias: categoriasTransformadas
                 };
 
-                // Verificar si el agente ya fue evaluado
+
                 this.evaluacionDetalleService.existeEvaluacion(this.idCabecera, agente._id)
                     .subscribe({
                         next: (respuesta) => {
@@ -260,26 +256,26 @@ export class EvaluacionAgenteComponent implements OnInit {
                                                 });
                                             },
                                             error: (err) => {
-                                                console.error('❌ Error al corregir ítems:', err);
+
                                                 Swal.fire('Error', 'No se pudo corregir los ítems.', 'error');
                                             }
                                         });
                                     },
                                     error: (err) => {
-                                        console.error('❌ Error al guardar evaluación:', err);
+
                                         Swal.fire('Error', 'No se pudo guardar la evaluación.', 'error');
                                     }
                                 });
                             }
                         },
                         error: (err) => {
-                            console.error('❌ Error al verificar existencia:', err);
+
                             Swal.fire('Error', 'No se pudo verificar la evaluación existente.', 'error');
                         }
                     });
             },
             error: (err) => {
-                console.error('❌ Error al obtener planilla:', err);
+
                 Swal.fire('Error', 'Ocurrió un error al obtener la planilla.', 'error');
             }
         });
@@ -297,7 +293,7 @@ export class EvaluacionAgenteComponent implements OnInit {
     }
     //navega a la página de evaluación de ítems
     verItemsEvaluacion(agente: any): void {
-        console.log('Objeto agente recibido:', agente);
+
         const idAgente = agente.idAgenteEvaluado || agente._id;
         const idEvaluacion = this.idCabecera;
 
@@ -308,7 +304,7 @@ export class EvaluacionAgenteComponent implements OnInit {
             || agente.legajo
             || 'Nombre no disponible';
 
-        console.log('Nombre agente a enviar:', nombreAgente);
+
 
         if (idAgente && idEvaluacion) {
             this.router.navigate(
@@ -326,7 +322,7 @@ export class EvaluacionAgenteComponent implements OnInit {
     }
 
     abrirModalCerrar(idEvaluacionDetalle: string, idAgente: string, nombreAgente: string) {
-        console.log('🔹 abrirModalCerrar llamado con:', { idEvaluacionDetalle, idAgente, nombreAgente });
+
         this.idEvaluacionDetalle = idEvaluacionDetalle; // para cerrarEvaluacion()
         this.idAgenteCerrar = idAgente;                // para cerrarEvaluacion()
         this.nombreAgenteCerrar = nombreAgente;        // solo para mostrar en el modal
@@ -339,12 +335,11 @@ export class EvaluacionAgenteComponent implements OnInit {
                     id: (motivo as any).id || (motivo as any)._id,
                     nombre: motivo.nombre
                 }));
-                console.log('✅ Motivos de cierre mapeados:', this.motivosCierre);
+
             },
             error: (err) => console.error('❌ Error al obtener motivos:', err)
         });
     }
-
 
 
     confirmarCierre() {
@@ -362,7 +357,6 @@ export class EvaluacionAgenteComponent implements OnInit {
             return;
         }
 
-        // Armar el objeto tipoCierre con los campos que espera el backend
         const tipoCierre = {
             idTipoCierreEvaluacion: this.motivoSeleccionado._id,
             nombreTipoCierreEvaluacion: this.motivoSeleccionado.nombre,
@@ -370,10 +364,10 @@ export class EvaluacionAgenteComponent implements OnInit {
             descripcion: this.motivoSeleccionado.descripcion || ''
         };
 
-        console.log("📦 Objeto tipoCierre que mando:", tipoCierre);
+
 
         this.planillaEDDetalleService.cerrarEvaluacion(
-            this.idEvaluacionDetalle,   // en realidad es idCabecera
+            this.idEvaluacionDetalle,
             this.idAgenteCerrar,
             tipoCierre
         ).subscribe({
@@ -383,7 +377,11 @@ export class EvaluacionAgenteComponent implements OnInit {
                     title: 'Éxito',
                     text: 'Evaluación cerrada correctamente'
                 });
+
                 this.mostrarModalCerrar = false;
+
+                // 🔄 Refrescar grilla inmediatamente
+                this.cargarAgentesEvaluados(this.idCabecera);
             },
             error: (err) => {
                 console.error('❌ Error al cerrar evaluación:', err);
@@ -396,115 +394,12 @@ export class EvaluacionAgenteComponent implements OnInit {
         });
     }
 
-
-
-
     obtenerFechaHoy(): string {
         const today = new Date();
         return today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
     }
 
 
-    //verifica que la evaluacion seleccionada exista
-
-    /*
-    meotod viejo apuenta a cavecera, obsoleto
-        confirmarCierre(): void {
-            // Validar que se haya seleccionado un motivo y una fecha
-            if (!this.motivoSeleccionado || !this.fechaCierre) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Campos incompletos',
-                    text: 'Debes seleccionar un motivo y una fecha de cierre.'
-                });
-                return;
-            }
-    
-            // Armar el payload con los datos requeridos por el backend
-            const cierrePayload = {
-                tipoCierreEvaluacion: {
-                    id: this.motivoSeleccionado.id,
-                    nombre: this.motivoSeleccionado.nombre
-                },
-                fechaCierre: this.fechaCierre
-            };
-            console.log('Payload enviado:', cierrePayload);
-            console.log(' ID de evaluación:', this.idCabeceraEvaluacion);
-    
-            this.planillaCabeceraService.actualizarCierreEvaluacion(this.idCabeceraEvaluacion, cierrePayload)
-                .subscribe({
-                    next: (res) => {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Éxito',
-                            text: 'La evaluación fue cerrada correctamente.'
-                        });
-    
-                        // Cerrar el modal y limpiar campos
-                        this.cerrarModalCerrar();
-    
-                        // (Opcional) Recargar agentes evaluados si querés que se actualice automáticamente
-                        this.cargarAgentesEvaluados(this.idCabecera);
-                    },
-                    error: (err) => {
-                        console.error('❌ Error al cerrar evaluación:', err);
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Ocurrió un error al cerrar la evaluación.'
-                        });
-                    }
-    
-                });
-    
-        }
-    */
-    /*
-        confirmarCierre(): void {
-            if (!this.motivoSeleccionado || !this.fechaCierre) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Campos incompletos',
-                    text: 'Debes seleccionar un motivo y una fecha de cierre.'
-                });
-                return;
-            }
-    
-            const payload = {
-                tipoCierreEvaluacion: {
-                    idTipoCierreEvaluacion: this.motivoSeleccionado.id,
-                    nombreTipoCierreEvaluacion: this.motivoSeleccionado.nombre,
-                    detalle: this.motivoSeleccionado.detalle || '',
-                    descripcion: this.motivoSeleccionado.descripcion || ''
-                }
-            };
-    
-            // Usar los IDs correctos
-            this.planillaEDDetalleService.cerrarEvaluacion(
-                this.idEvaluacionDetalle,  // <- id del documento EvaluacionDetalle
-                this.idAgenteCerrar,       // <- id del agente evaluado
-                payload
-            ).subscribe({
-                next: (resp) => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Éxito',
-                        text: 'La evaluación fue cerrada correctamente.'
-                    });
-                    this.cerrarModalCerrar();  // Cierra modal
-                    this.cargarAgentesEvaluados(this.idCabecera); // refresca la grilla si es necesario
-                },
-                error: (err) => {
-                    console.error('❌ Error al cerrar evaluación:', err);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Ocurrió un error al cerrar la evaluación.'
-                    });
-                }
-            });
-        }
-    */
 
     seleccionarAgente(agente: any) {
         this.agenteSeleccionado = agente;
@@ -513,17 +408,17 @@ export class EvaluacionAgenteComponent implements OnInit {
             const idAgente = agente.idAgenteEvaluado || agente._id;
 
             this.cargarTotales(this.idCabecera, idAgente)
-                .then(() => console.log('Totales cargados'))
+
                 .catch((err) => console.error('Error al cargar totales:', err));
         }
     }
     cargarTotales(idCabecera: string, idAgente: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            console.log('📌 Llamando a obtenerTotales con:', { idCabecera, idAgente });
+
 
             this.evaluacionResultadosService.obtenerTotales(idCabecera, idAgente).subscribe({
                 next: (resp) => {
-                    console.log('📌 Respuesta de la API obtenerTotales:', resp);
+
 
                     const totalItems = resp && resp.totalItems ? resp.totalItems : 0;
                     const sumaPuntajes = resp && resp.totalPuntaje ? resp.totalPuntaje : 0;
@@ -532,7 +427,6 @@ export class EvaluacionAgenteComponent implements OnInit {
                     this.sumaPuntajes = sumaPuntajes;
                     this.promedioPuntaje = totalItems > 0 ? sumaPuntajes / totalItems : 0;
 
-                    console.log(`📌 Totales calculados -> totalItems: ${totalItems}, sumaPuntajes: ${sumaPuntajes}, promedio: ${this.promedioPuntaje}`);
 
                     resolve();
                 },
@@ -549,7 +443,6 @@ export class EvaluacionAgenteComponent implements OnInit {
 
 
 
-
     imprimirEvaluacion(agente: any): void {
         const idAgente = agente.idAgenteEvaluado;
         const idCabecera = this.idCabecera;
@@ -559,15 +452,21 @@ export class EvaluacionAgenteComponent implements OnInit {
             return;
         }
 
-        // 🔹 Primero cargamos los totales desde el backend
-        this.cargarTotales(idCabecera, idAgente).then(() => {
-            console.log('📌 Totales cargados:', this.totalItemsConValor, this.sumaPuntajes, this.promedioPuntaje);
+        const parseToDate = (input: any): string => {
+            if (!input) return '-';
+            let d: Date;
+            if (input instanceof Date) d = input;
+            else if (typeof input === 'string' || typeof input === 'number') d = new Date(input);
+            else if (input.$date) d = new Date(input.$date);
+            else return '-';
+            return isNaN(d.getTime()) ? '-' : d.toLocaleDateString();
+        };
 
+        this.cargarTotales(idCabecera, idAgente).then(() => {
             const totalItems = this.totalItemsConValor;
             const sumaPuntajes = this.sumaPuntajes;
             const promedio = this.promedioPuntaje;
 
-            // 🔹 Obtenemos la evaluación completa
             this.evaluacionService.obtenerEvaluacionCompleta(idCabecera).subscribe(
                 (resp) => {
                     if (!resp || !resp.detalles) {
@@ -585,24 +484,19 @@ export class EvaluacionAgenteComponent implements OnInit {
                     }
 
                     const doc = new jsPDF();
-
-                    // 🔹 Cabecera principal
                     doc.setFontSize(18);
                     doc.setFont("helvetica", "bold");
                     doc.text("Evaluación de Desempeño", 105, 15, { align: "center" });
 
-                    // 🔹 Datos del agente
                     doc.setFontSize(12);
                     doc.setFont("helvetica", "normal");
                     doc.text(`Legajo: ${detalleAgente.agenteEvaluado.legajo || '-'}`, 10, 30);
                     doc.text(`Nombre: ${detalleAgente.agenteEvaluado.nombreAgenteEvaluado.toUpperCase()}`, 10, 38);
 
-                    // 🔹 Datos de la evaluación
                     doc.text(`Efector: ${resp.cabecera.Efector.nombre}`, 10, 50);
                     doc.text(`Servicio: ${resp.cabecera.Servicio.nombre}`, 10, 58);
-                    doc.text(`Período: ${new Date(resp.cabecera.periodo).toLocaleDateString()}`, 10, 66);
+                    doc.text(`Período: ${parseToDate(resp.cabecera.periodo)}`, 10, 66);
 
-                    // 🔹 Construcción de filas por categoría e ítems
                     const bodyRows: any[] = [];
                     detalleAgente.categorias.forEach((cat: any) => {
                         bodyRows.push([{
@@ -626,13 +520,11 @@ export class EvaluacionAgenteComponent implements OnInit {
                         }
                     });
 
-                    // 🔹 Final de tabla
                     let finalY = 75;
                     if ((doc as any).lastAutoTable) {
                         finalY = (doc as any).lastAutoTable.finalY;
                     }
 
-                    // 🔹 Cuadro con totales
                     doc.setDrawColor(0);
                     doc.setFillColor(240, 240, 240);
                     doc.rect(10, finalY + 10, 190, 35, 'FD');
@@ -643,32 +535,24 @@ export class EvaluacionAgenteComponent implements OnInit {
                     doc.text(`Suma de puntajes: ${sumaPuntajes}`, 15, finalY + 25);
                     doc.text(`Promedio de puntaje: ${promedio.toFixed(2)}`, 15, finalY + 32);
 
-                    // 🔹 Estado y fecha de cierre (FUERA DEL CUADRO) usando dato de la grilla compatible TS antiguo
                     const tipoCierre = (agente.tipoCierreEvaluacion && agente.tipoCierreEvaluacion.nombreTipoCierreEvaluacion)
                         ? agente.tipoCierreEvaluacion.nombreTipoCierreEvaluacion
                         : '-';
 
-                    let fechaCierreTexto = '';
-                    if (tipoCierre !== 'Evaluación Abierta') {
-                        fechaCierreTexto = resp.cabecera.fechaCierre
-                            ? new Date(resp.cabecera.fechaCierre).toLocaleDateString()
-                            : '-';
-                    }
+                    const fechaCierreTexto = parseToDate(resp.cabecera.fechaCierre);
 
                     doc.setFont("helvetica", "normal");
                     doc.setFontSize(11);
                     doc.text(`Estado de la evaluación: ${tipoCierre}`, 15, finalY + 50);
-                    if (fechaCierreTexto) {
+                    if (fechaCierreTexto !== '-') {
                         doc.text(`Fecha de Cierre: ${fechaCierreTexto}`, 15, finalY + 58);
                     }
 
-                    // 🔹 Pie de página
                     const pageHeight = doc.internal.pageSize.height;
                     doc.setFontSize(10);
                     doc.setFont("helvetica", "normal");
                     doc.text(`Generado el ${new Date().toLocaleDateString()} - Sistema de Evaluación`, 105, pageHeight - 10, { align: "center" });
 
-                    // 🔹 Guardamos el PDF
                     doc.save(`Evaluacion_${detalleAgente.agenteEvaluado.nombreAgenteEvaluado}.pdf`);
                 },
                 (err) => {
@@ -681,6 +565,7 @@ export class EvaluacionAgenteComponent implements OnInit {
             Swal.fire('Error', 'No se pudieron cargar los totales', 'error');
         });
     }
+
 
 
 

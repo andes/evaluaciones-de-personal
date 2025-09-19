@@ -153,6 +153,33 @@ router.get('/planillasED/buscar-por-tipo-evaluacion/:idTipoEvaluacion', async (r
     }
 });
 
+// Obtener ítems de una categoría específica de una planilla
+router.get('/planillasED/:planillaId/categorias/:categoriaId/items', async (req: Request, res: Response) => {
+    try {
+        const { planillaId, categoriaId } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(planillaId) || !mongoose.Types.ObjectId.isValid(categoriaId)) {
+            return res.status(400).json({ message: 'IDs inválidos' });
+        }
+
+        const planilla = await PlanillaEDModel.findById(planillaId).lean();
+        if (!planilla) {
+            return res.status(404).json({ message: 'Planilla no encontrada' });
+        }
+
+        const categoria = planilla.categorias.find(cat => String(cat.categoria) === categoriaId);
+        if (!categoria) {
+            return res.status(404).json({ message: 'Categoría no encontrada en la planilla' });
+        }
+
+        res.json({ items: categoria.items });
+    } catch (error) {
+        console.error('Error al obtener ítems por planilla y categoría:', error);
+        res.status(500).json({ message: 'Error al obtener ítems', error });
+    }
+});
+
+
 
 
 // Obtener planilla por ID

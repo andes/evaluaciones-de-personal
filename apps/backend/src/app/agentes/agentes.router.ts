@@ -57,7 +57,7 @@ router.put('/rAgentes/:id', async (req, res) => {
             return res.status(404).json({ error: 'Agente no encontrado' });
         }
 
-        // Validar legajo solo si cambió (y excluyendo el actual _id)
+
         if (legajo && legajo !== agenteActual.legajo) {
             const existeLegajo = await AgenteModel.findOne({ legajo, _id: { $ne: id } });
             if (existeLegajo) {
@@ -65,7 +65,7 @@ router.put('/rAgentes/:id', async (req, res) => {
             }
         }
 
-        // Validar dni solo si cambió (y excluyendo el actual _id)
+
         if (dni && dni !== agenteActual.dni) {
             const existeDni = await AgenteModel.findOne({ dni, _id: { $ne: id } });
             if (existeDni) {
@@ -114,7 +114,7 @@ router.post('/rAgentes/importar-csv', async (req, res) => {
 
                 if (!nombre || !dni || !legajo) return;
 
-                // Buscamos si ya existe ese legajo
+                // buscar si ya existe ese legajo
                 const existente = await AgenteModel.findOne({ legajo: legajo.toString() });
                 if (!existente) {
                     agentesNuevos.push({ nombre, dni, legajo });

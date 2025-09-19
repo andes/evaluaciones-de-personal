@@ -60,11 +60,16 @@ export class CrearPlanillaEDItemsComponent implements OnInit {
             console.warn('No se ha recibido un idPlanilla válido.');
             return;
         }
+
         this._PlanillaEDService.obtenerCategoriasPorPlanilla(this.idPlanilla).subscribe({
-            next: data => this.categoriasPlanilla = data.categorias,
-            error: err => console.error('Error al cargar categorías de la planilla:', err)
+            next: data => {
+                console.log('📦 Respuesta de obtenerCategoriasPorPlanilla:', data);
+                this.categoriasPlanilla = data.categorias; // asegurate de que data.categorias exista
+            },
+            error: err => console.error('❌ Error al cargar categorías de la planilla:', err)
         });
     }
+
 
     aceptarSeleccion(): void {
         if (!this.categoriaSeleccionada || !this.itemSeleccionado) {
