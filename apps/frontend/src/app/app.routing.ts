@@ -2,7 +2,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { AppHomeComponent } from './home/home.component';
 import { MenuPlanillaEDComponent } from './home/MenuPlanillaED.component';
+import { fondocomponent } from './shared/menu/fondo.component';
 
+//parametros
+import { TipoEvaluacionComponent } from './componentes/TipoEvaluacion.component';
+import { AcercaDeComponent } from './home/acercade';
+//parametros
 import { ListarCategoriaComponent } from './componentes/listar-categorias/listar-categorias.component';
 import { CrearCategoriasComponent } from './componentes/crear-categorias/crear-categorias.component';
 import { EditCategoriasComponent } from './componentes/editar-categorias/edit-categoria.component';
@@ -10,14 +15,20 @@ import { EditCategoriasComponent } from './componentes/editar-categorias/edit-ca
 import { ListarItemsComponent } from './Items/listar-items/listar-items.component';
 import { CrearItemsComponent } from './Items/crear-items/crear-items.component'
 import { EditItemsComponent } from './Items/editar-items/edit-items.component';
+import { ItemsRComponent } from './Items/itemsR.component';
 
 import { ListarPlanillaEDComponent } from './PlanillaED/listar-PlanillaED/listar-PlanillaED.component';
 import { CrearPlanillaEDComponent } from './PlanillaED/crear-PlanillaED/crear-PlanillaED.component';
 import { CrearPlanillaEDItemsComponent } from './PlanillaED/crear-PlanillaEDItems/crear-PlanillaEDItems.component';
 import { CrearPlanillaEDItemsDetalleComponent } from './PlanillaED/crear-PlanillaEDItemsDetalle/crear-PlanillaEDItemsDetalle.component';
+import { EvaluacionCabeceraComponent } from './Evalluacion/evaluacionCabecera.component';
+import { EvaluacionAgenteComponent } from './Evalluacion/evaluacionAgente.component';
+import { EvaluacionItemsComponent } from './Evalluacion/evaluacionItems.component';
+import { AgentesComponent } from './componentes/agentes.component';
 
 import { LoginComponent } from './users/login/login.component';
 import { RegisterComponent } from './users/register/register.component';
+
 
 import { AuthGuard } from './auth.guard';
 
@@ -27,12 +38,35 @@ const appRoutes: Routes = [
                 component: ListarCategoriaComponent,
                 pathMatch: 'full'
         },
+
+        {
+                path: 'acercade', component: AcercaDeComponent,
+                canActivate: [],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'fondofondo',
+                component: fondocomponent,
+                canActivate: [],
+                pathMatch: 'full'
+        },
+
+
         {
                 path: 'menuPlanillaED',
                 component: MenuPlanillaEDComponent,
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },
+        {
+                path: 'agentes',
+                component: AgentesComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+
         {
                 path: 'ListarCategoriasComponent',
                 component: ListarCategoriaComponent,
@@ -53,7 +87,7 @@ const appRoutes: Routes = [
         },
         {
                 path: 'ListarItems',
-                component: ListarItemsComponent,
+                component: ItemsRComponent,
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
         },
@@ -108,7 +142,37 @@ const appRoutes: Routes = [
                 component: AppHomeComponent,
                 canActivate: [AuthGuard],
                 pathMatch: 'full'
-        }
+        },
+
+        {
+                path: 'evaluacion-cabecera',
+                component: EvaluacionCabeceraComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'evaluacion-agente/:id',
+                component: EvaluacionAgenteComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'evaluacion-items/:idEvaluacion/:idAgente',
+                component: EvaluacionItemsComponent,
+                canActivate: [AuthGuard],
+                pathMatch: 'full'
+        },
+
+        {
+                path: 'tipo-evaluacion',
+                component: TipoEvaluacionComponent
+        },
+
+
 ];
+
+
 
 export const AppRouting: ModuleWithProviders<RouterModule> = RouterModule.forRoot(appRoutes);

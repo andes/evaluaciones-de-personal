@@ -19,19 +19,19 @@ export class CrearCategoriasComponent {
   constructor(private _CategoriaService: CategoryService, private router: Router) { }
 
   crearNuevaCategoria() {
-    console.log('intentando crear un nuero items')
+
     this._CategoriaService.guardarCategoria(this.nuevaCategoria).subscribe(data => {
-      console.log('Categoría creada:', data);
-      this.router.navigate(['/listar-categorias']);  // Redirecciona a la lista de categorías después de crearla
+
+      this.router.navigate(['/listar-categorias']);
     }, error => {
-      console.log('Error al crear la categoría:', error);
+
     })
 
       ;
   }
 
   volver() {
-    // Navega de regreso a la lista de categorías
+
     this.router.navigate(['/ListarCategoriasComponent']);
   }
 }

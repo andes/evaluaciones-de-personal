@@ -54,6 +54,7 @@ export class CrearPlanillaEDItemsDetalleComponent implements OnInit {
         });
     }
 
+    // agrega nuevo items a la evaluacion segun categoria seleccionada
     agregarNuevoItem(): void {
         if (!this.itemSeleccionado) {
             console.warn('Por favor, selecciona un ítem.');
@@ -86,7 +87,7 @@ export class CrearPlanillaEDItemsDetalleComponent implements OnInit {
                         valor: item.valor
                     }]
                 };
-
+                //agrega items nuevo  
                 this.planillaEDService.agregarCategoriaItems(this.planillaId, categoriaConItems).subscribe({
                     next: _ => {
                         this.cargarItems();

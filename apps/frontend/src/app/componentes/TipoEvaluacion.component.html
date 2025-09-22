@@ -1,0 +1,99 @@
+<app-header></app-header>
+<div class="contenedor-principal">
+    <app-comunes class="menu-horizontal"></app-comunes>
+
+    <!-- Contenedor principal a todo ancho -->
+    <div class="container-fluid mt-4 px-5">
+        <div class="row">
+            <!-- Columna única al 100% -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+
+                        <div class="mb-4">
+                            <div class="text-center">
+                                <h2 class="m-0">Tipo de Evaluación</h2>
+                            </div>
+
+                            <div class="d-flex justify-content-end mt-3">
+                                <button class="btn btn-success" (click)="abrirModal()">NUEVA</button>
+                            </div>
+                        </div>
+
+                        <!-- Tabla con ancho completo -->
+                        <div class="table-responsive">
+                            <table class="table table-striped w-100" *ngIf="tiposEvaluacion.length > 0; else sinDatos">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let tipo of tiposEvaluacion">
+                                        <td class="text-start">{{ tipo.nombre }}</td>
+                                        <td class="text-start">{{ tipo.descripcion }}</td>
+                                        <td class="text-start">
+                                            <button class="btn btn-primary btn-sm" (click)="editarTipo(tipo)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-sm ms-2"
+                                                    (click)="eliminarTipo(tipo._id!)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Mensaje cuando no hay datos -->
+                        <ng-template #sinDatos>
+                            <h5 class="text-start mt-3">No hay Tipos de Evaluación para mostrar</h5>
+                        </ng-template>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="mostrarModal" class="modal-overlay">
+    <div class="modal-custom">
+        <div class="modal-header d-flex justify-content-between align-items-center">
+            <h5 class="modal-title">
+                {{ modoEdicion ? 'Editar Tipo' : 'Nuevo Tipo' }}
+            </h5>
+            <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+        </div>
+
+        <div class="modal-body">
+            <form (ngSubmit)="guardarTipo()" #formTipo="ngForm">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input id="nombre" name="nombre" type="text" class="form-control" required
+                           [(ngModel)]="tipoSeleccionado.nombre" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="3" class="form-control"
+                              [(ngModel)]="tipoSeleccionado.descripcion"></textarea>
+                </div>
+
+                <div class="modal-footer d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary" [disabled]="formTipo.invalid">
+                        Guardar
+                    </button>
+                    <button type="button" class="btn btn-secondary ms-2" (click)="cerrarModal()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

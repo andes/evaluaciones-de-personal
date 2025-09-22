@@ -1,6 +1,8 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+
+
 @Component({
     selector: 'app-comunes',
     templateUrl: './comunes.component.html',
@@ -12,8 +14,33 @@ export class ComunesComponent {
 
     onPlanillaEDClick() {
         console.log('Clic en Planilla Evaluación Desempeño. Items');
-        this.router.navigate(['/listar-planillaEDRouter']); // Ejemplo de navegación
+        // this.router.navigate(['/ListarCategoriasComponent']);
     }
+    onCagoriaClick() {
+        console.log('Clic en Planilla Evaluación Desempeño. Items');
+        this.router.navigate(['/ListarCategoriasComponent']);
+    }
+
+
+    onTipoEvaluacion() {
+        console.log('Clic en Tipo Evaluación');
+        this.router.navigate(['/tipo-evaluacion']);
+
+    }
+
+    onAgentes() {
+        console.log('Clic en Agentes');
+        this.router.navigate(['/menu-agentes']);
+
+    }
+
+    onItemsClick() {
+        console.log('Clic en Items');
+        this.router.navigate(['/ListarItems']);
+
+    }
+
+
 
     onServiciosClick() {
 
@@ -24,6 +51,6 @@ export class ComunesComponent {
     onAgentesClick() {
 
         console.log('Clic en Volver');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/agentes']);
     }
 }

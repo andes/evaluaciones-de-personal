@@ -33,46 +33,50 @@ router.get('/rAgentes/:id', async (req, res) => {
 // nuevo
 router.post('/rAgentes', async (req, res) => {
     try {
-        console.log('Solicitud POST recibida en /rAgentes:', req.body);
         const nuevoAgente = await AgenteModel.create(req.body);
-        res.json(nuevoAgente);
+        res.status(201).json(nuevoAgente);
     } catch (error) {
+        if (error.code === 11000) {
+            return res.status(400).json({
+                error: 'El legajo o DNI ya está registrado'
+            });
+        }
         console.error('Error al crear el agente:', error);
         res.status(500).json({ error: 'Error al crear el agente' });
     }
 });
 
-// Modificar 
 router.put('/rAgentes/:id', async (req, res) => {
     try {
         const id = req.params.id;
+        const { legajo, dni, nombre } = req.body;
 
-        // Verificar si hay otro agente con el mismo legajo o dni
-        const duplicado = await AgenteModel.findOne({
-            $and: [
-                { _id: { $ne: id } },
-                {
-                    $or: [
-                        { legajo: req.body.legajo },
-                        { dni: req.body.dni }
-                    ]
-                }
-            ]
-        });
-
-        if (duplicado) {
-            return res.status(400).json({
-                error: 'Ya existe un agente con el mismo legajo o DNI.'
-            });
-        }
-
-        const actualizado = await AgenteModel.findByIdAndUpdate(id, req.body, { new: true });
-
-        if (!actualizado) {
+        // Obtener el agente actual
+        const agenteActual = await AgenteModel.findById(id);
+        if (!agenteActual) {
             return res.status(404).json({ error: 'Agente no encontrado' });
         }
 
+
+        if (legajo && legajo !== agenteActual.legajo) {
+            const existeLegajo = await AgenteModel.findOne({ legajo, _id: { $ne: id } });
+            if (existeLegajo) {
+                return res.status(400).json({ error: 'Ya existe un agente con el mismo legajo.' });
+            }
+        }
+
+
+        if (dni && dni !== agenteActual.dni) {
+            const existeDni = await AgenteModel.findOne({ dni, _id: { $ne: id } });
+            if (existeDni) {
+                return res.status(400).json({ error: 'Ya existe un agente con el mismo DNI.' });
+            }
+        }
+
+        // Actualizar
+        const actualizado = await AgenteModel.findByIdAndUpdate(id, { nombre, dni, legajo }, { new: true });
         res.json(actualizado);
+
     } catch (error) {
         console.error('Error al actualizar el agente:', error);
         res.status(500).json({ error: 'Error al actualizar el agente' });
@@ -110,7 +114,7 @@ router.post('/rAgentes/importar-csv', async (req, res) => {
 
                 if (!nombre || !dni || !legajo) return;
 
-                // Buscamos si ya existe ese legajo
+                // buscar si ya existe ese legajo
                 const existente = await AgenteModel.findOne({ legajo: legajo.toString() });
                 if (!existente) {
                     agentesNuevos.push({ nombre, dni, legajo });

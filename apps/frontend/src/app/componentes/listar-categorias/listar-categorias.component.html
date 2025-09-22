@@ -1,44 +1,87 @@
 <app-header></app-header>
+
 <div class="contenedor-principal">
-    <div>
-        <app-comunes></app-comunes>
-    </div>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div class="header-container mb-3">
-                            <span class="titulo">LISTADO DE Categorias</span>
-                            <button class="btn btn-success" (click)="crearNuevaCategoriaM()">NUEVO</button>
+    <app-comunes class="menu-horizontal"></app-comunes>
+
+    <div class="contenido">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <!-- Header con botón -->
+                            <div class="mb-4">
+                                <div class="text-center">
+                                    <h2 class="m-0">Categorías</h2>
+                                </div>
+
+                                <div class="d-flex justify-content-end mt-3">
+                                    <button class="btn btn-success" (click)="abrirModal()">NUEVA</button>
+                                </div>
+                            </div>
+
+                            <!-- Tabla -->
+                            <div class="table-responsive">
+                                <table class="table table-striped w-100" *ngIf="listCatgoria.length > 0; else sinDatos">
+                                    <thead>
+                                        <tr>
+                                            <th>Descripción</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let categoria of listCatgoria">
+                                            <td>{{ categoria.descripcion }}</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm"
+                                                        (click)="editarCategoria(categoria)">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-danger btn-sm ms-2"
+                                                        (click)="eliminarCategoria(categoria._id!)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Sin datos -->
+                            <ng-template #sinDatos>
+                                <h5 class="text-start mt-3">No hay Categorías para mostrar</h5>
+                            </ng-template>
+
                         </div>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Descripcion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let categoria of listCatgoria">
-                                    <td class="text-left" *ngIf="false">{{categoria._id}}</td>
-
-                                    <td class="text-left">{{categoria.descripcion}}</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm" (click)="editarCategoria(categoria)">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h5 style="text-align: start; margin-top: 10px;" *ngIf="listCatgoria.length == 0">
-                            No hay Categoria para mostrar
-                        </h5>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="mostrarModal" class="modal-overlay">
+    <div class="modal-custom">
+        <div class="modal-header d-flex justify-content-between align-items-center">
+            <h5 class="modal-title">{{ modoEdicion ? 'Editar Categoría' : 'Nueva Categoría' }}</h5>
+            <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+        </div>
+
+        <div class="modal-body">
+            <form (ngSubmit)="guardarCategoria()" #formCategoria="ngForm">
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="3" class="form-control"
+                              [(ngModel)]="categoriaSeleccionada.descripcion"></textarea>
+                </div>
+
+                <div class="modal-footer d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary" [disabled]="formCategoria.invalid">Guardar</button>
+                    <button type="button" class="btn btn-secondary ms-2" (click)="cerrarModal()">Cancelar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

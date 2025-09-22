@@ -1,19 +1,15 @@
 <div class="header-container">
     <div class="header">
         <h1>{{ titulo }}</h1>
-        <p *ngIf="nombreUsuario">Usuario: {{ nombreUsuario }}</p>
-
+        <p>{{ nombreUsuario }} – {{ rol }}</p>
     </div>
 
+    <nav>
+        <a *ngFor="let item of menuList" [routerLink]="item.route" (mouseover)="setAnimation(item.anim)">
+            {{ item.label }}
+        </a>
 
-    <plex-layout>
-        <plex-layout-main>
-            <nav>
-                <a *ngFor="let item of menuList" [routerLink]="item.route" (mouseover)="setAnimation(item.anim)">
-                    {{ item.label }}
-                </a>
-                <div class="animation" [ngClass]="animationClass"></div>
-            </nav>
-        </plex-layout-main>
-    </plex-layout>
+    </nav>
+
+
 </div>

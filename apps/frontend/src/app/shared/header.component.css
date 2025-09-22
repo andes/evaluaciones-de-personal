@@ -5,13 +5,19 @@
     background-color: #0db9fd !important;
     padding: 30px;
     border-radius: 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    box-shadow: none;
+
     color: #fff;
     text-align: center;
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
     z-index: 999;
+
+    background: linear-gradient(-45deg, #0db9fd, #0a8ecf, #17a2b8, #0db9fd);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
 }
 
 .header h1 {
@@ -37,78 +43,58 @@
 
 /* Menú Lavalamp */
 nav {
-    position: relative;
-    width: 100vw;
-    height: 70px;
-    background-color: #34495e;
+    background-color: #2c3e50;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    font-size: 0;
-    overflow: hidden;
-    z-index: 998;
+    height: 60px;
+    padding: 0 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 nav a {
-    flex: 1;
-    text-align: center;
-    height: 100%;
-    line-height: 70px;
-    font-size: 16px;
-    color: white;
-    text-decoration: none;
-    text-transform: uppercase;
     position: relative;
-    z-index: 1;
-    transition: background-color 0.3s;
+    color: #ecf0f1;
+    font-size: 15px;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+    width: 100%;
+    height: 2px;
+    background-color: #1abc9c;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+nav a:hover::after {
+    transform: scaleX(1);
 }
 
 nav a:hover {
-    cursor: pointer;
+    color: #1abc9c;
 }
 
-/* Elemento animado tipo "lava lamp" */
-nav .animation {
-    position: absolute;
-    height: 100%;
-    top: 0;
-    z-index: 0;
-    transition: all 0.4s ease;
-    border-radius: 0;
+
+
+.nav-link:hover {
+    color: #ffc107 !important;
+    /* amarillo al pasar el mouse */
 }
 
-/* Estilos para cada posición animada (usamos % del ancho) */
-nav .start-home,
-a:nth-child(1):hover~.animation {
-    width: 20%;
-    left: 0%;
-    background-color: #1abc9c;
-}
-
-nav .start-about,
-a:nth-child(2):hover~.animation {
-    width: 20%;
-    left: 20%;
-    background-color: #e74c3c;
-}
-
-nav .start-blog,
-a:nth-child(3):hover~.animation {
-    width: 20%;
-    left: 40%;
-    background-color: #3498db;
-}
-
-nav .start-portefolio,
-a:nth-child(4):hover~.animation {
-    width: 20%;
-    left: 60%;
-    background-color: #9b59b6;
-}
-
-nav .start-contact,
-a:nth-child(5):hover~.animation {
-    width: 20%;
-    left: 80%;
-    background-color: #e67e22;
+.contenido-con-fondo {
+    background-color: #f0f4f8;
+    /* un gris clarito */
+    padding: 20px;
+    /* espacio interno */
+    border-radius: 8px;
+    /* opcional, bordes redondeados */
+    min-height: 100vh;
+    /* asegura que ocupe la altura de la pantalla */
 }
